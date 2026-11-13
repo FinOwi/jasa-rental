@@ -2754,6 +2754,7 @@
     let bkProofObjUrl = '';
     let bkProofSeq = 0;
     let bkProofInitDone = false;
+    let bkProofCode = '';
     function bkProofIsPdf(path) { return /\.pdf($|\?)/i.test(path || ''); }
     function bkProofEnsureInit() {
       if (bkProofInitDone) return;
@@ -2774,7 +2775,7 @@
       if (body) body.innerHTML = '';
       if (bkProofObjUrl) { try { URL.revokeObjectURL(bkProofObjUrl); } catch (e) {} bkProofObjUrl = ''; }
     }
-    function bkProofRender(url, isPdf) {
+    function bkProofRender(url, isPdf, onErr) {
       const body = document.getElementById('bkProofBody');
       if (!body) return;
       body.innerHTML = '';
@@ -2788,42 +2789,112 @@
         el.alt = 'Bukti pembayaran';
         el.style.cssText = 'max-width:92vw;max-height:84vh;border-radius:10px;background:#fff;';
       }
+      if (typeof onErr === 'function') el.onerror = onErr;
       el.src = url;
       body.appendChild(el);
+    }
+    function bkProofShowError(notes) {
+      const body = document.getElementById('bkProofBody');
+      if (!body) return;
+      body.innerHTML = '';
+      const wrap = document.createElement('div');
+      wrap.id = 'bkProofError';
+      wrap.style.cssText = 'background:#fff;border-radius:10px;padding:20px 22px;max-width:min(92vw,520px);text-align:center;color:#222;';
+      const p = document.createElement('p');
+      p.style.cssText = 'margin:0;font-size:14.5px;line-height:1.55;';
+      p.textContent = 'Bukti belum bisa ditampilkan (' + notes.join(' · ') + '). Berkasnya ada di server — coba tombol Muat Ulang.';
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.id = 'bkProofRetry';
+      btn.textContent = 'Muat Ulang';
+      btn.style.cssText = 'margin-top:12px;padding:9px 22px;border:0;border-radius:8px;background:#1d4ed8;color:#fff;font-size:14px;cursor:pointer;';
+      btn.addEventListener('click', function () { if (bkProofCode) bkProof(bkProofCode); });
+      wrap.appendChild(p);
+      wrap.appendChild(btn);
+      body.appendChild(wrap);
     }
     async function bkProof(code) {
       const row = bkRowsCache.find(r => r.code === code);
       const path = row && row.data.payment ? row.data.payment.proofPath : '';
       if (!path) { toast('Booking ini tidak punya berkas bukti pembayaran.'); return; }
       bkProofEnsureInit();
-      let signedUrl = '';
-      try {
-        const r = await fetch(KONFIG.SUPABASE_URL + '/storage/v1/object/sign/payment-proofs/' + path, { method: 'POST', headers: sbHeaders({ 'Content-Type': 'application/json' }), body: JSON.stringify({ expiresIn: 3600 }) });
-        if (!r.ok) throw new Error('HTTP ' + r.status);
-        const j = await r.json();
-        if (j && j.signedURL) signedUrl = KONFIG.SUPABASE_URL + j.signedURL;
-        else { toast('Gagal membuat tautan bukti.'); return; }
-      } catch (e) { toast('Gagal membuka bukti: ' + e.message); return; }
       const modal = document.getElementById('bkProofModal');
       const body = document.getElementById('bkProofBody');
       if (!modal || !body) { toast('Gagal membuka bukti: panel tampilan tidak ditemukan.'); return; }
+      bkProofCode = code;
       const isPdf = bkProofIsPdf(path);
       const seq = ++bkProofSeq;
       modal.style.display = 'flex';
       body.innerHTML = '<span style="color:#fff;font-size:14px;">Memuat bukti…</span>';
-      try {
-        const fr = await fetch(signedUrl);
-        if (!fr.ok) throw new Error('HTTP ' + fr.status);
-        const blob = await fr.blob();
-        const objUrl = URL.createObjectURL(blob);
-        if (seq !== bkProofSeq) { try { URL.revokeObjectURL(objUrl); } catch (e) {} return; }
+      const notes = [];
+      // Render blob dari sebuah response ke modal. Hasil: 'ok' | 'stale' | 'err'.
+      const renderFromBlob = async (resp) => {
+        let objUrl = '';
+        try {
+          const blob = await resp.blob();
+          objUrl = URL.createObjectURL(blob);
+        } catch (e) { return 'err'; }
+        if (seq !== bkProofSeq) { try { URL.revokeObjectURL(objUrl); } catch (e) {} return 'stale'; }
+        if (bkProofObjUrl) { try { URL.revokeObjectURL(bkProofObjUrl); } catch (e) {} bkProofObjUrl = ''; }
         bkProofObjUrl = objUrl;
-        bkProofRender(objUrl, isPdf);
-      } catch (e) {
-        // Rencana B: tampilkan signed URL langsung di modal yang sama (tetap tanpa tab baru).
+        bkProofRender(objUrl, isPdf, function () {
+          if (seq !== bkProofSeq) return;
+          bkProofShowError(notes.concat(['media: gagal dimuat']));
+        });
+        return 'ok';
+      };
+      // TAHAP 1: unduh terautentikasi langsung memakai sesi panel — izin baca
+      // pemilik yang sama seperti sign, tanpa mekanisme signed URL sama sekali.
+      try {
+        const r1 = await fetch(KONFIG.SUPABASE_URL + '/storage/v1/object/payment-proofs/' + path, { headers: sbHeaders() });
         if (seq !== bkProofSeq) return;
-        bkProofRender(signedUrl, isPdf);
+        if (r1.ok) {
+          const rr = await renderFromBlob(r1);
+          if (rr !== 'err') return;
+          notes.push('unduh langsung: berkas tidak terbaca');
+        } else notes.push('unduh langsung: HTTP ' + r1.status);
+      } catch (e) {
+        if (seq !== bkProofSeq) return;
+        notes.push('unduh langsung: ' + ((e && e.message) || 'gagal jaringan'));
       }
+      // TAHAP 2: signed URL -> unduh sebagai blob -> object URL.
+      let signedUrl = '';
+      try {
+        const rs = await fetch(KONFIG.SUPABASE_URL + '/storage/v1/object/sign/payment-proofs/' + path, { method: 'POST', headers: sbHeaders({ 'Content-Type': 'application/json' }), body: JSON.stringify({ expiresIn: 3600 }) });
+        if (seq !== bkProofSeq) return;
+        if (rs.ok) {
+          const j = await rs.json();
+          if (j && j.signedURL) signedUrl = /^https?:\/\//i.test(j.signedURL) ? j.signedURL : KONFIG.SUPABASE_URL + j.signedURL;
+          else notes.push('tautan aman: respons tanpa tautan');
+        } else notes.push('tautan aman: HTTP ' + rs.status);
+      } catch (e) {
+        if (seq !== bkProofSeq) return;
+        notes.push('tautan aman: ' + ((e && e.message) || 'gagal jaringan'));
+      }
+      if (signedUrl) {
+        try {
+          const r2 = await fetch(signedUrl);
+          if (seq !== bkProofSeq) return;
+          if (r2.ok) {
+            const rr = await renderFromBlob(r2);
+            if (rr !== 'err') return;
+            notes.push('tautan aman: berkas tidak terbaca');
+          } else notes.push('tautan aman: HTTP ' + r2.status);
+        } catch (e) {
+          if (seq !== bkProofSeq) return;
+          notes.push('tautan aman: ' + ((e && e.message) || 'gagal jaringan'));
+        }
+        // TAHAP 3: signed URL langsung sebagai src media — kegagalan termuat
+        // kini terpantau lewat onerror dan dijelaskan di modal (tidak diam).
+        if (seq !== bkProofSeq) return;
+        bkProofRender(signedUrl, isPdf, function () {
+          if (seq !== bkProofSeq) return;
+          bkProofShowError(notes.concat(['tautan aman (langsung): gagal dimuat']));
+        });
+        return;
+      }
+      // Semua tahap pengambilan gagal: pesan jelas tampil DI DALAM modal.
+      bkProofShowError(notes.length ? notes : ['unduh langsung: gagal']);
     }
     async function bkVerifyPay(code) {
       const tid = await sbResolveTenant();
