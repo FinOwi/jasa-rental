@@ -813,9 +813,74 @@
                 <textarea class="form-textarea" id="cfgRentalTerms" rows="10" placeholder="Ketik ketentuan sewa Anda di sini...&#10;&#10;Contoh:&#10;1. Deposit wajib 50% dari nilai barang&#10;2. Pembayaran via transfer bank&#10;3. Barang wajib dikembalikan dalam kondisi bersih"></textarea>
               </div>
               <div class="form-group">
-                <label class="form-label">Info Pembayaran (tampil di formulir booking web)</label>
-                <textarea class="form-textarea" id="cfgPaymentInfo" rows="3" placeholder="Transfer BCA 1234567890 a.n. BK Adventure · DANA 0813xxxx a.n. ... · QRIS a.n. ... (kode QR dikirim admin via WA)"></textarea>
-                <div style="font-size:11px; color:var(--text-subtle); margin-top:4px;">Teks ini tampil apa adanya di langkah pembayaran saat pelanggan booking online, sebelum mereka mengunggah bukti transfer. Kosongkan bila tujuan pembayaran belum ingin ditampilkan.</div>
+                <label class="form-label">Metode Pembayaran (tampil di formulir booking web)</label>
+                <div style="display:grid; gap:12px;">
+                  <div>
+                    <div style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.04em; color:var(--text-muted); margin-bottom:4px;">BRI</div>
+                    <div class="form-row">
+                      <div class="form-group" style="margin:0;"><input type="text" class="form-input" id="cfgPmBriNo" placeholder="Nomor Rekening / No. HP E-Wallet"></div>
+                      <div class="form-group" style="margin:0;"><input type="text" class="form-input" id="cfgPmBriAn" placeholder="Atas Nama (opsional)"></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.04em; color:var(--text-muted); margin-bottom:4px;">MANDIRI</div>
+                    <div class="form-row">
+                      <div class="form-group" style="margin:0;"><input type="text" class="form-input" id="cfgPmMandiriNo" placeholder="Nomor Rekening / No. HP E-Wallet"></div>
+                      <div class="form-group" style="margin:0;"><input type="text" class="form-input" id="cfgPmMandiriAn" placeholder="Atas Nama (opsional)"></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.04em; color:var(--text-muted); margin-bottom:4px;">BCA</div>
+                    <div class="form-row">
+                      <div class="form-group" style="margin:0;"><input type="text" class="form-input" id="cfgPmBcaNo" placeholder="Nomor Rekening / No. HP E-Wallet"></div>
+                      <div class="form-group" style="margin:0;"><input type="text" class="form-input" id="cfgPmBcaAn" placeholder="Atas Nama (opsional)"></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.04em; color:var(--text-muted); margin-bottom:4px;">BNI</div>
+                    <div class="form-row">
+                      <div class="form-group" style="margin:0;"><input type="text" class="form-input" id="cfgPmBniNo" placeholder="Nomor Rekening / No. HP E-Wallet"></div>
+                      <div class="form-group" style="margin:0;"><input type="text" class="form-input" id="cfgPmBniAn" placeholder="Atas Nama (opsional)"></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.04em; color:var(--text-muted); margin-bottom:4px;">DANA</div>
+                    <div class="form-row">
+                      <div class="form-group" style="margin:0;"><input type="text" class="form-input" id="cfgPmDanaNo" placeholder="Nomor Rekening / No. HP E-Wallet"></div>
+                      <div class="form-group" style="margin:0;"><input type="text" class="form-input" id="cfgPmDanaAn" placeholder="Atas Nama (opsional)"></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.04em; color:var(--text-muted); margin-bottom:4px;">OVO</div>
+                    <div class="form-row">
+                      <div class="form-group" style="margin:0;"><input type="text" class="form-input" id="cfgPmOvoNo" placeholder="Nomor Rekening / No. HP E-Wallet"></div>
+                      <div class="form-group" style="margin:0;"><input type="text" class="form-input" id="cfgPmOvoAn" placeholder="Atas Nama (opsional)"></div>
+                    </div>
+                  </div>
+                  <div>
+                    <div style="font-family:var(--font-mono); font-size:11px; letter-spacing:0.04em; color:var(--text-muted); margin-bottom:4px;">GOPAY</div>
+                    <div class="form-row">
+                      <div class="form-group" style="margin:0;"><input type="text" class="form-input" id="cfgPmGopayNo" placeholder="Nomor Rekening / No. HP E-Wallet"></div>
+                      <div class="form-group" style="margin:0;"><input type="text" class="form-input" id="cfgPmGopayAn" placeholder="Atas Nama (opsional)"></div>
+                    </div>
+                  </div>
+                </div>
+                <div style="font-size:11px; color:var(--text-subtle); margin-top:6px;">Hanya metode yang nomornya diisi yang tampil ke pelanggan di formulir booking web, lengkap dengan logo resmi metode itu dan tombol salin nomor. Kosongkan nomor untuk menyembunyikan metode.</div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Catatan Pembayaran (opsional)</label>
+                <textarea class="form-textarea" id="cfgPaymentInfo" rows="3" placeholder="Contoh: Sesudah transfer, konfirmasi ke admin lewat WhatsApp agar booking cepat diverifikasi."></textarea>
+                <div style="font-size:11px; color:var(--text-subtle); margin-top:4px;">Catatan bebas yang tampil di bawah daftar metode pembayaran pada formulir booking web. Boleh dikosongkan.</div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Kode QR Pembayaran (QRIS)</label>
+                <input type="file" class="form-input" id="cfgPaymentQrFile" accept="image/png,image/jpeg,image/webp" onchange="handlePaymentQrUpload(event)" style="padding:6px 12px;">
+                <input type="hidden" id="cfgPaymentQrData">
+                <div id="paymentQrPreviewWrap" style="display:none; margin-top:10px; align-items:center; gap:12px;">
+                  <img id="paymentQrPreview" alt="Pratinjau kode QR pembayaran" style="width:120px; height:120px; object-fit:contain; background:#fff; border:1px solid var(--border); border-radius:8px; padding:6px;">
+                  <button type="button" class="btn btn-secondary" id="btnRemovePaymentQr" onclick="removePaymentQr()">Hapus QR</button>
+                </div>
+                <div style="font-size:11px; color:var(--text-subtle); margin-top:4px;">Unggah gambar kode QR (QRIS) toko — tampil otomatis di formulir booking web hanya saat pelanggan memilih metode QRIS. Gambar tidak dipotong; otomatis diperkecil ke maks 800px dan disimpan sebagai PNG/WebP kualitas tinggi agar tetap tajam saat dipindai. Berkas asli maks 3 MB.</div>
               </div>
 
               <div style="height:1px; background:var(--border); margin:20px 0;"></div>
@@ -1524,7 +1589,7 @@
         {id:"trip-sibayak",name:"Open Trip Gunung Sibayak",date:"2026-11-21",days:2,price:350000,quota:15,filled:8,meetingPoint:"Berastagi - basecamp",image:"https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",includes:["Transport PP dari titik kumpul","Guide & porter tim","Tenda & alat masak tim","Makan 3x selama trip","Dokumentasi"],description:"Pendakian 2 hari 1 malam yang ramah pemula dengan kawah aktif dan pemandangan Danau Toba dari kejauhan."},
         {id:"trip-sibuatan",name:"Open Trip Gunung Sibuatan",date:"2026-12-05",days:2,price:450000,quota:12,filled:3,meetingPoint:"Medan - titik kumpul diberitahu admin",image:"https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80",includes:["Transport PP dari titik kumpul","Guide lokal","Tenda & alat masak tim","Makan 3x selama trip","Dokumentasi"],description:"Jalur hutan lumut Sibuatan untuk pendaki yang ingin suasana hutan pegunungan yang masih sepi."}
       ],
-      receiptPaper:"80", pickupOnly:true, receiptShowLogo:true, receiptShowAddress:true, receiptShowPhone:true, depotPhone:"", paymentInfo:"", receiptNote:"", receiptFooter:"Barang harap kembali tepat waktu dalam kondisi baik. Terima kasih!",
+      receiptPaper:"80", pickupOnly:true, receiptShowLogo:true, receiptShowAddress:true, receiptShowPhone:true, depotPhone:"", paymentInfo:"", paymentQr:"", paymentMethods:{bri:{no:"",an:""},mandiri:{no:"",an:""},bca:{no:"",an:""},bni:{no:"",an:""},dana:{no:"",an:""},ovo:{no:"",an:""},gopay:{no:"",an:""}}, receiptNote:"", receiptFooter:"Barang harap kembali tepat waktu dalam kondisi baik. Terima kasih!",
       address:"Jl. Jamin Ginting No. 88, Berastagi, Kab. Karo, Sumatera Utara",
       mapsUrl:"https://www.google.com/maps/search/?api=1&query=Berastagi%2C+Karo%2C+Sumatera+Utara",
       trustItems:["100% Inspeksi Fisik","Garansi Tukar Unit di Basecamp","Pengambilan Langsung di Basecamp"],
@@ -3122,6 +3187,7 @@
     }
 
     // ===== CONFIG FORMS =====
+    const PAY_METHODS_CFG = [['bri', 'Bri'], ['mandiri', 'Mandiri'], ['bca', 'Bca'], ['bni', 'Bni'], ['dana', 'Dana'], ['ovo', 'Ovo'], ['gopay', 'Gopay']];
     function populateConfigForms() {
       const set = (id, val) => { const el = document.getElementById(id); if (el) el.value = val || ''; };
       set('cfgBrandName', siteConfig.brandName);
@@ -3153,6 +3219,9 @@
       document.getElementById('cfgReceiptShowPhone').checked = siteConfig.receiptShowPhone !== false;
       set('cfgDepotPhone', siteConfig.depotPhone || '');
       set('cfgPaymentInfo', siteConfig.paymentInfo || '');
+      previewPaymentQr(siteConfig.paymentQr || '');
+      const pmSeed = siteConfig.paymentMethods || {};
+      PAY_METHODS_CFG.forEach(([key, cap]) => { const m = pmSeed[key] || {}; set('cfgPm' + cap + 'No', m.no || ''); set('cfgPm' + cap + 'An', m.an || ''); });
       set('cfgReceiptNote', siteConfig.receiptNote || '');
       set('cfgReceiptFooter', siteConfig.receiptFooter || 'Barang harap kembali tepat waktu dalam kondisi baik. Terima kasih!');
       set('cfgCatalogEyebrow', siteConfig.catalogEyebrow);
@@ -3194,6 +3263,10 @@
       siteConfig.receiptShowPhone = document.getElementById('cfgReceiptShowPhone').checked;
       siteConfig.depotPhone = v('cfgDepotPhone');
       siteConfig.paymentInfo = v('cfgPaymentInfo');
+      siteConfig.paymentQr = document.getElementById('cfgPaymentQrData').value || '';
+      const pmNew = {};
+      PAY_METHODS_CFG.forEach(([key, cap]) => { pmNew[key] = { no: v('cfgPm' + cap + 'No'), an: v('cfgPm' + cap + 'An') }; });
+      siteConfig.paymentMethods = pmNew;
       siteConfig.receiptNote = v('cfgReceiptNote');
       siteConfig.receiptFooter = v('cfgReceiptFooter') || 'Barang harap kembali tepat waktu dalam kondisi baik. Terima kasih!';
       saveData();
@@ -3216,6 +3289,15 @@
       const img = document.getElementById('heroImgPreview');
       if (url && url.trim()) { img.src = fixImageUrl(url); bindImgPreviewError(img); img.classList.add('show'); }
       else img.classList.remove('show');
+    }
+    function previewPaymentQr(url) {
+      const dataEl = document.getElementById('cfgPaymentQrData');
+      if (dataEl) dataEl.value = url || '';
+      const wrap = document.getElementById('paymentQrPreviewWrap');
+      const img = document.getElementById('paymentQrPreview');
+      if (!wrap || !img) return;
+      if (url && url.trim()) { img.src = url; wrap.style.display = 'flex'; }
+      else { img.removeAttribute('src'); wrap.style.display = 'none'; }
     }
     function previewCardImg(url, imgId, emptyId) {
       const ci = document.getElementById(imgId);
@@ -3903,6 +3985,59 @@
         if (!dataUrl) { toast('Foto gagal diproses. Coba foto JPG/PNG lain.'); return; }
         storeUploadedDataUrl(dataUrl, setValue);
       });
+    }
+    // ===== UNGGAH KODE QR PEMBAYARAN (QRIS) =====
+    // Berbeda dari foto katalog: QR TIDAK dipotong dan TIDAK dipaksa masuk
+    // bingkai — aspek asli dipertahankan, sisi terpanjang dibatasi 800px,
+    // latar diisi putih (zona tenang QR), lalu disimpan PNG/WebP kualitas
+    // tinggi supaya modul QR tetap tajam & bisa dipindai. Hasil disimpan
+    // sebagai data URL di config (siteConfig.paymentQr), bukan Storage.
+    function processQrImageFile(file, cb) {
+      const rawFallback = () => { const r = new FileReader(); r.onload = () => cb(r.result); r.onerror = () => cb(null); r.readAsDataURL(file); };
+      let url;
+      try { url = URL.createObjectURL(file); } catch (e) { rawFallback(); return; }
+      let settled = false;
+      const settle = fn => { if (settled) return; settled = true; clearTimeout(timer); try { URL.revokeObjectURL(url); } catch (e) {} fn(); };
+      const timer = setTimeout(() => settle(rawFallback), 4000);
+      const img = new Image();
+      img.onload = () => settle(() => {
+        try {
+          const sw = img.naturalWidth || img.width, sh = img.naturalHeight || img.height;
+          if (!sw || !sh) { rawFallback(); return; }
+          const scale = Math.min(1, 800 / Math.max(sw, sh));
+          const w = Math.max(1, Math.round(sw * scale)), h = Math.max(1, Math.round(sh * scale));
+          const canvas = document.createElement('canvas');
+          canvas.width = w; canvas.height = h;
+          const ctx = canvas.getContext('2d');
+          if (!ctx) { cb(null); return; }
+          ctx.fillStyle = '#FFFFFF';
+          ctx.fillRect(0, 0, w, h);
+          ctx.drawImage(img, 0, 0, sw, sh, 0, 0, w, h);
+          let out = '';
+          try { out = canvas.toDataURL('image/webp', 0.92); } catch (e) { out = ''; }
+          if (!out || out.indexOf('data:image/webp') !== 0) out = canvas.toDataURL('image/png');
+          cb(out);
+        } catch (err) { rawFallback(); }
+      });
+      img.onerror = () => settle(rawFallback);
+      img.src = url;
+    }
+    function handlePaymentQrUpload(e) {
+      const file = e.target.files && e.target.files[0];
+      e.target.value = '';
+      if (!file) return;
+      if (file.size > 3 * 1024 * 1024) { toast('Berkas QR terlalu besar — maksimal 3 MB. Kecilkan dulu, lalu unggah lagi.'); return; }
+      if (!/^image\//.test(file.type || '')) { toast('Berkas QR harus berupa gambar (PNG/JPG/WebP).'); return; }
+      toast('Memproses kode QR…');
+      processQrImageFile(file, dataUrl => {
+        if (!dataUrl) { toast('Kode QR gagal diproses. Coba gambar PNG/JPG lain.'); return; }
+        previewPaymentQr(dataUrl);
+        toast('Kode QR terpasang — klik SIMPAN untuk terapkan.');
+      });
+    }
+    function removePaymentQr() {
+      previewPaymentQr('');
+      toast('Kode QR dihapus — klik SIMPAN untuk terapkan.');
     }
     // ===== PEMOTONG FOTO GENERIK (Cropper.js) =====
     // Dipakai upload hero/barang/paket: cubit utk zoom (layar sentuh), seret
