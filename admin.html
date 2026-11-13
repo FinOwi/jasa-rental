@@ -32,6 +32,9 @@
       --sans: 'Plus Jakarta Sans', sans-serif;
       --mono: 'JetBrains Mono', monospace;
       --sidebar-w: 240px;
+      /* Ritme jarak seragam (pass clean v4, nilai mockup yang disetujui) */
+      --sp-panel: 24px;
+      --sp-gap: 20px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -247,7 +250,7 @@
     /* Panel Cards */
     .panel {
       background: var(--surface); border: 1px solid var(--border);
-      padding: 22px 24px; margin-bottom: 20px;
+      padding: var(--sp-panel); margin-bottom: var(--sp-gap);
     }
     .panel-head {
       display: flex; align-items: center; justify-content: space-between;
@@ -272,7 +275,7 @@
     }
     .form-input, .form-select, .form-textarea {
       width: 100%; background: var(--surface); border: 1px solid var(--border);
-      padding: 8px 12px; font-size: 13px; font-family: var(--sans);
+      padding: 9px 12px; font-size: 13px; font-family: var(--sans);
       outline: none; transition: border-color 0.12s;
     }
     .form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--forest); }
@@ -283,7 +286,8 @@
     /* Buttons */
     .btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      padding: 9px 18px; font-family: var(--mono); font-size: 12px; font-weight: 600;
+      padding: 9px 18px; min-height: 38px; border-radius: 2px;
+      font-family: var(--mono); font-size: 12px; font-weight: 600;
       border: 1px solid var(--border-dark); cursor: pointer; letter-spacing: 0.04em;
       transition: background 0.12s;
     }
@@ -296,19 +300,22 @@
     .btn-warn { background: var(--ochre); color: var(--forest); border-color: var(--ochre); }
     .btn-warn:hover { background: #E5A93D; }
     .btn-full { width: 100%; }
+    .btn-sm { font-size: 11px; padding: 6px 12px; min-height: 32px; }
+    .btn-xs { font-size: 10px; padding: 5px 10px; min-height: 30px; }
 
     /* Tables */
     .table-wrap {
       background: var(--surface); border: 1px solid var(--border); overflow-x: auto;
+      margin-bottom: var(--sp-gap);
     }
-    table { width: 100%; border-collapse: collapse; font-size: 12px; text-align: left; }
+    table { width: 100%; border-collapse: collapse; font-size: 12.5px; text-align: left; }
     th {
       background: var(--surface-2); font-family: var(--mono); font-size: 10px;
       font-weight: 600; color: var(--text-muted); text-transform: uppercase;
-      padding: 10px 14px; border-bottom: 1px solid var(--border);
+      padding: 11px 14px; border-bottom: 1px solid var(--border);
       white-space: nowrap;
     }
-    td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+    td { padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
     tr:hover td { background: #FCFCFA; }
     tr:last-child td { border-bottom: none; }
 
@@ -425,6 +432,51 @@
       font-family: var(--serif); font-size: 16px; color: var(--text-muted); margin-bottom: 4px;
     }
 
+    /* ===== KONTRAK AKTIF: folder per penyewa + pencarian (v4) ===== */
+    .rentals-box {
+      background: var(--surface); border: 1px solid var(--border);
+      margin-bottom: var(--sp-gap);
+    }
+    .rentals-head { padding: 12px 16px; background: var(--surface-2); border-bottom: 1px solid var(--border); }
+    .rentals-head-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .rental-search {
+      display: flex; align-items: center; gap: 8px; margin-top: 10px;
+      background: var(--surface); border: 1px solid var(--border);
+      padding: 0 10px; min-height: 42px;
+    }
+    .rental-search:focus-within { border-color: var(--forest); }
+    .rental-search .icon { color: var(--text-subtle); flex-shrink: 0; }
+    .rental-search input {
+      flex: 1; min-width: 0; border: none; outline: none; background: transparent;
+      font-family: var(--sans); font-size: 13px; color: var(--text); padding: 10px 0;
+    }
+    .rental-search-clear {
+      background: none; border: none; cursor: pointer; color: var(--text-muted);
+      display: none; align-items: center; justify-content: center;
+      width: 32px; height: 32px; flex-shrink: 0; padding: 0;
+    }
+    .rental-search-clear.show { display: inline-flex; }
+    .folder-list { padding: 14px; display: flex; flex-direction: column; gap: 12px; }
+    .folder-list .empty-state { padding: 28px 20px; }
+    .renter-folder { border: 1px solid var(--border); background: var(--surface); }
+    .renter-folder-head {
+      display: flex; align-items: center; gap: 10px; padding: 12px 14px;
+      cursor: pointer; background: var(--surface-2); flex-wrap: wrap;
+    }
+    .renter-folder-head:hover { background: #E9E7DF; }
+    .renter-folder-head .folder-ic { color: var(--forest); display: inline-flex; flex-shrink: 0; }
+    .renter-folder-head .folder-main {
+      flex: 1; min-width: 200px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    }
+    .renter-folder-head .folder-name { font-weight: 700; font-size: 13px; }
+    .folder-actions { display: inline-flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+    .folder-chevron { display: inline-flex; color: var(--text-muted); transition: transform 0.15s; flex-shrink: 0; }
+    .renter-folder.open .folder-chevron { transform: rotate(180deg); }
+    .renter-folder-body { display: none; border-top: 1px solid var(--border); }
+    .renter-folder.open .renter-folder-body { display: block; }
+    .folder-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .folder-table { min-width: 640px; }
+
     /* Responsive */
     @media (max-width: 900px) {
       .metrics-grid { grid-template-columns: repeat(2, 1fr); }
@@ -467,6 +519,65 @@
       .metrics-grid { grid-template-columns: 1fr; }
       .btn { padding: 9px 12px; }
       .topbar-title { font-size: 16px; }
+    }
+
+    /* ======================================================== */
+    /* PASS CLEAN+RESPONSIF v4 — nilai mockup yang disetujui    */
+    /* pemilik: sidebar bilah atas di HP, target sentuh besar,  */
+    /* lantai huruf formulir, folder kontrak ramah jempol.     */
+    /* ======================================================== */
+    @media (max-width: 720px) {
+      #appRoot { flex-direction: column; }
+      .sidebar {
+        width: 100%; height: auto; flex-direction: row; align-items: stretch;
+        border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08);
+      }
+      .sidebar-brand {
+        padding: 10px 12px; border-bottom: none;
+        border-right: 1px solid rgba(255,255,255,0.08);
+      }
+      .sidebar-brand .mark { width: 28px; height: 28px; font-size: 14px; }
+      .sidebar-nav {
+        display: flex; flex-direction: row; align-items: center;
+        overflow-x: auto; overflow-y: hidden; padding: 6px 8px; gap: 2px;
+        scrollbar-width: none;
+      }
+      .sidebar-nav::-webkit-scrollbar { display: none; }
+      .nav-item {
+        flex: none; gap: 7px; padding: 9px 11px; font-size: 12px;
+        border-left: none; border-bottom: 3px solid transparent; min-height: 40px;
+      }
+      .nav-item span { display: inline; }
+      .nav-item .icon { width: 16px; height: 16px; }
+      .nav-item.active { border-bottom-color: var(--ochre); }
+      .sidebar-footer {
+        padding: 8px; border-top: none;
+        border-left: 1px solid rgba(255,255,255,0.08);
+        display: flex; align-items: center;
+      }
+      .btn-logout { width: auto; padding: 8px 10px; min-height: 40px; }
+      .main-area { height: auto; flex: 1; min-height: 0; }
+      .btn { min-height: 42px; }
+      .btn-sm, .btn-xs { min-height: 40px; padding: 8px 12px; font-size: 11px; }
+      .form-input, .form-select, .form-textarea { font-size: 14px; padding: 11px 12px; }
+      .rental-search-clear { width: 40px; height: 40px; }
+      .renter-folder-head .folder-main { min-width: 0; }
+      .folder-actions { width: 100%; margin-top: 2px; }
+      .folder-list { padding: 10px; }
+      /* Tabel mini folder menumpuk di HP (port mockup v4): baris jadi
+         blok penuh, kepala tabel hilang, tombol aksi tidak lagi jatuh
+         di luar tepi kanan layar sempit. Sel aksi = td terakhir. */
+      .folder-scroll { overflow-x: visible; }
+      .folder-table { min-width: 0; }
+      .folder-table thead { display: none; }
+      .folder-table, .folder-table tbody, .folder-table tr, .folder-table td { display: block; width: 100%; }
+      .folder-table tr { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+      .folder-table tr:last-child { border-bottom: none; }
+      .folder-table td { border-bottom: none; padding: 2px 0; }
+      .folder-table td:last-child { padding-top: 8px; }
+    }
+    @media (pointer: coarse) {
+      .btn { min-height: 40px; }
     }
   </style>
 </head>
@@ -1237,28 +1348,20 @@
             </div>
           </div>
 
-          <!-- Active Rentals Table -->
-          <div class="table-wrap">
-            <div style="padding:12px 16px; background:var(--surface-2); border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
-              <span class="mono" style="font-size:11px; font-weight:700;">KONTRAK SEWA AKTIF DI LAPANGAN</span>
-              <span class="mono" style="font-size:11px;" id="activeCount">0 KONTRAK</span>
+          <!-- Active Rentals: folder per penyewa + pencarian -->
+          <div class="rentals-box">
+            <div class="rentals-head">
+              <div class="rentals-head-row">
+                <span class="mono" style="font-size:11px; font-weight:700;">KONTRAK SEWA AKTIF DI LAPANGAN</span>
+                <span class="mono" style="font-size:11px;" id="activeCount">0 KONTRAK</span>
+              </div>
+              <div class="rental-search">
+                <svg class="icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.5" y2="16.5"></line></svg>
+                <input type="text" id="rentalSearchInput" placeholder="Cari penyewa, barang, kode kontrak, No. WA&hellip;" autocomplete="off" oninput="onRentalSearchInput(this)">
+                <button type="button" class="rental-search-clear" id="rentalSearchClear" aria-label="Bersihkan pencarian" onclick="clearRentalSearch()"><svg class="icon" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+              </div>
             </div>
-            <table>
-              <thead>
-                <tr>
-                  <th>KONTRAK</th>
-                  <th>NAMA PENYEWA</th>
-                  <th>NO. WA</th>
-                  <th>NIK / KTP</th>
-                  <th>ALAT</th>
-                  <th>QTY</th>
-                  <th>DURASI</th>
-                  <th>TGL KEMBALI</th>
-                  <th style="text-align:right;">AKSI</th>
-                </tr>
-              </thead>
-              <tbody id="rentalTableBody"></tbody>
-            </table>
+            <div id="rentalTableBody" class="folder-list"></div>
           </div>
         </div>
 
@@ -3261,57 +3364,144 @@
       return 'id:' + String(c.renterName || '').trim().toLowerCase() + '|' + String(c.renterNIK || '').trim().toLowerCase();
     }
 
+    // ===== Folder per penyewa + pencarian kontrak aktif (v4) =====
+    // Keadaan buka/tutup folder disimpan per kunci penyewa (rentalRenterKey)
+    // supaya render ulang dari sinkron tidak menutup folder yang sedang
+    // dibuka admin; penyewa baru mulai tertutup. Teks kueri juga disimpan
+    // di variabel ini dan diterapkan kembali sesudah tiap render.
+    let rentalFolderOpen = {};
+    let rentalFolderKeys = [];
+    let rentalSearchQuery = '';
+
+    function toggleRentalFolder(idx) {
+      const k = rentalFolderKeys[idx];
+      if (k == null) return;
+      rentalFolderOpen[k] = rentalFolderOpen[k] !== true;
+      renderRentalTable();
+    }
+
+    function onRentalSearchInput(el) {
+      rentalSearchQuery = el.value;
+      renderRentalTable();
+    }
+
+    function clearRentalSearch() {
+      rentalSearchQuery = '';
+      const inp = document.getElementById('rentalSearchInput');
+      if (inp) inp.value = '';
+      renderRentalTable();
+      if (inp) inp.focus();
+    }
+
+    // Padanan pencarian: teks dibandingkan huruf-kecil; bila kueri berangka,
+    // versi hanya-digit kedua pihak juga dibandingkan (WA/NIK/kode) SESUDAH
+    // awalan nomor dikanonisasi di kedua sisi memakai logika normalizePhone
+    // (0 -> 62, 8 -> 62...) — supaya kueri "0813" menemukan nomor tersimpan
+    // "62813..." dan kueri "62813" menemukan nomor tersimpan "0813...".
+    function rentalSearchHit(text, q, qd) {
+      const t = String(text || '').toLowerCase();
+      if (q && t.includes(q)) return true;
+      if (qd) {
+        const td = t.replace(/\D/g, '');
+        if (td && normalizePhone(td).includes(normalizePhone(qd))) return true;
+      }
+      return false;
+    }
+
     function renderRentalTable() {
       const body = document.getElementById('rentalTableBody');
+      const countEl = document.getElementById('activeCount');
       const lateTotal = activeRentals.filter(x => daysLate(x) > 0).length;
       // Kelompokkan per penyewa (urutan grup = kemunculan pertama; urutan
-      // kontrak di dalam grup tidak berubah) supaya satu orang = satu blok.
+      // kontrak di dalam grup tidak berubah) supaya satu orang = satu folder.
       const groups = [];
       const byKey = {};
       activeRentals.forEach(c => {
         const k = rentalRenterKey(c);
-        if (!byKey[k]) { byKey[k] = { first: c, items: [] }; groups.push(byKey[k]); }
+        if (!byKey[k]) { byKey[k] = { key: k, first: c, items: [] }; groups.push(byKey[k]); }
         byKey[k].items.push(c);
       });
-      document.getElementById('activeCount').textContent = activeRentals.length + ' KONTRAK \u00B7 ' + groups.length + ' PENYEWA' + (lateTotal ? ' \u00B7 ' + lateTotal + ' TELAT' : '');
+      rentalFolderKeys = groups.map(g => g.key);
+
+      const q = rentalSearchQuery.trim().toLowerCase();
+      const qd = q.replace(/\D/g, '');
+      const searching = q !== '';
+      // Field pencarian berada di luar wadah yang digambar ulang: samakan
+      // nilainya dengan keadaan tersimpan agar kueri bertahan lintas render.
+      const inp = document.getElementById('rentalSearchInput');
+      if (inp && inp.value !== rentalSearchQuery) inp.value = rentalSearchQuery;
+      const clr = document.getElementById('rentalSearchClear');
+      if (clr) clr.classList.toggle('show', searching);
+
       if (activeRentals.length === 0) {
-        body.innerHTML = '<tr><td colspan="9" class="empty-state"><div class="title">Tidak ada sewa aktif</div></td></tr>';
+        countEl.textContent = '0 KONTRAK \u00B7 0 PENYEWA';
+        body.innerHTML = '<div class="empty-state"><div class="title">Tidak ada sewa aktif</div></div>';
         return;
       }
+
+      let visibleGroups = 0, visibleItems = 0;
       let html = '';
-      groups.forEach(g => {
+      groups.forEach((g, gi) => {
         const f = g.first;
+        const identityHit = !searching || g.items.some(c =>
+          rentalSearchHit(c.renterName, q, '') ||
+          rentalSearchHit(c.renterPhone, q, qd) ||
+          rentalSearchHit(c.renterNIK, q, qd));
+        const items = (searching && !identityHit)
+          ? g.items.filter(c => rentalSearchHit(String(c.itemName || '') + ' ' + (c.size || ''), q, qd) || rentalSearchHit(c.contractId, q, qd))
+          : g.items;
+        if (searching && !identityHit && items.length === 0) return;
+        visibleGroups++; visibleItems += items.length;
+        // Selama pencarian, folder yang tampil otomatis terbuka; di luar
+        // pencarian keadaan manual admin yang berlaku.
+        const open = searching ? true : rentalFolderOpen[g.key] === true;
         const totalUnits = g.items.reduce((s, x) => s + (x.qty || 0), 0);
         const nearest = g.items.map(x => x.returnDate || '').filter(Boolean).sort()[0] || '-';
         const lateItems = g.items.filter(x => daysLate(x) > 0);
         const lateMax = lateItems.reduce((m, x) => Math.max(m, daysLate(x)), 0);
-        html += '<tr class="renter-group-row" style="background:var(--surface-2);">' +
-          '<td colspan="9" style="padding:10px 12px;border-top:2px solid var(--border);">' +
-            '<span style="font-weight:700;font-size:13px;">' + escHtml(f.renterName || '') + '</span>' +
-            (f.renterPhone ? ' <span class="mono" style="font-size:11px;color:var(--text-muted);">' + escHtml(f.renterPhone) + '</span>' : '') +
-            (f.renterNIK ? ' <span class="mono" style="font-size:11px;color:var(--text-muted);">NIK ' + escHtml(f.renterNIK) + '</span>' : '') +
-            ' <span class="mono" style="font-size:11px;font-weight:700;color:var(--forest);">' + g.items.length + ' barang &middot; total ' + totalUnits + ' unit &middot; kembali terdekat ' + nearest + '</span>' +
-            (lateItems.length ? ' <span class="badge-tag" style="background:var(--terracotta);color:#fff;border-color:var(--terracotta);">' + lateItems.length + ' TELAT &middot; MAKS ' + lateMax + ' HARI</span>' : '') +
-            ' <span style="float:right;white-space:nowrap;">' +
-              '<button class="btn btn-secondary" style="font-size:10px;padding:4px 10px;margin-right:4px;" onclick="printStrukGroup(\'' + f.contractId + '\')">STRUK</button>' +
-              '<button class="btn btn-secondary" style="font-size:10px;padding:4px 10px;margin-right:4px;" onclick="sendStrukWAGroup(\'' + f.contractId + '\')">KIRIM PDF</button>' +
-              '<button class="btn btn-secondary" style="font-size:10px;padding:4px 10px;" onclick="sendStrukImageWAGroup(\'' + f.contractId + '\')">GAMBAR WA</button>' +
+        html += '<div class="renter-folder' + (open ? ' open' : '') + '">' +
+          '<div class="renter-folder-head" role="button" tabindex="0" aria-expanded="' + (open ? 'true' : 'false') + '" onclick="toggleRentalFolder(' + gi + ')">' +
+            '<span class="folder-ic"><svg class="icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>' +
+            '<span class="folder-main">' +
+              '<span class="folder-name">' + escHtml(f.renterName || '') + '</span>' +
+              (f.renterPhone ? '<span class="mono" style="font-size:11px;color:var(--text-muted);">' + escHtml(f.renterPhone) + '</span>' : '') +
+              (f.renterNIK ? '<span class="mono" style="font-size:11px;color:var(--text-muted);">NIK ' + escHtml(f.renterNIK) + '</span>' : '') +
+              '<span class="mono" style="font-size:11px;font-weight:700;color:var(--forest);">' + g.items.length + ' barang &middot; total ' + totalUnits + ' unit &middot; kembali terdekat ' + nearest + '</span>' +
+              (lateItems.length ? '<span class="badge-tag" style="background:var(--terracotta);color:#fff;border-color:var(--terracotta);">' + lateItems.length + ' TELAT &middot; MAKS ' + lateMax + ' HARI</span>' : '') +
             '</span>' +
-          '</td></tr>';
-        html += g.items.map(c => {
-          const late = daysLate(c);
-          return '<tr' + (late > 0 ? ' style="background:#FDF2F0;"' : '') + '>' +
-          '<td class="mono" style="font-weight:600;">' + c.contractId + '</td>' +
-          '<td><span style="color:var(--text-subtle);">&mdash;</span></td>' +
-          '<td><span style="color:var(--text-subtle);">&mdash;</span></td>' +
-          '<td><span style="color:var(--text-subtle);">&mdash;</span></td>' +
-          '<td style="font-weight:600;">' + escHtml(c.itemName) + '</td>' +
-          '<td class="mono">' + c.qty + '</td>' +
-          '<td class="mono">' + c.days + ' hari</td>' +
-          '<td class="mono" style="color:' + (late > 0 ? 'var(--terracotta)' : 'var(--amber-warn)') + ';font-weight:600;">' + c.returnDate + (late > 0 ? ' <span class="badge-tag" style="background:var(--terracotta);color:#fff;border-color:var(--terracotta);">TELAT ' + late + ' HARI</span>' : '') + '</td>' +
-          '<td style="text-align:right; white-space:nowrap;">' + (late > 0 ? '<button class="btn" style="font-size:10px;padding:4px 10px;margin-right:4px;background:var(--terracotta);color:#fff;border:none;cursor:pointer;" onclick="remindLate(\'' + c.contractId + '\')">INGATKAN WA</button>' : '') + '<button class="btn btn-primary" style="font-size:10px;padding:4px 10px;" onclick="returnItem(\'' + c.contractId + '\')">BARANG KEMBALI</button></td>' +
-        '</tr>'; }).join('');
+            '<span class="folder-actions">' +
+              '<button class="btn btn-secondary btn-xs" onclick="event.stopPropagation();printStrukGroup(\'' + f.contractId + '\')">STRUK</button>' +
+              '<button class="btn btn-secondary btn-xs" onclick="event.stopPropagation();sendStrukWAGroup(\'' + f.contractId + '\')">KIRIM PDF</button>' +
+              '<button class="btn btn-secondary btn-xs" onclick="event.stopPropagation();sendStrukImageWAGroup(\'' + f.contractId + '\')">GAMBAR WA</button>' +
+            '</span>' +
+            '<span class="folder-chevron"><svg class="icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>' +
+          '</div>' +
+          '<div class="renter-folder-body"><div class="folder-scroll"><table class="folder-table">' +
+            '<thead><tr><th>KONTRAK</th><th>ALAT</th><th>QTY</th><th>DURASI</th><th>TGL KEMBALI</th><th style="text-align:right;">AKSI</th></tr></thead>' +
+            '<tbody>' +
+            items.map(c => {
+              const late = daysLate(c);
+              return '<tr' + (late > 0 ? ' style="background:#FDF2F0;"' : '') + '>' +
+              '<td class="mono" style="font-weight:600;">' + c.contractId + '</td>' +
+              '<td style="font-weight:600;">' + escHtml(c.itemName) + '</td>' +
+              '<td class="mono">' + c.qty + '</td>' +
+              '<td class="mono">' + c.days + ' hari</td>' +
+              '<td class="mono" style="color:' + (late > 0 ? 'var(--terracotta)' : 'var(--amber-warn)') + ';font-weight:600;">' + c.returnDate + (late > 0 ? ' <span class="badge-tag" style="background:var(--terracotta);color:#fff;border-color:var(--terracotta);">TELAT ' + late + ' HARI</span>' : '') + '</td>' +
+              '<td style="text-align:right; white-space:nowrap;">' + (late > 0 ? '<button class="btn btn-xs" style="background:var(--terracotta);color:#fff;border-color:var(--terracotta);" onclick="remindLate(\'' + c.contractId + '\')">INGATKAN WA</button> ' : '') + '<button class="btn btn-primary btn-xs" onclick="returnItem(\'' + c.contractId + '\')">BARANG KEMBALI</button></td>' +
+            '</tr>'; }).join('') +
+            '</tbody></table></div></div>' +
+        '</div>';
       });
+
+      if (searching) {
+        countEl.textContent = visibleItems + ' DARI ' + activeRentals.length + ' BARANG \u00B7 ' + visibleGroups + ' PENYEWA COCOK';
+        if (visibleGroups === 0) {
+          body.innerHTML = '<div class="empty-state"><div class="title">Tidak ada hasil untuk \'' + escHtml(rentalSearchQuery.trim()) + '\'.</div></div>';
+          return;
+        }
+      } else {
+        countEl.textContent = activeRentals.length + ' KONTRAK \u00B7 ' + groups.length + ' PENYEWA' + (lateTotal ? ' \u00B7 ' + lateTotal + ' TELAT' : '');
+      }
       body.innerHTML = html;
     }
 
