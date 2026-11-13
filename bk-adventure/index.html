@@ -1374,7 +1374,7 @@ async function uploadProof(file) {
     headers: { "apikey": BOOKING_CFG.anonKey, "Authorization": "Bearer " + BOOKING_CFG.anonKey, "Content-Type": file.type, "x-upsert": "false" },
     body: file
   });
-  if (!r.ok) throw new Error("Upload bukti pembayaran gagal (" + r.status + ").");
+  if (!r.ok) throw new Error("Unggah bukti pembayaran gagal — periksa koneksimu lalu coba lagi.");
   return path;
 }
 async function submitBooking(payload) {
@@ -1390,7 +1390,10 @@ async function submitBooking(payload) {
     });
     if (!r.ok) return { ok: false, error: "Server booking bermasalah (" + r.status + "). Coba lagi." };
     return await r.json();
-  } catch (e) { return { ok: false, error: "Tidak ada koneksi ke server booking." }; }
+  } catch (e) {
+    const msg = (e && e.message && e.message.indexOf("Unggah bukti") === 0) ? e.message : "Tidak ada koneksi ke server booking.";
+    return { ok: false, error: msg };
+  }
 }
 const STATUS_LABEL = {
   pending: "MENUNGGU KONFIRMASI ADMIN",
