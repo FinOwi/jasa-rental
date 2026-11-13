@@ -812,6 +812,11 @@
                 <label class="form-label">Ketentuan Sewa & Deposit (HTML atau plain text, tampil di modal)</label>
                 <textarea class="form-textarea" id="cfgRentalTerms" rows="10" placeholder="Ketik ketentuan sewa Anda di sini...&#10;&#10;Contoh:&#10;1. Deposit wajib 50% dari nilai barang&#10;2. Pembayaran via transfer bank&#10;3. Barang wajib dikembalikan dalam kondisi bersih"></textarea>
               </div>
+              <div class="form-group">
+                <label class="form-label">Info Pembayaran (tampil di formulir booking web)</label>
+                <textarea class="form-textarea" id="cfgPaymentInfo" rows="3" placeholder="Transfer BCA 1234567890 a.n. BK Adventure · DANA 0813xxxx a.n. ... · QRIS a.n. ... (kode QR dikirim admin via WA)"></textarea>
+                <div style="font-size:11px; color:var(--text-subtle); margin-top:4px;">Teks ini tampil apa adanya di langkah pembayaran saat pelanggan booking online, sebelum mereka mengunggah bukti transfer. Kosongkan bila tujuan pembayaran belum ingin ditampilkan.</div>
+              </div>
 
               <div style="height:1px; background:var(--border); margin:20px 0;"></div>
         </div>
@@ -1519,7 +1524,7 @@
         {id:"trip-sibayak",name:"Open Trip Gunung Sibayak",date:"2026-11-21",days:2,price:350000,quota:15,filled:8,meetingPoint:"Berastagi - basecamp",image:"https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80",includes:["Transport PP dari titik kumpul","Guide & porter tim","Tenda & alat masak tim","Makan 3x selama trip","Dokumentasi"],description:"Pendakian 2 hari 1 malam yang ramah pemula dengan kawah aktif dan pemandangan Danau Toba dari kejauhan."},
         {id:"trip-sibuatan",name:"Open Trip Gunung Sibuatan",date:"2026-12-05",days:2,price:450000,quota:12,filled:3,meetingPoint:"Medan - titik kumpul diberitahu admin",image:"https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80",includes:["Transport PP dari titik kumpul","Guide lokal","Tenda & alat masak tim","Makan 3x selama trip","Dokumentasi"],description:"Jalur hutan lumut Sibuatan untuk pendaki yang ingin suasana hutan pegunungan yang masih sepi."}
       ],
-      receiptPaper:"80", pickupOnly:true, receiptShowLogo:true, receiptShowAddress:true, receiptShowPhone:true, depotPhone:"", receiptNote:"", receiptFooter:"Barang harap kembali tepat waktu dalam kondisi baik. Terima kasih!",
+      receiptPaper:"80", pickupOnly:true, receiptShowLogo:true, receiptShowAddress:true, receiptShowPhone:true, depotPhone:"", paymentInfo:"", receiptNote:"", receiptFooter:"Barang harap kembali tepat waktu dalam kondisi baik. Terima kasih!",
       address:"Jl. Jamin Ginting No. 88, Berastagi, Kab. Karo, Sumatera Utara",
       mapsUrl:"https://www.google.com/maps/search/?api=1&query=Berastagi%2C+Karo%2C+Sumatera+Utara",
       trustItems:["100% Inspeksi Fisik","Garansi Tukar Unit di Basecamp","Pengambilan Langsung di Basecamp"],
@@ -3147,6 +3152,7 @@
       document.getElementById('cfgReceiptShowAddress').checked = siteConfig.receiptShowAddress !== false;
       document.getElementById('cfgReceiptShowPhone').checked = siteConfig.receiptShowPhone !== false;
       set('cfgDepotPhone', siteConfig.depotPhone || '');
+      set('cfgPaymentInfo', siteConfig.paymentInfo || '');
       set('cfgReceiptNote', siteConfig.receiptNote || '');
       set('cfgReceiptFooter', siteConfig.receiptFooter || 'Barang harap kembali tepat waktu dalam kondisi baik. Terima kasih!');
       set('cfgCatalogEyebrow', siteConfig.catalogEyebrow);
@@ -3187,6 +3193,7 @@
       siteConfig.receiptShowAddress = document.getElementById('cfgReceiptShowAddress').checked;
       siteConfig.receiptShowPhone = document.getElementById('cfgReceiptShowPhone').checked;
       siteConfig.depotPhone = v('cfgDepotPhone');
+      siteConfig.paymentInfo = v('cfgPaymentInfo');
       siteConfig.receiptNote = v('cfgReceiptNote');
       siteConfig.receiptFooter = v('cfgReceiptFooter') || 'Barang harap kembali tepat waktu dalam kondisi baik. Terima kasih!';
       saveData();
