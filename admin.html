@@ -1753,12 +1753,15 @@
       // Printer Bluetooth terhubung? Kirim ESC/POS langsung, tanpa dialog.
       if (typeof btReady === 'function' && btReady() && !btFallbackOnce) { btPrintStruk(contractId); return; }
       btFallbackOnce = false;
-      const all = activeRentals.concat(completedRentals);
-      const c = all.find(x => x.contractId === contractId);
-      if (!c) return;
-      let batch = [c];
-      if (c.dispatchTimestamp) batch = all.filter(x => x.dispatchTimestamp === c.dispatchTimestamp && x.renterName === c.renterName);
-      const dt = c.dispatchTimestamp ? new Date(c.dispatchTimestamp) : new Date();
+      const found = strukBatch(contractId);
+      if (!found) return;
+      printStrukHtmlFrom(found.c, found.batch, null);
+    }
+    // Isi dialog print struk (HTML) dari pasangan (kontrak jangkar, batch).
+    // opts (struk grup per penyewa): { contractLabel, timestamp } mengganti
+    // label kontrak & tanggal; tanpa opts keluaran identik perilaku lama.
+    function printStrukHtmlFrom(c, batch, opts) {
+      const dt = (opts && opts.timestamp != null) ? new Date(opts.timestamp) : (c.dispatchTimestamp ? new Date(c.dispatchTimestamp) : new Date());
       let rows = ''; let total = 0;
       batch.forEach(x => {
         const item = inventory.find(i => i.id === x.itemId);
@@ -1782,7 +1785,7 @@
         ((siteConfig.receiptShowPhone !== false && siteConfig.depotPhone) ? '<div>WA: ' + siteConfig.depotPhone + '</div>' : '') +
         '</div>' +
         '<div style="border-top:1px dashed #000;margin:8px 0;"></div>' +
-        '<div style="display:flex;justify-content:space-between;"><span>STRUK SEWA</span><span>' + c.contractId + (batch.length > 1 ? ' (+' + (batch.length - 1) + ' kontrak lain)' : '') + '</span></div>' +
+        '<div style="display:flex;justify-content:space-between;"><span>STRUK SEWA</span><span>' + (opts && opts.contractLabel ? escHtml(opts.contractLabel) : c.contractId + (batch.length > 1 ? ' (+' + (batch.length - 1) + ' kontrak lain)' : '')) + '</span></div>' +
         '<div>Tgl: ' + dt.toLocaleDateString('id-ID') + ' ' + dt.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) + '</div>' +
         '<div>Penyewa: ' + escHtml(c.renterName || '') + '</div>' +
         (c.renterPhone ? '<div>WA: ' + c.renterPhone + '</div>' : '') +
@@ -1854,9 +1857,15 @@
     function btStrukBytes(contractId) {
       const found = strukBatch(contractId);
       if (!found) return null;
-      const c = found.c, batch = found.batch;
+      return btStrukBytesFrom(found.c, found.batch, null);
+    }
+    // Byte ESC/POS struk dari pasangan (kontrak jangkar, batch). opts (struk
+    // grup per penyewa): { contractIds, timestamp } — tanggal = dispatch
+    // terawal grup + satu baris daftar semua kontrak grup; tanpa opts
+    // keluaran byte identik dengan perilaku lama.
+    function btStrukBytesFrom(c, batch, opts) {
       const cols = (siteConfig.receiptPaper === '58') ? 32 : 48;
-      const dt = c.dispatchTimestamp ? new Date(c.dispatchTimestamp) : new Date();
+      const dt = (opts && opts.timestamp != null) ? new Date(opts.timestamp) : (c.dispatchTimestamp ? new Date(c.dispatchTimestamp) : new Date());
       let total = 0;
       const items = [];
       batch.forEach(x => {
@@ -1893,6 +1902,7 @@
       if (siteConfig.receiptShowPhone !== false && siteConfig.depotPhone) center('WA: ' + siteConfig.depotPhone);
       line('-'.repeat(cols));
       two('STRUK SEWA', c.contractId + (batch.length > 1 ? ' (+' + (batch.length - 1) + ')' : ''));
+      if (opts && opts.contractIds && opts.contractIds.length > 1) wrapTextLines('Kontrak: ' + opts.contractIds.join(', '), cols).forEach(w => line(w));
       line('Tgl: ' + dt.toLocaleDateString('id-ID') + ' ' + dt.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }));
       wrapTextLines('Penyewa: ' + (c.renterName || ''), cols).forEach(w => line(w));
       if (c.renterPhone) line('WA: ' + c.renterPhone);
@@ -1926,6 +1936,20 @@
         toast('Gagal mencetak via Bluetooth — membuka dialog print.');
         btFallbackOnce = true;
         printStruk(contractId);
+      }
+    }
+    async function btPrintStrukGroup(contractId) {
+      const g = strukGroupData(contractId);
+      if (!g) return;
+      const bytes = btStrukBytesFrom(g.c, g.batch, g.opts);
+      if (!bytes) return;
+      try {
+        await btWriteAll(bytes);
+        toast('Struk terkirim ke printer Bluetooth.');
+      } catch (e) {
+        toast('Gagal mencetak via Bluetooth — membuka dialog print.');
+        btFallbackOnce = true;
+        printStrukGroup(contractId);
       }
     }
     async function btTestPrint() {
@@ -1990,7 +2014,12 @@
     function buildStrukLines(contractId) {
       const found = strukBatch(contractId);
       if (!found) return null;
-      const c = found.c, batch = found.batch;
+      return buildStrukLinesFrom(found.c, found.batch, null);
+    }
+    // opts (struk grup per penyewa): { contractLabel, timestamp } — baris
+    // "No. Kontrak" memuat SEMUA kontrak grup & "Tanggal" memakai
+    // dispatchTimestamp terawal grup; tanpa opts perilaku lama persis.
+    function buildStrukLinesFrom(c, batch, opts) {
       const paper = siteConfig.receiptPaper === '58' ? 58 : 80;
       // Lebar teks dihitung dari metrik font Courier jsPDF (monospace,
       // persis 0,6 em per karakter) terhadap lebar kertas — bukan tebakan
@@ -2004,7 +2033,7 @@
       const maxChars = Math.max(16, Math.floor(usable / charW(9.5)));
       const bigChars = Math.max(10, Math.floor(usable / charW(13)));
       const clean = t => String(t).replace(/\u00A0/g, ' ');
-      const dt = c.dispatchTimestamp ? new Date(c.dispatchTimestamp) : new Date();
+      const dt = (opts && opts.timestamp != null) ? new Date(opts.timestamp) : (c.dispatchTimestamp ? new Date(c.dispatchTimestamp) : new Date());
       let total = 0;
       const items = [];
       batch.forEach(x => {
@@ -2026,7 +2055,7 @@
       if (siteConfig.receiptShowAddress !== false && siteConfig.address) add(siteConfig.address, { c: 1 });
       if (siteConfig.receiptShowPhone !== false && siteConfig.depotPhone) add('WA Toko: ' + siteConfig.depotPhone, { c: 1 });
       add('-'.repeat(maxChars), {});
-      add('No. Kontrak: ' + c.contractId, {});
+      add('No. Kontrak: ' + (opts && opts.contractLabel ? opts.contractLabel : c.contractId), {});
       add('Tanggal: ' + dt.toLocaleDateString('id-ID') + ' ' + dt.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }), {});
       add('Penyewa: ' + (c.renterName || ''), {});
       add('-'.repeat(maxChars), {});
@@ -2043,9 +2072,12 @@
       return { L: L, paper: paper, margin: margin, c: c };
     }
     function buildStrukPDF(contractId) {
-      if (!window.jspdf || !window.jspdf.jsPDF) return null;
       const built = buildStrukLines(contractId);
       if (!built) return null;
+      return renderStrukPDF(built);
+    }
+    function renderStrukPDF(built) {
+      if (!window.jspdf || !window.jspdf.jsPDF) return null;
       const L = built.L, paper = built.paper, margin = built.margin, c = built.c;
       const lh = x => x.big ? 6.4 : 4.7;
       const H = 10 + L.reduce((s2, x) => s2 + lh(x), 0) + 4;
@@ -2071,6 +2103,9 @@
     function buildStrukImage(contractId) {
       const built = buildStrukLines(contractId);
       if (!built) return null;
+      return renderStrukImage(built);
+    }
+    function renderStrukImage(built) {
       const L = built.L, paper = built.paper, margin = built.margin, c = built.c;
       const S = 8;
       const lhPx = x => (x.big ? 6.4 : 4.7) * S;
@@ -2101,6 +2136,9 @@
     function sendStrukImageWA(contractId) {
       const img = buildStrukImage(contractId);
       if (!img) { toast('Struk tidak ditemukan.'); return; }
+      deliverStrukImage(img);
+    }
+    function deliverStrukImage(img) {
       const c = img.contract;
       img.canvas.toBlob(blob => {
         if (!blob) { toast('Gagal membuat gambar struk.'); return; }
@@ -2126,6 +2164,9 @@
     function sendStrukWA(contractId) {
       const pdf = buildStrukPDF(contractId);
       if (!pdf) { toast('Library PDF belum termuat (butuh internet). Mengirim versi teks.'); sendStrukWAText(contractId); return; }
+      deliverStrukPDF(pdf);
+    }
+    function deliverStrukPDF(pdf) {
       const c = pdf.contract;
       const file = new File([pdf.blob], pdf.filename, { type: 'application/pdf' });
       if (navigator.canShare && navigator.canShare({ files: [file] })) {
@@ -2148,10 +2189,12 @@
     function sendStrukWAText(contractId) {
       const found = strukBatch(contractId);
       if (!found) return;
-      const c = found.c, batch = found.batch;
+      sendStrukWATextFrom(found.c, found.batch, null);
+    }
+    function sendStrukWATextFrom(c, batch, opts) {
       const phone = normalizePhone(c.renterPhone, c.renterName);
       if (!phone) { alert('Nomor WhatsApp penyewa tidak tersedia pada kontrak ini.'); return; }
-      const dt = c.dispatchTimestamp ? new Date(c.dispatchTimestamp) : new Date();
+      const dt = (opts && opts.timestamp != null) ? new Date(opts.timestamp) : (c.dispatchTimestamp ? new Date(c.dispatchTimestamp) : new Date());
       let total = 0, items = '';
       batch.forEach(x => {
         const item = inventory.find(i => i.id === x.itemId);
@@ -2165,7 +2208,7 @@
         ((siteConfig.receiptShowAddress !== false && siteConfig.address) ? siteConfig.address + '\n' : '') +
         ((siteConfig.receiptShowPhone !== false && siteConfig.depotPhone) ? 'WA Toko: ' + siteConfig.depotPhone + '\n' : '') +
         '------------------------------\n' +
-        'No. Kontrak: ' + c.contractId + '\n' +
+        'No. Kontrak: ' + (opts && opts.contractLabel ? opts.contractLabel : c.contractId) + '\n' +
         'Tanggal: ' + dt.toLocaleDateString('id-ID') + ' ' + dt.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' }) + '\n' +
         'Penyewa: ' + (c.renterName || '') + '\n' +
         '------------------------------\n' + items +
@@ -2175,6 +2218,51 @@
         '------------------------------\n' +
         (siteConfig.receiptFooter || 'Barang harap kembali tepat waktu dalam kondisi baik. Terima kasih!');
       window.open('https://wa.me/' + phone + '?text=' + encodeURIComponent(msg), '_blank');
+    }
+
+    // ===== STRUK GABUNGAN PER PENYEWA =====
+    // Perintah pemilik: satu orang = SATU struk untuk SEMUA kontrak
+    // aktifnya, lintas batch/dispatchTimestamp ("alken > barang > struk
+    // 1 aja"). Grup dihitung dari activeRentals SAJA dengan kunci grup
+    // yang sama seperti tabel sewa aktif (rentalRenterKey). Jalur lama
+    // per batch (printStruk/sendStrukWA/sendStrukImageWA) TIDAK berubah.
+    function strukGroup(contractId) {
+      const anchor = activeRentals.find(x => x.contractId === contractId);
+      if (!anchor) return null;
+      const key = rentalRenterKey(anchor);
+      return { c: anchor, batch: activeRentals.filter(x => rentalRenterKey(x) === key) };
+    }
+    function strukGroupData(contractId) {
+      const g = strukGroup(contractId);
+      if (!g) return null;
+      const ids = g.batch.map(x => x.contractId);
+      let ts = null;
+      g.batch.forEach(x => { if (x.dispatchTimestamp && (ts === null || x.dispatchTimestamp < ts)) ts = x.dispatchTimestamp; });
+      return { c: g.c, batch: g.batch, opts: { contractLabel: ids.join(', '), contractIds: ids, timestamp: ts } };
+    }
+    function printStrukGroup(contractId) {
+      // Sama seperti printStruk: Bluetooth terhubung -> ESC/POS langsung.
+      if (typeof btReady === 'function' && btReady() && !btFallbackOnce) { btPrintStrukGroup(contractId); return; }
+      btFallbackOnce = false;
+      const g = strukGroupData(contractId);
+      if (!g) return;
+      printStrukHtmlFrom(g.c, g.batch, g.opts);
+    }
+    function sendStrukWAGroup(contractId) {
+      const g = strukGroupData(contractId);
+      if (!g) { toast('Struk tidak ditemukan.'); return; }
+      const built = buildStrukLinesFrom(g.c, g.batch, g.opts);
+      const pdf = built ? renderStrukPDF(built) : null;
+      if (!pdf) { toast('Library PDF belum termuat (butuh internet). Mengirim versi teks.'); sendStrukWATextFrom(g.c, g.batch, g.opts); return; }
+      deliverStrukPDF(pdf);
+    }
+    function sendStrukImageWAGroup(contractId) {
+      const g = strukGroupData(contractId);
+      if (!g) { toast('Struk tidak ditemukan.'); return; }
+      const built = buildStrukLinesFrom(g.c, g.batch, g.opts);
+      const img = built ? renderStrukImage(built) : null;
+      if (!img) { toast('Struk tidak ditemukan.'); return; }
+      deliverStrukImage(img);
     }
 
 
@@ -3164,27 +3252,67 @@
       window.open('https://wa.me/' + phone + '?text=' + encodeURIComponent(msg), '_blank');
     }
 
+    function rentalRenterKey(c) {
+      // Kunci pengelompokan penyewa: nomor WA ternormalisasi lewat
+      // normalizePhone (fungsi yang sama dengan jalur struk/WA). WA tak
+      // terbaca -> cadangan nama+NIK (huruf kecil).
+      const p = normalizePhone(c.renterPhone, c.renterName);
+      if (p) return 'wa:' + p;
+      return 'id:' + String(c.renterName || '').trim().toLowerCase() + '|' + String(c.renterNIK || '').trim().toLowerCase();
+    }
+
     function renderRentalTable() {
       const body = document.getElementById('rentalTableBody');
       const lateTotal = activeRentals.filter(x => daysLate(x) > 0).length;
-      document.getElementById('activeCount').textContent = activeRentals.length + ' KONTRAK' + (lateTotal ? ' \u00B7 ' + lateTotal + ' TELAT' : '');
+      // Kelompokkan per penyewa (urutan grup = kemunculan pertama; urutan
+      // kontrak di dalam grup tidak berubah) supaya satu orang = satu blok.
+      const groups = [];
+      const byKey = {};
+      activeRentals.forEach(c => {
+        const k = rentalRenterKey(c);
+        if (!byKey[k]) { byKey[k] = { first: c, items: [] }; groups.push(byKey[k]); }
+        byKey[k].items.push(c);
+      });
+      document.getElementById('activeCount').textContent = activeRentals.length + ' KONTRAK \u00B7 ' + groups.length + ' PENYEWA' + (lateTotal ? ' \u00B7 ' + lateTotal + ' TELAT' : '');
       if (activeRentals.length === 0) {
         body.innerHTML = '<tr><td colspan="9" class="empty-state"><div class="title">Tidak ada sewa aktif</div></td></tr>';
         return;
       }
-      body.innerHTML = activeRentals.map(c => {
-        const late = daysLate(c);
-        return '<tr' + (late > 0 ? ' style="background:#FDF2F0;"' : '') + '>' +
-        '<td class="mono" style="font-weight:600;">' + c.contractId + '</td>' +
-        '<td>' + escHtml(c.renterName || '') + '</td>' +
-        '<td class="mono">' + escHtml(c.renterPhone || '') + '</td>' +
-        '<td class="mono" style="font-size:11px;">' + escHtml(c.renterNIK || '') + '</td>' +
-        '<td style="font-weight:600;">' + escHtml(c.itemName) + '</td>' +
-        '<td class="mono">' + c.qty + '</td>' +
-        '<td class="mono">' + c.days + ' hari</td>' +
-        '<td class="mono" style="color:' + (late > 0 ? 'var(--terracotta)' : 'var(--amber-warn)') + ';font-weight:600;">' + c.returnDate + (late > 0 ? ' <span class="badge-tag" style="background:var(--terracotta);color:#fff;border-color:var(--terracotta);">TELAT ' + late + ' HARI</span>' : '') + '</td>' +
-        '<td style="text-align:right; white-space:nowrap;">' + (late > 0 ? '<button class="btn" style="font-size:10px;padding:4px 10px;margin-right:4px;background:var(--terracotta);color:#fff;border:none;cursor:pointer;" onclick="remindLate(\'' + c.contractId + '\')">INGATKAN WA</button>' : '') + '<button class="btn btn-secondary" style="font-size:10px;padding:4px 10px;margin-right:4px;" onclick="printStruk(\'' + c.contractId + '\')">STRUK</button><button class="btn btn-secondary" style="font-size:10px;padding:4px 10px;margin-right:4px;" onclick="sendStrukWA(\'' + c.contractId + '\')">KIRIM PDF</button><button class="btn btn-secondary" style="font-size:10px;padding:4px 10px;margin-right:4px;" onclick="sendStrukImageWA(\'' + c.contractId + '\')">GAMBAR WA</button><button class="btn btn-primary" style="font-size:10px;padding:4px 10px;" onclick="returnItem(\'' + c.contractId + '\')">BARANG KEMBALI</button></td>' +
-      '</tr>'; }).join('');
+      let html = '';
+      groups.forEach(g => {
+        const f = g.first;
+        const totalUnits = g.items.reduce((s, x) => s + (x.qty || 0), 0);
+        const nearest = g.items.map(x => x.returnDate || '').filter(Boolean).sort()[0] || '-';
+        const lateItems = g.items.filter(x => daysLate(x) > 0);
+        const lateMax = lateItems.reduce((m, x) => Math.max(m, daysLate(x)), 0);
+        html += '<tr class="renter-group-row" style="background:var(--surface-2);">' +
+          '<td colspan="9" style="padding:10px 12px;border-top:2px solid var(--border);">' +
+            '<span style="font-weight:700;font-size:13px;">' + escHtml(f.renterName || '') + '</span>' +
+            (f.renterPhone ? ' <span class="mono" style="font-size:11px;color:var(--text-muted);">' + escHtml(f.renterPhone) + '</span>' : '') +
+            (f.renterNIK ? ' <span class="mono" style="font-size:11px;color:var(--text-muted);">NIK ' + escHtml(f.renterNIK) + '</span>' : '') +
+            ' <span class="mono" style="font-size:11px;font-weight:700;color:var(--forest);">' + g.items.length + ' barang &middot; total ' + totalUnits + ' unit &middot; kembali terdekat ' + nearest + '</span>' +
+            (lateItems.length ? ' <span class="badge-tag" style="background:var(--terracotta);color:#fff;border-color:var(--terracotta);">' + lateItems.length + ' TELAT &middot; MAKS ' + lateMax + ' HARI</span>' : '') +
+            ' <span style="float:right;white-space:nowrap;">' +
+              '<button class="btn btn-secondary" style="font-size:10px;padding:4px 10px;margin-right:4px;" onclick="printStrukGroup(\'' + f.contractId + '\')">STRUK</button>' +
+              '<button class="btn btn-secondary" style="font-size:10px;padding:4px 10px;margin-right:4px;" onclick="sendStrukWAGroup(\'' + f.contractId + '\')">KIRIM PDF</button>' +
+              '<button class="btn btn-secondary" style="font-size:10px;padding:4px 10px;" onclick="sendStrukImageWAGroup(\'' + f.contractId + '\')">GAMBAR WA</button>' +
+            '</span>' +
+          '</td></tr>';
+        html += g.items.map(c => {
+          const late = daysLate(c);
+          return '<tr' + (late > 0 ? ' style="background:#FDF2F0;"' : '') + '>' +
+          '<td class="mono" style="font-weight:600;">' + c.contractId + '</td>' +
+          '<td><span style="color:var(--text-subtle);">&mdash;</span></td>' +
+          '<td><span style="color:var(--text-subtle);">&mdash;</span></td>' +
+          '<td><span style="color:var(--text-subtle);">&mdash;</span></td>' +
+          '<td style="font-weight:600;">' + escHtml(c.itemName) + '</td>' +
+          '<td class="mono">' + c.qty + '</td>' +
+          '<td class="mono">' + c.days + ' hari</td>' +
+          '<td class="mono" style="color:' + (late > 0 ? 'var(--terracotta)' : 'var(--amber-warn)') + ';font-weight:600;">' + c.returnDate + (late > 0 ? ' <span class="badge-tag" style="background:var(--terracotta);color:#fff;border-color:var(--terracotta);">TELAT ' + late + ' HARI</span>' : '') + '</td>' +
+          '<td style="text-align:right; white-space:nowrap;">' + (late > 0 ? '<button class="btn" style="font-size:10px;padding:4px 10px;margin-right:4px;background:var(--terracotta);color:#fff;border:none;cursor:pointer;" onclick="remindLate(\'' + c.contractId + '\')">INGATKAN WA</button>' : '') + '<button class="btn btn-primary" style="font-size:10px;padding:4px 10px;" onclick="returnItem(\'' + c.contractId + '\')">BARANG KEMBALI</button></td>' +
+        '</tr>'; }).join('');
+      });
+      body.innerHTML = html;
     }
 
     function renderRecentRentals() {
