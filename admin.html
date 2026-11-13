@@ -1171,6 +1171,11 @@
             </div>
             <div id="bkList"><p style="font-size:13px;color:var(--text-subtle);">Memuat booking website...</p></div>
           </div>
+          <!-- ===== MODAL BUKTI PEMBAYARAN BOOKING (lightbox, tanpa tab baru) ===== -->
+          <div id="bkProofModal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(12,14,12,.88);align-items:center;justify-content:center;padding:18px;">
+            <button type="button" id="bkProofClose" aria-label="Tutup bukti" style="position:absolute;top:14px;right:16px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:rgba(0,0,0,.55);color:#fff;font-size:19px;line-height:1;cursor:pointer;">&#10005;</button>
+            <div id="bkProofBody" style="display:flex;align-items:center;justify-content:center;max-width:92vw;max-height:84vh;"></div>
+          </div>
           <div class="two-col">
             <!-- Dispatch Form -->
             <div class="panel">
@@ -2745,17 +2750,80 @@
         return true;
       } catch (e) { toast('Gagal mengubah status booking: ' + e.message); return false; }
     }
+    // ===== MODAL BUKTI PEMBAYARAN (lightbox di halaman yang sama) =====
+    let bkProofObjUrl = '';
+    let bkProofSeq = 0;
+    let bkProofInitDone = false;
+    function bkProofIsPdf(path) { return /\.pdf($|\?)/i.test(path || ''); }
+    function bkProofEnsureInit() {
+      if (bkProofInitDone) return;
+      bkProofInitDone = true;
+      const modal = document.getElementById('bkProofModal');
+      if (!modal) return;
+      modal.addEventListener('click', function (e) { if (e.target === modal) bkProofClose(); });
+      const btn = document.getElementById('bkProofClose');
+      if (btn) btn.addEventListener('click', function () { bkProofClose(); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') bkProofClose(); });
+    }
+    function bkProofClose() {
+      bkProofSeq++;
+      const modal = document.getElementById('bkProofModal');
+      if (!modal || modal.style.display === 'none') return;
+      modal.style.display = 'none';
+      const body = document.getElementById('bkProofBody');
+      if (body) body.innerHTML = '';
+      if (bkProofObjUrl) { try { URL.revokeObjectURL(bkProofObjUrl); } catch (e) {} bkProofObjUrl = ''; }
+    }
+    function bkProofRender(url, isPdf) {
+      const body = document.getElementById('bkProofBody');
+      if (!body) return;
+      body.innerHTML = '';
+      let el;
+      if (isPdf) {
+        el = document.createElement('iframe');
+        el.title = 'Bukti pembayaran (PDF)';
+        el.style.cssText = 'width:min(92vw,900px);height:84vh;border:0;border-radius:10px;background:#fff;';
+      } else {
+        el = document.createElement('img');
+        el.alt = 'Bukti pembayaran';
+        el.style.cssText = 'max-width:92vw;max-height:84vh;border-radius:10px;background:#fff;';
+      }
+      el.src = url;
+      body.appendChild(el);
+    }
     async function bkProof(code) {
       const row = bkRowsCache.find(r => r.code === code);
       const path = row && row.data.payment ? row.data.payment.proofPath : '';
       if (!path) { toast('Booking ini tidak punya berkas bukti pembayaran.'); return; }
+      bkProofEnsureInit();
+      let signedUrl = '';
       try {
         const r = await fetch(KONFIG.SUPABASE_URL + '/storage/v1/object/sign/payment-proofs/' + path, { method: 'POST', headers: sbHeaders({ 'Content-Type': 'application/json' }), body: JSON.stringify({ expiresIn: 3600 }) });
         if (!r.ok) throw new Error('HTTP ' + r.status);
         const j = await r.json();
-        if (j && j.signedURL) window.open(KONFIG.SUPABASE_URL + j.signedURL, '_blank');
-        else toast('Gagal membuat tautan bukti.');
-      } catch (e) { toast('Gagal membuka bukti: ' + e.message); }
+        if (j && j.signedURL) signedUrl = KONFIG.SUPABASE_URL + j.signedURL;
+        else { toast('Gagal membuat tautan bukti.'); return; }
+      } catch (e) { toast('Gagal membuka bukti: ' + e.message); return; }
+      const modal = document.getElementById('bkProofModal');
+      const body = document.getElementById('bkProofBody');
+      if (!modal || !body) { toast('Gagal membuka bukti: panel tampilan tidak ditemukan.'); return; }
+      const isPdf = bkProofIsPdf(path);
+      const seq = ++bkProofSeq;
+      modal.style.display = 'flex';
+      body.innerHTML = '<span style="color:#fff;font-size:14px;">Memuat bukti…</span>';
+      try {
+        const fr = await fetch(signedUrl);
+        if (!fr.ok) throw new Error('HTTP ' + fr.status);
+        const blob = await fr.blob();
+        const objUrl = URL.createObjectURL(blob);
+        if (seq !== bkProofSeq) { try { URL.revokeObjectURL(objUrl); } catch (e) {} return; }
+        bkProofObjUrl = objUrl;
+        bkProofRender(objUrl, isPdf);
+      } catch (e) {
+        // Rencana B: tampilkan signed URL langsung di modal yang sama (tetap tanpa tab baru).
+        if (seq !== bkProofSeq) return;
+        bkProofRender(signedUrl, isPdf);
+      }
     }
     async function bkVerifyPay(code) {
       const tid = await sbResolveTenant();
