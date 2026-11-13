@@ -1,0 +1,1724 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>BK Adventure — Peta Lapangan | Sewa Alat Outdoor Medan</title>
+<meta name="description" content="Sewa alat outdoor di Medan dengan booking berbasis tanggal: pilih tanggal dulu, lihat alat yang benar-benar tersedia, bayar, dan kode booking langsung terbit.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#16211B; --ink-2:#1E2B23; --ink-soft:#2A382F;
+  --paper:#F1F3EF; --paper-2:#E7ECE4; --white:#FFFFFF;
+  --survey:#D9A404; --survey-deep:#A87E03;
+  --marker:#C0392B; --marker-soft:#F7E9E6;
+  --line:#D3DAD0; --line-dark:#3A4740;
+  --muted:#5A665E; --ok:#1E6B3C;
+  --shadow:0 14px 34px rgba(22,33,27,.13);
+  --font-d:'Space Grotesk',sans-serif; --font-b:'Inter',sans-serif; --font-m:'IBM Plex Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{overflow-x:clip;scroll-behavior:smooth}
+@supports not (overflow:clip){html,body{overflow-x:hidden}}
+body{font-family:var(--font-b);background:var(--paper);color:var(--ink);overflow-x:clip;line-height:1.55;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+button{font:inherit;cursor:pointer}
+a{color:inherit}
+.mono{font-family:var(--font-m)}
+.wrap{width:min(1240px,100% - 40px);margin-inline:auto}
+section{position:relative}
+.sec-pad{padding:64px 0}
+.sec-head{margin-bottom:28px}
+.eyebrow{font-family:var(--font-m);font-size:11.5px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--survey-deep);display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:26px;height:2px;background:var(--survey);flex:none}
+.sec-head h2{font-family:var(--font-d);font-size:clamp(27px,4.4vw,40px);font-weight:700;line-height:1.12;letter-spacing:-.01em;margin-top:10px}
+.sec-head p{color:var(--muted);max-width:620px;margin-top:8px;font-size:15px}
+.btn{display:inline-flex;align-items:center;gap:9px;border:none;border-radius:8px;padding:13px 22px;font-family:var(--font-d);font-weight:600;font-size:15px;text-decoration:none;transition:transform .15s,background .15s,box-shadow .15s}
+.btn:active{transform:translateY(1px)}
+.btn-survey{background:var(--survey);color:var(--ink)}
+.btn-survey:hover{background:#C79503}
+.btn-ink{background:var(--ink);color:var(--paper)}
+.btn-ink:hover{background:var(--ink-soft)}
+.btn-ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.btn-ghost:hover{background:var(--ink);color:var(--paper)}
+.btn[disabled]{opacity:.55;cursor:not-allowed}
+.btn svg{width:18px;height:18px;flex:none}
+
+/* ===== HEADER ===== */
+header.site{position:sticky;top:0;z-index:60;background:var(--ink);color:var(--paper);border-bottom:3px solid var(--survey)}
+.hd-in{display:flex;align-items:center;gap:18px;height:64px}
+.logo{font-family:var(--font-d);font-weight:700;font-size:19px;letter-spacing:.04em;text-decoration:none;line-height:1.05}
+.logo small{display:block;font-family:var(--font-m);font-weight:500;font-size:9.5px;letter-spacing:.24em;color:var(--survey)}
+nav.main{display:flex;gap:26px;margin-left:26px}
+nav.main a{font-family:var(--font-d);font-size:14px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:#C9D4C9}
+nav.main a:hover{color:#fff}
+.hd-right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.btn-track{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1.5px solid var(--survey);color:var(--survey);border-radius:8px;padding:9px 15px;font-family:var(--font-m);font-size:12.5px;font-weight:600;letter-spacing:.08em}
+.btn-track:hover{background:var(--survey);color:var(--ink)}
+.btn-track svg{width:15px;height:15px}
+.icon-btn{position:relative;width:42px;height:42px;border-radius:8px;border:1.5px solid var(--line-dark);background:transparent;color:var(--paper);display:flex;align-items:center;justify-content:center}
+.icon-btn:hover{border-color:var(--survey);color:var(--survey)}
+.icon-btn svg{width:20px;height:20px}
+.cart-badge{position:absolute;top:-8px;right:-8px;min-width:21px;height:21px;border-radius:999px;background:var(--survey);color:var(--ink);font-family:var(--font-m);font-size:11px;font-weight:600;display:none;align-items:center;justify-content:center;padding:0 5px}
+#btnMenu{display:none}
+.mobile-nav{display:none;background:var(--ink-2);border-top:1px solid var(--line-dark)}
+.mobile-nav.open{display:block}
+.mobile-nav a{display:block;padding:13px 20px;font-family:var(--font-d);font-size:14px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;color:#C9D4C9;border-bottom:1px solid var(--line-dark)}
+.mobile-nav a:last-child{border-bottom:none}
+
+/* ===== HERO ===== */
+.hero{background:var(--paper);overflow:hidden}
+.contour-bg{position:absolute;pointer-events:none;color:var(--ink)}
+.hero .contour-bg{width:760px;height:760px;right:-190px;top:-160px;opacity:.10;transform:rotate(12deg)}
+.hero-in{position:relative;display:grid;grid-template-columns:1.08fr .92fr;gap:44px;padding:58px 0 0;align-items:center}
+.hero-copy .coords{font-family:var(--font-m);font-size:12px;letter-spacing:.18em;color:var(--muted);display:flex;gap:14px;flex-wrap:wrap}
+.hero-copy .coords b{color:var(--marker);font-weight:600}
+.hero-copy h1{font-family:var(--font-d);font-size:clamp(36px,5.6vw,58px);font-weight:700;line-height:1.04;letter-spacing:-.015em;margin:16px 0 16px}
+.hero-copy h1 .hl{background:var(--survey);padding:0 8px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.hero-copy p.lead{color:var(--muted);font-size:16.5px;max-width:520px}
+.hero-photo{position:relative}
+.hero-photo img{width:100%;height:430px;object-fit:cover;border-radius:14px;border:1.5px solid var(--ink)}
+.hero-photo .tag{position:absolute;left:14px;bottom:14px;background:var(--ink);color:var(--paper);font-family:var(--font-m);font-size:11.5px;letter-spacing:.1em;padding:8px 13px;border-radius:6px}
+.hero-photo .tag b{color:var(--survey)}
+.field-notes{display:flex;gap:0;flex-wrap:wrap;border:1.5px solid var(--ink);border-radius:10px;background:var(--white);margin-top:30px;overflow:hidden}
+.field-notes div{flex:1 1 180px;padding:12px 16px;border-right:1px dashed var(--line)}
+.field-notes div:last-child{border-right:none}
+.field-notes .k{font-family:var(--font-m);font-size:10.5px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase}
+.field-notes .v{font-family:var(--font-d);font-weight:600;font-size:15px;margin-top:2px}
+
+/* ===== BOOKING BAR (date-first) ===== */
+.bookbar-zone{position:relative;padding:30px 0 6px}
+.bookbar{background:var(--white);border:2px solid var(--ink);border-radius:14px;box-shadow:var(--shadow);padding:20px 22px;position:relative}
+.bookbar::before{content:"";position:absolute;top:-2px;left:22px;width:64px;height:4px;background:var(--marker);border-radius:0 0 4px 4px}
+.bb-title{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.bb-title h2{font-family:var(--font-d);font-size:20px;font-weight:700}
+.bb-title .step{font-family:var(--font-m);font-size:11px;letter-spacing:.2em;color:var(--marker);font-weight:600}
+.bb-grid{display:grid;grid-template-columns:1.2fr .8fr auto;gap:14px;align-items:end}
+.bb-field label{display:block;font-family:var(--font-m);font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+.bb-field input{width:100%;border:1.5px solid var(--line);border-radius:8px;padding:12px 13px;font:inherit;font-size:15px;background:var(--paper);color:var(--ink);outline:none}
+.bb-field input:focus{border-color:var(--ink)}
+.bb-status{margin-top:14px;font-family:var(--font-m);font-size:12.5px;letter-spacing:.04em;color:var(--muted);display:none}
+.bb-status.on{display:block}
+.bb-status b{color:var(--ink)}
+.bb-status .clr{background:none;border:none;color:var(--marker);font:inherit;font-weight:600;text-decoration:underline;padding:0;margin-left:8px}
+
+/* ===== KATEGORI: penanda koordinat ===== */
+.cat-list{border:1.5px solid var(--ink);border-radius:12px;background:var(--white);overflow:hidden}
+.cat-row{display:flex;align-items:center;gap:16px;width:100%;text-align:left;background:var(--white);border:none;border-bottom:1px solid var(--line);padding:15px 20px;transition:background .15s}
+.cat-row:last-child{border-bottom:none}
+.cat-row:hover{background:var(--paper)}
+.cat-row.active{background:var(--ink);color:var(--paper)}
+.cat-row .no{font-family:var(--font-m);font-size:13px;font-weight:600;color:var(--survey-deep);border:1.5px solid currentColor;border-radius:6px;padding:3px 8px;flex:none}
+.cat-row.active .no{color:var(--survey)}
+.cat-row .nm{font-family:var(--font-d);font-weight:600;font-size:16.5px}
+.cat-row .ct{margin-left:auto;font-family:var(--font-m);font-size:12px;letter-spacing:.08em;color:var(--muted);flex:none}
+.cat-row.active .ct{color:#C9D4C9}
+.cat-row .arr{font-family:var(--font-m);color:var(--survey-deep);flex:none}
+.cat-row.active .arr{color:var(--survey)}
+
+/* ===== KATALOG ===== */
+.cat-tools{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:20px}
+.chip-row{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:1.5px solid var(--line);background:var(--white);border-radius:999px;padding:8px 15px;font-family:var(--font-d);font-size:13.5px;font-weight:500}
+.chip.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.search-box{margin-left:auto;position:relative;flex:1 1 220px;max-width:340px}
+.search-box input{width:100%;border:1.5px solid var(--line);border-radius:8px;padding:11px 13px 11px 40px;font:inherit;font-size:14.5px;background:var(--white);outline:none}
+.search-box input:focus{border-color:var(--ink)}
+.search-box svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:17px;height:17px;color:var(--muted)}
+.prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.prod-card{background:var(--white);border:1.5px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;min-width:0;transition:border-color .15s,box-shadow .15s}
+.prod-card:hover{border-color:var(--ink);box-shadow:var(--shadow)}
+.prod-media{position:relative;background:var(--paper-2)}
+.prod-media img{width:100%;height:190px;object-fit:contain;padding:12px}
+.badge{position:absolute;top:10px;left:10px;font-family:var(--font-m);font-size:10.5px;font-weight:600;letter-spacing:.12em;padding:4px 9px;border-radius:5px;background:var(--ink);color:var(--paper)}
+.badge-sale{background:var(--survey);color:var(--ink)}
+.badge-out{background:var(--marker);color:#fff}
+.prod-body{padding:16px 16px 18px;display:flex;flex-direction:column;gap:5px;flex:1}
+.prod-cat{font-family:var(--font-m);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--survey-deep)}
+.prod-name{font-family:var(--font-d);font-weight:600;font-size:16.5px;line-height:1.3}
+.prod-cond{font-size:12.5px;color:var(--muted)}
+.prod-spec{font-family:var(--font-m);font-size:11.5px;color:var(--muted);letter-spacing:.02em}
+.avail{font-family:var(--font-m);font-size:11.5px;font-weight:600;letter-spacing:.05em;margin-top:7px;display:flex;align-items:center;gap:8px}
+.avail .sq{width:9px;height:9px;flex:none;background:var(--ok)}
+.avail.full{color:var(--marker)}
+.avail.full .sq{background:var(--marker)}
+.prod-price{margin-top:auto;padding-top:10px}
+.prod-price b{font-family:var(--font-d);font-size:19px;font-weight:700}
+.prod-price span{font-size:13px;color:var(--muted)}
+.prod-est{font-family:var(--font-m);font-size:11.5px;color:var(--muted);margin-top:1px}
+.add-btn{margin-top:12px;width:100%;border:none;border-radius:8px;background:var(--ink);color:var(--paper);padding:12px 14px;font-family:var(--font-d);font-weight:600;font-size:14.5px;display:flex;align-items:center;justify-content:center;gap:9px}
+.add-btn:hover{background:var(--ink-soft)}
+.add-btn svg{width:17px;height:17px}
+.add-btn[disabled]{background:var(--paper-2);color:var(--muted);cursor:not-allowed}
+.prod-card.out-date{border-color:#E3CFC9}
+.prod-card.out-date .prod-media img,.prod-card.out-date .prod-name,.prod-card.out-date .prod-price{opacity:.45}
+.prod-card.out-date .prod-media img{filter:grayscale(.7)}
+.empty-note{grid-column:1/-1;background:var(--white);border:1.5px dashed var(--line);border-radius:12px;padding:34px;text-align:center;color:var(--muted)}
+
+/* ===== PAKET: rute siap jalan ===== */
+.pkg-zone{background:var(--ink);color:var(--paper);overflow:hidden}
+.pkg-zone .contour-bg{width:820px;height:820px;left:-260px;bottom:-420px;opacity:.14;color:var(--paper);transform:rotate(-8deg)}
+.pkg-zone .eyebrow{color:var(--survey)}
+.pkg-zone .sec-head p{color:#B9C6B9}
+.pkg-grid{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.pkg-card{background:var(--paper);color:var(--ink);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.pkg-card img{width:100%;height:190px;object-fit:cover}
+.pkg-body{padding:22px;display:flex;flex-direction:column;gap:10px;flex:1}
+.pkg-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.pkg-top h3{font-family:var(--font-d);font-size:21px;font-weight:700}
+.pkg-dur{font-family:var(--font-m);font-size:11.5px;font-weight:600;letter-spacing:.1em;background:var(--survey);padding:4px 10px;border-radius:5px;white-space:nowrap}
+.pkg-desc{color:var(--muted);font-size:14px}
+.legend{border:1.5px dashed var(--line);border-radius:10px;padding:13px 15px}
+.legend .lg-t{font-family:var(--font-m);font-size:10.5px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase;margin-bottom:8px}
+.pkg-items{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:6px 14px}
+.pkg-items li{display:flex;gap:8px;font-size:13.5px;align-items:flex-start}
+.pkg-items svg{width:15px;height:15px;color:var(--ok);flex:none;margin-top:3px}
+.pkg-foot{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:14px;padding-top:8px}
+.pkg-price b{font-family:var(--font-d);font-size:21px;display:block}
+.pkg-price span{font-family:var(--font-m);font-size:11px;color:var(--muted);letter-spacing:.06em}
+
+/* ===== CARA SEWA: stepper lintasan ===== */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;position:relative}
+.steps::before{content:"";position:absolute;top:25px;left:6%;right:6%;border-top:2.5px dashed var(--survey);z-index:0}
+.step{position:relative;z-index:1}
+.step .num{width:50px;height:50px;border-radius:50%;background:var(--ink);color:var(--survey);font-family:var(--font-m);font-weight:600;font-size:15px;display:flex;align-items:center;justify-content:center;border:3px solid var(--paper);box-shadow:0 0 0 1.5px var(--ink)}
+.step h3{font-family:var(--font-d);font-size:17px;font-weight:600;margin:14px 0 6px}
+.step p{font-size:14px;color:var(--muted)}
+.terms{margin-top:30px;background:var(--white);border:1.5px solid var(--line);border-radius:12px;padding:20px 22px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.terms div .k{font-family:var(--font-m);font-size:10.5px;letter-spacing:.16em;color:var(--survey-deep);text-transform:uppercase}
+.terms div p{font-size:13.5px;color:var(--muted);margin-top:4px}
+
+/* ===== OPEN TRIP: papan jalur ===== */
+.trip-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.trip-card{background:var(--ink);color:var(--paper);border-radius:14px;overflow:hidden;border-bottom:5px solid var(--survey)}
+.trip-card img{width:100%;height:210px;object-fit:cover}
+.trip-body{padding:22px}
+.trip-sign{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.trip-sign h3{font-family:var(--font-d);font-size:22px;font-weight:700}
+.trip-elev{font-family:var(--font-m);font-size:12px;font-weight:600;letter-spacing:.1em;color:var(--survey)}
+.trip-meta{display:grid;gap:6px;margin:12px 0;font-family:var(--font-m);font-size:12.5px;color:#C9D4C9}
+.trip-meta span{display:flex;gap:9px;align-items:flex-start}
+.trip-meta svg{width:15px;height:15px;flex:none;margin-top:2px;color:var(--survey)}
+.trip-body>p{font-size:14px;color:#B9C6B9}
+.quota{margin:16px 0 6px}
+.quota-bar{height:9px;border-radius:99px;background:var(--ink-soft);overflow:hidden;border:1px solid var(--line-dark)}
+.quota-fill{height:100%;background:var(--survey)}
+.quota small{font-family:var(--font-m);font-size:11.5px;color:#C9D4C9;letter-spacing:.05em}
+.trip-foot{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:12px}
+.trip-price b{font-family:var(--font-d);font-size:21px;display:block}
+.trip-price span{font-family:var(--font-m);font-size:11px;color:#C9D4C9;letter-spacing:.06em}
+.btn-outline-s{background:transparent;border:1.5px solid var(--survey);color:var(--survey)}
+.btn-outline-s:hover{background:var(--survey);color:var(--ink)}
+
+/* ===== LACAK strip ===== */
+.track-strip{background:var(--white);border:1.5px solid var(--ink);border-radius:12px;padding:20px 22px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.track-strip .tt{font-family:var(--font-d);font-weight:600;font-size:17px}
+.track-strip .ts{font-family:var(--font-m);font-size:12px;color:var(--muted);letter-spacing:.04em}
+.track-strip .btn{margin-left:auto}
+
+/* ===== NEWSLETTER + FOOTER ===== */
+.news-zone{background:var(--paper-2)}
+.news-in{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+.news-in h3{font-family:var(--font-d);font-size:21px;font-weight:700}
+.news-in p{color:var(--muted);font-size:14px}
+.news-form{display:flex;gap:10px;margin-left:auto;flex:1 1 320px;max-width:480px}
+.news-form input{flex:1;border:1.5px solid var(--line);border-radius:8px;padding:12px 14px;font:inherit;font-size:14.5px;background:var(--white);outline:none;min-width:0}
+.news-form input:focus{border-color:var(--ink)}
+footer.site{background:var(--ink);color:#C9D4C9;overflow:hidden;position:relative}
+footer.site .contour-bg{width:700px;height:700px;right:-240px;top:-300px;opacity:.08;color:var(--paper)}
+.ft-grid{position:relative;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px;padding:52px 0 34px}
+.ft-grid h4{font-family:var(--font-d);color:#fff;font-size:14px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:14px}
+.ft-grid ul{list-style:none;display:grid;gap:9px;font-size:14px}
+.ft-grid a{text-decoration:none}
+.ft-grid a:hover{color:var(--survey)}
+.ft-brand .logo{color:#fff}
+.ft-brand p{font-size:14px;margin-top:12px;max-width:320px}
+.ft-coords{font-family:var(--font-m);font-size:12px;color:var(--survey);letter-spacing:.08em;margin-top:14px}
+.ft-bottom{position:relative;border-top:1px solid var(--line-dark);padding:18px 0 calc(18px + env(safe-area-inset-bottom));display:flex;gap:14px;flex-wrap:wrap;font-family:var(--font-m);font-size:11.5px;letter-spacing:.05em}
+.socials{display:flex;gap:9px;margin-top:6px}
+.socials a{width:36px;height:36px;border:1.5px solid var(--line-dark);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#C9D4C9}
+.socials a:hover{border-color:var(--survey);color:var(--survey)}
+.socials svg{width:16px;height:16px}
+
+/* ===== DRAWER KERANJANG ===== */
+.backdrop{position:fixed;inset:0;background:rgba(10,18,14,.5);z-index:80;opacity:0;pointer-events:none;transition:opacity .25s}
+.backdrop.show{opacity:1;pointer-events:auto}
+.drawer-clip{position:fixed;inset:0;z-index:90;overflow:hidden;pointer-events:none}
+.drawer{position:absolute;top:0;right:0;height:100dvh;width:min(430px,94vw);background:var(--white);box-shadow:-18px 0 44px rgba(22,33,27,.22);transform:translateX(105%);visibility:hidden;transition:transform .32s ease,visibility 0s .32s;display:flex;flex-direction:column;pointer-events:auto}
+.drawer.show{transform:translateX(0);visibility:visible;transition:transform .32s ease}
+.drawer-hd{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1.5px solid var(--ink)}
+.drawer-hd h3{font-family:var(--font-d);font-size:19px;font-weight:700}
+.drawer-hd .sub{font-family:var(--font-m);font-size:11px;color:var(--muted);letter-spacing:.08em}
+.drawer-items{flex:1;overflow-y:auto;padding:16px 22px}
+.cart-item{display:flex;gap:13px;padding:13px 0;border-bottom:1px solid var(--line)}
+.cart-item img{width:74px;height:74px;object-fit:contain;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:5px;flex:none}
+.ci-body{flex:1;min-width:0}
+.ci-body b{font-family:var(--font-d);font-size:14.5px;line-height:1.3;display:block}
+.ci-sub{font-family:var(--font-m);font-size:11.5px;color:var(--muted);margin-top:3px}
+.ci-row{display:flex;align-items:center;justify-content:space-between;margin-top:8px}
+.qty{display:inline-flex;align-items:center;border:1.5px solid var(--line);border-radius:8px;overflow:hidden}
+.qty button{width:32px;height:32px;border:none;background:#fff;font-size:17px;font-weight:700;color:var(--ink);line-height:1}
+.qty span{min-width:30px;text-align:center;font-weight:600;font-size:14px;font-family:var(--font-m)}
+.ci-price{font-family:var(--font-m);font-weight:600;color:var(--ink);font-size:14px}
+.remove-btn{background:none;border:none;color:var(--marker);font-size:12.5px;font-weight:600;padding:0}
+.drawer-foot{border-top:1.5px solid var(--ink);padding:18px 22px calc(18px + env(safe-area-inset-bottom))}
+.sum-row{display:flex;justify-content:space-between;font-size:14px;color:var(--muted);margin-bottom:6px}
+.sum-row .mono{font-size:13px}
+.sum-row.total{font-size:15.5px;color:var(--ink);font-weight:600}
+.sum-row.total .mono{font-weight:600;font-size:15px}
+.drawer-foot .btn{width:100%;justify-content:center;margin-top:12px}
+.cart-empty{text-align:center;color:var(--muted);padding:44px 10px}
+.cart-empty svg{width:52px;height:52px;margin:0 auto 12px;color:var(--line)}
+
+/* ===== MODAL ===== */
+.modal-wrap{position:fixed;inset:0;z-index:95;display:none;align-items:center;justify-content:center;padding:18px}
+.modal-wrap>.backdrop{z-index:0}
+.modal-wrap .modal{z-index:2}
+.modal-wrap.show{display:flex}
+.modal{background:#fff;border-radius:14px;width:100%;max-width:540px;max-height:92dvh;overflow-y:auto;position:relative;border-top:5px solid var(--survey)}
+.modal-lg{max-width:780px}
+.modal-pad{padding:28px}
+.modal-x{position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:50%;border:1.5px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;z-index:3}
+.modal-x:hover{border-color:var(--ink)}
+.modal-x svg{width:17px;height:17px}
+.modal h3.ttl{font-family:var(--font-d);font-size:23px;font-weight:700;margin:8px 0 18px}
+.step-flow{display:flex;gap:6px;flex-wrap:wrap;font-family:var(--font-m);font-size:10.5px;font-weight:600;letter-spacing:.1em;margin-bottom:18px}
+.step-flow span{border:1.5px solid var(--line);border-radius:6px;padding:5px 9px;color:var(--muted)}
+.step-flow span.on{background:var(--ink);color:var(--survey);border-color:var(--ink)}
+.prod-modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.prod-modal-grid .pm-img{background:var(--paper);display:flex;align-items:center;justify-content:center;padding:26px}
+.prod-modal-grid .pm-img img{max-height:320px;object-fit:contain}
+.pm-body{padding:28px 28px 28px 8px}
+.pm-body h3{font-family:var(--font-d);font-size:21px;font-weight:700;line-height:1.25;margin:6px 0 8px}
+.pm-body .desc{font-size:14px;color:var(--muted)}
+.spec-chips{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0}
+.spec-chips span{font-family:var(--font-m);font-size:11.5px;font-weight:500;background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:4px 10px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}
+.field input,.field textarea,.field select{width:100%;border:1.5px solid var(--line);border-radius:8px;padding:11px 13px;font:inherit;font-size:14.5px;outline:none;background:#fff}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--ink)}
+.field input[readonly]{background:var(--paper);font-family:var(--font-m);font-size:13.5px}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.size-chips{display:flex;flex-wrap:wrap;gap:8px}
+.size-chip{border:1.5px solid var(--line);background:#fff;border-radius:8px;padding:9px 14px;font-family:var(--font-m);font-size:13.5px;font-weight:600;min-width:48px}
+.size-chip.active{background:var(--ink);color:var(--survey);border-color:var(--ink)}
+.size-chip[disabled]{opacity:.4;cursor:not-allowed;text-decoration:line-through}
+.legend-box{background:var(--paper);border:1.5px solid var(--ink);border-radius:10px;padding:14px 16px;margin-bottom:18px}
+.legend-box .lg-t{font-family:var(--font-m);font-size:10.5px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase;margin-bottom:9px}
+.pay-box{border:1.5px solid var(--ink);border-radius:12px;padding:16px;margin-top:16px}
+.stamp{border:2.5px solid var(--ink);border-radius:10px;padding:18px 16px;text-align:center;position:relative;background:var(--white);transform:rotate(-1.2deg);box-shadow:var(--shadow)}
+.stamp::before{content:"";position:absolute;inset:5px;border:1px dashed var(--line);border-radius:7px;pointer-events:none}
+.stamp .st-k{font-family:var(--font-m);font-size:11px;font-weight:600;letter-spacing:.3em;color:var(--muted)}
+.stamp .st-code{font-family:var(--font-m);font-size:36px;font-weight:600;letter-spacing:.14em;color:var(--ink);margin:6px 0 2px}
+.stamp .st-code .dot{color:var(--marker)}
+.stamp .st-coord{font-family:var(--font-m);font-size:11px;letter-spacing:.12em;color:var(--muted)}
+.stamp .st-status{display:inline-block;margin-top:11px;background:var(--marker);color:#fff;font-family:var(--font-m);font-size:11px;font-weight:600;letter-spacing:.12em;border-radius:6px;padding:5px 12px}
+.status-track{display:flex;gap:0;margin-top:14px}
+.status-track div{flex:1;text-align:center;position:relative;padding-top:16px;font-family:var(--font-m);font-size:10px;letter-spacing:.06em;color:var(--muted)}
+.status-track div::before{content:"";position:absolute;top:5px;left:0;right:0;border-top:2.5px dashed var(--line)}
+.status-track div::after{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:11px;height:11px;border-radius:50%;background:var(--white);border:2.5px solid var(--line)}
+.status-track div.done{color:var(--ink);font-weight:600}
+.status-track div.done::before{border-top:2.5px solid var(--survey)}
+.status-track div.done::after{background:var(--survey);border-color:var(--ink)}
+.ck-err{background:var(--marker-soft);border:1px solid #E3CFC9;color:#7E2A1E;border-radius:10px;padding:13px 15px;font-size:14px}
+.ck-card{border:1.5px solid var(--ink);border-radius:12px;padding:16px}
+.ck-card .ck-code{font-family:var(--font-m);font-size:20px;font-weight:600;letter-spacing:.08em}
+.ck-pill{background:var(--ink);color:var(--survey);font-family:var(--font-m);font-size:10.5px;font-weight:600;letter-spacing:.08em;border-radius:6px;padding:4px 10px}
+
+/* ===== MEMBER ===== */
+.member-zone{position:relative}
+.btn-member{display:inline-flex;align-items:center;gap:8px;background:var(--ink);border:1.5px solid var(--ink);color:var(--paper);border-radius:8px;padding:9px 15px;font-family:var(--font-m);font-size:12.5px;font-weight:600;letter-spacing:.08em;cursor:pointer}
+.btn-member:hover{background:var(--survey-deep);border-color:var(--survey-deep);color:#fff}
+.btn-member svg{width:15px;height:15px}
+.member-chip{background:var(--survey);color:var(--ink);font-family:var(--font-m);font-size:10px;font-weight:700;letter-spacing:.14em;border-radius:4px;padding:3px 7px;flex:none}
+.member-menu{position:absolute;top:calc(100% + 8px);right:0;width:256px;background:#fff;border:1.5px solid var(--ink);border-radius:12px;box-shadow:var(--shadow);padding:8px;z-index:70}
+.member-menu .mm-head{padding:8px 10px 10px;border-bottom:1px dashed var(--line);margin-bottom:6px}
+.member-menu .mm-head b{font-family:var(--font-d);font-size:15px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.member-menu .mm-head span{display:block;font-family:var(--font-m);font-size:11.5px;color:var(--muted);margin-top:3px;letter-spacing:.04em}
+.member-menu>button{display:block;width:100%;text-align:left;background:none;border:none;padding:10px;border-radius:8px;font:inherit;font-size:14px;font-weight:600;cursor:pointer;color:var(--ink)}
+.member-menu>button:hover{background:var(--paper)}
+.st-member{display:inline-block;margin-left:8px;background:var(--survey);color:var(--ink);font-family:var(--font-m);font-size:11px;font-weight:700;letter-spacing:.12em;border-radius:6px;padding:5px 12px;vertical-align:middle}
+.auth-swap{margin-top:16px;text-align:center;font-size:13.5px;color:var(--muted)}
+.auth-swap button{background:none;border:none;color:var(--ink);font:inherit;font-weight:700;text-decoration:underline;cursor:pointer;padding:0}
+.mb-empty{border:1.5px dashed var(--line);border-radius:12px;padding:26px 18px;text-align:center;color:var(--muted);font-size:14px}
+.mb-empty b{display:block;font-family:var(--font-d);color:var(--ink);font-size:16px;margin-bottom:5px}
+.btn-google{display:inline-flex;align-items:center;gap:10px;background:#fff;border:1.5px solid #DADCE0;color:#3C4043;border-radius:8px;padding:10px 16px;font:inherit;font-size:14px;font-weight:600;cursor:pointer}
+.btn-google:hover{background:#F8F9FA;border-color:#BDC1C6}
+.btn-google .g-logo{width:18px;height:18px;flex:none}
+.btn-google.hd{font-family:var(--font-m);font-size:12px;letter-spacing:.03em;padding:8px 13px}
+.btn-google .g-short{display:none}
+@media (max-width:640px){.btn-google .g-full{display:none}.btn-google .g-short{display:inline}}
+.g-acc{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 13px;cursor:pointer;font:inherit;margin-bottom:9px}
+.g-acc:hover{background:var(--paper);border-color:var(--ink)}
+.g-avatar{width:38px;height:38px;border-radius:50%;color:#fff;font-family:var(--font-d);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:16px;flex:none}
+.g-acc-tx b{display:block;font-size:14.5px;color:var(--ink)}
+.g-acc-tx span{display:block;font-family:var(--font-m);font-size:11.5px;color:var(--muted);margin-top:1px}
+.g-other{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:10px;padding:11px 13px;cursor:pointer;font:inherit;font-size:14px;font-weight:600;color:var(--ink)}
+.g-other:hover{background:var(--paper);border-color:var(--ink)}
+.g-other svg{width:20px;height:20px;margin:0 9px;color:var(--muted)}
+.sim-tag{font-family:var(--font-m);font-size:10px;font-weight:600;letter-spacing:.1em;color:var(--marker);border:1px dashed #E3CFC9;border-radius:6px;padding:7px 9px;margin-top:16px;text-align:center}
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,90px);background:var(--ink);color:var(--paper);padding:13px 22px;border-radius:10px;border-left:5px solid var(--survey);font-size:14px;font-weight:600;z-index:120;transition:transform .3s;box-shadow:var(--shadow);max-width:92vw;text-align:center;pointer-events:none}
+.toast.show{transform:translate(-50%,0)}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width:1100px){
+  .prod-grid{grid-template-columns:repeat(3,1fr)}
+  nav.main{display:none}
+  #btnMenu{display:flex}
+}
+@media (max-width:900px){
+  .hero-in{grid-template-columns:1fr;padding-top:42px}
+  .hero-photo img{height:300px}
+  .steps{grid-template-columns:1fr 1fr;gap:26px}
+  .steps::before{display:none}
+  .pkg-grid,.trip-grid{grid-template-columns:1fr}
+  .terms{grid-template-columns:1fr}
+  .ft-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  .wrap{width:calc(100% - 32px)}
+  .sec-pad{padding:46px 0}
+  .hd-in{height:58px;gap:10px}
+  .logo{font-size:16.5px}
+  .logo small{font-size:8.5px}
+  .btn-track{padding:8px 10px;font-size:11px}
+  .btn-track .bt-t{display:none}
+  .btn-member{padding:8px 10px;font-size:11px}
+  .btn-member .bm-name{display:none}
+  .prod-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .prod-media img{height:140px;padding:8px}
+  .prod-body{padding:12px 12px 14px}
+  .prod-name{font-size:14.5px}
+  .prod-price b{font-size:16.5px}
+  .add-btn{font-size:13px;padding:11px 8px}
+  .bb-grid{grid-template-columns:1fr 1fr}
+  .bb-grid .btn{grid-column:1/-1;justify-content:center}
+  .field-notes div{flex:1 1 140px}
+  .prod-modal-grid{grid-template-columns:1fr}
+  .pm-body{padding:6px 22px 24px}
+  .modal-wrap{padding:10px}
+  .modal-pad{padding:22px 18px}
+  .search-box{max-width:none;flex:1 1 100%;order:3}
+  .stamp .st-code{font-size:29px}
+  .pkg-items{grid-template-columns:1fr}
+  .track-strip .btn{margin-left:0;width:100%;justify-content:center}
+  .news-form{margin-left:0;max-width:none}
+}
+@media (max-width:400px){
+  .prod-grid{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .bb-grid{grid-template-columns:1fr}
+  .ft-grid{grid-template-columns:1fr}
+}
+.srv-err{margin-top:26px;background:var(--white);border:1.5px solid var(--marker);border-radius:12px;padding:20px 22px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.srv-err b{font-family:var(--font-d);font-size:16.5px}
+.srv-err span{color:var(--muted);font-size:14px;flex:1 1 260px}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<g id="konturLines" fill="none" stroke="currentColor" stroke-width="1.6">
+<path d="M300 26c96-4 196 58 232 142 34 79 16 184-44 260-58 74-164 118-262 100C128 510 44 430 34 322 24 216 96 108 186 62c36-18 74-34 114-36Z"/>
+<path d="M300 84c78-3 158 48 186 116 27 65 12 150-38 211-49 60-134 95-212 79C158 475 94 409 86 322 78 236 136 150 210 114c29-14 59-28 90-30Z"/>
+<path d="M300 142c60-2 120 38 142 90 21 50 8 116-31 163-38 46-103 72-163 59-60-13-108-66-114-132-6-65 38-132 94-160 23-11 47-19 72-20Z"/>
+<path d="M300 196c44-1 88 28 104 66 15 37 5 85-24 120-28 34-76 52-119 42-44-10-79-49-83-97-4-47 28-96 69-117 17-8 35-13 53-14Z"/>
+<path d="M300 246c30-1 60 19 71 45 10 25 3 58-17 82-19 23-52 35-81 28-30-7-54-33-57-66-2-32 20-65 48-79 11-6 23-9 36-10Z"/>
+<path d="M300 292c17 0 34 11 40 26 6 14 1 32-10 45-11 13-29 19-45 15-17-4-30-19-31-37-1-18 11-36 27-44 6-3 12-4 19-5Z"/>
+</g></defs></svg>
+
+<header class="site">
+  <div class="wrap hd-in">
+    <a class="logo" href="#beranda">BK ADVENTURE<small>PETA LAPANGAN — MEDAN</small></a>
+    <nav class="main">
+      <a href="#katalog">Katalog</a><a href="#paket">Paket</a><a href="#cara-sewa">Cara Sewa</a><a href="#opentrip">Open Trip</a>
+    </nav>
+    <div class="hd-right">
+      <button class="btn-track" id="btnCheckBooking3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><span class="bt-t">LACAK BOOKING</span><span style="display:none"></span></button>
+      <div class="member-zone">
+        <button class="btn-google hd" id="btnMember"><svg class="g-logo" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z"/><path fill="#FBBC05" d="M5.84 14.1a6.6 6.6 0 0 1 0-4.2V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15A11 11 0 0 0 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z"/></svg><span class="g-full">Masuk dengan Google</span><span class="g-short">Masuk</span></button>
+        <button class="btn-member" id="btnMemberIn" style="display:none"><span class="bm-name" id="memberName">Member</span><span class="member-chip">MEMBER</span></button>
+        <div class="member-menu" id="memberMenu" style="display:none">
+          <div class="mm-head"><b><span id="mmName">Member</span><span class="member-chip">MEMBER</span></b><span id="mmEmail">akun Google</span><span id="mmPhone">WA: belum diisi</span></div>
+          <button type="button" id="mmEditWa">Ubah WA Profil</button>
+          <button type="button" id="mmMyBookings">Booking Saya</button>
+          <button type="button" id="mmLogout">Keluar</button>
+        </div>
+      </div>
+      <button class="icon-btn" id="btnAdmin" aria-label="Admin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg></button>
+      <button class="icon-btn" id="btnCart" aria-label="Keranjang"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg><span class="cart-badge" id="cartCount">0</span></button>
+      <button class="icon-btn" id="btnMenu" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#katalog">Katalog</a><a href="#paket">Paket Rute</a><a href="#cara-sewa">Cara Sewa</a><a href="#opentrip">Open Trip</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="beranda">
+  <svg class="contour-bg" aria-hidden="true"><use href="#konturLines"/></svg>
+  <div class="wrap hero-in">
+    <div class="hero-copy">
+      <div class="coords"><span>3.5952° N · 98.6722° E</span><span><b>▲</b> MEDAN — SUMATERA UTARA</span></div>
+      <h1>Pilih tanggalnya dulu. <span class="hl">Alatnya menyusul</span> — yang benar-benar tersedia.</h1>
+      <p class="lead">Rental alat outdoor yang bekerja seperti membaca peta: tetapkan tanggal ambil dan durasi, katalog langsung menunjukkan alat yang tersedia untuk rentang itu. Booking, bayar, dan kode terbit di website — tanpa chat bolak-balik.</p>
+      <div class="field-notes">
+        <div><div class="k">Katalog</div><div class="v">18 item asli</div></div>
+        <div><div class="k">Ketersediaan</div><div class="v">Per tanggal dipilih</div></div>
+        <div><div class="k">Booking</div><div class="v">Kode terbit seketika</div></div>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=1000&q=80" alt="Tenda di bawah langit malam">
+      <div class="tag">TITIK BERANGKAT — <b>DEPOT BK ADVENTURE, MEDAN</b></div>
+    </div>
+  </div>
+
+  <!-- BOOKING BAR -->
+  <div class="wrap bookbar-zone">
+    <div class="bookbar" id="bookingbar">
+      <div class="bb-title"><span class="step">LANGKAH 01 — TENTUKAN TANGGAL</span><h2>Cek alat yang tersedia untuk tanggalmu</h2></div>
+      <div class="bb-grid">
+        <div class="bb-field"><label for="bbStart">Tanggal Ambil</label><input type="date" id="bbStart"></div>
+        <div class="bb-field"><label for="bbDays">Durasi (hari)</label><input type="number" id="bbDays" min="1" max="30" value="2"></div>
+        <button class="btn btn-survey" id="bbCheck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>Cek Alat Tersedia</button>
+      </div>
+      <div class="bb-status" id="bbStatus"></div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap" id="srvError" style="display:none">
+  <div class="srv-err">
+    <b>Katalog belum bisa dimuat dari server.</b>
+    <span>Website ini 100% online — katalog, harga &amp; stok selalu dari server. Periksa koneksi internetmu, lalu coba lagi.</span>
+    <button class="btn btn-ink" id="srvRetry" type="button">Coba Lagi</button>
+  </div>
+</div>
+
+<!-- KATEGORI -->
+<section class="sec-pad" style="padding-bottom:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Penanda 01–07 · Daftar Kategori</div>
+      <h2>Baca peta katalognya</h2>
+      <p>Tujuh penanda kategori, disusun seperti legenda peta. Ketuk satu penanda untuk menyaring katalog.</p>
+    </div>
+    <div class="cat-list" id="catGrid"></div>
+  </div>
+</section>
+
+<!-- KATALOG -->
+<section class="sec-pad" id="katalog">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Katalog Alat</div>
+      <h2>Alat yang bisa kamu bawa</h2>
+      <p id="catNote">Status stok mengikuti stok siap hari ini. Isi booking bar di atas untuk melihat ketersediaan pada tanggal pilihanmu.</p>
+    </div>
+    <div class="cat-tools">
+      <div class="chip-row" id="chipRow"></div>
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input id="searchInput" placeholder="Cari alat, mis. tenda, carrier, sepatu...">
+      </div>
+    </div>
+    <div class="prod-grid" id="prodGrid"><div class="empty-note">MEMUAT KATALOG DARI SERVER…</div></div>
+    <div style="margin-top:22px;text-align:center"><button class="btn btn-ghost" id="btnViewAll">Lihat Semua Kategori</button></div>
+  </div>
+</section>
+
+<!-- PAKET -->
+<section class="pkg-zone sec-pad" id="paket">
+  <svg class="contour-bg" aria-hidden="true"><use href="#konturLines"/></svg>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Rute Siap Jalan</div>
+      <h2>Paket lengkap, tinggal berangkat</h2>
+      <p>Rute yang sudah digambar untukmu: satu paket berisi semua alat wajib untuk ukuran grupmu. Harga per paket untuk durasi tertera — tanpa hitung per item.</p>
+    </div>
+    <div class="pkg-grid" id="paketGrid"></div>
+  </div>
+</section>
+
+<!-- CARA SEWA -->
+<section class="sec-pad" id="cara-sewa">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Lintasan Booking</div>
+      <h2>Cara sewa dalam 4 titik</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="num">01</div><h3>Tentukan Tanggal &amp; Alat</h3><p>Isi booking bar, katalog menyaring alat yang tersedia untuk rentang tanggalmu. Masukkan alat ke daftar muatan.</p></div>
+      <div class="step"><div class="num">02</div><h3>Isi Data Booking</h3><p>Nama, nomor WhatsApp, tanggal mulai, dan durasi. Tanggal dari booking bar otomatis terbawa ke formulir.</p></div>
+      <div class="step"><div class="num">03</div><h3>Bayar &amp; Upload Bukti</h3><p>Transfer tepat sebesar total, lalu unggah foto bukti pembayaran di formulir. Kode booking terbit setelah langkah ini.</p></div>
+      <div class="step"><div class="num">04</div><h3>Ambil di Depot</h3><p>Datang pada tanggal mulai, bawa KTP (NIK dicatat di depot), bayar deposit jaminan tunai, dan berangkat.</p></div>
+    </div>
+    <div class="terms">
+      <div><div class="k">Deposit Jaminan</div><p>Ditahan tunai saat pengambilan dan kembali penuh saat alat pulang lengkap &amp; bersih. Terpisah dari pembayaran sewa.</p></div>
+      <div><div class="k">Keterlambatan</div><p>Pengembalian lewat tanggal dihitung sebagai tambahan hari sewa sesuai tarif item yang dibawa.</p></div>
+      <div><div class="k">Lacak Booking</div><p>Status booking bisa dicek kapan pun dari tombol Lacak Booking di header — cukup kode booking + nomor WhatsApp.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- OPEN TRIP -->
+<section class="sec-pad" id="opentrip" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Papan Informasi Jalur</div>
+      <h2>Open trip berikutnya</h2>
+      <p>Papan jalur di titik berangkat: gunung, tanggal, dan sisa kursi dibaca sekilas seperti papan informasi di kaki gunung.</p>
+    </div>
+    <div class="trip-grid" id="tripGrid"></div>
+  </div>
+</section>
+
+<!-- LACAK STRIP -->
+<section style="padding-bottom:64px">
+  <div class="wrap">
+    <div class="track-strip">
+      <div><div class="tt">Sudah punya kode booking?</div><div class="ts">LACAK DENGAN KODE BK-XXXXX + NOMOR WHATSAPP SAAT BOOKING</div></div>
+      <button class="btn btn-ink" id="btnCheckBooking4">Lacak Booking Saya</button>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="news-zone" style="padding:38px 0">
+  <div class="wrap news-in">
+    <div><h3>Catatan lapangan, sebulan sekali</h3><p>Jadwal open trip, alat baru, dan promo sewa — dikirim hemat, tanpa spam.</p></div>
+    <form class="news-form" id="newsForm">
+      <input type="email" required placeholder="Alamat email kamu" aria-label="Alamat email">
+      <button class="btn btn-survey" type="submit">Ikut</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site" id="kontak">
+  <svg class="contour-bg" aria-hidden="true"><use href="#konturLines"/></svg>
+  <div class="wrap">
+    <div class="ft-grid">
+      <div class="ft-brand">
+        <a class="logo" href="#beranda">BK ADVENTURE<small>PETA LAPANGAN — MEDAN</small></a>
+        <p>Rental alat outdoor dengan booking berbasis tanggal. Pilih tanggal, alat tersedia terlihat jelas, bayar, dan berangkat.</p>
+        <div class="ft-coords">DEPOT — 3.5952° N, 98.6722° E · MEDAN</div>
+      </div>
+      <div>
+        <h4>Jelajah</h4>
+        <ul>
+          <li><a href="#katalog">Semua Produk</a></li>
+          <li><a href="#paket">Paket Rute Siap Jalan</a></li>
+          <li><a href="#opentrip">Open Trip</a></li>
+          <li><a href="#cara-sewa">Cara Sewa</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Bantuan</h4>
+        <ul>
+          <li><a href="#" id="btnCheckBooking2">Lacak / Cek Status Booking</a></li>
+          <li><a href="#cara-sewa">Syarat &amp; Deposit</a></li>
+          <li><a href="#katalog">Cek Ketersediaan</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ikuti Kami</h4>
+        <div class="socials">
+          <a href="#" aria-label="Instagram" onclick="return socialSoon(event)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="Facebook" onclick="return socialSoon(event)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 8.5V6.8c0-.8.5-1 .9-1H17V2.5h-2.9C11.2 2.5 10 4.4 10 6.5v2H7.5V12H10v9.5h4V12h2.7l.4-3.5H14Z"/></svg></a>
+          <a href="#" aria-label="YouTube" onclick="return socialSoon(event)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="m10.5 9.5 5 2.5-5 2.5z" fill="currentColor" stroke="none"/></svg></a>
+        </div>
+        <ul style="margin-top:16px">
+          <li><span class="mono" style="font-size:12px">BUKA SETIAP HARI — 08.00–21.00 WIB</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <span>BK ADVENTURE — BK-ADVENTURE.MY.ID</span>
+      <span style="margin-left:auto">PETA LAPANGAN · KONTUR © 2026</span>
+    </div>
+  </div>
+</footer>
+
+<!-- DRAWER -->
+<div class="backdrop" id="backdrop"></div>
+<div class="drawer-clip">
+<aside class="drawer" id="cartDrawer" aria-label="Daftar muatan">
+  <div class="drawer-hd">
+    <div><h3>Daftar Muatan</h3><div class="sub">KERANJANG BOOKING KAMU</div></div>
+    <button class="modal-x" id="btnCloseCart" style="position:static" aria-label="Tutup"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>
+  <div class="drawer-items" id="cartItems"></div>
+  <div class="drawer-foot" id="cartFoot" style="display:none">
+    <div class="sum-row"><span>Subtotal sewa</span><span class="mono" id="sumRent">Rp0</span></div>
+    <div class="sum-row"><span>Item beli &amp; paket</span><span class="mono" id="sumOnce">Rp0</span></div>
+    <div class="sum-row total"><span>Total sewa per hari</span><span class="mono" id="sumRentTotal">Rp0</span></div>
+    <p style="font-size:12.5px;color:var(--muted)">Tanggal &amp; durasi diisi di formulir booking — tanggal dari booking bar otomatis terbawa. Stok dipegang untuk tanggalmu begitu booking terbit.</p>
+    <button class="btn btn-survey" id="btnCheckout">Booking Sekarang</button>
+    <button id="btnCheckBooking1" style="display:block;margin:12px auto 0;background:none;border:none;color:var(--ink);font-weight:700;font-size:13.5px;text-decoration:underline">Sudah punya kode booking? Lacak di sini</button>
+  </div>
+</aside>
+</div>
+
+<!-- PRODUCT MODAL -->
+<div class="modal-wrap" id="prodModal">
+  <div class="backdrop show" style="position:absolute" data-close-prod></div>
+  <div class="modal modal-lg">
+    <button class="modal-x" data-close-prod aria-label="Tutup"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <div class="prod-modal-grid">
+      <div class="pm-img"><img id="pmImg" src="" alt=""></div>
+      <div class="pm-body">
+        <div class="prod-cat" id="pmCat"></div>
+        <h3 id="pmName"></h3>
+        <p class="desc" id="pmDesc"></p>
+        <div class="spec-chips" id="pmSpecs"></div>
+        <div id="pmStock"></div>
+        <div class="field" id="pmSizeField" style="margin-top:16px">
+          <label>Pilih Ukuran</label>
+          <div class="size-chips" id="pmSizes"></div>
+        </div>
+        <div class="field" style="margin-top:16px">
+          <label>Jumlah Unit</label>
+          <span class="qty"><button type="button" id="pmQtyMinus">−</button><span id="pmQtyVal">1</span><button type="button" id="pmQtyPlus">+</button></span>
+        </div>
+        <div class="prod-price" style="margin:14px 0 16px"><b id="pmPrice"></b> <span id="pmPriceUnit"></span></div>
+        <button class="btn btn-ink" id="pmAdd" style="width:100%;justify-content:center">Tambah ke Daftar Muatan</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div class="modal-wrap" id="coModal">
+  <div class="backdrop show" style="position:absolute" data-close-co></div>
+  <div class="modal">
+    <button class="modal-x" data-close-co aria-label="Tutup"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <div class="modal-pad">
+      <div class="eyebrow">Auto Booking</div>
+      <h3 class="ttl">Booking Langsung di Website</h3>
+      <form id="coForm">
+        <div class="step-flow"><span class="on">01 DATA</span><span class="on">02 BAYAR</span><span class="on">03 BUKTI</span><span>04 KODE TERBIT</span></div>
+        <div class="legend-box">
+          <div class="lg-t">Legenda — Ringkasan Muatan</div>
+          <div id="coLegend"></div>
+          <div class="sum-row" style="margin-top:9px"><span>Item sewa per hari</span><span class="mono" id="coRentDay">Rp0</span></div>
+          <div class="sum-row"><span>Item beli &amp; paket</span><span class="mono" id="coOnce">Rp0</span></div>
+          <div class="sum-row total" style="margin-bottom:0"><span>Perkiraan Total</span><span class="mono" id="coTotal">Rp0</span></div>
+        </div>
+        <div class="field"><label>Nama Lengkap</label><input id="coName" required placeholder="Nama penyewa"></div>
+        <div class="field"><label>Nomor WhatsApp</label><input id="coPhone" required inputmode="tel" placeholder="08xxxxxxxxxx"></div>
+        <div class="field-row">
+          <div class="field"><label>Tanggal Mulai</label><input type="date" id="coStart" required></div>
+          <div class="field"><label>Durasi Sewa (hari)</label><input type="number" id="coDays" min="1" max="30" value="2" required></div>
+        </div>
+        <div class="field"><label>Catatan (opsional)</label><textarea id="coNotes" rows="2" placeholder="Contoh: ambil sore, untuk trip Sibayak"></textarea></div>
+        <div class="pay-box">
+          <div class="eyebrow" style="font-size:11px">Pembayaran Dulu, Baru Booking Terbit</div>
+          <p style="font-size:13.5px;color:var(--muted);margin:8px 0 12px">Transfer <b style="color:var(--ink)">tepat sebesar Perkiraan Total</b> ke: <b id="payInfoText" style="color:var(--ink)">Detail rekening/QRIS depot diisi saat produksi — sementara tanya admin bila ragu.</b><br>Deposit jaminan barang tetap dibayar tunai saat pengambilan, terpisah dari pembayaran ini.</p>
+          <div class="field-row">
+            <div class="field"><label>Metode Pembayaran</label>
+              <select id="coPayMethod" required>
+                <option value="">— Pilih metode —</option>
+                <option value="Transfer Bank">Transfer Bank</option>
+                <option value="QRIS">QRIS</option>
+                <option value="E-Wallet">E-Wallet (DANA/OVO/GoPay)</option>
+              </select></div>
+            <div class="field"><label>Nama Pengirim</label><input id="coPaySender" placeholder="Nama di rekening/e-wallet"></div>
+          </div>
+          <div class="field" style="margin-bottom:0"><label>Upload Bukti Pembayaran (wajib)</label>
+            <input type="file" id="coPayProof" accept="image/jpeg,image/png,image/webp,application/pdf" style="border:1.5px dashed var(--ink);background:var(--paper);padding:12px;width:100%;border-radius:8px;font:inherit;font-size:13.5px">
+            <div id="payProofPreview" style="display:none;margin-top:10px"></div>
+            <p style="font-size:12px;color:var(--muted);margin-top:7px">Foto/screenshot bukti transfer, JPG/PNG/WebP/PDF, maks 5 MB. Booking tidak bisa dibuat tanpa bukti pembayaran.</p>
+          </div>
+        </div>
+        <button class="btn btn-survey" type="submit" id="coSubmit" style="width:100%;justify-content:center;margin-top:16px">Buat Booking Sekarang</button>
+        <p style="font-size:12.5px;color:var(--muted);margin-top:10px;text-align:center">Tanpa perlu chat dulu. Kode booking terbit langsung setelah tombol ini ditekan.</p>
+      </form>
+      <div id="coSuccess" style="display:none">
+        <div style="text-align:center;padding:4px 0 2px">
+          <span style="display:inline-flex;width:58px;height:58px;border-radius:50%;background:var(--paper-2);color:var(--ok);align-items:center;justify-content:center;border:1.5px solid var(--ink)"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+          <h3 style="font-family:var(--font-d);font-size:21px;font-weight:700;margin:12px 0 2px">Booking Tercatat</h3>
+          <p style="color:var(--muted);font-size:14px">Simpan stempel koordinat ini — tunjukkan saat pengambilan barang di depot.</p>
+        </div>
+        <div class="stamp" style="margin:18px 0">
+          <div class="st-k">KODE BOOKING</div>
+          <div class="st-code" id="coCode">BK-00000</div>
+          <div class="st-coord">3.5952° N · 98.6722° E — DEPOT BK ADVENTURE</div>
+          <div><span class="st-status" id="coStatusPill">MENUNGGU KONFIRMASI ADMIN</span></div>
+          <div><span class="st-member" id="coMemberBadge" style="display:none">MEMBER</span></div>
+        </div>
+        <div id="coSummary" style="font-size:14px;display:grid;gap:5px"></div>
+        <div style="background:var(--paper);border:1.5px solid var(--line);border-radius:10px;padding:13px 15px;font-size:13.5px;margin-top:16px">
+          Admin akan memverifikasi bukti pembayaranmu. Langkah berikutnya: datang ke depot pada tanggal mulai, bawa KTP (nomor NIK dicatat di depot), bayar deposit jaminan tunai, lalu ambil barangmu. Admin menghubungimu via WhatsApp bila ada kendala.
+        </div>
+        <button class="btn btn-ink" id="coDone" style="width:100%;justify-content:center;margin-top:16px">Selesai</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LACAK MODAL -->
+<div class="modal-wrap" id="ckModal">
+  <div class="backdrop show" style="position:absolute" data-close-ck></div>
+  <div class="modal">
+    <button class="modal-x" data-close-ck aria-label="Tutup"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <div class="modal-pad">
+      <div class="eyebrow">Lacak Pesananmu</div>
+      <h3 class="ttl">Lacak Status Booking</h3>
+      <form id="ckForm">
+        <div class="field"><label>Kode Booking</label><input id="ckCode" required placeholder="Contoh: BK-7F3K2" style="text-transform:uppercase"></div>
+        <div class="field"><label>Nomor WhatsApp saat booking</label><input id="ckPhone" required inputmode="tel" placeholder="08xxxxxxxxxx"></div>
+        <button class="btn btn-survey" type="submit" style="width:100%;justify-content:center">Lacak Booking</button>
+      </form>
+      <div id="ckResult" style="display:none;margin-top:18px"></div>
+    </div>
+  </div>
+</div>
+
+<!-- UBAH WA PROFIL MODAL -->
+<div class="modal-wrap" id="waModal">
+  <div class="backdrop show" style="position:absolute" data-close-wa></div>
+  <div class="modal">
+    <button class="modal-x" data-close-wa aria-label="Tutup"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <div class="modal-pad">
+      <div class="eyebrow">Profil Member</div>
+      <h3 class="ttl">Nomor WhatsApp</h3>
+      <p style="font-size:14px;color:var(--muted);margin:-8px 0 18px">Nomor ini dipakai depot untuk menghubungimu soal booking — bukan untuk login. Login tetap hanya dengan Google.</p>
+      <form id="waForm">
+        <div class="field"><label>Nomor WhatsApp</label><input id="waPhone" inputmode="tel" placeholder="08xxxxxxxxxx" autocomplete="tel"></div>
+        <div class="ck-err" id="waErr" style="display:none;margin-bottom:14px"></div>
+        <button class="btn btn-survey" type="submit" style="width:100%;justify-content:center">Simpan Nomor WA</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- BOOKING SAYA MODAL -->
+<div class="modal-wrap" id="mbModal">
+  <div class="backdrop show" style="position:absolute" data-close-mb></div>
+  <div class="modal">
+    <button class="modal-x" data-close-mb aria-label="Tutup"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <div class="modal-pad">
+      <div class="eyebrow">Akun Member</div>
+      <h3 class="ttl">Booking Saya</h3>
+      <div id="mbList" style="display:grid;gap:14px"></div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== TEMA "PETA LAPANGAN" — VERSI SERVER (platform jasa-rental.my.id) =====
+// 100% online: katalog, config, booking & lacak SEMUA dari Supabase server.
+// Tidak ada cermin localStorage untuk katalog/config; keranjang saja yang
+// lokal (per pengunjung). Booking dipimpin tanggal (date-first).
+let WA_NUMBER = ""; // diisi dari config server (depotPhone) saat data termuat
+
+/* ===== KONFIG SERVER (Supabase) =====
+   Konstanta per tenant — generator platform mengganti TENANT_SLUG (kunci
+   data di Supabase) untuk tiap toko; folder path di URL hanyalah presentasi. */
+const TENANT_SLUG = 'kontur';
+const KONFIG = {
+  SUPABASE_URL: 'https://nuowbpevzfwobedtgxzm.supabase.co',
+  SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im51b3dicGV2emZ3b2JlZHRneHptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQwNjk5MjYsImV4cCI6MjEwOTY0NTkyNn0.-kSflWBRXeKtr2idO8bmEIcoipUO9pbNN-uOWapiS2M'
+};
+const BOOKING_CFG = { url: KONFIG.SUPABASE_URL, anonKey: KONFIG.SUPABASE_ANON_KEY, slug: TENANT_SLUG };
+let PAYMENT_INFO = ""; // diisi dari config server (paymentInfo) bila pemilik toko mengisinya
+let SITE = {};
+let CATALOG = [];
+let PACKAGES = [];
+let TRIPS = [];
+let sbTenantId = null;
+async function sbResolveTenant() {
+  if (sbTenantId) return sbTenantId;
+  try {
+    const r = await fetch(KONFIG.SUPABASE_URL + '/rest/v1/rpc/resolve_tenant', {
+      method: 'POST',
+      headers: { 'apikey': KONFIG.SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + KONFIG.SUPABASE_ANON_KEY, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ s: TENANT_SLUG })
+    });
+    if (!r.ok) return null;
+    const rows = await r.json();
+    if (rows && rows.length) sbTenantId = rows[0].id;
+  } catch (e) { /* server tak terjangkau */ }
+  return sbTenantId;
+}
+function applyConfig() {
+  const brand = SITE.footerBrand || SITE.brandName || 'BK ADVENTURE';
+  document.title = brand + ' — Sewa Alat Outdoor Medan | jasa-rental.my.id';
+  document.querySelectorAll('.logo').forEach(el => {
+    el.innerHTML = escHtml(brand) + '<small>' + escHtml(SITE.brandSubtitle || 'PETA LAPANGAN — MEDAN') + '</small>';
+  });
+  if (SITE.heroHeading) { const h = document.querySelector('.hero-copy h1'); if (h) h.innerHTML = escHtml(SITE.heroHeading); }
+  if (SITE.heroDescription) { const p = document.querySelector('.hero-copy p.lead'); if (p) p.textContent = SITE.heroDescription; }
+  if (SITE.heroImage) { const im = document.querySelector('.hero-photo img'); if (im) im.src = SITE.heroImage; }
+  const tagB = document.querySelector('.hero-photo .tag b'); if (tagB) tagB.textContent = 'DEPOT ' + brand;
+  const fn = document.querySelector('.field-notes .v'); if (fn) fn.textContent = CATALOG.length + ' item asli';
+  const fc = document.querySelector('.ft-coords'); if (fc && SITE.address) fc.textContent = String(SITE.address).toUpperCase();
+  const sc = document.querySelector('.stamp .st-coord'); if (sc) sc.textContent = '3.5952° N · 98.6722° E — DEPOT ' + brand;
+  const fb = document.querySelector('.ft-bottom span'); if (fb) fb.textContent = brand + ' — JASA-RENTAL.MY.ID/BK-ADVENTURE';
+  const wa = String(SITE.depotPhone || '').replace(/[^0-9]/g, '');
+  WA_NUMBER = wa ? (wa.startsWith('0') ? '62' + wa.slice(1) : wa) : '';
+  PAYMENT_INFO = SITE.paymentInfo || '';
+  if (PAYMENT_INFO) $('#payInfoText').textContent = PAYMENT_INFO;
+  if (SITE.openTripEnabled === false) { const t = document.getElementById('opentrip'); if (t) t.style.display = 'none'; }
+}
+async function loadServerData() {
+  const errBox = $('#srvError');
+  try {
+    const tid = await sbResolveTenant();
+    if (!tid) throw new Error('tenant tidak teratasi');
+    const H = { 'apikey': KONFIG.SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + KONFIG.SUPABASE_ANON_KEY };
+    const [rc, rk] = await Promise.all([
+      fetch(KONFIG.SUPABASE_URL + '/rest/v1/site_config?tenant_id=eq.' + tid + '&select=config', { headers: H }),
+      fetch(KONFIG.SUPABASE_URL + '/rest/v1/catalog_items?tenant_id=eq.' + tid + '&select=data&order=item_id', { headers: H })
+    ]);
+    if (!rc.ok || !rk.ok) throw new Error('HTTP ' + rc.status + '/' + rk.status);
+    const confRows = await rc.json();
+    const catRows = await rk.json();
+    SITE = (confRows.length && confRows[0].config) || {};
+    CATALOG = catRows.map(r => r.data);
+    PACKAGES = (SITE.packages || []).map(p => Object.assign({}, p, { type: 'package' }));
+    TRIPS = SITE.openTripEnabled === false ? [] : (SITE.openTrips || []);
+    applyConfig();
+    if (errBox) errBox.style.display = 'none';
+    renderCats(); renderProducts(); renderPackages(); renderTrips();
+    return true;
+  } catch (e) {
+    if (errBox) errBox.style.display = 'block';
+    if (!CATALOG.length) $('#prodGrid').innerHTML = '<div class="empty-note">Katalog belum bisa dimuat dari server. Periksa koneksi internetmu, lalu coba lagi.</div>';
+    return false;
+  }
+}
+const rp = n => "Rp" + Number(n || 0).toLocaleString("id-ID");
+// Teks data server / input pengguna wajib disaring sebelum masuk innerHTML
+// (pola yang sama dengan panel admin).
+function escHtml(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+}
+if (window.Element && !Element.prototype.scrollIntoView) Element.prototype.scrollIntoView = function () {};
+const $ = s => document.querySelector(s);
+let activeCat = "Semua";
+let query = "";
+let cart = [];
+try { cart = JSON.parse(localStorage.getItem("bk_peta_cart_v1") || "[]"); } catch (e) { cart = []; }
+
+function toast(msg) {
+  const t = $("#toast"); t.textContent = msg; t.classList.add("show");
+  clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove("show"), 2600);
+}
+function socialSoon(e) { e.preventDefault(); toast("Tautan media sosial disambungkan saat produksi."); return false; }
+function itemById(id) { return CATALOG.find(x => x.id === id) || PACKAGES.find(x => x.id === id) || null; }
+function isRental(e) { return e && e.type === "rental"; }
+function priceOf(e) { return e.type === "package" ? e.price : (e.type === "sale" ? e.priceSale : e.priceRental); }
+function normPhone(v) {
+  let p = String(v || "").replace(/[^0-9]/g, "");
+  if (p.startsWith("0")) p = "62" + p.slice(1);
+  return p;
+}
+function datePlus(iso, days) { const d = new Date(iso + "T00:00:00"); d.setDate(d.getDate() + days); return d.toISOString().slice(0, 10); }
+function overlap(aStart, aEnd, bStart, bEnd) { return aStart < bEnd && bStart < aEnd; }
+function fmtDateID(iso) {
+  try { return new Date(iso + "T00:00:00").toLocaleDateString("id-ID", { weekday: "long", day: "numeric", month: "long", year: "numeric" }); }
+  catch (e) { return iso; }
+}
+function fmtShort(iso) {
+  try { return new Date(iso + "T00:00:00").toLocaleDateString("id-ID", { day: "numeric", month: "short" }).toUpperCase(); }
+  catch (e) { return iso; }
+}
+
+/* ===== KEADAAN TANGGAL (BOOKING BAR) ===== */
+const sel = { start: "", days: 2 };
+function selRange() { return sel.start ? { start: sel.start, end: datePlus(sel.start, sel.days) } : null; }
+function heldQty() {
+  // Versi server: hold booking pelanggan lain TIDAK terekspos ke publik,
+  // jadi saringan tanggal memakai stok server apa adanya. Pemeriksaan akhir
+  // (termasuk hold yang tumpang tindih) dilakukan RPC create_booking.
+  return 0;
+}
+// Stok dasar (tanpa tanggal) — sama seperti tema Trail.
+function baseQty(e, size) {
+  if (!e) return 0;
+  if (e.type === "package") return 99;
+  if (size && e.sizes) { const s = e.sizes.find(x => x.label === size); return s ? s.ready : 0; }
+  if (e.sizes) return e.sizes.reduce((a, s) => a + s.ready, 0);
+  return e.stockReady || 0;
+}
+// Ketersediaan efektif: bila tanggal dipilih, kurangi hold yang tumpang tindih.
+function availQty(e, size) {
+  if (!e) return 0;
+  if (e.type === "package") return 99;
+  const r = selRange();
+  if (!r) return baseQty(e, size);
+  if (e.sizes && !size) return e.sizes.reduce((a, s) => a + Math.max(0, s.ready - heldQty(e.id, s.label, r.start, r.end)), 0);
+  return baseQty(e, size) - heldQty(e.id, size || "", r.start, r.end);
+}
+function maxQty(e, size) { return Math.max(0, availQty(e, size)); }
+
+function applyBookingBar() {
+  const start = $("#bbStart").value;
+  const days = Math.max(1, Math.min(30, parseInt($("#bbDays").value || "2", 10) || 2));
+  const today = new Date().toISOString().slice(0, 10);
+  if (!start) { toast("Pilih tanggal ambil dulu."); $("#bbStart").focus(); return; }
+  if (start < today) { toast("Tanggal ambil tidak boleh di masa lalu."); return; }
+  sel.start = start; sel.days = days;
+  $("#bbDays").value = days;
+  const end = datePlus(start, days);
+  const st = $("#bbStatus");
+  st.classList.add("on");
+  st.innerHTML = `MENAMPILKAN KETERSEDIAAN <b>${fmtShort(start)} — ${fmtShort(end)}</b> · ${days} HARI` +
+    `<button type="button" class="clr" id="bbClear">ATUR ULANG</button>`;
+  $("#catNote").textContent = "Status stok di bawah ini khusus untuk rentang " + fmtDateID(start) + " s/d " + fmtDateID(end) + " (" + days + " hari), Stok akhir & hold booking pelanggan lain diperiksa server saat booking dibuat.";
+  renderProducts();
+  document.getElementById("katalog").scrollIntoView({ behavior: "smooth" });
+  toast("Katalog disaring untuk " + fmtShort(start) + " — " + fmtShort(end) + ".");
+}
+function clearBookingBar() {
+  sel.start = ""; sel.days = 2;
+  $("#bbStart").value = ""; $("#bbDays").value = 2;
+  $("#bbStatus").classList.remove("on"); $("#bbStatus").innerHTML = "";
+  $("#catNote").textContent = "Status stok mengikuti stok siap hari ini. Isi booking bar di atas untuk melihat ketersediaan pada tanggal pilihanmu.";
+  renderProducts();
+}
+
+/* ===== KATEGORI: penanda koordinat ===== */
+const CAT_ORDER = ["Tenda & Shelter","Carrier & Pack","Sleep System","Dapur & Hidrasi","Pakaian & Sepatu","Penerangan & Safety","Aksesoris"];
+function sortedCats() {
+  const cats = [...new Set(CATALOG.map(x => x.category))];
+  cats.sort((a, b) => CAT_ORDER.indexOf(a) - CAT_ORDER.indexOf(b));
+  return cats;
+}
+function renderCats() {
+  const cats = sortedCats();
+  const all = [{ name: "Semua", label: "Semua Alat", n: CATALOG.length, no: "00" }];
+  const rows = all.concat(cats.map((c, i) => ({
+    name: c, label: c, n: CATALOG.filter(x => x.category === c).length,
+    no: String(i + 1).padStart(2, "0")
+  })));
+  $("#catGrid").innerHTML = rows.map(r =>
+    `<button class="cat-row ${activeCat === r.name ? "active" : ""}" data-cat="${escHtml(r.name)}">
+       <span class="no">${r.no}</span><span class="nm">${escHtml(r.label)}</span>
+       <span class="ct">${r.n} ITEM</span><span class="arr">&rarr;</span></button>`).join("");
+  $("#chipRow").innerHTML = ["Semua", ...cats].map(c =>
+    `<button class="chip ${activeCat === c ? "active" : ""}" data-cat="${escHtml(c)}">${escHtml(c)}</button>`).join("");
+}
+function setCategory(c) {
+  activeCat = c; renderCats(); renderProducts();
+  document.getElementById("katalog").scrollIntoView({ behavior: "smooth" });
+}
+
+/* ===== PRODUK ===== */
+function availLine(it) {
+  const r = selRange();
+  if (it.type === "sale") {
+    return it.stockReady > 0
+      ? { full: false, txt: `STOK BELI — ${it.stockReady} UNIT` }
+      : { full: true, txt: "STOK BELI HABIS" };
+  }
+  if (!r) {
+    return it.stockReady > 0
+      ? { full: false, txt: `STOK SIAP — ${it.stockReady} DARI ${it.stockTotal} UNIT` }
+      : { full: true, txt: "HABIS — SEMUA UNIT SEDANG DISEWA" };
+  }
+  const a = availQty(it, null);
+  const lbl = `${fmtShort(r.start)}–${fmtShort(r.end)}`;
+  return a > 0
+    ? { full: false, txt: `TERSEDIA ${lbl} — SISA ${a} UNIT` }
+    : { full: true, txt: `PENUH ${lbl}` };
+}
+function renderProducts() {
+  const q = query.trim().toLowerCase();
+  const r = selRange();
+  const list = CATALOG.filter(it =>
+    (activeCat === "Semua" || it.category === activeCat) &&
+    (!q || (it.name + " " + it.category + " " + (it.desc || "")).toLowerCase().includes(q)));
+  if (!list.length) {
+    $("#prodGrid").innerHTML = `<div class="empty-note">Tidak ada produk yang cocok. Coba kata kunci atau kategori lain.</div>`;
+    return;
+  }
+  $("#prodGrid").innerHTML = list.map(it => {
+    const av = availLine(it);
+    const outBase = it.stockReady <= 0;
+    const outDate = !!r && it.type !== "sale" && availQty(it, null) <= 0;
+    const badge = it.type === "sale" ? `<span class="badge badge-sale">DIJUAL</span>`
+      : (outDate ? `<span class="badge badge-out">PENUH TANGGAL INI</span>`
+      : (outBase ? `<span class="badge badge-out">HABIS</span>` : ""));
+    const price = it.type === "sale"
+      ? `<b>${rp(it.priceSale)}</b><span> harga beli</span>`
+      : `<b>${rp(it.priceRental)}</b><span> / hari</span>`;
+    const est = (r && it.type === "rental")
+      ? `<div class="prod-est">≈ ${rp(it.priceRental * sel.days)} UNTUK ${sel.days} HARI</div>` : "";
+    const spec = (it.specs || []).slice(0, 2).join(" · ").toUpperCase();
+    const btn = outDate
+      ? `<button class="add-btn" disabled>HABIS UNTUK TANGGAL INI</button>`
+      : (outBase && it.type !== "sale" || it.type === "sale" && outBase
+        ? `<button class="add-btn" disabled>Stok Habis</button>`
+        : `<button class="add-btn" data-act="${it.sizes ? "open" : "add"}" data-id="${escHtml(it.id)}">
+             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+             ${it.sizes ? "Pilih Ukuran" : "Tambah ke Muatan"}</button>`);
+    return `<article class="prod-card ${outDate ? "out-date" : ""}">
+      <div class="prod-media" data-act="open" data-id="${escHtml(it.id)}" style="cursor:pointer">
+        <img src="${escHtml(it.image)}" alt="${escHtml(it.name)}" loading="lazy">${badge}</div>
+      <div class="prod-body">
+        <div class="prod-cat">${escHtml(it.category)}</div>
+        <div class="prod-name">${escHtml(it.name)}</div>
+        <div class="prod-cond">${escHtml(it.condition || "")}</div>
+        ${spec ? `<div class="prod-spec">${escHtml(spec)}</div>` : ""}
+        <div class="avail ${av.full ? "full" : ""}"><span class="sq"></span>${av.txt}</div>
+        <div class="prod-price">${price}${est}</div>
+        ${btn}
+      </div></article>`;
+  }).join("");
+}
+
+/* ===== MODAL PRODUK ===== */
+let pmItem = null, pmSize = null, pmQty = 1;
+function pmStockHtml() {
+  const av = availLine(pmItem);
+  return `<div class="avail ${av.full ? "full" : ""}"><span class="sq"></span>${av.txt}</div>` +
+    (pmItem.condition ? `<div style="font-size:12.5px;color:var(--muted);margin-top:4px">Kondisi: ${escHtml(pmItem.condition)}</div>` : "");
+}
+function openProduct(id) {
+  pmItem = itemById(id); if (!pmItem) return;
+  pmQty = 1; pmSize = null;
+  if (pmItem.sizes) { const f = pmItem.sizes.find(s => maxQty(pmItem, s.label) > 0); pmSize = f ? f.label : null; }
+  $("#pmImg").src = pmItem.image; $("#pmImg").alt = pmItem.name;
+  $("#pmCat").textContent = pmItem.category;
+  $("#pmName").textContent = pmItem.name;
+  $("#pmDesc").textContent = pmItem.desc || "";
+  $("#pmSpecs").innerHTML = (pmItem.specs || []).map(s => `<span>${escHtml(s)}</span>`).join("");
+  $("#pmStock").innerHTML = pmStockHtml();
+  const sf = $("#pmSizeField");
+  if (pmItem.sizes) {
+    sf.style.display = "block";
+    $("#pmSizes").innerHTML = pmItem.sizes.map(s =>
+      `<button type="button" class="size-chip ${pmSize === s.label ? "active" : ""}" data-size="${escHtml(s.label)}" ${maxQty(pmItem, s.label) <= 0 ? "disabled" : ""}>${escHtml(s.label)}</button>`).join("");
+  } else sf.style.display = "none";
+  $("#pmQtyVal").textContent = pmQty;
+  const p = priceOf(pmItem);
+  $("#pmPrice").textContent = rp(p);
+  $("#pmPriceUnit").textContent = pmItem.type === "sale" ? "harga beli" : "/ hari";
+  $("#pmAdd").disabled = maxQty(pmItem, pmSize) <= 0;
+  $("#prodModal").classList.add("show");
+}
+function closeProduct() { $("#prodModal").classList.remove("show"); }
+function openProductRefreshSizes() {
+  document.querySelectorAll("#pmSizes .size-chip").forEach(b => b.classList.toggle("active", b.dataset.size === pmSize));
+  $("#pmAdd").disabled = maxQty(pmItem, pmSize) <= 0;
+}
+
+/* ===== KERANJANG: DAFTAR MUATAN ===== */
+function saveCart() { localStorage.setItem("bk_peta_cart_v1", JSON.stringify(cart)); }
+function addToCart(id, size, qty) {
+  const e = itemById(id); if (!e) return;
+  const max = maxQty(e, size);
+  const found = cart.find(c => c.id === id && c.size === (size || null));
+  const cur = found ? found.qty : 0;
+  if (cur + qty > max) { toast("Stok siap hanya " + max + " unit untuk pilihan ini."); qty = max - cur; if (qty <= 0) return; }
+  if (found) found.qty += qty; else cart.push({ id, size: size || null, qty });
+  saveCart(); renderCart();
+  toast(e.name + " masuk daftar muatan.");
+}
+function cartSums() {
+  let rent = 0, once = 0;
+  cart.forEach(c => {
+    const e = itemById(c.id); if (!e) return;
+    if (isRental(e)) rent += priceOf(e) * c.qty; else once += priceOf(e) * c.qty;
+  });
+  return { rent, once };
+}
+function renderCart() {
+  const n = cart.reduce((a, c) => a + c.qty, 0);
+  const badge = $("#cartCount");
+  badge.style.display = n ? "flex" : "none"; badge.textContent = n;
+  const box = $("#cartItems");
+  if (!cart.length) {
+    box.innerHTML = `<div class="cart-empty">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+      <p>Daftar muatan masih kosong.<br>Pilih alat dari katalog untuk mulai.</p></div>`;
+    $("#cartFoot").style.display = "none"; return;
+  }
+  box.innerHTML = cart.map((c, i) => {
+    const e = itemById(c.id); if (!e) return "";
+    const p = priceOf(e);
+    const unit = e.type === "package" ? "per paket" : (e.type === "sale" ? "harga beli" : "per hari");
+    return `<div class="cart-item">
+      <img src="${escHtml(e.image)}" alt="${escHtml(e.name)}">
+      <div class="ci-body">
+        <b>${escHtml(e.name)}</b>
+        <div class="ci-sub">${c.size ? "UK " + escHtml(c.size) + " · " : ""}${rp(p)} ${unit}</div>
+        <div class="ci-row">
+          <span class="qty"><button data-qty="-1" data-i="${i}">−</button><span>${c.qty}</span><button data-qty="1" data-i="${i}">+</button></span>
+          <span class="ci-price">${rp(p * c.qty)}${isRental(e) ? "/hari" : ""}</span>
+        </div>
+        <button class="remove-btn" data-remove="${i}" style="margin-top:7px">Hapus dari muatan</button>
+      </div></div>`;
+  }).join("");
+  const s = cartSums();
+  $("#sumRent").textContent = rp(s.rent) + (s.rent ? " /hari" : "");
+  $("#sumOnce").textContent = rp(s.once);
+  $("#sumRentTotal").textContent = rp(s.rent) + (s.rent ? " /hari" : "");
+  $("#cartFoot").style.display = "block";
+}
+function openCart() { renderCart(); $("#cartDrawer").classList.add("show"); $("#backdrop").classList.add("show"); }
+function closeCart() { $("#cartDrawer").classList.remove("show"); $("#backdrop").classList.remove("show"); }
+
+/* ===== PAKET & TRIP ===== */
+const checkSvg = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>`;
+function renderPackages() {
+  $("#paketGrid").innerHTML = PACKAGES.map((p, i) => `<article class="pkg-card">
+    <img src="${escHtml(p.image)}" alt="${escHtml(p.name)}" loading="lazy">
+    <div class="pkg-body">
+      <div class="pkg-top"><h3>${escHtml(p.name)}</h3><span class="pkg-dur">RUTE ${String(i + 1).padStart(2, "0")} · ${escHtml(p.duration || "")}</span></div>
+      <p class="pkg-desc">${escHtml(p.description || "")}</p>
+      <div class="legend"><div class="lg-t">Legenda — Isi Paket</div>
+      <ul class="pkg-items">${(p.items || []).map(x => `<li>${checkSvg}${escHtml(x)}</li>`).join("")}</ul></div>
+      <div class="pkg-foot">
+        <div class="pkg-price"><b>${rp(p.price)}</b><span>PER PAKET · ${escHtml(p.duration || "")}</span></div>
+        <button class="btn btn-ink" data-pkg="${escHtml(p.id)}">Pesan Paket</button>
+      </div></div></article>`).join("");
+}
+const TRIP_ELEV = { "trip-sibayak": "2.212 MDPL", "trip-sibuatan": "2.457 MDPL" };
+function renderTrips() {
+  $("#tripGrid").innerHTML = TRIPS.map(t => {
+    const pct = Math.min(100, Math.round((t.filled / t.quota) * 100));
+    const sisa = t.quota - t.filled;
+    return `<article class="trip-card">
+      <img src="${escHtml(t.image)}" alt="${escHtml(t.name)}" loading="lazy">
+      <div class="trip-body">
+        <div class="trip-sign"><h3>${escHtml(t.name.replace("Open Trip ", ""))}</h3><span class="trip-elev">▲ ${TRIP_ELEV[t.id] || ""}</span></div>
+        <div class="trip-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>${fmtDateID(t.date).toUpperCase()} · ${t.days} HARI</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>TITIK KUMPUL: ${escHtml(t.meetingPoint || "-")}</span>
+        </div>
+        <p>${escHtml(t.description || "")}</p>
+        <div class="quota"><div class="quota-bar"><div class="quota-fill" style="width:${pct}%"></div></div>
+        <small>TERISI ${t.filled} DARI ${t.quota} KURSI — SISA ${sisa}</small></div>
+        <div class="trip-foot">
+          <div class="trip-price"><b>${rp(t.price)}</b><span>PER ORANG</span></div>
+          <button class="btn btn-outline-s" data-trip="${escHtml(t.id)}">Daftar Trip</button>
+        </div></div></article>`;
+  }).join("");
+}
+function sendWhatsApp(msg) {
+  if (WA_NUMBER) { window.open("https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(msg), "_blank"); return true; }
+  return false;
+}
+
+/* ===== CHECKOUT ===== */
+function refreshCoTotals() {
+  const days = Math.max(1, parseInt($("#coDays").value || "1", 10));
+  const s = cartSums();
+  $("#coRentDay").textContent = rp(s.rent) + " x " + days + " hari";
+  $("#coOnce").textContent = rp(s.once);
+  $("#coTotal").textContent = rp(s.rent * days + s.once);
+  $("#coLegend").innerHTML = cart.map(c => {
+    const e = itemById(c.id); if (!e) return "";
+    const p = priceOf(e);
+    return `<div class="sum-row" style="margin-bottom:4px"><span>${escHtml(e.name)}${c.size ? " (Uk. " + escHtml(c.size) + ")" : ""} x${c.qty}</span><span class="mono">${rp(p * c.qty)}${e.type === "rental" ? "/hari" : ""}</span></div>`;
+  }).join("") || `<div class="sum-row"><span>Muatan kosong</span><span class="mono">Rp0</span></div>`;
+}
+function openCheckout() {
+  if (!cart.length) { toast("Daftar muatan masih kosong."); return; }
+  closeCart();
+  if (sel.start) { $("#coStart").value = sel.start; $("#coDays").value = sel.days; }
+  else {
+    const d = new Date(); d.setDate(d.getDate() + 1);
+    $("#coStart").value = d.toISOString().slice(0, 10);
+  }
+  $("#coSuccess").style.display = "none";
+  $("#coForm").style.display = "block";
+  prefillCheckoutForm();
+  refreshCoTotals();
+  $("#coModal").classList.add("show");
+}
+function closeCheckout() { $("#coModal").classList.remove("show"); }
+
+/* ===== BUKTI PEMBAYARAN ===== */
+let coProofFile = null, coProofDataUrl = "";
+$("#coPayProof").addEventListener("change", e => {
+  const f = e.target.files && e.target.files[0];
+  coProofFile = null; coProofDataUrl = "";
+  const box = $("#payProofPreview");
+  box.style.display = "none"; box.innerHTML = "";
+  if (!f) return;
+  const okType = ["image/jpeg", "image/png", "image/webp", "application/pdf"].includes(f.type);
+  if (!okType) { toast("Berkas harus JPG, PNG, WebP, atau PDF."); e.target.value = ""; return; }
+  if (f.size > 5 * 1024 * 1024) { toast("Bukti pembayaran maksimal 5 MB."); e.target.value = ""; return; }
+  coProofFile = f;
+  const rd = new FileReader();
+  rd.onload = () => {
+    coProofDataUrl = typeof rd.result === "string" ? rd.result : "";
+    box.style.display = "block";
+    box.innerHTML = f.type.startsWith("image/")
+      ? `<img src="${coProofDataUrl}" alt="Bukti pembayaran" style="max-height:170px;border-radius:10px;border:1px solid var(--line)">`
+      : `<span style="font-size:13.5px;font-weight:600">${escHtml(f.name)}</span>`;
+  };
+  rd.readAsDataURL(f);
+});
+
+/* ===== AUTO BOOKING — SERVER (RPC create_booking) ===== */
+async function uploadProof(file) {
+  const ext = (file.name.split(".").pop() || "jpg").toLowerCase();
+  const path = BOOKING_CFG.slug + "/" + Date.now() + "-" + Math.random().toString(36).slice(2, 9) + "." + ext;
+  const r = await fetch(BOOKING_CFG.url + "/storage/v1/object/payment-proofs/" + path, {
+    method: "POST",
+    headers: { "apikey": BOOKING_CFG.anonKey, "Authorization": "Bearer " + BOOKING_CFG.anonKey, "Content-Type": file.type, "x-upsert": "false" },
+    body: file
+  });
+  if (!r.ok) throw new Error("Upload bukti pembayaran gagal (" + r.status + ").");
+  return path;
+}
+async function submitBooking(payload) {
+  try {
+    if (coProofFile) payload.payment.proofPath = await uploadProof(coProofFile);
+    // B2: member yang login memakai tokennya sendiri supaya server bisa
+    // memverifikasi identitas (auth.jwt); tamu tetap memakai anon key.
+    const bearer = (memberSession && memberSession.access_token) ? memberSession.access_token : BOOKING_CFG.anonKey;
+    const r = await fetch(BOOKING_CFG.url + "/rest/v1/rpc/create_booking", {
+      method: "POST",
+      headers: { "apikey": BOOKING_CFG.anonKey, "Authorization": "Bearer " + bearer, "Content-Type": "application/json" },
+      body: JSON.stringify({ s: BOOKING_CFG.slug, payload })
+    });
+    if (!r.ok) return { ok: false, error: "Server booking bermasalah (" + r.status + "). Coba lagi." };
+    return await r.json();
+  } catch (e) { return { ok: false, error: "Tidak ada koneksi ke server booking." }; }
+}
+const STATUS_LABEL = {
+  pending: "MENUNGGU KONFIRMASI ADMIN",
+  confirmed: "TERKONFIRMASI — TINGGAL AMBIL",
+  cancelled: "DIBATALKAN",
+  converted: "SUDAH DIAMBIL / SEDANG BERJALAN"
+};
+$("#coForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const days = Math.max(1, parseInt($("#coDays").value || "1", 10));
+  const payload = {
+    name: $("#coName").value, phone: $("#coPhone").value,
+    startDate: $("#coStart").value, days, notes: $("#coNotes").value.trim(),
+    items: cart.map(c => ({ id: c.id, size: c.size || "", qty: c.qty })),
+    member: !!currentMember(),
+    memberEmail: currentMember() ? currentMember().email : "",
+    payment: {
+      method: $("#coPayMethod").value, sender: $("#coPaySender").value,
+      proofName: coProofFile ? coProofFile.name : ""
+    }
+  };
+  if (!payload.payment.method) { toast("Pilih metode pembayaran dulu."); return; }
+  if (payload.payment.sender.trim().length < 3) { toast("Isi nama pengirim pembayaran."); return; }
+  if (!coProofFile) { toast("Upload bukti pembayaran dulu — booking wajib dibayar di muka."); $("#coPayProof").focus(); return; }
+  const btn = $("#coSubmit");
+  btn.disabled = true; btn.textContent = "Memproses Booking...";
+  const res = await submitBooking(payload);
+  btn.disabled = false; btn.textContent = "Buat Booking Sekarang";
+  if (!res.ok) { toast(res.error || "Booking gagal. Coba lagi."); return; }
+  addMyCode(res.code, normPhone(payload.phone));
+  const s = cartSums();
+  const startTxt = fmtDateID(payload.startDate);
+  const retTxt = fmtDateID(res.returnDate || datePlus(payload.startDate, days));
+  const lines = cart.map(c => {
+    const en = itemById(c.id); const p = priceOf(en);
+    return `<div style="display:flex;justify-content:space-between;gap:12px"><span>${escHtml(en.name)}${c.size ? " (Uk. " + escHtml(c.size) + ")" : ""} x${c.qty}</span><b>${rp(p * c.qty)}${en.type === "rental" ? "/hari" : ""}</b></div>`;
+  }).join("");
+  $("#coSummary").innerHTML = lines +
+    `<div style="display:flex;justify-content:space-between;gap:12px"><span>Nama penyewa</span><b>${escHtml(payload.name)}</b></div>` +
+    `<div style="display:flex;justify-content:space-between;gap:12px"><span>Mulai sewa</span><b>${startTxt}</b></div>` +
+    `<div style="display:flex;justify-content:space-between;gap:12px"><span>Kembali</span><b>${retTxt} (${days} hari)</b></div>` +
+    `<div style="display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:7px"><span>Perkiraan total</span><b>${rp(s.rent * days + s.once)}</b></div>` +
+    `<div style="display:flex;justify-content:space-between;gap:12px"><span>Pembayaran</span><b>${escHtml(payload.payment.method)} — ${escHtml(payload.payment.sender)}</b></div>` +
+    `<div style="display:flex;justify-content:space-between;gap:12px"><span>Status pembayaran</span><b style="color:var(--marker)">Bukti terkirim — menunggu verifikasi admin</b></div>` +
+    "";
+  $("#coCode").innerHTML = escHtml(res.code).replace("-", '<span class="dot">-</span>');
+  $("#coStatusPill").textContent = STATUS_LABEL.pending;
+  $("#coMemberBadge").style.display = payload.member ? "inline-block" : "none";
+  $("#coForm").style.display = "none";
+  $("#coSuccess").style.display = "block";
+  /* Member: simpan nomor WA yang dipakai booking ini ke profil (kontak depot),
+     supaya booking berikutnya terisi otomatis. */
+  const cmSave = currentMember();
+  if (cmSave) {
+    const usedPhone = normPhone(payload.phone);
+    if (/^628\d{7,12}$/.test(usedPhone) && usedPhone !== cmSave.phone) {
+      updateMember({ phone: usedPhone });
+      renderMemberUI();
+    }
+  }
+  cart = []; saveCart(); renderCart(); renderProducts();
+});
+$("#coDone").addEventListener("click", closeCheckout);
+
+/* ===== LACAK BOOKING ===== */
+function openCheck() { $("#ckResult").style.display = "none"; $("#ckModal").classList.add("show"); }
+function closeCheck() { $("#ckModal").classList.remove("show"); }
+async function lookupBooking(code, phone) {
+  if (BOOKING_CFG.url) {
+    try {
+      const r = await fetch(BOOKING_CFG.url + "/rest/v1/rpc/booking_status", {
+        method: "POST",
+        headers: { "apikey": BOOKING_CFG.anonKey, "Authorization": "Bearer " + BOOKING_CFG.anonKey, "Content-Type": "application/json" },
+        body: JSON.stringify({ s: BOOKING_CFG.slug, p_code: code, p_phone: phone })
+      });
+      if (!r.ok) return { ok: false, error: "Server bermasalah (" + r.status + ")." };
+      return await r.json();
+    } catch (e) { return { ok: false, error: "Tidak ada koneksi ke server." }; }
+  }
+  return { ok: false, error: "Server tidak dapat dihubungi." };
+}
+function statusTrackHtml(status) {
+  if (status === "cancelled") return `<div style="font-family:var(--font-m);font-size:12px;color:var(--marker);font-weight:600;letter-spacing:.06em;margin-top:12px">BOOKING INI DIBATALKAN — SILAKAN BUAT BOOKING BARU</div>`;
+  const idx = { pending: 1, confirmed: 2, converted: 3 }[status] || 1;
+  const steps = ["DITERIMA", "TERKONFIRMASI", "DIAMBIL", "SELESAI"];
+  return `<div class="status-track">${steps.map((s, i) => `<div class="${i < idx ? "done" : ""}">${s}</div>`).join("")}</div>`;
+}
+$("#ckForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const res = await lookupBooking($("#ckCode").value, $("#ckPhone").value);
+  const box = $("#ckResult");
+  box.style.display = "block";
+  if (!res.ok) { box.innerHTML = `<div class="ck-err">${escHtml(res.error)}</div>`; return; }
+  const total = res.items.reduce((a, d) => a + (d.type === "rental" ? d.price * d.qty * res.days : d.price * d.qty), 0);
+  box.innerHTML = `<div class="ck-card">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+      <span class="ck-code">${escHtml(res.code)}</span>
+      <span class="ck-pill">${escHtml(STATUS_LABEL[res.status] || res.status)}</span></div>
+    ${statusTrackHtml(res.status)}
+    <div style="font-size:14px;margin-top:12px;display:grid;gap:4px">
+      <span>Penyewa: <b>${escHtml(res.renterName)}</b></span>
+      <span class="mono" style="font-size:12.5px">${fmtShort(res.startDate)} — ${fmtShort(res.returnDate)} · ${res.days} HARI</span>
+      ${res.items.map(d => `<span>${escHtml(d.itemName)} x${d.qty} — ${rp(d.price * d.qty)}${d.type === "rental" ? "/hari" : ""}</span>`).join("")}
+      <span style="border-top:1px solid var(--line);padding-top:6px">Perkiraan total: <b>${rp(total)}</b></span>
+      ${res.items[0] && res.items[0].payment ? `<span>Pembayaran: <b>${escHtml(res.items[0].payment.method)} — ${escHtml(res.items[0].payment.sender)}</b> (${res.items[0].payment.verified ? "Terverifikasi" : "Bukti terkirim, menunggu verifikasi"})</span>` : ""}
+    </div></div>`;
+});
+
+/* ===== MEMBER — LOGIN GOOGLE SUNGGUHAN (Supabase Auth, tanpa library) =====
+   Tombol "Masuk dengan Google" mengarahkan browser ke endpoint authorize
+   Supabase; sesudah login, Supabase mengembalikan pengguna ke halaman ini
+   dengan access_token di URL hash. Session disimpan di perangkat ini
+   (jr_member_session_v1). Profil (email, nama, avatar) diambil dari
+   /auth/v1/user — tidak ada kata sandi & tidak ada akun mock di sini.
+   Bila provider Google belum diaktifkan pemilik di Supabase, authorize
+   mengembalikan error di hash dan pengguna melihat pesan jujur.
+   "Booking Saya" = riwayat perangkat ini: kode booking yang berhasil
+   dibuat di perangkat ini (jr_my_codes_v1) + status live dari RPC. */
+const MEMBER_KEY = "jr_member_session_v1";
+const MY_CODES_KEY = "jr_my_codes_v1";
+const MEMBER_WA_KEY = "jr_member_wa_v1";
+let memberSession = null; // {access_token, refresh_token, expires_at, profile}
+let memberProfile = null; // {email, name, avatar}
+function loadMyCodes() {
+  try { return JSON.parse(localStorage.getItem(MY_CODES_KEY) || "[]"); } catch (e) { return []; }
+}
+function addMyCode(code, phone) {
+  if (!code) return;
+  const list = loadMyCodes().filter(x => x.code !== code);
+  list.unshift({ code, phone: phone || "", at: Date.now() });
+  try { localStorage.setItem(MY_CODES_KEY, JSON.stringify(list.slice(0, 30))); } catch (e) {}
+}
+function loadMemberSession() {
+  try { return JSON.parse(localStorage.getItem(MEMBER_KEY) || "null"); } catch (e) { return null; }
+}
+function saveMemberSession(sv) {
+  memberSession = sv;
+  try { sv ? localStorage.setItem(MEMBER_KEY, JSON.stringify(sv)) : localStorage.removeItem(MEMBER_KEY); } catch (e) {}
+}
+function memberWaMap() {
+  try { return JSON.parse(localStorage.getItem(MEMBER_WA_KEY) || "{}"); } catch (e) { return {}; }
+}
+function memberWa() { return memberProfile ? (memberWaMap()[memberProfile.email] || "") : ""; }
+function setMemberWa(phone) {
+  if (!memberProfile) return;
+  const m = memberWaMap(); m[memberProfile.email] = phone;
+  try { localStorage.setItem(MEMBER_WA_KEY, JSON.stringify(m)); } catch (e) {}
+}
+function currentMember() {
+  if (!memberProfile) return null;
+  return { name: memberProfile.name, email: memberProfile.email, phone: memberWa() };
+}
+function updateMember(patch) {
+  if (patch && patch.phone !== undefined) setMemberWa(patch.phone);
+  return currentMember();
+}
+function googleAuthorizeUrl() {
+  return KONFIG.SUPABASE_URL + "/auth/v1/authorize?provider=google&redirect_to=" +
+    encodeURIComponent(location.origin + location.pathname);
+}
+function startGoogleLogin() { location.href = googleAuthorizeUrl(); }
+async function refreshMemberSession() {
+  if (!memberSession || !memberSession.refresh_token) return false;
+  try {
+    const r = await fetch(KONFIG.SUPABASE_URL + "/auth/v1/token?grant_type=refresh_token", {
+      method: "POST",
+      headers: { "apikey": KONFIG.SUPABASE_ANON_KEY, "Content-Type": "application/json" },
+      body: JSON.stringify({ refresh_token: memberSession.refresh_token })
+    });
+    if (!r.ok) return false;
+    const j = await r.json();
+    if (!j.access_token) return false;
+    memberSession.access_token = j.access_token;
+    if (j.refresh_token) memberSession.refresh_token = j.refresh_token;
+    memberSession.expires_at = Date.now() + (parseInt(j.expires_in || "3600", 10) * 1000);
+    saveMemberSession(memberSession);
+    return true;
+  } catch (e) { return false; }
+}
+async function fetchMemberProfile(retried) {
+  if (!memberSession || !memberSession.access_token) return false;
+  try {
+    const r = await fetch(KONFIG.SUPABASE_URL + "/auth/v1/user", {
+      headers: { "apikey": KONFIG.SUPABASE_ANON_KEY, "Authorization": "Bearer " + memberSession.access_token }
+    });
+    if (!r.ok) {
+      // R2: token kedaluwarsa -> coba perbarui SEKALI lewat refresh_token.
+      if (r.status === 401 && !retried && (await refreshMemberSession())) return fetchMemberProfile(true);
+      saveMemberSession(null); memberProfile = null;
+      if (r.status === 401) toast("Sesi Google berakhir — silakan masuk lagi.");
+      return false;
+    }
+    const u = await r.json();
+    const md = u.user_metadata || {};
+    memberProfile = {
+      email: u.email || "",
+      name: md.full_name || md.name || (u.email || "").split("@")[0],
+      avatar: md.avatar_url || md.picture || ""
+    };
+    memberSession.profile = memberProfile;
+    saveMemberSession(memberSession);
+    return true;
+  } catch (e) { return false; }
+}
+async function captureAuthFromHash() {
+  const raw = location.hash || "";
+  if (raw.length > 1 && (raw.includes("access_token=") || raw.includes("error"))) {
+    const p = new URLSearchParams(raw.slice(1));
+    const at = p.get("access_token");
+    const err = p.get("error_description") || p.get("error");
+    try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {}
+    if (at) {
+      saveMemberSession({
+        access_token: at,
+        refresh_token: p.get("refresh_token") || "",
+        expires_at: Date.now() + (parseInt(p.get("expires_in") || "3600", 10) * 1000)
+      });
+      if (await fetchMemberProfile()) {
+        toast("Selamat datang, " + memberProfile.name.split(/\s+/)[0] + "! Kamu masuk sebagai member.");
+      }
+      renderMemberUI();
+      return;
+    }
+    if (err) {
+      toast("Login Google belum aktif di server — coba lagi nanti.");
+      renderMemberUI();
+      return;
+    }
+  }
+  memberSession = loadMemberSession();
+  if (memberSession && memberSession.profile) memberProfile = memberSession.profile;
+  else if (memberSession && memberSession.access_token) await fetchMemberProfile();
+  renderMemberUI();
+}
+function renderMemberUI() {
+  const m = currentMember();
+  $("#btnMember").style.display = m ? "none" : "inline-flex";
+  $("#btnMemberIn").style.display = m ? "inline-flex" : "none";
+  if (!m) $("#memberMenu").style.display = "none";
+  if (m) {
+    const first = (m.name || "Member").trim().split(/\s+/)[0];
+    $("#memberName").textContent = first;
+    $("#mmName").textContent = m.name;
+    $("#mmEmail").textContent = m.email;
+    $("#mmPhone").textContent = "WA: " + (m.phone || "belum diisi");
+  }
+  prefillCheckoutForm();
+}
+function prefillCheckoutForm() {
+  const m = currentMember();
+  const ph = $("#coPhone");
+  if (!ph) return;
+  ph.readOnly = false; /* WA = kontak depot, selalu bisa diedit (bukan kredensial) */
+  if (m) {
+    $("#coName").value = m.name;
+    if (m.phone) ph.value = m.phone;
+  }
+}
+function openWaEdit() {
+  const m = currentMember();
+  if (!m) { startGoogleLogin(); return; }
+  $("#waErr").style.display = "none";
+  $("#waPhone").value = m.phone || "";
+  $("#waModal").classList.add("show");
+}
+function closeWaEdit() { $("#waModal").classList.remove("show"); }
+function closeMyBookings() { $("#mbModal").classList.remove("show"); }
+function authErr(id, msg) { const b = $(id); b.textContent = msg; b.style.display = "block"; }
+function bookingCardHtml(res, mine) {
+  const total = res.items.reduce((a, d) => a + (d.type === "rental" ? d.price * d.qty * res.days : d.price * d.qty), 0);
+  const f = res.items[0] || {};
+  return `<div class="ck-card">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+      <span class="ck-code">${escHtml(res.code)}</span>
+      <span class="ck-pill">${escHtml(STATUS_LABEL[res.status] || res.status)}</span></div>
+    ${statusTrackHtml(res.status)}
+    <div style="font-size:14px;margin-top:12px;display:grid;gap:4px">
+      <span>Penyewa: <b>${escHtml(res.renterName || "")}</b></span>
+      <span class="mono" style="font-size:12.5px">${fmtShort(res.startDate)} — ${fmtShort(res.returnDate)} · ${res.days} HARI</span>
+      ${res.items.map(d => `<span>${escHtml(d.itemName)} x${d.qty} — ${rp(d.price * d.qty)}${d.type === "rental" ? "/hari" : ""}</span>`).join("")}
+      <span style="border-top:1px solid var(--line);padding-top:6px">Perkiraan total: <b>${rp(total)}</b></span>
+      ${f.payment ? `<span>Pembayaran: <b>${escHtml(f.payment.method)} — ${escHtml(f.payment.sender)}</b> (${f.payment.verified ? "Terverifikasi" : "Bukti terkirim, menunggu verifikasi"})</span>` : ""}
+      ${mine ? `<span><span class="member-chip">MEMBER</span></span>` : ""}
+    </div></div>`;
+}
+async function openMyBookings() {
+  $("#memberMenu").style.display = "none";
+  const m = currentMember();
+  const box = $("#mbList");
+  if (!m) { startGoogleLogin(); return; }
+  const codes = loadMyCodes();
+  $("#mbModal").classList.add("show");
+  if (!codes.length) {
+    box.innerHTML = `<div class="mb-empty"><b>Belum ada booking</b>Belum ada booking yang dibuat dari perangkat ini. Kode booking yang berhasil dibuat di sini akan tersimpan dan statusnya bisa dipantau dari menu ini.</div>`;
+    return;
+  }
+  box.innerHTML = `<div class="mb-empty">MEMUAT STATUS DARI SERVER…</div>`;
+  const parts = [];
+  for (const rec of codes) {
+    const res = await lookupBooking(rec.code, rec.phone);
+    if (!res.ok) {
+      parts.push(`<div class="ck-card"><span class="ck-code">${escHtml(rec.code)}</span><div style="font-size:13.5px;margin-top:8px;color:var(--muted)">Status belum bisa dimuat (${escHtml(res.error || "server tidak merespons")}). Coba lagi nanti, atau lacak manual dengan kode + nomor WA.</div></div>`);
+    } else {
+      const mine = !!(res.items[0] && res.items[0].memberEmail && res.items[0].memberEmail === m.email);
+      parts.push(bookingCardHtml(res, mine));
+    }
+  }
+  box.innerHTML = parts.join("");
+}
+$("#btnMember").addEventListener("click", startGoogleLogin);
+$("#btnMemberIn").addEventListener("click", () => {
+  const menu = $("#memberMenu");
+  menu.style.display = menu.style.display === "none" ? "block" : "none";
+});
+document.addEventListener("click", e => {
+  if (!e.target.closest(".member-zone")) $("#memberMenu").style.display = "none";
+});
+$("#waForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const phone = normPhone($("#waPhone").value);
+  $("#waErr").style.display = "none";
+  if (!/^628\d{7,12}$/.test(phone)) return authErr("#waErr", "Nomor WhatsApp tidak valid — gunakan format 08xxxxxxxxxx.");
+  updateMember({ phone });
+  e.target.reset();
+  closeWaEdit();
+  renderMemberUI();
+  toast("Nomor WA profil tersimpan.");
+});
+$("#mmEditWa").addEventListener("click", () => { $("#memberMenu").style.display = "none"; openWaEdit(); });
+$("#mmLogout").addEventListener("click", async () => {
+  const tok = memberSession && memberSession.access_token;
+  saveMemberSession(null);
+  memberProfile = null;
+  $("#memberMenu").style.display = "none";
+  renderMemberUI();
+  toast("Kamu sudah keluar. Sampai jumpa!");
+  if (tok) {
+    try {
+      await fetch(KONFIG.SUPABASE_URL + "/auth/v1/logout", {
+        method: "POST",
+        headers: { "apikey": KONFIG.SUPABASE_ANON_KEY, "Authorization": "Bearer " + tok }
+      });
+    } catch (e) { /* best-effort */ }
+  }
+});
+$("#mmMyBookings").addEventListener("click", openMyBookings);
+
+/* ===== EVENTS ===== */
+document.addEventListener("click", e => {
+  if (e.target.closest("#bbClear")) { clearBookingBar(); return; }
+  const catBtn = e.target.closest("[data-cat]");
+  if (catBtn) { setCategory(catBtn.dataset.cat); return; }
+  const act = e.target.closest("[data-act]");
+  if (act) {
+    if (act.dataset.act === "add") addToCart(act.dataset.id, null, 1);
+    else openProduct(act.dataset.id);
+    return;
+  }
+  const pkg = e.target.closest("[data-pkg]");
+  if (pkg) { addToCart(pkg.dataset.pkg, null, 1); openCart(); return; }
+  const trip = e.target.closest("[data-trip]");
+  if (trip) {
+    const t = TRIPS.find(x => x.id === trip.dataset.trip);
+    const msg = "Halo BK Adventure! Saya mau daftar " + t.name + " (" + fmtDateID(t.date) + ", " + rp(t.price) + "/orang). Mohon info ketersediaan kursi. Terima kasih.";
+    if (!sendWhatsApp(msg)) {
+      if (navigator.clipboard) navigator.clipboard.writeText(msg).catch(() => {});
+      toast("Mode pratinjau lokal: pesan pendaftaran trip tersalin — tempel ke WhatsApp admin.");
+    }
+    return;
+  }
+  const sz = e.target.closest("[data-size]");
+  if (sz) { pmSize = sz.dataset.size; openProductRefreshSizes(); return; }
+  const qb = e.target.closest("[data-qty]");
+  if (qb) {
+    const i = +qb.dataset.i, d = +qb.dataset.qty, c = cart[i]; if (!c) return;
+    const en = itemById(c.id); const max = maxQty(en, c.size);
+    c.qty += d;
+    if (c.qty > max) { c.qty = max; toast("Stok siap hanya " + max + " unit."); }
+    if (c.qty <= 0) cart.splice(i, 1);
+    saveCart(); renderCart(); return;
+  }
+  const rm = e.target.closest("[data-remove]");
+  if (rm) { cart.splice(+rm.dataset.remove, 1); saveCart(); renderCart(); return; }
+  if (e.target.closest("[data-close-prod]")) closeProduct();
+  if (e.target.closest("[data-close-co]")) closeCheckout();
+  if (e.target.closest("[data-close-ck]")) closeCheck();
+  if (e.target.closest("[data-close-wa]")) closeWaEdit();
+  if (e.target.closest("[data-close-mb]")) closeMyBookings();
+});
+$("#bbCheck").addEventListener("click", applyBookingBar);
+$("#bbStart").addEventListener("change", () => { if ($("#bbStart").value) applyBookingBar(); });
+$("#btnCheckBooking1").addEventListener("click", () => { closeCart(); openCheck(); });
+$("#btnCheckBooking2").addEventListener("click", e => { e.preventDefault(); openCheck(); });
+$("#btnCheckBooking3").addEventListener("click", openCheck);
+$("#btnCheckBooking4").addEventListener("click", openCheck);
+$("#pmQtyMinus").addEventListener("click", () => { pmQty = Math.max(1, pmQty - 1); $("#pmQtyVal").textContent = pmQty; });
+$("#pmQtyPlus").addEventListener("click", () => {
+  const max = maxQty(pmItem, pmSize); pmQty = Math.min(max || 1, pmQty + 1); $("#pmQtyVal").textContent = pmQty;
+});
+$("#pmAdd").addEventListener("click", () => {
+  if (!pmItem) return;
+  if (pmItem.sizes && !pmSize) { toast("Pilih ukuran yang stoknya siap dulu."); return; }
+  addToCart(pmItem.id, pmSize, pmQty); closeProduct(); openCart();
+});
+$("#btnCart").addEventListener("click", openCart);
+$("#btnCloseCart").addEventListener("click", closeCart);
+$("#backdrop").addEventListener("click", closeCart);
+$("#btnCheckout").addEventListener("click", openCheckout);
+$("#coDays").addEventListener("input", refreshCoTotals);
+$("#coStart").addEventListener("change", refreshCoTotals);
+$("#searchInput").addEventListener("input", e => { query = e.target.value; renderProducts(); });
+$("#btnViewAll").addEventListener("click", () => { activeCat = "Semua"; query = ""; $("#searchInput").value = ""; renderCats(); renderProducts(); });
+$("#btnAdmin").addEventListener("click", () => toast("Panel admin khusus pemilik toko — tidak ditautkan dari halaman pelanggan."));
+$("#btnMenu").addEventListener("click", () => $("#mobileNav").classList.toggle("open"));
+document.querySelectorAll("#mobileNav a").forEach(a => a.addEventListener("click", () => $("#mobileNav").classList.remove("open")));
+$("#newsForm").addEventListener("submit", e => { e.preventDefault(); toast("Terima kasih sudah berlangganan. Info trip & promo akan kami kirim ke email kamu."); e.target.reset(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") { closeCart(); closeProduct(); closeCheckout(); closeCheck(); closeWaEdit(); closeMyBookings(); $("#memberMenu").style.display = "none"; } });
+
+/* ===== INIT ===== */
+(function initDates() {
+  const d = new Date(); d.setDate(d.getDate() + 1);
+  const iso = d.toISOString().slice(0, 10);
+  $("#bbStart").min = new Date().toISOString().slice(0, 10);
+  $("#bbStart").value = iso;
+  $("#coStart") && ($("#coStart").min = new Date().toISOString().slice(0, 10));
+})();
+/* ===== BOOT VERSI SERVER ===== */
+const srvRetryBtn = $("#srvRetry");
+if (srvRetryBtn) srvRetryBtn.addEventListener("click", loadServerData);
+captureAuthFromHash();
+renderCart();
+loadServerData();
+</script>
+</body>
+</html>
