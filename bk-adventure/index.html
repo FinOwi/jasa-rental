@@ -1511,7 +1511,8 @@ async function captureAuthFromHash() {
       return;
     }
     if (err) {
-      toast("Login Google belum aktif di server — coba lagi nanti.");
+      console.warn("Google OAuth error:", err);
+      toast("Login Google gagal di server: " + String(err).slice(0, 90));
       renderMemberUI();
       return;
     }
