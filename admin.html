@@ -3130,6 +3130,7 @@
         await sbRest('bookings?tenant_id=eq.' + tid + '&code=eq.' + encodeURIComponent(code), { method: 'PATCH', body: { status } });
         bkRowsCache.forEach(r => { if (r.code === code) r.status = status; });
         bkRenderBookings();
+        if (typeof refreshLiveHeld === 'function') refreshLiveHeld(true);
         if (!silent) toast('Booking ' + code + ' -> ' + bkStatusLabel(status));
         return true;
       } catch (e) { toast('Gagal mengubah status booking: ' + e.message); return false; }
@@ -3292,6 +3293,7 @@
           row.data = nd;
         }
         bkRenderBookings();
+        if (typeof refreshLiveHeld === 'function') refreshLiveHeld(true);
         toast('Pembayaran booking ' + code + ' terverifikasi.');
       } catch (e) { toast('Gagal verifikasi: ' + e.message); }
     }
@@ -3540,9 +3542,10 @@
     }
 
     function renderMetrics() {
+      refreshLiveHeld();
       let total=0, ready=0, rented=0, sale=0, saleSKU=0;
       inventory.forEach(i => {
-        total += i.stockTotal; ready += i.stockReady;
+        total += i.stockTotal; ready += Math.max(0, i.stockReady - heldOf(i.id));
         rented += (i.type==='rental' ? (i.stockRented||0) : 0);
         if (i.type==='sale') { sale += i.stockReady; saleSKU++; }
       });
@@ -3561,7 +3564,29 @@
       }
     }
 
+    // ===== STOK LIVE (agregat booking terkonfirmasi — RPC live_stock) =====
+    // Angka SIAP di panel = stok server dikurangi unit terikat booking yang
+    // sudah terkonfirmasi, sama seperti yang dilihat pelanggan di website.
+    let invLiveHeld = null, invLiveHeldAt = 0;
+    function heldOf(id, size) {
+      if (!invLiveHeld) return 0;
+      if (size) return invLiveHeld[id + '|' + size] || 0;
+      let n = 0;
+      for (const k in invLiveHeld) if (k.startsWith(id + '|')) n += invLiveHeld[k] || 0;
+      return n;
+    }
+    async function refreshLiveHeld(force) {
+      if (typeof sbRest !== 'function') return;
+      if (!force && invLiveHeld && Date.now() - invLiveHeldAt < 30000) return;
+      try {
+        invLiveHeld = await sbRest('rpc/live_stock', { method: 'POST', body: { s: KONFIG.TENANT_SLUG } }) || {};
+        invLiveHeldAt = Date.now();
+      } catch (e) { if (!invLiveHeld) invLiveHeld = {}; return; }
+      renderInvTable(); renderMetrics();
+    }
+
     function renderInvTable() {
+      refreshLiveHeld();
       const search = (document.getElementById('invSearch') ? document.getElementById('invSearch').value : '').toLowerCase().trim();
       let filtered = inventory;
       if (search) filtered = inventory.filter(i => i.name.toLowerCase().includes(search) || i.sku.toLowerCase().includes(search));
@@ -3576,9 +3601,9 @@
         return '<tr>' +
           '<td><img src="' + escHtml(i.image) + '" style="width:48px;height:36px;object-fit:cover;border:1px solid var(--border);"></td>' +
           '<td class="mono" style="font-weight:600;">' + escHtml(i.sku) + '</td>' +
-          '<td><div style="font-weight:600;">' + escHtml(i.name) + '</div><div class="mono" style="font-size:10px;color:var(--text-subtle);">' + escHtml(i.category) + '</div>' + ((i.sizes && i.sizes.length) ? '<div class="mono" style="font-size:10px;color:#9A6E1F;font-weight:700;">' + i.sizes.map(s => escHtml(s.label) + ': ' + ((s.ready || 0) > 0 ? s.ready : 'HABIS')).join(' &middot; ') + '</div>' : (i.size ? '<div class="mono" style="font-size:10px;color:#9A6E1F;font-weight:700;">UKURAN: ' + escHtml(i.size) + '</div>' : '')) + '</td>' +
+          '<td><div style="font-weight:600;">' + escHtml(i.name) + '</div><div class="mono" style="font-size:10px;color:var(--text-subtle);">' + escHtml(i.category) + '</div>' + ((i.sizes && i.sizes.length) ? '<div class="mono" style="font-size:10px;color:#9A6E1F;font-weight:700;">' + i.sizes.map(s => { const sr = Math.max(0, (s.ready || 0) - heldOf(i.id, s.label)); return escHtml(s.label) + ': ' + (sr > 0 ? sr : 'HABIS'); }).join(' &middot; ') + '</div>' : (i.size ? '<div class="mono" style="font-size:10px;color:#9A6E1F;font-weight:700;">UKURAN: ' + escHtml(i.size) + '</div>' : '')) + '</td>' +
           '<td><span class="badge-tag ' + (isR?'badge-rental':'badge-sale') + '">' + (isR?'SEWA':'DIJUAL') + '</span></td>' +
-          '<td class="mono" style="color:var(--green-ok);font-weight:700;">' + i.stockReady + '</td>' +
+          '<td class="mono" style="color:var(--green-ok);font-weight:700;">' + Math.max(0, i.stockReady - heldOf(i.id)) + (heldOf(i.id) > 0 ? '<div style="font-size:10px;color:#C9551B;font-weight:600;">&minus;' + heldOf(i.id) + ' terkonfirmasi</div>' : '') + '</td>' +
           '<td class="mono">' + (isR ? (i.stockRented||0) : '&mdash;') + '</td>' +
           '<td class="mono" style="font-weight:700;">' + i.stockTotal + '</td>' +
           '<td class="mono">' + (isR ? fmtRupiah(i.priceRental)+'/hr' : fmtRupiah(i.priceSale)) + '</td>' +
