@@ -468,6 +468,13 @@ nav.main a:hover{color:var(--survey-deep)}
 /* Mockup v4 tidak punya daftar kategori bernomor & tombol lihat-semua: elemennya
    tetap di DOM (renderCats menulis ke #catGrid), hanya tampilannya disembunyikan. */
 #catGrid,#viewAllWrap{display:none}
+/* Header hijau (perintah zgg 14 Nov sore): latar ink + teks paper, selaras
+   footer & zona paket. Tombol member jadi pill paper dan ikon jadi paper
+   supaya tidak tenggelam di latar gelap. */
+header.site{background:var(--ink);color:var(--paper);border-bottom:3px solid var(--survey)}
+header.site .btn-track{color:var(--paper)}
+header.site .btn-member{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+header.site .icon-btn{color:var(--paper);border-color:rgba(241,243,239,.4)}
 .mobile-nav{border-top:1px solid var(--line)}
 /* --- hero full-bleed --- */
 .hero-full{position:relative;overflow:hidden;background:var(--paper-2)}
