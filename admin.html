@@ -2015,6 +2015,8 @@
         '<div style="border-top:1px dashed #000;margin:8px 0;"></div>' + rows +
         '<div style="border-top:1px dashed #000;margin:8px 0;"></div>' +
         '<div style="display:flex;justify-content:space-between;font-weight:bold;"><span>TOTAL</span><span>' + fmtRupiah(total) + '</span></div>' +
+        (c.payMethod ? '<div style="display:flex;justify-content:space-between;"><span>PEMBAYARAN:</span><span>' + escHtml(c.payMethod) + '</span></div>' : '') +
+        (c.paySender ? '<div style="display:flex;justify-content:space-between;"><span>PENGIRIM:</span><span>' + escHtml(c.paySender) + '</span></div>' : '') +
         '<div>Tgl Kembali: ' + (c.returnDate || '-') + '</div>' +
         '<div style="border-top:1px dashed #000;margin:8px 0;"></div>' +
         '<div style="text-align:center;">' + String(siteConfig.receiptFooter || 'Barang harap kembali tepat waktu dalam kondisi baik. Terima kasih!').split('\n').join('<br>') + '</div></div>';
@@ -2133,6 +2135,8 @@
       items.forEach(it => { wrapTextLines(it.name, cols).forEach(w => line(w)); two('  ' + it.detail, it.sub); });
       line('-'.repeat(cols));
       two('TOTAL', fmtRupiah(total), true);
+      if (c.payMethod) two('PEMBAYARAN:', c.payMethod);
+      if (c.paySender) two('PENGIRIM:', c.paySender);
       line('Tgl Kembali: ' + (c.returnDate || '-'));
       line('-'.repeat(cols));
       center(siteConfig.receiptFooter || 'Barang harap kembali tepat waktu dalam kondisi baik. Terima kasih!');
@@ -2289,6 +2293,8 @@
       });
       add('-'.repeat(maxChars), {});
       L.push({ l: 'TOTAL:', r: clean(fmtRupiah(total)), b: 1 });
+      if (c.payMethod) L.push({ l: 'PEMBAYARAN:', r: clean(c.payMethod) });
+      if (c.paySender) L.push({ l: 'PENGIRIM:', r: clean(c.paySender) });
       add('Tanggal Kembali: ' + (c.returnDate || '-'), {});
       add('-'.repeat(maxChars), {});
       add(siteConfig.receiptFooter || 'Barang harap kembali tepat waktu dalam kondisi baik. Terima kasih!', { c: 1 });
@@ -2437,6 +2443,8 @@
         '------------------------------\n' + items +
         '------------------------------\n' +
         '*TOTAL: ' + fmtRupiah(total) + '*\n' +
+        (c.payMethod ? 'Pembayaran: ' + c.payMethod + '\n' : '') +
+        (c.paySender ? 'Pengirim: ' + c.paySender + '\n' : '') +
         'Tanggal Kembali: ' + (c.returnDate || '-') + '\n' +
         '------------------------------\n' +
         (siteConfig.receiptFooter || 'Barang harap kembali tepat waktu dalam kondisi baik. Terima kasih!');
@@ -3273,6 +3281,7 @@
           size: r.data.size || '', renterName: f.renterName || '', renterPhone: f.renterPhone || '',
           renterNIK: ident.idType === 'KTP' ? ident.idNumber : '',
           idType: ident.idType, idNumber: ident.idNumber,
+          payMethod: (f.payment && f.payment.method) || '', paySender: (f.payment && f.payment.sender) || '',
           qty, days: r.data.days || 1, returnDate: r.data.returnDate || '',
           dispatchTimestamp: batchTs, dispatchDate: new Date().toISOString().split('T')[0],
           dispatchTime: new Date().toTimeString().split(' ')[0].substring(0, 5)
