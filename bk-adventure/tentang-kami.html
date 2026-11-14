@@ -643,14 +643,24 @@ nav.main a.active{color:var(--survey)}
   async function loadConfig(){
     try {
       var H = { 'apikey': ANON, 'Authorization': 'Bearer ' + ANON, 'Content-Type': 'application/json' };
-      var r = await fetch(SB_URL + '/rest/v1/rpc/resolve_tenant', { method: 'POST', headers: H, body: JSON.stringify({ s: TENANT_SLUG }) });
-      if (!r.ok) return;
-      var rows = await r.json();
-      if (!rows || !rows.length) return;
-      var rc = await fetch(SB_URL + '/rest/v1/site_config?tenant_id=eq.' + rows[0].id + '&select=config', { headers: { 'apikey': ANON, 'Authorization': 'Bearer ' + ANON } });
-      if (!rc.ok) return;
-      var confRows = await rc.json();
-      var SITE = (confRows.length && confRows[0].config) || {};
+      // Config utama lewat RPC per slug (shop_config) — tetap terbuka
+      // sesudah policy baca publik tabel dicabut (hardening RLS).
+      // Fallback: jalur lama via resolve_tenant + baca tabel.
+      var SITE = null;
+      try {
+        var rp = await fetch(SB_URL + '/rest/v1/rpc/shop_config', { method: 'POST', headers: H, body: JSON.stringify({ s: TENANT_SLUG }) });
+        if (rp.ok) { var cfgJ = await rp.json(); if (cfgJ) SITE = cfgJ; }
+      } catch (e) { /* fallback di bawah */ }
+      if (!SITE) {
+        var r = await fetch(SB_URL + '/rest/v1/rpc/resolve_tenant', { method: 'POST', headers: H, body: JSON.stringify({ s: TENANT_SLUG }) });
+        if (!r.ok) return;
+        var rows = await r.json();
+        if (!rows || !rows.length) return;
+        var rc = await fetch(SB_URL + '/rest/v1/site_config?tenant_id=eq.' + rows[0].id + '&select=config', { headers: { 'apikey': ANON, 'Authorization': 'Bearer ' + ANON } });
+        if (!rc.ok) return;
+        var confRows = await rc.json();
+        SITE = (confRows.length && confRows[0].config) || {};
+      }
       // Announcement bar — pola yang sama dengan beranda.
       var ab = document.getElementById('announceBar');
       if (ab) {
