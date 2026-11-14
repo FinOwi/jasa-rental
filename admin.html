@@ -1305,9 +1305,32 @@
                     <input type="tel" class="form-input" id="dispatchPhone" placeholder="0812-xxxx-xxxx" required>
                   </div>
                   <div class="form-group">
-                    <label class="form-label">NIK / No. KTP</label>
-                    <input type="text" class="form-input" id="dispatchNIK" placeholder="16 digit NIK" minlength="16" maxlength="16" required>
+                    <label class="form-label">Jenis Identitas</label>
+                    <select class="form-input" id="dispatchIdType">
+                      <option value="KTP">KTP</option>
+                      <option value="KTM">KTM (Kartu Mahasiswa)</option>
+                      <option value="SIM">SIM</option>
+                      <option value="Paspor">Paspor</option>
+                      <option value="Kartu Pelajar">Kartu Pelajar</option>
+                      <option value="Lainnya">Lainnya</option>
+                    </select>
                   </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Nomor Identitas</label>
+                  <input type="text" class="form-input" id="dispatchNIK" placeholder="Nomor sesuai kartu (boleh kosong bila foto dilampirkan)">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Foto Identitas</label>
+                  <input type="file" id="dispatchIdPhotoInput" accept="image/*" capture="environment" style="display:none;" onchange="handleDispatchIdPhoto(this)">
+                  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+                    <button type="button" class="btn btn-secondary" style="font-size:11px;padding:7px 12px;" onclick="document.getElementById('dispatchIdPhotoInput').click()">LAMPIRKAN FOTO</button>
+                    <span id="dispatchIdPhotoWrap" style="display:none;align-items:center;gap:8px;">
+                      <img id="dispatchIdPhotoPreview" alt="Pratinjau foto identitas" style="max-width:120px;max-height:84px;border:1px solid var(--border);border-radius:6px;object-fit:cover;">
+                      <button type="button" class="btn btn-danger" style="font-size:11px;padding:7px 12px;" onclick="removeDispatchIdPhoto()">HAPUS FOTO</button>
+                    </span>
+                  </div>
+                  <div style="font-size:11px;color:var(--text-subtle);margin-top:6px;">Cukup salah satu: nomor identitas ATAU foto kartunya (KTP/KTM/SIM/Paspor/dll).</div>
                 </div>
                 
                 <div style="border-top:1px solid var(--border); margin:16px 0 12px; padding-top:16px;">
@@ -1659,6 +1682,56 @@
       </div>
       <div id="infoModalContent"></div>
     </div>
+  </div>
+
+  <!-- Modal Tangkap Identitas (dispatch booking & pengganti prompt NIK) -->
+  <div class="modal-overlay" id="idCaptureModal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3>Identitas Penyewa</h3>
+        <button class="modal-close" type="button" onclick="cancelIdentityCapture()">&times;</button>
+      </div>
+      <p id="idCapSub" style="font-size:13px;color:var(--text-muted);margin-bottom:14px;"></p>
+      <div class="form-group">
+        <label class="form-label">Jenis Identitas</label>
+        <select class="form-input" id="idCapType" onchange="idCapRefresh()">
+          <option value="KTP">KTP</option>
+          <option value="KTM">KTM (Kartu Mahasiswa)</option>
+          <option value="SIM">SIM</option>
+          <option value="Paspor">Paspor</option>
+          <option value="Kartu Pelajar">Kartu Pelajar</option>
+          <option value="Lainnya">Lainnya</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Nomor Identitas</label>
+        <input type="text" class="form-input" id="idCapNumber" placeholder="Nomor sesuai kartu (boleh kosong bila foto dilampirkan)" oninput="idCapRefresh()">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Foto Identitas</label>
+        <input type="file" id="idCapPhotoInput" accept="image/*" capture="environment" style="display:none;" onchange="handleIdCapPhoto(this)">
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+          <button type="button" class="btn btn-secondary" style="font-size:11px;padding:7px 12px;" onclick="document.getElementById('idCapPhotoInput').click()">AMBIL FOTO / PILIH BERKAS</button>
+          <span id="idCapPhotoWrap" style="display:none;align-items:center;gap:8px;">
+            <img id="idCapPhotoPreview" alt="Pratinjau foto identitas" style="max-width:120px;max-height:84px;border:1px solid var(--border);border-radius:6px;object-fit:cover;">
+            <button type="button" class="btn btn-secondary" style="font-size:11px;padding:7px 12px;" onclick="document.getElementById('idCapPhotoInput').click()">GANTI</button>
+            <button type="button" class="btn btn-danger" style="font-size:11px;padding:7px 12px;" onclick="idCapSetPhoto('')">HAPUS</button>
+          </span>
+        </div>
+        <div style="font-size:11px;color:var(--text-subtle);margin-top:6px;">Cukup salah satu: nomor identitas ATAU foto kartunya. Identitas dicatat di depot saat barang diambil.</div>
+      </div>
+      <div id="idCapError" style="display:none;font-size:12.5px;color:var(--red-bad);background:#FEF2F2;border:1px solid #FECACA;border-radius:8px;padding:9px 11px;margin-bottom:12px;"></div>
+      <div style="display:flex;gap:8px;justify-content:flex-end;">
+        <button type="button" class="btn btn-secondary" id="idCapCancel" onclick="cancelIdentityCapture()">BATAL</button>
+        <button type="button" class="btn btn-primary" id="idCapConfirm" onclick="confirmIdentityCapture()">DISPATCH</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox Foto Identitas (pola visual bkProofModal) -->
+  <div id="idPhotoModal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(12,14,12,.88);align-items:center;justify-content:center;padding:18px;">
+    <button type="button" id="idPhotoClose" aria-label="Tutup foto identitas" style="position:absolute;top:14px;right:16px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:rgba(0,0,0,.55);color:#fff;font-size:19px;line-height:1;cursor:pointer;">&#10005;</button>
+    <div id="idPhotoBody" style="display:flex;align-items:center;justify-content:center;max-width:92vw;max-height:84vh;"></div>
   </div>
 
   <script>
@@ -3110,9 +3183,6 @@
         return;
       }
       const f = g.first;
-      const nik = (prompt('Penyewa sudah di depot. Masukkan NIK penyewa (16 digit) untuk dispatch ' + code + ' atas nama ' + (f.renterName || '') + ':') || '').trim();
-      if (!nik) return;
-      if (!/^\d{16}$/.test(nik)) { alert('NIK harus 16 digit angka. Dispatch dibatalkan.'); return; }
       for (const r of g.rows) {
         const item = inventory.find(i => i.id === r.item_id);
         if (!item) { alert('Item tidak ditemukan di inventaris: ' + r.item_id); return; }
@@ -3123,9 +3193,22 @@
           alert('Stok tidak mencukupi untuk ' + item.name); return;
         }
       }
+      // Identitas dicatat di depot saat barang diambil. Modal Tangkap
+      // Identitas (fasilitas panel di admin) menggantikan prompt NIK
+      // lama: nomor identitas ATAU foto kartu (KTP/KTM/SIM/Paspor/dll).
+      // Batal di modal = dispatch berhenti tanpa sisa.
+      openIdentityCapture({
+        name: f.renterName || '',
+        code: code,
+        onConfirm: function (ident) { bkDoConvert(code, g, ident); },
+        onCancel: function () {}
+      });
+    }
+    async function bkDoConvert(code, g, ident) {
+      const f = g.first;
       const batchTs = Date.now();
       const firstCid = [];
-      g.rows.forEach(r => {
+      g.rows.forEach((r, ri) => {
         const item = inventory.find(i => i.id === r.item_id);
         const qty = r.data.qty || 1;
         if (item.sizes && item.sizes.length && r.data.size) {
@@ -3138,13 +3221,18 @@
         }
         const cid = 'CTR-' + Date.now().toString().slice(-6) + '-' + Math.random().toString(36).substr(2, 3).toUpperCase();
         firstCid.push(cid);
-        activeRentals.unshift({
+        const contract = {
           contractId: cid, itemId: item.id, itemName: r.data.itemName || item.name,
           size: r.data.size || '', renterName: f.renterName || '', renterPhone: f.renterPhone || '',
-          renterNIK: nik, qty, days: r.data.days || 1, returnDate: r.data.returnDate || '',
+          renterNIK: ident.idType === 'KTP' ? ident.idNumber : '',
+          idType: ident.idType, idNumber: ident.idNumber,
+          qty, days: r.data.days || 1, returnDate: r.data.returnDate || '',
           dispatchTimestamp: batchTs, dispatchDate: new Date().toISOString().split('T')[0],
           dispatchTime: new Date().toTimeString().split(' ')[0].substring(0, 5)
-        });
+        };
+        // Foto identitas hanya menumpang kontrak pertama batch.
+        if (ri === 0 && ident.idPhoto) contract.idPhoto = ident.idPhoto;
+        activeRentals.unshift(contract);
         pushLog('KELUAR', { itemId: r.item_id, itemName: item.name, size: r.data.size || '', qty, ref: cid, note: 'Dispatch dari booking website ' + code + ' ke ' + (f.renterName || ''), source: 'Booking Website' });
       });
       saveData();
@@ -3371,6 +3459,7 @@
     // di variabel ini dan diterapkan kembali sesudah tiap render.
     let rentalFolderOpen = {};
     let rentalFolderKeys = [];
+    let rentalFolderPhotos = [];
     let rentalSearchQuery = '';
 
     function toggleRentalFolder(idx) {
@@ -3422,6 +3511,9 @@
         byKey[k].items.push(c);
       });
       rentalFolderKeys = groups.map(g => g.key);
+      // Foto identitas per folder (dari kontrak pertama batch di grup;
+      // batchIdPhoto menelusur batch-nya) untuk tombol FOTO ID di kepala.
+      rentalFolderPhotos = groups.map(g => g.items.map(c => batchIdPhoto(c)).find(p => !!p) || '');
 
       const q = rentalSearchQuery.trim().toLowerCase();
       const qd = q.replace(/\D/g, '');
@@ -3446,7 +3538,8 @@
         const identityHit = !searching || g.items.some(c =>
           rentalSearchHit(c.renterName, q, '') ||
           rentalSearchHit(c.renterPhone, q, qd) ||
-          rentalSearchHit(c.renterNIK, q, qd));
+          rentalSearchHit(c.renterNIK, q, qd) ||
+          rentalSearchHit(c.idNumber, q, qd));
         const items = (searching && !identityHit)
           ? g.items.filter(c => rentalSearchHit(String(c.itemName || '') + ' ' + (c.size || ''), q, qd) || rentalSearchHit(c.contractId, q, qd))
           : g.items;
@@ -3459,13 +3552,15 @@
         const nearest = g.items.map(x => x.returnDate || '').filter(Boolean).sort()[0] || '-';
         const lateItems = g.items.filter(x => daysLate(x) > 0);
         const lateMax = lateItems.reduce((m, x) => Math.max(m, daysLate(x)), 0);
+        const idLabel = renterIdLabel(f);
+        const gPhoto = rentalFolderPhotos[gi] || '';
         html += '<div class="renter-folder' + (open ? ' open' : '') + '">' +
           '<div class="renter-folder-head" role="button" tabindex="0" aria-expanded="' + (open ? 'true' : 'false') + '" onclick="toggleRentalFolder(' + gi + ')">' +
             '<span class="folder-ic"><svg class="icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span>' +
             '<span class="folder-main">' +
               '<span class="folder-name">' + escHtml(f.renterName || '') + '</span>' +
               (f.renterPhone ? '<span class="mono" style="font-size:11px;color:var(--text-muted);">' + escHtml(f.renterPhone) + '</span>' : '') +
-              (f.renterNIK ? '<span class="mono" style="font-size:11px;color:var(--text-muted);">NIK ' + escHtml(f.renterNIK) + '</span>' : '') +
+              (idLabel ? '<span class="mono" style="font-size:11px;color:var(--text-muted);">' + escHtml(idLabel) + '</span>' : '') +
               '<span class="mono" style="font-size:11px;font-weight:700;color:var(--forest);">' + g.items.length + ' barang &middot; total ' + totalUnits + ' unit &middot; kembali terdekat ' + nearest + '</span>' +
               (lateItems.length ? '<span class="badge-tag" style="background:var(--terracotta);color:#fff;border-color:var(--terracotta);">' + lateItems.length + ' TELAT &middot; MAKS ' + lateMax + ' HARI</span>' : '') +
             '</span>' +
@@ -3473,6 +3568,7 @@
               '<button class="btn btn-secondary btn-xs" onclick="event.stopPropagation();printStrukGroup(\'' + f.contractId + '\')">STRUK</button>' +
               '<button class="btn btn-secondary btn-xs" onclick="event.stopPropagation();sendStrukWAGroup(\'' + f.contractId + '\')">KIRIM PDF</button>' +
               '<button class="btn btn-secondary btn-xs" onclick="event.stopPropagation();sendStrukImageWAGroup(\'' + f.contractId + '\')">GAMBAR WA</button>' +
+              (gPhoto ? '<button class="btn btn-secondary btn-xs" onclick="event.stopPropagation();showRenterIdPhoto(' + gi + ')">FOTO ID</button>' : '') +
             '</span>' +
             '<span class="folder-chevron"><svg class="icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span>' +
           '</div>' +
@@ -3519,7 +3615,7 @@
           '<span class="badge-tag badge-rented">' + c.returnDate + '</span>' + (daysLate(c) > 0 ? '<span class="badge-tag" style="background:var(--terracotta);color:#fff;border-color:var(--terracotta);margin-left:4px;">TELAT ' + daysLate(c) + ' HARI</span>' : '') +
         '</div>' +
         '<div style="font-weight:600;font-size:12px;">' + escHtml(c.itemName) + '</div>' +
-        '<div class="mono" style="font-size:10px;color:var(--text-subtle);">' + escHtml(c.renterName||'') + ' (' + escHtml(c.renterPhone||'') + ') &bull; ' + c.qty + ' unit &bull; ' + c.days + ' hari</div>' +
+        '<div class="mono" style="font-size:10px;color:var(--text-subtle);">' + escHtml(c.renterName||'') + ' (' + escHtml(c.renterPhone||'') + ') &bull; ' + c.qty + ' unit &bull; ' + c.days + ' hari' + (c.idType ? ' &bull; ' + escHtml(renterIdLabel(c)) : '') + '</div>' +
         '</div>'
       ).join('');
     }
@@ -3955,16 +4051,248 @@
       addDispatchItem();
     }
 
+    // ===== TANGKAP IDENTITAS (dispatch booking & form manual) =====
+    // Identitas penyewa dicatat di depot saat barang diambil. Dua jalur
+    // dispatch (bkConvert dari booking website & form Catat Sewa Keluar)
+    // memakai fasilitas yang sama: jenis identitas (KTP/KTM/SIM/Paspor/
+    // Kartu Pelajar/Lainnya) + nomor dan/atau FOTO kartu. Aturan sah:
+    // minimal salah satu terisi — nomor ATAU foto.
+    // Foto: aspek asli dipertahankan, sisi terpanjang maks 1280px,
+    // WebP q0.8 (mundur ke JPEG q0.8); hasil akhir di atas 600KB DITOLAK
+    // karena foto hanya menumpang JSON kontrak tersinkron (idPhoto,
+    // kontrak pertama batch saja) — harus kecil.
+    const ID_PHOTO_MAX_BYTES = 600 * 1024;
+    function idPhotoBytes(dataUrl) {
+      const s = String(dataUrl || '');
+      const i = s.indexOf(',');
+      if (i < 0) return 0;
+      return Math.floor((s.length - i - 1) * 3 / 4);
+    }
+    function processIdPhotoFile(file, cb) {
+      const tooBig = () => cb(null, 'Foto identitas terlalu besar (maks 600KB sesudah diproses). Coba foto ulang dengan resolusi lebih rendah.');
+      const rawFallback = () => {
+        const r = new FileReader();
+        r.onload = () => { const du = r.result; if (du && idPhotoBytes(du) <= ID_PHOTO_MAX_BYTES) cb(du); else tooBig(); };
+        r.onerror = () => cb(null, 'Foto identitas gagal dibaca. Coba berkas lain.');
+        r.readAsDataURL(file);
+      };
+      let url;
+      try { url = URL.createObjectURL(file); } catch (e) { rawFallback(); return; }
+      let settled = false;
+      const settle = fn => { if (settled) return; settled = true; clearTimeout(timer); try { URL.revokeObjectURL(url); } catch (e) {} fn(); };
+      const timer = setTimeout(() => settle(rawFallback), 4000);
+      const img = new Image();
+      img.onload = () => settle(() => {
+        try {
+          const sw = img.naturalWidth || img.width, sh = img.naturalHeight || img.height;
+          if (!sw || !sh) { rawFallback(); return; }
+          const scale = Math.min(1, 1280 / Math.max(sw, sh));
+          const w = Math.max(1, Math.round(sw * scale)), h = Math.max(1, Math.round(sh * scale));
+          const canvas = document.createElement('canvas');
+          canvas.width = w; canvas.height = h;
+          const ctx = canvas.getContext('2d');
+          if (!ctx) { cb(null, 'Foto identitas gagal diproses di perangkat ini.'); return; }
+          ctx.fillStyle = '#FFFFFF';
+          ctx.fillRect(0, 0, w, h);
+          ctx.drawImage(img, 0, 0, sw, sh, 0, 0, w, h);
+          let out = '';
+          try { out = canvas.toDataURL('image/webp', 0.8); } catch (e) { out = ''; }
+          if (!out || out.indexOf('data:image/webp') !== 0) out = canvas.toDataURL('image/jpeg', 0.8);
+          if (idPhotoBytes(out) > ID_PHOTO_MAX_BYTES) { tooBig(); return; }
+          cb(out);
+        } catch (err) { rawFallback(); }
+      });
+      img.onerror = () => settle(rawFallback);
+      img.src = url;
+    }
+
+    // Validator bersama modal & form manual. Mengembalikan pesan galat
+    // (string) atau '' bila sah.
+    function validateIdentity(idType, idNumber, hasPhoto) {
+      const num = String(idNumber || '').trim();
+      if (!num && !hasPhoto) return 'Isi nomor identitas atau lampirkan foto identitas.';
+      if (num) {
+        if (idType === 'KTP') {
+          if (!/^\d{16}$/.test(num)) return 'NIK KTP harus tepat 16 digit angka (atau kosongkan nomornya dan pakai foto KTP).';
+        } else if (num.length < 5) {
+          return 'Nomor identitas minimal 5 karakter (atau kosongkan nomornya dan pakai foto kartu).';
+        }
+      }
+      return '';
+    }
+
+    // Label identitas generik untuk tampilan: kontrak baru membawa
+    // idType+idNumber ("KTM 12345", atau jenisnya saja bila foto-saja);
+    // kontrak lama tanpa idType tetap "NIK <renterNIK>".
+    function renterIdLabel(c) {
+      if (!c) return '';
+      if (c.idType) return c.idNumber ? (c.idType + ' ' + c.idNumber) : c.idType;
+      return c.renterNIK ? ('NIK ' + c.renterNIK) : '';
+    }
+
+    // Foto identitas disimpan HANYA di kontrak pertama batch; helper ini
+    // menelusur foto batch (pola strukBatch: dispatchTimestamp sama +
+    // kunci penyewa sama) di kontrak aktif maupun selesai.
+    function batchIdPhoto(contract) {
+      if (!contract) return '';
+      if (contract.idPhoto) return contract.idPhoto;
+      if (!contract.dispatchTimestamp) return '';
+      const key = rentalRenterKey(contract);
+      const all = activeRentals.concat(completedRentals);
+      const hit = all.find(x => x.dispatchTimestamp === contract.dispatchTimestamp && rentalRenterKey(x) === key && x.idPhoto);
+      return hit ? hit.idPhoto : '';
+    }
+
+    // ----- Modal Tangkap Identitas (dipakai bkConvert) -----
+    // openIdentityCapture({ name, code, onConfirm, onCancel })
+    // onConfirm({ idType, idNumber, idPhoto }) — idPhoto '' bila tanpa foto.
+    // Batal (tombol/✕/latar/Escape) -> onCancel, tanpa sisa apa pun.
+    let idCapCtx = null;
+    let idCapPhoto = '';
+    let idCapInitDone = false;
+    function idCapInit() {
+      if (idCapInitDone) return;
+      idCapInitDone = true;
+      const modal = document.getElementById('idCaptureModal');
+      if (modal) modal.addEventListener('click', function (e) { if (e.target === modal) cancelIdentityCapture(); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && modal && modal.classList.contains('open')) cancelIdentityCapture();
+      });
+    }
+    function idCapShowError(msg) {
+      const e = document.getElementById('idCapError');
+      if (!e) return;
+      e.textContent = msg || '';
+      e.style.display = msg ? '' : 'none';
+    }
+    function idCapRefresh() {
+      const num = document.getElementById('idCapNumber').value.trim();
+      const btn = document.getElementById('idCapConfirm');
+      if (!btn) return;
+      btn.disabled = !num && !idCapPhoto;
+      btn.style.opacity = btn.disabled ? '0.55' : '';
+    }
+    function idCapSetPhoto(dataUrl) {
+      idCapPhoto = dataUrl || '';
+      const wrap = document.getElementById('idCapPhotoWrap');
+      const img = document.getElementById('idCapPhotoPreview');
+      if (idCapPhoto) { img.src = idCapPhoto; wrap.style.display = 'inline-flex'; }
+      else { img.removeAttribute('src'); wrap.style.display = 'none'; }
+      idCapRefresh();
+    }
+    function handleIdCapPhoto(input) {
+      const file = input.files && input.files[0];
+      input.value = '';
+      if (!file) return;
+      if (!/^image\//.test(file.type || '')) { idCapShowError('Berkas harus berupa gambar (JPG/PNG/WebP).'); return; }
+      toast('Memproses foto identitas…');
+      processIdPhotoFile(file, (dataUrl, err) => {
+        if (!dataUrl) { idCapShowError(err || 'Foto identitas gagal diproses. Coba foto lain.'); return; }
+        idCapShowError('');
+        idCapSetPhoto(dataUrl);
+      });
+    }
+    function openIdentityCapture(opts) {
+      opts = opts || {};
+      idCapCtx = { onConfirm: opts.onConfirm || null, onCancel: opts.onCancel || null };
+      document.getElementById('idCapSub').textContent = 'Penyewa sudah di depot. Catat identitas untuk dispatch ' + (opts.code || '') + ' atas nama ' + (opts.name || '') + '. Cukup nomor identitas ATAU foto kartunya.';
+      document.getElementById('idCapType').value = 'KTP';
+      document.getElementById('idCapNumber').value = '';
+      idCapShowError('');
+      idCapSetPhoto('');
+      idCapInit();
+      document.getElementById('idCaptureModal').classList.add('open');
+      idCapRefresh();
+    }
+    function confirmIdentityCapture() {
+      if (!idCapCtx) return;
+      const idType = document.getElementById('idCapType').value;
+      const idNumber = document.getElementById('idCapNumber').value.trim();
+      const err = validateIdentity(idType, idNumber, !!idCapPhoto);
+      if (err) { idCapShowError(err); return; }
+      const ctx = idCapCtx;
+      const ident = { idType: idType, idNumber: idNumber, idPhoto: idCapPhoto };
+      idCapCtx = null;
+      document.getElementById('idCaptureModal').classList.remove('open');
+      if (ctx.onConfirm) ctx.onConfirm(ident);
+    }
+    function cancelIdentityCapture() {
+      const modal = document.getElementById('idCaptureModal');
+      if (!modal || !modal.classList.contains('open')) return;
+      const ctx = idCapCtx;
+      idCapCtx = null;
+      modal.classList.remove('open');
+      if (ctx && ctx.onCancel) ctx.onCancel();
+    }
+
+    // ----- Blok identitas form manual (Catat Sewa Keluar) -----
+    let dispatchIdPhoto = '';
+    function handleDispatchIdPhoto(input) {
+      const file = input.files && input.files[0];
+      input.value = '';
+      if (!file) return;
+      if (!/^image\//.test(file.type || '')) { toast('Berkas harus berupa gambar (JPG/PNG/WebP).'); return; }
+      toast('Memproses foto identitas…');
+      processIdPhotoFile(file, (dataUrl, err) => {
+        if (!dataUrl) { toast(err || 'Foto identitas gagal diproses. Coba foto lain.'); return; }
+        dispatchIdPhoto = dataUrl;
+        const img = document.getElementById('dispatchIdPhotoPreview');
+        img.src = dataUrl;
+        document.getElementById('dispatchIdPhotoWrap').style.display = 'inline-flex';
+      });
+    }
+    function removeDispatchIdPhoto() {
+      dispatchIdPhoto = '';
+      const img = document.getElementById('dispatchIdPhotoPreview');
+      if (img) img.removeAttribute('src');
+      const wrap = document.getElementById('dispatchIdPhotoWrap');
+      if (wrap) wrap.style.display = 'none';
+    }
+
+    // ----- Lightbox Foto Identitas (dari kepala folder penyewa) -----
+    let idPhotoInitDone = false;
+    function idPhotoEnsureInit() {
+      if (idPhotoInitDone) return;
+      idPhotoInitDone = true;
+      const modal = document.getElementById('idPhotoModal');
+      if (!modal) return;
+      modal.addEventListener('click', function (e) { if (e.target === modal) closeIdPhoto(); });
+      const btn = document.getElementById('idPhotoClose');
+      if (btn) btn.addEventListener('click', closeIdPhoto);
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeIdPhoto(); });
+    }
+    function showRenterIdPhoto(idx) {
+      const photo = rentalFolderPhotos[idx];
+      if (!photo) { toast('Folder ini tidak punya foto identitas.'); return; }
+      idPhotoEnsureInit();
+      const body = document.getElementById('idPhotoBody');
+      body.innerHTML = '';
+      const img = document.createElement('img');
+      img.alt = 'Foto identitas penyewa';
+      img.style.cssText = 'max-width:92vw;max-height:84vh;border-radius:10px;background:#fff;';
+      img.src = photo;
+      body.appendChild(img);
+      document.getElementById('idPhotoModal').style.display = 'flex';
+    }
+    function closeIdPhoto() {
+      const modal = document.getElementById('idPhotoModal');
+      if (!modal || modal.style.display === 'none') return;
+      modal.style.display = 'none';
+      document.getElementById('idPhotoBody').innerHTML = '';
+    }
+
     // ===== DISPATCH =====
     function dispatchRental(e) {
       e.preventDefault();
       const days = parseInt(document.getElementById('dispatchDays').value, 10);
       const name = document.getElementById('dispatchName').value.trim();
       const phone = document.getElementById('dispatchPhone').value.trim();
-      const nik = document.getElementById('dispatchNIK').value.trim();
+      const idType = (document.getElementById('dispatchIdType') || {}).value || 'KTP';
+      const idNumber = document.getElementById('dispatchNIK').value.trim();
 
-      if (nik.length !== 16 || !/^\d{16}$/.test(nik)) {
-        alert('NIK harus 16 digit angka.');
+      const idErr = validateIdentity(idType, idNumber, !!dispatchIdPhoto);
+      if (idErr) {
+        alert(idErr);
         return;
       }
 
@@ -3994,7 +4322,7 @@
       const returnDate = ret.toISOString().split('T')[0];
 
       const batchTs = Date.now();
-      dispatchItems.forEach(di => {
+      dispatchItems.forEach((di, diIdx) => {
         const item = inventory.find(i => i.id === di.itemId);
         di._cid = 'CTR-' + Date.now().toString().slice(-6) + '-' + Math.random().toString(36).substr(2, 3).toUpperCase();
         di._batchTs = batchTs;
@@ -4007,21 +4335,26 @@
           item.stockRented = (item.stockRented || 0) + di.qty;
         }
 
-        activeRentals.unshift({
+        const contract = {
           contractId: di._cid,
           itemId: item.id,
           itemName: item.name + (di.size ? ' (Uk: ' + di.size + ')' : ''),
           size: di.size || '',
           renterName: name,
           renterPhone: phone,
-          renterNIK: nik,
+          renterNIK: idType === 'KTP' ? idNumber : '',
+          idType: idType,
+          idNumber: idNumber,
           qty: di.qty,
           days: days,
           returnDate: returnDate,
           dispatchTimestamp: di._batchTs,
           dispatchDate: new Date().toISOString().split('T')[0],
           dispatchTime: new Date().toTimeString().split(' ')[0].substring(0,5)
-        });
+        };
+        // Foto identitas hanya menumpang kontrak pertama batch.
+        if (diIdx === 0 && dispatchIdPhoto) contract.idPhoto = dispatchIdPhoto;
+        activeRentals.unshift(contract);
       });
 
       dispatchItems.forEach(di => {
@@ -4032,6 +4365,7 @@
       saveData();
       renderAll();
       document.getElementById('formDispatch').reset();
+      removeDispatchIdPhoto();
       populateDispatch();
       toast('Dispatch berhasil: ' + name + ' — struk siap dicetak.');
       if (firstCid) setTimeout(() => printStruk(firstCid), 350);
