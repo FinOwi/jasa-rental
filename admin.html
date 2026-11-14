@@ -1993,6 +1993,11 @@
         total += sub;
         rows += '<div style="margin-top:8px;">' + escHtml(x.itemName) + '</div><div style="display:flex;justify-content:space-between;"><span>' + x.qty + ' unit x ' + (x.days || 1) + ' hari @ ' + fmtRupiah(price) + '</span><span>' + fmtRupiah(sub) + '</span></div>';
       });
+      collectSaleLines(batch, c).forEach(l => {
+        const sub = (l.price || 0) * (l.qty || 1);
+        total += sub;
+        rows += '<div style="margin-top:8px;">' + escHtml(l.itemName) + (l.size ? ' (Uk: ' + escHtml(l.size) + ')' : '') + ' (BELI)</div><div style="display:flex;justify-content:space-between;"><span>' + l.qty + ' unit @ ' + fmtRupiah(l.price || 0) + '</span><span>' + fmtRupiah(sub) + '</span></div>';
+      });
       const paperCfg = (siteConfig.receiptPaper || '80') === '58' ? { w: '48mm', f: '11px', page: '58mm' } : { w: '72mm', f: '12px', page: '80mm' };
       let pageStyle = document.getElementById('printPageStyle');
       if (!pageStyle) { pageStyle = document.createElement('style'); pageStyle.id = 'printPageStyle'; document.head.appendChild(pageStyle); }
@@ -2099,6 +2104,11 @@
         const sub = price * x.qty * (x.days || 1);
         total += sub;
         items.push({ name: x.itemName + (x.size ? ' (Uk: ' + x.size + ')' : ''), detail: x.qty + ' unit x ' + (x.days || 1) + ' hari @ ' + fmtRupiah(price), sub: fmtRupiah(sub) });
+      });
+      collectSaleLines(batch, c).forEach(l => {
+        const sub = (l.price || 0) * (l.qty || 1);
+        total += sub;
+        items.push({ name: l.itemName + (l.size ? ' (Uk: ' + l.size + ')' : '') + ' (BELI)', detail: l.qty + ' unit @ ' + fmtRupiah(l.price || 0), sub: fmtRupiah(sub) });
       });
       const B = [];
       const raw = function() { for (let i = 0; i < arguments.length; i++) B.push(arguments[i]); };
@@ -2211,6 +2221,24 @@
       if (c.dispatchTimestamp) batch = all.filter(x => x.dispatchTimestamp === c.dispatchTimestamp && x.renterName === c.renterName);
       return { c: c, batch: batch };
     }
+    // Baris BELI (penjualan dari booking website) menumpang field
+    // saleLines di SEMUA kontrak satu batch dispatch (pola payMethod):
+    // { itemName, size, qty, price } dengan price = harga jual saat
+    // booking dibuat. Kumpulkan SEKALI per dispatchTimestamp agar struk
+    // grup lintas batch tidak menggandakan; jangkar sintetis booking
+    // murni-jual (tanpa kontrak, batch kosong) dibaca dari c sendiri.
+    function collectSaleLines(batch, c) {
+      const seen = {}, out = [];
+      const take = x => {
+        if (!x || !Array.isArray(x.saleLines) || !x.saleLines.length) return;
+        const k = String(x.dispatchTimestamp || 0);
+        if (seen[k]) return; seen[k] = 1;
+        x.saleLines.forEach(l => out.push(l));
+      };
+      (batch || []).forEach(take);
+      if (c && (batch || []).indexOf(c) === -1) take(c);
+      return out;
+    }
     // Teks data (nama barang/penyewa/catatan) wajib disaring sebelum masuk
     // innerHTML — cegah injeksi markup dari data (lihat run50 di storefront).
     function escHtml(s) {
@@ -2271,6 +2299,17 @@
         items.push({
           name: '- ' + x.itemName + (x.size ? ' (Uk: ' + x.size + ')' : ''),
           detail: '  ' + x.qty + ' unit x ' + (x.days || 1) + ' hari @ ' + clean(fmtRupiah(price)),
+          amount: clean(fmtRupiah(sub))
+        });
+      });
+      // Baris BELI: harga jual tersimpan di barisnya (harga saat booking
+      // dibuat), TANPA durasi/hari; ikut menambah TOTAL.
+      collectSaleLines(batch, c).forEach(l => {
+        const sub = (l.price || 0) * (l.qty || 1);
+        total += sub;
+        items.push({
+          name: '- ' + l.itemName + (l.size ? ' (Uk: ' + l.size + ')' : '') + ' [BELI]',
+          detail: '  ' + l.qty + ' unit @ ' + clean(fmtRupiah(l.price || 0)),
           amount: clean(fmtRupiah(sub))
         });
       });
@@ -2431,6 +2470,11 @@
         const sub = price * x.qty * (x.days || 1);
         total += sub;
         items += '- ' + x.itemName + '\n  ' + x.qty + ' unit x ' + (x.days || 1) + ' hari @ ' + fmtRupiah(price) + ' = ' + fmtRupiah(sub) + '\n';
+      });
+      collectSaleLines(batch, c).forEach(l => {
+        const sub = (l.price || 0) * (l.qty || 1);
+        total += sub;
+        items += '- ' + l.itemName + ' (BELI)\n  ' + l.qty + ' unit @ ' + fmtRupiah(l.price || 0) + ' = ' + fmtRupiah(sub) + '\n';
       });
       const msg = '*STRUK SEWA \u2014 ' + (siteConfig.brandName || 'BK ADVENTURE') + '*\n' +
         (siteConfig.receiptNote ? siteConfig.receiptNote + '\n' : '') +
@@ -3259,13 +3303,48 @@
         onCancel: function () {}
       });
     }
+    // Cetak struk booking MURNI-JUAL: tidak ada kontrak jangkar, jadi
+    // struk dibangun dari jangkar sintetis (baris BELI dibaca pembangkit
+    // struk dari field saleLines jangkar). Jalur Bluetooth meniru
+    // printStruk: byte thermal dulu, gagal -> dialog print HTML.
+    async function printSaleStruk(anchor) {
+      if (typeof btReady === 'function' && btReady()) {
+        try {
+          const b = btStrukBytesFrom(anchor, [], null);
+          if (b) { await btWriteAll(b); toast('Struk penjualan terkirim ke printer Bluetooth.'); return; }
+        } catch (e) { /* jatuh ke dialog print di bawah */ }
+      }
+      printStrukHtmlFrom(anchor, [], null);
+    }
     async function bkDoConvert(code, g, ident) {
       const f = g.first;
       const batchTs = Date.now();
       const firstCid = [];
+      const rentContracts = [];
+      const saleLines = [];
       g.rows.forEach((r, ri) => {
         const item = inventory.find(i => i.id === r.item_id);
         const qty = r.data.qty || 1;
+        if (item.type === 'sale') {
+          // PENJUALAN: BUKAN kontrak aktif. Stok ready & total turun
+          // PERMANEN (ukuran: ready ukuran turun, rented TIDAK naik,
+          // agregat total ikut turun), tercatat sebagai event JUAL di
+          // riwayat barang ber-ref kode booking, dan barisnya masuk
+          // struk sebagai baris BELI (B3). Mutasi stok + saveData
+          // terjadi SEBELUM status booking diubah (bkSetStatus di
+          // bawah): jendela balapan mengarah under-sell, aman.
+          if (item.sizes && item.sizes.length && r.data.size) {
+            const se = item.sizes.find(s => s.label === r.data.size);
+            if (se) se.ready -= qty;
+            syncSizeAggregates(item);
+          } else {
+            item.stockReady -= qty;
+            item.stockTotal -= qty;
+          }
+          saleLines.push({ itemName: r.data.itemName || item.name, size: r.data.size || '', qty, price: (r.data.price != null ? r.data.price : (item.priceSale || 0)) });
+          pushLog('JUAL', { itemId: r.item_id, itemName: item.name, size: r.data.size || '', qty, ref: code, note: 'Penjualan dari booking website ' + code + ' ke ' + (f.renterName || ''), source: 'Booking Website' });
+          return;
+        }
         if (item.sizes && item.sizes.length && r.data.size) {
           const se = item.sizes.find(s => s.label === r.data.size);
           if (se) { se.ready -= qty; se.rented = (se.rented || 0) + qty; }
@@ -3286,16 +3365,31 @@
           dispatchTimestamp: batchTs, dispatchDate: new Date().toISOString().split('T')[0],
           dispatchTime: new Date().toTimeString().split(' ')[0].substring(0, 5)
         };
-        // Foto identitas hanya menumpang kontrak pertama batch.
-        if (ri === 0 && ident.idPhoto) contract.idPhoto = ident.idPhoto;
+        // Foto identitas hanya menumpang kontrak rental PERTAMA batch
+        // (bukan baris indeks 0: baris pertama bisa baris penjualan).
+        if (!rentContracts.length && ident.idPhoto) contract.idPhoto = ident.idPhoto;
+        rentContracts.push(contract);
         activeRentals.unshift(contract);
         pushLog('KELUAR', { itemId: r.item_id, itemName: item.name, size: r.data.size || '', qty, ref: cid, note: 'Dispatch dari booking website ' + code + ' ke ' + (f.renterName || ''), source: 'Booking Website' });
       });
+      // Baris BELI menumpang SEMUA kontrak rental batch ini (pola
+      // payMethod) supaya struk batch & struk grup menemukannya lewat
+      // collectSaleLines; dedupe per dispatchTimestamp di sana menjaga
+      // tidak dobel.
+      if (saleLines.length) rentContracts.forEach(c => { c.saleLines = saleLines; });
       saveData();
       renderAll();
       await bkSetStatus(code, 'converted', true);
-      toast('Booking ' + code + ' berhasil di-dispatch. Struk siap dari daftar sewa.');
+      toast(saleLines.length && !firstCid.length
+        ? 'Booking ' + code + ' terjual: penjualan tercatat & stok berkurang permanen.'
+        : 'Booking ' + code + ' berhasil di-dispatch. Struk siap dari daftar sewa.');
       if (firstCid[0]) setTimeout(() => printStruk(firstCid[0]), 350);
+      else if (saleLines.length) setTimeout(() => printSaleStruk({
+        contractId: code, itemId: '', itemName: '', size: '', qty: 0, days: 0,
+        renterName: f.renterName || '', renterPhone: f.renterPhone || '',
+        payMethod: (f.payment && f.payment.method) || '', paySender: (f.payment && f.payment.sender) || '',
+        returnDate: '', dispatchTimestamp: batchTs, saleLines: saleLines
+      }), 350);
     }
     setInterval(() => { bkLoadBookings(); }, 60000);
     window.addEventListener('focus', () => bkLoadBookings());
@@ -3462,7 +3556,7 @@
           '<td><img src="' + escHtml(i.image) + '" style="width:48px;height:36px;object-fit:cover;border:1px solid var(--border);"></td>' +
           '<td class="mono" style="font-weight:600;">' + escHtml(i.sku) + '</td>' +
           '<td><div style="font-weight:600;">' + escHtml(i.name) + '</div><div class="mono" style="font-size:10px;color:var(--text-subtle);">' + escHtml(i.category) + '</div>' + ((i.sizes && i.sizes.length) ? '<div class="mono" style="font-size:10px;color:#9A6E1F;font-weight:700;">' + i.sizes.map(s => escHtml(s.label) + ': ' + ((s.ready || 0) > 0 ? s.ready : 'HABIS')).join(' &middot; ') + '</div>' : (i.size ? '<div class="mono" style="font-size:10px;color:#9A6E1F;font-weight:700;">UKURAN: ' + escHtml(i.size) + '</div>' : '')) + '</td>' +
-          '<td><span class="badge-tag ' + (isR?'badge-rental':'badge-sale') + '">' + (isR?'RENTAL':'RETAIL') + '</span></td>' +
+          '<td><span class="badge-tag ' + (isR?'badge-rental':'badge-sale') + '">' + (isR?'SEWA':'DIJUAL') + '</span></td>' +
           '<td class="mono" style="color:var(--green-ok);font-weight:700;">' + i.stockReady + '</td>' +
           '<td class="mono">' + (isR ? (i.stockRented||0) : '&mdash;') + '</td>' +
           '<td class="mono" style="font-weight:700;">' + i.stockTotal + '</td>' +
