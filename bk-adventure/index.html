@@ -465,6 +465,9 @@ nav.main a:hover{color:var(--survey-deep)}
 .btn-track:hover{color:var(--survey-deep);background:none}
 .btn-google.hd{height:40px;border-radius:999px}
 .icon-btn{width:40px;height:40px;border-radius:8px;color:var(--ink)}
+/* Mockup v4 tidak punya daftar kategori bernomor & tombol lihat-semua: elemennya
+   tetap di DOM (renderCats menulis ke #catGrid), hanya tampilannya disembunyikan. */
+#catGrid,#viewAllWrap{display:none}
 .mobile-nav{border-top:1px solid var(--line)}
 /* --- hero full-bleed --- */
 .hero-full{position:relative;overflow:hidden;background:var(--paper-2)}
@@ -718,7 +721,7 @@ footer.site{padding:48px 0 24px}
       </div>
     </div>
     <div class="prod-grid" id="prodGrid"><div class="empty-note">MEMUAT KATALOG DARI SERVER…</div></div>
-    <div style="margin-top:22px;text-align:center"><button class="btn btn-ghost" id="btnViewAll">Lihat Semua Kategori</button></div>
+    <div id="viewAllWrap" style="margin-top:22px;text-align:center"><button class="btn btn-ghost" id="btnViewAll">Lihat Semua Kategori</button></div>
   </div>
 </section>
 
@@ -726,8 +729,8 @@ footer.site{padding:48px 0 24px}
 <section class="pkg-zone sec-pad" id="paket">
   <div class="wrap">
     <div class="sec-head">
-      <div class="eyebrow">Penanda · Paket Bundel</div>
-      <h2>Paket siap berangkat</h2>
+      <div class="eyebrow">Rute Siap Jalan</div>
+      <h2>Paket lengkap, tinggal berangkat</h2>
       <p class="sec-note">Bundel alat untuk ukuran grupmu — harga per paket untuk durasi yang tertera, tanpa hitung per item.</p>
     </div>
     <div class="pkg-grid" id="paketGrid"></div>
@@ -738,8 +741,8 @@ footer.site{padding:48px 0 24px}
 <section class="sec-pad" id="cara-sewa">
   <div class="wrap">
     <div class="sec-head">
-      <div class="eyebrow">Penanda · Cara Sewa</div>
-      <h2>Dari tanggal ke titik berangkat</h2>
+      <div class="eyebrow">Lintasan Booking</div>
+      <h2>Cara sewa dalam 4 titik</h2>
     </div>
     <div class="steps">
       <div class="step"><div class="num">01</div><h3>Tentukan Tanggal &amp; Durasi</h3><p>Isi kartu booking: tanggal ambil dan berapa hari. Katalog langsung menyaring alat yang benar-benar tersedia untuk rentang itu.</p></div>
@@ -759,9 +762,9 @@ footer.site{padding:48px 0 24px}
 <section class="sec-pad" id="opentrip" style="padding-top:0">
   <div class="wrap">
     <div class="sec-head">
-      <div class="eyebrow">Penanda · Open Trip</div>
-      <h2>Berangkat bareng, alat sudah termasuk</h2>
-      <p class="sec-note">Trip terjadwal dengan kuota terbatas. Harga per orang — daftar lewat tombol di kartunya.</p>
+      <div class="eyebrow">Papan Informasi Jalur</div>
+      <h2>Open trip berikutnya</h2>
+      <p class="sec-note">Papan jalur di titik berangkat: gunung, tanggal, dan sisa kursi dibaca sekilas seperti papan informasi di kaki gunung.</p>
     </div>
     <div class="trip-grid" id="tripGrid"></div>
   </div>
