@@ -477,6 +477,11 @@
     .folder-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
     .folder-table { min-width: 640px; }
 
+    /* ===== TAB PENGATURAN: folder lipat konfigurasi (pola folder penyewa) ===== */
+    .cfg-form > .cfg-folder { margin-bottom: 0; scroll-margin-top: 78px; }
+    .cfg-folder-in { padding: var(--sp-panel); }
+    @media (max-width: 720px) { .cfg-folder-in { padding: 18px 16px; } }
+
     /* Responsive */
     @media (max-width: 900px) {
       .metrics-grid { grid-template-columns: repeat(2, 1fr); }
@@ -632,7 +637,7 @@
         <div class="nav-section-label">Konten Situs</div>
         <div class="nav-item" onclick="switchTab('identity', this)">
           <svg class="icon" viewBox="0 0 24 24"><polygon points="12 2 2 22 22 22"></polygon><line x1="12" y1="2" x2="12" y2="22"></line></svg>
-          <span>Identitas & Hero</span>
+          <span>Pengaturan</span>
         </div>
         <div class="nav-item" onclick="switchTab('catalog', this)">
           <svg class="icon" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
@@ -735,7 +740,7 @@
                 </button>
                 <button class="btn btn-secondary btn-full" onclick="switchTab('identity', document.querySelectorAll('.nav-item')[1])">
                   <svg class="icon" viewBox="0 0 24 24"><polygon points="12 2 2 22 22 22"></polygon></svg>
-                  Edit Konten Hero & Identitas
+                  Buka Pengaturan Situs
                 </button>
               </div>
             </div>
@@ -772,17 +777,19 @@
         <div class="tab-panel" id="tab-identity">
       <form id="formIdentity" onsubmit="saveIdentity(event)" class="cfg-form">
         <div class="cfg-nav">
-        <a href="#sec-brand">Brand &amp; Logo</a>
-        <a href="#sec-hero">Hero</a>
-        <a href="#sec-paket">Paket</a>
-        <a href="#sec-ketentuan">Ketentuan</a>
-        <a href="#sec-lokasi">Lokasi</a>
-        <a href="#sec-struk">Struk</a>
-        <a href="#sec-footer">Footer</a>
+        <a href="#sec-brand" onclick="cfgNavGo('brand')">Brand &amp; Logo</a>
+        <a href="#sec-announce" onclick="cfgNavGo('announce')">Announcement</a>
+        <a href="#sec-hero" onclick="cfgNavGo('hero')">Hero</a>
+        <a href="#sec-paket" onclick="cfgNavGo('paket')">Paket</a>
+        <a href="#sec-pembayaran" onclick="cfgNavGo('pembayaran')">Pembayaran</a>
+        <a href="#sec-ketentuan" onclick="cfgNavGo('ketentuan')">Ketentuan</a>
+        <a href="#sec-lokasi" onclick="cfgNavGo('lokasi')">Lokasi</a>
+        <a href="#sec-struk" onclick="cfgNavGo('struk')">Struk</a>
+        <a href="#sec-footer" onclick="cfgNavGo('footer')">Footer</a>
         </div>
-        <div class="panel" id="sec-brand">
-          <div class="panel-head"><h3>Identitas Brand & Announcement Bar</h3>
-              <span class="badge-tag" style="color:var(--text-subtle); border-color:var(--border);">SITE CONFIG</span></div>
+        <div class="renter-folder cfg-folder" id="sec-brand" data-cfg-folder="brand">
+          <div class="renter-folder-head" role="button" tabindex="0" aria-expanded="false" onclick="toggleCfgFolder('brand')" onkeydown="cfgFolderKey(event,'brand')"><span class="folder-ic"><svg class="icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span><span class="folder-main"><span class="folder-name">Ganti Identitas Brand</span></span><span class="folder-chevron"><svg class="icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
+          <div class="renter-folder-body"><div class="cfg-folder-in">
 <div style="background:#EEF5F0; border:1px solid var(--border); border-left:4px solid var(--forest); padding:12px 14px; margin-bottom:18px; font-size:12px; line-height:1.6; color:var(--text-muted);">
                 <strong style="color:var(--forest);">Terhubung ke Index:</strong>
                 perubahan yang disimpan di sini memakai konfigurasi storefront yang sama. Index v25 yang sedang terbuka di tab lain akan memperbarui tampilannya otomatis; index yang baru dibuka akan langsung memakai data terbaru.
@@ -804,64 +811,33 @@
                 <input type="file" class="form-input" id="cfgLogoFile" accept="image/*" onchange="openLogoCropper(event)" style="padding:6px 12px;">
                 <input type="text" class="form-input" id="cfgLogoUrl" placeholder="atau paste URL logo" oninput="previewLogo(this.value)" style="margin-top:8px;">
                 <img class="img-preview" id="logoPreview" style="max-height:80px; object-fit:contain;">
-                <div id="logoCropperModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.8); z-index:9999; padding:40px;">
-                  <div style="max-width:800px; margin:0 auto; background:white; padding:24px; border-radius:4px;">
-                    <h3 style="margin-bottom:16px; font-family:var(--serif);">Crop & Resize Logo</h3>
-                    <div style="max-height:500px; overflow:hidden;">
-                      <img id="logoCropperImage" style="max-width:100%;">
-                    </div>
-                    <div style="margin-top:16px; display:flex; gap:12px; justify-content:flex-end;">
-                      <button type="button" class="btn" onclick="closeLogoCropper()" style="background:var(--border); color:var(--text);">Batal</button>
-                      <button type="button" class="btn btn-primary" onclick="applyLogoCrop()">Terapkan Crop</button>
-                    </div>
-                  </div>
-                </div>
-                <div id="imgCropperModal" style="display:none; position:fixed; inset:0; background:rgba(10,15,12,0.88); z-index:9999; padding:18px; overflow:auto;">
-                  <div style="max-width:860px; margin:0 auto; background:white; padding:20px; border-radius:6px;">
-                    <h3 style="margin-bottom:6px; font-family:var(--serif);">Sesuaikan Foto</h3>
-                    <p style="font-size:12px; color:#666; margin:0 0 12px;">Di layar sentuh: <b>cubit</b> untuk zoom, seret untuk menggeser. Di komputer: roda mouse untuk zoom. Pilih template bingkai sesuai pemakaian foto:</p>
-                    <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
-                      <button type="button" class="btn crop-tpl" data-tpl="hero" onclick="setCropTemplate('hero')">Hero 16:9</button>
-                      <button type="button" class="btn crop-tpl" data-tpl="produk" onclick="setCropTemplate('produk')">Produk 4:3</button>
-                      <button type="button" class="btn crop-tpl" data-tpl="kotak" onclick="setCropTemplate('kotak')">Kotak 1:1</button>
-                      <button type="button" class="btn crop-tpl" data-tpl="potret" onclick="setCropTemplate('potret')">Potret 3:4</button>
-                      <button type="button" class="btn crop-tpl" data-tpl="bebas" onclick="setCropTemplate('bebas')">Bebas</button>
-                    </div>
-                    <div style="max-height:54vh; overflow:hidden; background:#141414;">
-                      <img id="imgCropperImage" style="max-width:100%; display:block;">
-                    </div>
-                    <div style="margin-top:14px; display:flex; gap:10px; justify-content:space-between; align-items:center; flex-wrap:wrap;">
-                      <div style="display:flex; gap:8px;">
-                        <button type="button" class="btn" onclick="imgCropZoom(0.12)">Zoom +</button>
-                        <button type="button" class="btn" onclick="imgCropZoom(-0.12)">Zoom -</button>
-                        <button type="button" class="btn" onclick="imgCropRotate()">Putar 90&deg;</button>
-                      </div>
-                      <div style="display:flex; gap:10px;">
-                        <button type="button" class="btn" onclick="closeImageCropper()" style="background:var(--border); color:var(--text);">Batal</button>
-                        <button type="button" class="btn btn-primary" onclick="applyImageCrop()">Pakai Foto Ini</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                
               </div>
               
-              <div class="cfg-grid-3"><div class="form-group">
-                <label class="form-label">Trust Badge 1</label>
-                <input type="text" class="form-input" id="cfgTrust1" placeholder="Contoh: 100% Inspeksi Fisik">
-              </div>
-              <div class="form-group">
-                <label class="form-label">Trust Badge 2</label>
-                <input type="text" class="form-input" id="cfgTrust2" placeholder="Contoh: Garansi Tukar Unit">
-              </div>
-              <div class="form-group">
-                <label class="form-label">Trust Badge 3</label>
-                <input type="text" class="form-input" id="cfgTrust3" placeholder="Contoh: Pengambilan Langsung di Basecamp">
-              </div></div>
+              
 
               <div style="height:1px; background:var(--border); margin:20px 0;"></div>
+        </div></div>
         </div>
-        <div class="panel" id="sec-hero">
-          <div class="panel-head"><h3>Konten Hero Section</h3></div>
+        <div class="renter-folder cfg-folder" id="sec-announce" data-cfg-folder="announce">
+          <div class="renter-folder-head" role="button" tabindex="0" aria-expanded="false" onclick="toggleCfgFolder('announce')" onkeydown="cfgFolderKey(event,'announce')"><span class="folder-ic"><svg class="icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span><span class="folder-main"><span class="folder-name">Announcement Bar</span></span><span class="folder-chevron"><svg class="icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
+          <div class="renter-folder-body"><div class="cfg-folder-in">
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label">Teks Kiri Announcement Bar</label>
+                  <input type="text" class="form-input" id="cfgAnnounceLeft" placeholder="Contoh: HYGIENE GRADE-A · REAL-TIME TRACKING">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Teks Kanan Announcement Bar</label>
+                  <input type="text" class="form-input" id="cfgAnnounceRight" placeholder="Contoh: EST. 2026 // SEWA & RETAIL">
+                </div>
+              </div>
+              <div style="font-size:11px; color:var(--text-subtle);">Announcement bar adalah strip teks tipis di paling atas storefront &mdash; teks kiri tampil di awal bar, teks kanan di ujungnya.</div>
+            </div></div>
+        </div>
+        <div class="renter-folder cfg-folder" id="sec-hero" data-cfg-folder="hero">
+          <div class="renter-folder-head" role="button" tabindex="0" aria-expanded="false" onclick="toggleCfgFolder('hero')" onkeydown="cfgFolderKey(event,'hero')"><span class="folder-ic"><svg class="icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span><span class="folder-main"><span class="folder-name">Konten Hero Section</span></span><span class="folder-chevron"><svg class="icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
+          <div class="renter-folder-body"><div class="cfg-folder-in">
 
 
               <div class="form-group">
@@ -889,10 +865,26 @@
                   <input type="text" class="form-input" id="cfgHeroCtaSecondary">
                 </div></div>
               </div>
+              
+              <div class="cfg-grid-3"><div class="form-group">
+                <label class="form-label">Trust Badge 1</label>
+                <input type="text" class="form-input" id="cfgTrust1" placeholder="Contoh: 100% Inspeksi Fisik">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Trust Badge 2</label>
+                <input type="text" class="form-input" id="cfgTrust2" placeholder="Contoh: Garansi Tukar Unit">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Trust Badge 3</label>
+                <input type="text" class="form-input" id="cfgTrust3" placeholder="Contoh: Pengambilan Langsung di Basecamp">
+              </div></div>
+
               <div style="height:1px; background:var(--border); margin:20px 0;"></div>
+        </div></div>
         </div>
-        <div class="panel" id="sec-paket">
-          <div class="panel-head"><h3>Paket Sewa Tenda</h3></div>
+        <div class="renter-folder cfg-folder" id="sec-paket" data-cfg-folder="paket">
+          <div class="renter-folder-head" role="button" tabindex="0" aria-expanded="false" onclick="toggleCfgFolder('paket')" onkeydown="cfgFolderKey(event,'paket')"><span class="folder-ic"><svg class="icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span><span class="folder-main"><span class="folder-name">Paket Sewa Tenda</span></span><span class="folder-chevron"><svg class="icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
+          <div class="renter-folder-body"><div class="cfg-folder-in">
 
               
               <div class="form-row"><div class="form-group">
@@ -914,16 +906,12 @@
               </div></div></details>
 
               <div style="height:1px; background:var(--border); margin:20px 0;"></div>
+        </div></div>
         </div>
-        <div class="panel" id="sec-ketentuan">
-          <div class="panel-head"><h3>Ketentuan Sewa (Terms of Service)</h3></div>
-
-              
-              <div class="form-group">
-                <label class="form-label">Ketentuan Sewa & Deposit (HTML atau plain text, tampil di modal)</label>
-                <textarea class="form-textarea" id="cfgRentalTerms" rows="10" placeholder="Ketik ketentuan sewa Anda di sini...&#10;&#10;Contoh:&#10;1. Deposit wajib 50% dari nilai barang&#10;2. Pembayaran via transfer bank&#10;3. Barang wajib dikembalikan dalam kondisi bersih"></textarea>
-              </div>
-              <div class="form-group">
+        <div class="renter-folder cfg-folder" id="sec-pembayaran" data-cfg-folder="pembayaran">
+          <div class="renter-folder-head" role="button" tabindex="0" aria-expanded="false" onclick="toggleCfgFolder('pembayaran')" onkeydown="cfgFolderKey(event,'pembayaran')"><span class="folder-ic"><svg class="icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span><span class="folder-main"><span class="folder-name">Metode Pembayaran</span></span><span class="folder-chevron"><svg class="icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
+          <div class="renter-folder-body"><div class="cfg-folder-in">
+<div class="form-group">
                 <label class="form-label">Metode Pembayaran (tampil di formulir booking web)</label>
                 <div style="display:grid; gap:12px;">
                   <div>
@@ -993,11 +981,25 @@
                 </div>
                 <div style="font-size:11px; color:var(--text-subtle); margin-top:4px;">Unggah gambar kode QR (QRIS) toko — tampil otomatis di formulir booking web hanya saat pelanggan memilih metode QRIS. Gambar tidak dipotong; otomatis diperkecil ke maks 800px dan disimpan sebagai PNG/WebP kualitas tinggi agar tetap tajam saat dipindai. Berkas asli maks 3 MB.</div>
               </div>
+            </div></div>
+        </div>
+        <div class="renter-folder cfg-folder" id="sec-ketentuan" data-cfg-folder="ketentuan">
+          <div class="renter-folder-head" role="button" tabindex="0" aria-expanded="false" onclick="toggleCfgFolder('ketentuan')" onkeydown="cfgFolderKey(event,'ketentuan')"><span class="folder-ic"><svg class="icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span><span class="folder-main"><span class="folder-name">Ketentuan Sewa</span></span><span class="folder-chevron"><svg class="icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
+          <div class="renter-folder-body"><div class="cfg-folder-in">
+
+              
+              <div class="form-group">
+                <label class="form-label">Ketentuan Sewa & Deposit (HTML atau plain text, tampil di modal)</label>
+                <textarea class="form-textarea" id="cfgRentalTerms" rows="10" placeholder="Ketik ketentuan sewa Anda di sini...&#10;&#10;Contoh:&#10;1. Deposit wajib 50% dari nilai barang&#10;2. Pembayaran via transfer bank&#10;3. Barang wajib dikembalikan dalam kondisi bersih"></textarea>
+              </div>
+              
 
               <div style="height:1px; background:var(--border); margin:20px 0;"></div>
+        </div></div>
         </div>
-        <div class="panel" id="sec-lokasi">
-          <div class="panel-head"><h3>Lokasi Basecamp &amp; Google Maps</h3></div>
+        <div class="renter-folder cfg-folder" id="sec-lokasi" data-cfg-folder="lokasi">
+          <div class="renter-folder-head" role="button" tabindex="0" aria-expanded="false" onclick="toggleCfgFolder('lokasi')" onkeydown="cfgFolderKey(event,'lokasi')"><span class="folder-ic"><svg class="icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span><span class="folder-main"><span class="folder-name">Lokasi Basecamp &amp; Google Maps</span></span><span class="folder-chevron"><svg class="icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
+          <div class="renter-folder-body"><div class="cfg-folder-in">
 
               <div class="form-group">
                 <label class="form-label">Alamat Lengkap Basecamp (tampil di web + jadi titik peta)</label>
@@ -1014,9 +1016,11 @@
               
 
               <div style="border-top:1px dashed var(--border); margin:18px 0 14px;"></div>
+        </div></div>
         </div>
-        <div class="panel" id="sec-struk">
-          <div class="panel-head"><h3>Kustomisasi Struk</h3></div>
+        <div class="renter-folder cfg-folder" id="sec-struk" data-cfg-folder="struk">
+          <div class="renter-folder-head" role="button" tabindex="0" aria-expanded="false" onclick="toggleCfgFolder('struk')" onkeydown="cfgFolderKey(event,'struk')"><span class="folder-ic"><svg class="icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span><span class="folder-main"><span class="folder-name">Kustomisasi Struk</span></span><span class="folder-chevron"><svg class="icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
+          <div class="renter-folder-body"><div class="cfg-folder-in">
 
 <div class="form-group">
                 <label class="form-label">Ukuran Kertas Struk (Printer Thermal)</label>
@@ -1061,9 +1065,11 @@
                 </div>
                 <div id="btUnsupported" style="display:none; font-size:12px; color:var(--text-subtle);">Browser ini tidak mendukung Web Bluetooth (perlu Chrome di Android). Cetak tetap bisa lewat tombol STRUK (dialog print) atau PDF.</div>
               </div>
+        </div></div>
         </div>
-        <div class="panel" id="sec-footer">
-          <div class="panel-head"><h3>Footer Website</h3></div>
+        <div class="renter-folder cfg-folder" id="sec-footer" data-cfg-folder="footer">
+          <div class="renter-folder-head" role="button" tabindex="0" aria-expanded="false" onclick="toggleCfgFolder('footer')" onkeydown="cfgFolderKey(event,'footer')"><span class="folder-ic"><svg class="icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span><span class="folder-main"><span class="folder-name">Footer Website</span></span><span class="folder-chevron"><svg class="icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
+          <div class="renter-folder-body"><div class="cfg-folder-in">
 
               <div class="form-row">
                 <div class="form-row"><div class="form-group">
@@ -1081,6 +1087,7 @@
               </div>
 
               <div style="height:1px; background:var(--border); margin:20px 0;"></div>
+        </div></div>
         </div>
         <div class="cfg-savebar">
           <button type="submit" class="btn btn-primary btn-full" style="margin-top:8px;">
@@ -1090,6 +1097,45 @@
               <a href="index.html" target="_blank" rel="noopener" class="btn btn-secondary btn-full" style="margin-top:10px; text-decoration:none;">BUKA INDEX UNTUK CEK HASIL</a>
         </div>
       </form>
+        <div id="logoCropperModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.8); z-index:9999; padding:40px;">
+                  <div style="max-width:800px; margin:0 auto; background:white; padding:24px; border-radius:4px;">
+                    <h3 style="margin-bottom:16px; font-family:var(--serif);">Crop & Resize Logo</h3>
+                    <div style="max-height:500px; overflow:hidden;">
+                      <img id="logoCropperImage" style="max-width:100%;">
+                    </div>
+                    <div style="margin-top:16px; display:flex; gap:12px; justify-content:flex-end;">
+                      <button type="button" class="btn" onclick="closeLogoCropper()" style="background:var(--border); color:var(--text);">Batal</button>
+                      <button type="button" class="btn btn-primary" onclick="applyLogoCrop()">Terapkan Crop</button>
+                    </div>
+                  </div>
+                </div>
+        <div id="imgCropperModal" style="display:none; position:fixed; inset:0; background:rgba(10,15,12,0.88); z-index:9999; padding:18px; overflow:auto;">
+                  <div style="max-width:860px; margin:0 auto; background:white; padding:20px; border-radius:6px;">
+                    <h3 style="margin-bottom:6px; font-family:var(--serif);">Sesuaikan Foto</h3>
+                    <p style="font-size:12px; color:#666; margin:0 0 12px;">Di layar sentuh: <b>cubit</b> untuk zoom, seret untuk menggeser. Di komputer: roda mouse untuk zoom. Pilih template bingkai sesuai pemakaian foto:</p>
+                    <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
+                      <button type="button" class="btn crop-tpl" data-tpl="hero" onclick="setCropTemplate('hero')">Hero 16:9</button>
+                      <button type="button" class="btn crop-tpl" data-tpl="produk" onclick="setCropTemplate('produk')">Produk 4:3</button>
+                      <button type="button" class="btn crop-tpl" data-tpl="kotak" onclick="setCropTemplate('kotak')">Kotak 1:1</button>
+                      <button type="button" class="btn crop-tpl" data-tpl="potret" onclick="setCropTemplate('potret')">Potret 3:4</button>
+                      <button type="button" class="btn crop-tpl" data-tpl="bebas" onclick="setCropTemplate('bebas')">Bebas</button>
+                    </div>
+                    <div style="max-height:54vh; overflow:hidden; background:#141414;">
+                      <img id="imgCropperImage" style="max-width:100%; display:block;">
+                    </div>
+                    <div style="margin-top:14px; display:flex; gap:10px; justify-content:space-between; align-items:center; flex-wrap:wrap;">
+                      <div style="display:flex; gap:8px;">
+                        <button type="button" class="btn" onclick="imgCropZoom(0.12)">Zoom +</button>
+                        <button type="button" class="btn" onclick="imgCropZoom(-0.12)">Zoom -</button>
+                        <button type="button" class="btn" onclick="imgCropRotate()">Putar 90&deg;</button>
+                      </div>
+                      <div style="display:flex; gap:10px;">
+                        <button type="button" class="btn" onclick="closeImageCropper()" style="background:var(--border); color:var(--text);">Batal</button>
+                        <button type="button" class="btn btn-primary" onclick="applyImageCrop()">Pakai Foto Ini</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
     </div>
 
 <!-- ===== TAB: CATALOG HEADER ===== -->
@@ -3344,7 +3390,7 @@
 
       const titles = {
         dashboard: ['Dashboard Overview', 'ADMIN CONSOLE'],
-        identity: ['Identitas & Hero Editor', 'SITE CONFIG'],
+        identity: ['Pengaturan', 'SITE CONFIG'],
         catalog: ['Header Katalog Editor', 'CATALOG CONTENT'],
         inventory: ['Inventaris Barang', 'STOCK MANAGEMENT'],
         rentals: ['Sewa & Kontrak', 'RENTAL OPERATIONS'],
@@ -3467,6 +3513,32 @@
       if (k == null) return;
       rentalFolderOpen[k] = rentalFolderOpen[k] !== true;
       renderRentalTable();
+    }
+
+    // ===== Folder lipat tab Pengaturan (pola folder penyewa) =====
+    // Semua folder mulai tertutup. Keadaan terbuka disimpan di variabel
+    // ini dan diterapkan dari peta ini, supaya pengisian ulang formulir
+    // (populateConfigForms) dari data sinkron tidak menutup folder yang
+    // sedang dibuka admin.
+    let cfgFolderOpen = {};
+    function applyCfgFolderStates() {
+      document.querySelectorAll('[data-cfg-folder]').forEach(el => {
+        const open = cfgFolderOpen[el.getAttribute('data-cfg-folder')] === true;
+        el.classList.toggle('open', open);
+        const h = el.querySelector('.renter-folder-head');
+        if (h) h.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    }
+    function toggleCfgFolder(key) {
+      cfgFolderOpen[key] = cfgFolderOpen[key] !== true;
+      applyCfgFolderStates();
+    }
+    function cfgFolderKey(e, key) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleCfgFolder(key); }
+    }
+    function cfgNavGo(key) {
+      cfgFolderOpen[key] = true;
+      applyCfgFolderStates();
     }
 
     function onRentalSearchInput(el) {
@@ -3746,6 +3818,8 @@
       set('cfgBrandName', siteConfig.brandName);
       set('cfgBrandSubtitle', siteConfig.brandSubtitle);
       set('cfgLogoUrl', siteConfig.logoUrl);
+      set('cfgAnnounceLeft', siteConfig.announceLeft);
+      set('cfgAnnounceRight', siteConfig.announceRight);
       previewLogo(siteConfig.logoUrl);
       set('cfgHeroImage', siteConfig.heroImage);
       set('cfgHeroHeading', siteConfig.heroHeading);
@@ -3789,6 +3863,8 @@
       siteConfig.brandName = v('cfgBrandName') || siteConfig.brandName;
       siteConfig.brandSubtitle = v('cfgBrandSubtitle') || siteConfig.brandSubtitle;
       siteConfig.logoUrl = v('cfgLogoUrl') || siteConfig.logoUrl;
+      siteConfig.announceLeft = v('cfgAnnounceLeft') || siteConfig.announceLeft;
+      siteConfig.announceRight = v('cfgAnnounceRight') || siteConfig.announceRight;
       siteConfig.heroImage = v('cfgHeroImage') || siteConfig.heroImage;
       siteConfig.heroHeading = v('cfgHeroHeading') || siteConfig.heroHeading;
       siteConfig.heroDescription = v('cfgHeroDescription') || siteConfig.heroDescription;
@@ -3824,7 +3900,7 @@
       siteConfig.receiptFooter = v('cfgReceiptFooter') || 'Barang harap kembali tepat waktu dalam kondisi baik. Terima kasih!';
       saveData();
       updateAdminBranding();
-      toast('Identitas & hero tersimpan — index akan memakai perubahan ini.');
+      toast('Pengaturan tersimpan — index akan memakai perubahan ini.');
     }
 
     function saveCatalog(e) {
