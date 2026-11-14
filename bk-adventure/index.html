@@ -888,7 +888,7 @@ function applyConfig() {
   else if (!PAYMENT_METHODS.length) { noteEl.textContent = 'Detail rekening/QRIS depot diisi saat produksi — sementara tanya admin bila ragu.'; noteEl.style.display = 'block'; }
   else { noteEl.style.display = 'none'; }
   PAYMENT_QR = validPayQrSrc(SITE.paymentQr);
-  updatePayQr();
+  renderPayMethodOptions();
   if (SITE.openTripEnabled === false) { const t = document.getElementById('opentrip'); if (t) t.style.display = 'none'; }
 }
 async function loadServerData() {
@@ -1322,6 +1322,36 @@ function renderPayMethods() {
     if (m) copyPayNumber(m.no);
   }));
 }
+// Opsi select metode pembayaran DIBANGUN DARI CONFIG YANG SAMA dengan
+// kartu daftar metode di atas: brand yang terisi menjadi opsi tersendiri
+// (value = nama brand persis, supaya bank/e-wallet tujuan tercatat di
+// booking & tampil di Inbox admin + struk). QRIS menjadi opsi hanya bila
+// kode QR terpasang — value-nya wajib persis 'QRIS' (updatePayQr
+// membandingkan itu). Tanpa metode terisi & tanpa QR: fallback 3 opsi
+// generik lama dengan value persis yang diterima server.
+const PAY_METHOD_KINDS = { bri: 'Transfer Bank', mandiri: 'Transfer Bank', bca: 'Transfer Bank', bni: 'Transfer Bank', dana: 'E-Wallet', ovo: 'E-Wallet', gopay: 'E-Wallet' };
+function renderPayMethodOptions() {
+  const sel = $('#coPayMethod');
+  if (!sel) return;
+  const prev = sel.value;
+  let html = '<option value="">— Pilih metode —</option>';
+  if (PAYMENT_METHODS.length) {
+    PAYMENT_METHODS.forEach(m => {
+      html += '<option value="' + escHtml(m.name) + '">' + escHtml(m.name) + ' · ' + (PAY_METHOD_KINDS[m.key] || '') + '</option>';
+    });
+    if (PAYMENT_QR) html += '<option value="QRIS">QRIS</option>';
+  } else if (PAYMENT_QR) {
+    html += '<option value="QRIS">QRIS</option>';
+  } else {
+    html += '<option value="Transfer Bank">Transfer Bank</option>' +
+      '<option value="QRIS">QRIS</option>' +
+      '<option value="E-Wallet">E-Wallet (DANA/OVO/GoPay)</option>';
+  }
+  sel.innerHTML = html;
+  // Pertahankan pilihan yang masih valid; yang tidak ada lagi dikosongkan.
+  sel.value = (prev && Array.from(sel.options).some(o => o.value === prev)) ? prev : '';
+  updatePayQr();
+}
 function fallbackCopyPay(text) {
   try {
     const ta = document.createElement('textarea');
@@ -1377,17 +1407,42 @@ async function uploadProof(file) {
   if (!r.ok) throw new Error("Unggah bukti pembayaran gagal — periksa koneksimu lalu coba lagi.");
   return path;
 }
+const SESSION_EXPIRED_MSG = "Sesi masuk kamu sudah berakhir. Masuk lagi dengan Google, lalu ulangi booking-nya.";
+// Samakan dengan jalur keluar member: sesi dibersihkan dari perangkat dan
+// tampilan kembali ke keadaan belum-masuk.
+function expireMemberSession() {
+  saveMemberSession(null);
+  memberProfile = null;
+  renderMemberUI();
+}
 async function submitBooking(payload) {
   try {
-    if (coProofFile) payload.payment.proofPath = await uploadProof(coProofFile);
     // B2: member yang login memakai tokennya sendiri supaya server bisa
     // memverifikasi identitas (auth.jwt); tamu tetap memakai anon key.
-    const bearer = (memberSession && memberSession.access_token) ? memberSession.access_token : BOOKING_CFG.anonKey;
-    const r = await fetch(BOOKING_CFG.url + "/rest/v1/rpc/create_booking", {
+    // Token member hanya berlaku 1 jam: sesi lama yang dibiarkan semalam
+    // akan ditolak server (401) — perbarui DULU sebelum mengirim (pola R2
+    // yang sama seperti fetchMemberProfile). Refresh gagal = sesi memang
+    // berakhir: bersihkan sesi dan minta masuk lagi — JANGAN diam-diam
+    // turun ke anon key, karena identitas member booking akan hilang.
+    const isMember = !!(memberSession && memberSession.access_token);
+    if (isMember) {
+      const exp = memberSession.expires_at || 0;
+      if (!exp || exp - Date.now() < 60000) {
+        if (!(await refreshMemberSession())) { expireMemberSession(); return { ok: false, error: SESSION_EXPIRED_MSG }; }
+      }
+    }
+    if (coProofFile) payload.payment.proofPath = await uploadProof(coProofFile);
+    const postBooking = () => fetch(BOOKING_CFG.url + "/rest/v1/rpc/create_booking", {
       method: "POST",
-      headers: { "apikey": BOOKING_CFG.anonKey, "Authorization": "Bearer " + bearer, "Content-Type": "application/json" },
+      headers: { "apikey": BOOKING_CFG.anonKey, "Authorization": "Bearer " + ((memberSession && memberSession.access_token) ? memberSession.access_token : BOOKING_CFG.anonKey), "Content-Type": "application/json" },
       body: JSON.stringify({ s: BOOKING_CFG.slug, payload })
     });
+    let r = await postBooking();
+    if (r.status === 401 && isMember) {
+      // Token ternyata sudah mati di server: perbarui sekali, kirim ulang sekali.
+      if (await refreshMemberSession()) r = await postBooking();
+      if (r.status === 401) { expireMemberSession(); return { ok: false, error: SESSION_EXPIRED_MSG }; }
+    }
     if (!r.ok) return { ok: false, error: "Server booking bermasalah (" + r.status + "). Coba lagi." };
     return await r.json();
   } catch (e) {
