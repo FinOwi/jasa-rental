@@ -123,6 +123,9 @@ nav.main a:hover{color:#fff}
 .chip-row{display:flex;gap:8px;flex-wrap:wrap}
 .chip{border:1.5px solid var(--line);background:var(--white);border-radius:999px;padding:8px 15px;font-family:var(--font-d);font-size:13.5px;font-weight:500}
 .chip.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.mode-switch{display:inline-flex;gap:4px;border:1.5px solid var(--line);background:var(--white);border-radius:999px;padding:4px;margin-bottom:14px}
+.mode-btn{border:none;background:transparent;border-radius:999px;padding:8px 20px;font-family:var(--font-d);font-size:14px;font-weight:600;color:var(--ink);cursor:pointer}
+.mode-btn.active{background:var(--ink);color:var(--paper)}
 .search-box{margin-left:auto;position:relative;flex:1 1 220px;max-width:340px}
 .search-box input{width:100%;border:1.5px solid var(--line);border-radius:8px;padding:11px 13px 11px 40px;font:inherit;font-size:14.5px;background:var(--white);outline:none}
 .search-box input:focus{border-color:var(--ink)}
@@ -526,6 +529,10 @@ footer.site .contour-bg{width:700px;height:700px;right:-240px;top:-300px;opacity
       <h2>Alat yang bisa kamu bawa</h2>
       <p id="catNote">Status stok mengikuti stok siap hari ini. Isi booking bar di atas untuk melihat ketersediaan pada tanggal pilihanmu.</p>
     </div>
+    <div class="mode-switch" role="group" aria-label="Mode katalog">
+      <button type="button" class="mode-btn active" id="modeBtnRental">Katalog Sewa</button>
+      <button type="button" class="mode-btn" id="modeBtnSale">Katalog Jual</button>
+    </div>
     <div class="cat-tools">
       <div class="chip-row" id="chipRow"></div>
       <div class="search-box">
@@ -928,6 +935,10 @@ const $ = s => document.querySelector(s);
 let activeCat = "Semua";
 let query = "";
 let cart = [];
+// Mode katalog: "rental" (Katalog Sewa) | "sale" (Katalog Jual).
+// Bawaan Sewa; hanya variabel sesi halaman (bukan localStorage).
+// Keranjang TIDAK ikut mode: campuran sewa + beli tetap satu booking.
+let catalogMode = "rental";
 try { cart = JSON.parse(localStorage.getItem("bk_peta_cart_v1") || "[]"); } catch (e) { cart = []; }
 
 function toast(msg) {
@@ -1010,16 +1021,18 @@ function clearBookingBar() {
 
 /* ===== KATEGORI: penanda koordinat ===== */
 const CAT_ORDER = ["Tenda & Shelter","Carrier & Pack","Sleep System","Dapur & Hidrasi","Pakaian & Sepatu","Penerangan & Safety","Aksesoris"];
+function modeItems() { return CATALOG.filter(x => x.type === catalogMode); }
 function sortedCats() {
-  const cats = [...new Set(CATALOG.map(x => x.category))];
+  const cats = [...new Set(modeItems().map(x => x.category))];
   cats.sort((a, b) => CAT_ORDER.indexOf(a) - CAT_ORDER.indexOf(b));
   return cats;
 }
 function renderCats() {
   const cats = sortedCats();
-  const all = [{ name: "Semua", label: "Semua Alat", n: CATALOG.length, no: "00" }];
+  const pool = modeItems();
+  const all = [{ name: "Semua", label: "Semua Alat", n: pool.length, no: "00" }];
   const rows = all.concat(cats.map((c, i) => ({
-    name: c, label: c, n: CATALOG.filter(x => x.category === c).length,
+    name: c, label: c, n: pool.filter(x => x.category === c).length,
     no: String(i + 1).padStart(2, "0")
   })));
   $("#catGrid").innerHTML = rows.map(r =>
@@ -1032,6 +1045,15 @@ function renderCats() {
 function setCategory(c) {
   activeCat = c; renderCats(); renderProducts();
   document.getElementById("katalog").scrollIntoView({ behavior: "smooth" });
+}
+function setCatalogMode(m) {
+  if (m !== "rental" && m !== "sale") return;
+  catalogMode = m;
+  $("#modeBtnRental").classList.toggle("active", m === "rental");
+  $("#modeBtnSale").classList.toggle("active", m === "sale");
+  // Kategori aktif yang tidak ada di mode baru kembali ke "Semua".
+  if (activeCat !== "Semua" && !modeItems().some(x => x.category === activeCat)) activeCat = "Semua";
+  renderCats(); renderProducts();
 }
 
 /* ===== PRODUK ===== */
@@ -1057,10 +1079,11 @@ function renderProducts() {
   const q = query.trim().toLowerCase();
   const r = selRange();
   const list = CATALOG.filter(it =>
+    it.type === catalogMode &&
     (activeCat === "Semua" || it.category === activeCat) &&
     (!q || (it.name + " " + it.category + " " + (it.desc || "")).toLowerCase().includes(q)));
   if (!list.length) {
-    $("#prodGrid").innerHTML = `<div class="empty-note">Tidak ada produk yang cocok. Coba kata kunci atau kategori lain.</div>`;
+    $("#prodGrid").innerHTML = `<div class="empty-note">Tidak ada produk ${catalogMode === "sale" ? "dijual" : "disewa"} yang cocok. Coba kata kunci atau kategori lain.</div>`;
     return;
   }
   $("#prodGrid").innerHTML = list.map(it => {
@@ -1082,7 +1105,7 @@ function renderProducts() {
         ? `<button class="add-btn" disabled>Stok Habis</button>`
         : `<button class="add-btn" data-act="${it.sizes ? "open" : "add"}" data-id="${escHtml(it.id)}">
              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
-             ${it.sizes ? "Pilih Ukuran" : "Tambah ke Muatan"}</button>`);
+             ${it.sizes ? "Pilih Ukuran" : (it.type === "sale" ? "+ Beli" : "+ Sewa")}</button>`);
     return `<article class="prod-card ${outDate ? "out-date" : ""}">
       <div class="prod-media" data-act="open" data-id="${escHtml(it.id)}" style="cursor:pointer">
         <img src="${escHtml(it.image)}" alt="${escHtml(it.name)}" loading="lazy">${badge}</div>
@@ -1125,6 +1148,7 @@ function openProduct(id) {
   const p = priceOf(pmItem);
   $("#pmPrice").textContent = rp(p);
   $("#pmPriceUnit").textContent = pmItem.type === "sale" ? "harga beli" : "/ hari";
+  $("#pmAdd").textContent = pmItem.type === "sale" ? "+ Beli" : (pmItem.type === "rental" ? "+ Sewa" : "Tambah ke Daftar Muatan");
   $("#pmAdd").disabled = maxQty(pmItem, pmSize) <= 0;
   $("#prodModal").classList.add("show");
 }
@@ -1861,6 +1885,8 @@ $("#coDays").addEventListener("input", refreshCoTotals);
 $("#coStart").addEventListener("change", refreshCoTotals);
 $("#searchInput").addEventListener("input", e => { query = e.target.value; renderProducts(); });
 $("#btnViewAll").addEventListener("click", () => { activeCat = "Semua"; query = ""; $("#searchInput").value = ""; renderCats(); renderProducts(); });
+$("#modeBtnRental").addEventListener("click", () => setCatalogMode("rental"));
+$("#modeBtnSale").addEventListener("click", () => setCatalogMode("sale"));
 $("#btnMenu").addEventListener("click", () => $("#mobileNav").classList.toggle("open"));
 document.querySelectorAll("#mobileNav a").forEach(a => a.addEventListener("click", () => $("#mobileNav").classList.remove("open")));
 $("#newsForm").addEventListener("submit", e => { e.preventDefault(); toast("Terima kasih sudah berlangganan. Info trip & promo akan kami kirim ke email kamu."); e.target.reset(); });
