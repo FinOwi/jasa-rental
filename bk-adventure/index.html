@@ -1123,6 +1123,17 @@ async function loadServerData() {
       fetch(KONFIG.SUPABASE_URL + '/rest/v1/site_config?tenant_id=eq.' + tid + '&select=config', { headers: H }),
       fetch(KONFIG.SUPABASE_URL + '/rest/v1/catalog_items?tenant_id=eq.' + tid + '&select=data&order=item_id', { headers: H })
     ]);
+    // Stok live: agregat unit terikat booking TERKONFIRMASI (RPC live_stock).
+    // Kegagalan fetch/RPC belum terpasang -> LIVE_HELD kosong -> tampilan
+    // persis seperti sebelumnya (stok server apa adanya).
+    try {
+      const rl = await fetch(KONFIG.SUPABASE_URL + '/rest/v1/rpc/live_stock', {
+        method: 'POST',
+        headers: Object.assign({ 'Content-Type': 'application/json' }, H),
+        body: JSON.stringify({ s: KONFIG.TENANT_SLUG })
+      });
+      LIVE_HELD = rl.ok ? (await rl.json()) || {} : {};
+    } catch (e) { LIVE_HELD = {}; }
     if (!rc.ok || !rk.ok) throw new Error('HTTP ' + rc.status + '/' + rk.status);
     const confRows = await rc.json();
     const catRows = await rk.json();
@@ -1149,6 +1160,7 @@ function escHtml(s) {
 if (window.Element && !Element.prototype.scrollIntoView) Element.prototype.scrollIntoView = function () {};
 const $ = s => document.querySelector(s);
 let activeCat = "Semua";
+let LIVE_HELD = {};
 let query = "";
 let cart = [];
 // Mode katalog: "rental" (Katalog Sewa) | "sale" (Katalog Jual).
@@ -1198,12 +1210,25 @@ function baseQty(e, size) {
   if (e.sizes) return e.sizes.reduce((a, s) => a + s.ready, 0);
   return e.stockReady || 0;
 }
+// Unit terikat booking TERKONFIRMASI (agregat RPC live_stock, kunci
+// "itemId|ukuran"). Tanpa ukuran -> jumlah semua ukuran item itu.
+function heldConfirmedQty(e, size) {
+  if (!e) return 0;
+  if (size) return LIVE_HELD[e.id + "|" + size] || 0;
+  let n = 0;
+  for (const k in LIVE_HELD) if (k.startsWith(e.id + "|")) n += LIVE_HELD[k] || 0;
+  return n;
+}
+// Stok siap efektif untuk tampilan TANPA tanggal: stok server dikurangi
+// unit yang sudah terkonfirmasi. Mode tanggal tidak memakai ini — gerbang
+// akhirnya tetap RPC create_booking (hold per tanggal, server-side).
+function effReady(e, size) { return Math.max(0, baseQty(e, size) - heldConfirmedQty(e, size)); }
 // Ketersediaan efektif: bila tanggal dipilih, kurangi hold yang tumpang tindih.
 function availQty(e, size) {
   if (!e) return 0;
   if (e.type === "package") return 99;
   const r = selRange();
-  if (!r) return baseQty(e, size);
+  if (!r) return effReady(e, size);
   if (e.sizes && !size) return e.sizes.reduce((a, s) => a + Math.max(0, s.ready - heldQty(e.id, s.label, r.start, r.end)), 0);
   return baseQty(e, size) - heldQty(e.id, size || "", r.start, r.end);
 }
@@ -1278,14 +1303,15 @@ function setCatalogMode(m) {
 function availLine(it) {
   const r = selRange();
   if (it.type === "sale") {
-    return it.stockReady > 0
-      ? { full: false, txt: `STOK BELI — ${it.stockReady} UNIT` }
+    const eff = effReady(it);
+    return eff > 0
+      ? { full: false, txt: `STOK BELI — ${eff} UNIT` }
       : { full: true, txt: "STOK BELI HABIS" };
   }
   if (!r) {
-    return it.stockReady > 0
-      ? { full: false, txt: `STOK SIAP — ${it.stockReady} DARI ${it.stockTotal} UNIT` }
-      : { full: true, txt: "HABIS — SEMUA UNIT SEDANG DISEWA" };
+    const eff = effReady(it);
+    if (eff > 0) return { full: false, txt: `STOK SIAP — ${eff} DARI ${it.stockTotal} UNIT` };
+    return { full: true, txt: it.stockReady > 0 ? "HABIS — SEMUA UNIT TERBOOKING" : "HABIS — SEMUA UNIT SEDANG DISEWA" };
   }
   const a = availQty(it, null);
   const lbl = `${fmtShort(r.start)}–${fmtShort(r.end)}`;
@@ -1306,7 +1332,7 @@ function renderProducts() {
   }
   $("#prodGrid").innerHTML = list.map(it => {
     const av = availLine(it);
-    const outBase = it.stockReady <= 0;
+    const outBase = it.stockReady <= 0 || (!r && effReady(it) <= 0);
     const outDate = !!r && it.type !== "sale" && availQty(it, null) <= 0;
     const badge = it.type === "sale" ? `<span class="badge badge-sale">DIJUAL</span>`
       : (outDate ? `<span class="badge badge-out">PENUH TANGGAL INI</span>`
