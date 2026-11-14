@@ -787,6 +787,7 @@
         <a href="#sec-pembayaran" onclick="cfgNavGo('pembayaran')">Pembayaran</a>
         <a href="#sec-ketentuan" onclick="cfgNavGo('ketentuan')">Ketentuan</a>
         <a href="#sec-lokasi" onclick="cfgNavGo('lokasi')">Lokasi</a>
+        <a href="#sec-titik" onclick="cfgNavGo('titikberangkat')">Titik Berangkat</a>
         <a href="#sec-struk" onclick="cfgNavGo('struk')">Struk</a>
         <a href="#sec-footer" onclick="cfgNavGo('tampilan')">Footer</a>
         </div>
@@ -1037,6 +1038,24 @@
                 <label style="display:flex; gap:8px; align-items:center; font-size:13px; cursor:pointer;"><input type="checkbox" id="cfgPickupOnly"> Pengambilan hanya di basecamp — tidak melayani pengiriman (info tampil di web &amp; pesan WhatsApp)</label>
               </div>
               
+
+              <div style="border-top:1px dashed var(--border); margin:18px 0 14px;"></div>
+        </div></div>
+        </div>
+        <div class="renter-folder cfg-folder" id="sec-titik" data-cfg-folder="titikberangkat">
+          <div class="renter-folder-head" role="button" tabindex="0" aria-expanded="false" onclick="toggleCfgFolder('titikberangkat')" onkeydown="cfgFolderKey(event,'titikberangkat')"><span class="folder-ic"><svg class="icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1 2-2V5a2 2 0 0 1 2 2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span><span class="folder-main"><span class="folder-name">Titik Berangkat</span></span><span class="folder-chevron"><svg class="icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
+          <div class="renter-folder-body"><div class="cfg-folder-in">
+
+              <div style="font-size:11px; color:var(--text-subtle); margin-bottom:14px;">Konten halaman Tentang Kami (Titik Berangkat) di storefront — tampil sesudah pengaturan disimpan.</div>
+              <div class="form-group">
+                <label class="form-label">Teks Tentang Kami (pisahkan paragraf dengan baris kosong)</label>
+                <textarea class="form-textarea" id="cfgAboutText" rows="9"></textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Jam Buka (teks tampil di web)</label>
+                <input type="text" class="form-input" id="cfgOpeningHours" placeholder="Contoh: Setiap hari 08.00–21.00 WIB">
+              </div>
+              <div style="font-size:11px; color:var(--text-subtle);">Alamat basecamp diisi di folder <a href="#sec-lokasi" onclick="cfgNavGo('lokasi')">Lokasi Basecamp &amp; Google Maps</a> — alamat yang sama tampil di halaman Titik Berangkat. Bila alamat kosong, halaman menampilkan teks &quot;Alamat basecamp — hubungi via WhatsApp&quot;.</div>
 
               <div style="border-top:1px dashed var(--border); margin:18px 0 14px;"></div>
         </div></div>
@@ -1794,12 +1813,12 @@
     ];
 
     const SITE_CONFIG_DEFAULT = {
-      brandName:"BK ADVENTURE", brandSubtitle:"TOKO PERALATAN SEWA & RETAIL",
+      brandName:"BK ADVENTURE", brandSubtitle:"PETA LAPANGAN — MEDAN",
       logoUrl:"", // NEW: Logo brand upload
       announceLeft:"HYGIENE GRADE-A · REAL-TIME TRACKING", announceRight:"EST. 2026 // SEWA & RETAIL",
-      heroImage:"https://images.unsplash.com/photo-1510312305653-8ed496efae75?auto=format&fit=crop&w=1920&q=80",
-      heroHeading:"Udara Bebas, Jalur Terbuka,<br>Peralatan Siap Badai.",
-      heroDescription:"Basecamp persewaan dan penjualan perlengkapan outdoor teknikal grade ekspedisi.",
+      heroImage:"assets/hero-bk-adventure.jpg",
+      heroHeading:"Udara Segar, Alat Lengkap, Tidur Nyenyak.",
+      heroDescription:"Rental alat outdoor yang bekerja seperti membaca peta: tetapkan tanggal ambil dan durasi, katalog langsung menunjukkan alat yang tersedia untuk rentang itu. Booking, bayar, dan kode terbit di website — tanpa chat bolak-balik.",
       heroCtaPrimary:"JELAJAHI KATALOG STOK", heroCtaSecondary:"KETENTUAN SEWA & DEPOSIT",
       rentalTerms:"1. Deposit wajib dibayarkan sebelum pengambilan barang\n2. Barang wajib dikembalikan sesuai jadwal yang disepakati\n3. Kerusakan atau kehilangan menjadi tanggung jawab penyewa",
       packageEyebrow:"PAKET BUNDLING HEMAT",
@@ -1819,6 +1838,8 @@
       ],
       receiptPaper:"80", pickupOnly:true, receiptShowLogo:true, receiptShowAddress:true, receiptShowPhone:true, depotPhone:"", paymentInfo:"", paymentQr:"", paymentMethods:{bri:{no:"",an:""},mandiri:{no:"",an:""},bca:{no:"",an:""},bni:{no:"",an:""},dana:{no:"",an:""},ovo:{no:"",an:""},gopay:{no:"",an:""}}, receiptNote:"", receiptFooter:"Barang harap kembali tepat waktu dalam kondisi baik. Terima kasih!",
       address:"Jl. Jamin Ginting No. 88, Berastagi, Kab. Karo, Sumatera Utara",
+      aboutText:"BK Adventure adalah tempat sewa alat camping di Medan untuk pendaki, komunitas, dan keluarga yang ingin berangkat tanpa membeli semua perlengkapan sendiri. Katalog kami berisi tenda, carrier, sleeping bag, matras, sampai set dapur lapangan — semuanya bisa dipesan lewat website ini.\n\nSebagai rental alat camping di Medan, kami menjalankan booking dengan cara yang berbeda: kamu memilih tanggal dulu, lalu katalog menunjukkan alat yang benar-benar tersedia untuk tanggal itu. Booking dibayar di muka, bukti pembayaran diunggah di formulir, dan kode booking terbit seketika — tanpa perlu chat bolak-balik untuk memastikan stok.\n\nSelain sewa satuan, tersedia Paket Tenda 2P dan 4P yang isinya sudah lengkap tinggal berangkat, plus open trip berkala ke jalur seperti Gunung Sibayak dan Gunung Sibuatan. Semua alat diambil dan dikembalikan di basecamp kami di Medan; deposit jaminan dibayar tunai saat pengambilan dan kembali penuh saat alat pulang lengkap dan bersih.",
+      openingHours:"Setiap hari 08.00–21.00 WIB",
       mapsUrl:"https://www.google.com/maps/search/?api=1&query=Berastagi%2C+Karo%2C+Sumatera+Utara",
       trustItems:["100% Inspeksi Fisik","Garansi Tukar Unit di Basecamp","Pengambilan Langsung di Basecamp"],
       footerBrand:"BK ADVENTURE", footerTagline:"Alpine & Expedition Grade Equipment - Jakarta Basecamp",
@@ -3942,6 +3963,8 @@
       set('cfgFooterTagline', siteConfig.footerTagline);
       set('cfgFooterCopyright', siteConfig.footerCopyright);
       set('cfgAddress', siteConfig.address);
+      set('cfgAboutText', siteConfig.aboutText);
+      set('cfgOpeningHours', siteConfig.openingHours);
       set('cfgMapsUrl', siteConfig.mapsUrl);
       set('cfgReceiptPaper', siteConfig.receiptPaper || '80');
       document.getElementById('cfgPickupOnly').checked = siteConfig.pickupOnly !== false;
@@ -3988,6 +4011,8 @@
       siteConfig.footerTagline = v('cfgFooterTagline') || siteConfig.footerTagline;
       siteConfig.footerCopyright = v('cfgFooterCopyright') || siteConfig.footerCopyright;
       siteConfig.address = v('cfgAddress') || siteConfig.address;
+      siteConfig.aboutText = v('cfgAboutText');
+      siteConfig.openingHours = v('cfgOpeningHours');
       siteConfig.mapsUrl = v('cfgMapsUrl') || siteConfig.mapsUrl;
       siteConfig.receiptPaper = v('cfgReceiptPaper') || '80';
       siteConfig.pickupOnly = document.getElementById('cfgPickupOnly').checked;
