@@ -1130,7 +1130,7 @@ async function loadServerData() {
       const rl = await fetch(KONFIG.SUPABASE_URL + '/rest/v1/rpc/live_stock', {
         method: 'POST',
         headers: Object.assign({ 'Content-Type': 'application/json' }, H),
-        body: JSON.stringify({ s: KONFIG.TENANT_SLUG })
+        body: JSON.stringify({ s: TENANT_SLUG })
       });
       LIVE_HELD = rl.ok ? (await rl.json()) || {} : {};
     } catch (e) { LIVE_HELD = {}; }
