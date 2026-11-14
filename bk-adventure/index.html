@@ -3,11 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>BK Adventure — Peta Lapangan | Sewa Alat Outdoor Medan</title>
-<meta name="description" content="Sewa alat outdoor di Medan dengan booking berbasis tanggal: pilih tanggal dulu, lihat alat yang benar-benar tersedia, bayar, dan kode booking langsung terbit.">
+<title>BK Adventure — Sewa Alat Outdoor Medan | jasa-rental.my.id</title>
+<meta name="description" content="BK Adventure — sewa alat camping di Medan: cek stok per tanggal, booking dan bayar di website, kode booking terbit seketika. Tenda, carrier, sepatu gunung & open trip Sibayak–Sibuatan.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="BK Adventure — Sewa Alat Outdoor Medan">
+<meta property="og:description" content="Sewa alat camping di Medan: cek stok per tanggal, booking dan bayar di website, kode terbit seketika.">
+<meta property="og:url" content="https://jasa-rental.my.id/bk-adventure/">
+<meta property="og:image" content="https://jasa-rental.my.id/bk-adventure/assets/hero-bk-adventure.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json" id="ldBusiness">{}</script>
 <style>
 :root{
   --ink:#16211B; --ink-2:#1E2B23; --ink-soft:#2A382F;
@@ -428,23 +434,205 @@ footer.site .contour-bg{width:700px;height:700px;right:-240px;top:-300px;opacity
 .srv-err b{font-family:var(--font-d);font-size:16.5px}
 .srv-err span{color:var(--muted);font-size:14px;flex:1 1 260px}
 </style>
+<style id="clean-v4">
+/* ===== CLEAN v4 (produksi) — lapisan di atas CSS lama: token & semua section
+   mengikuti mockup beranda v4 + brief Laras. Komponen lama (drawer, modal,
+   keranjang, checkout) mempertahankan kelasnya; nilainya diselaraskan. ===== */
+:root{
+  --ink:#16211B; --ink-2:#1E2B23; --paper:#F1F3EF; --paper-2:#E7ECE4;
+  --survey:#D9A404; --survey-deep:#A87E03; --marker:#C0392B; --terra:#C04E31;
+  --line:#D3DAD0; --line-dark:#3A4740; --muted:#5A665E; --ok:#1E6B3C;
+  --shadow:0 16px 40px rgba(22,33,27,.18);
+  --font-b:'Space Grotesk',system-ui,sans-serif;
+  --font-serif:'Fraunces',Georgia,serif;
+}
+[hidden]{display:none!important}
+body{font-family:var(--font-b)}
+h1,h2{letter-spacing:-.01em}
+/* --- announcement bar (dirender dari config announceLeft/announceRight) --- */
+.announce{background:var(--survey);color:var(--ink)}
+.announce-in{display:flex;justify-content:space-between;align-items:center;gap:16px;height:32px;font-family:var(--font-m);font-size:11px;letter-spacing:.14em;font-weight:600;white-space:nowrap;overflow:hidden}
+/* --- header --- */
+header.site{background:var(--paper);border-bottom:1px solid var(--line);box-shadow:none}
+.hd-in{display:flex;align-items:center;gap:28px;height:60px}
+.logo{font-size:17px}
+.logo small{font-size:9.5px}
+nav.main{display:flex;gap:22px;margin-right:auto}
+nav.main a{font-size:13.5px;font-weight:500;color:var(--ink);white-space:nowrap}
+nav.main a:hover{color:var(--survey-deep)}
+.btn-track{background:none;border:none;box-shadow:none;font-family:var(--font-m);font-size:11.5px;letter-spacing:.12em;font-weight:600;color:var(--ink);cursor:pointer;padding:8px 4px;white-space:nowrap;display:inline-flex;align-items:center;gap:7px}
+.btn-track svg{width:15px;height:15px}
+.btn-track:hover{color:var(--survey-deep);background:none}
+.btn-google.hd{height:40px;border-radius:999px}
+.icon-btn{width:40px;height:40px;border-radius:8px}
+.mobile-nav{border-top:1px solid var(--line)}
+/* --- hero full-bleed --- */
+.hero-full{position:relative;overflow:hidden;background:var(--ink)}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 62%}
+.hero-inner{position:relative;padding:72px 0 128px;min-height:86vh;display:flex;flex-direction:column;justify-content:center}
+.hero-copy{max-width:640px}
+.hero-copy h1{font-family:var(--font-serif);font-weight:600;font-size:clamp(34px,5.4vw,54px);line-height:1.08;color:#fff;margin:0 0 20px;letter-spacing:-.01em}
+.hero-tagline{display:flex;align-items:center;gap:10px;font-family:var(--font-m);font-size:12px;letter-spacing:.22em;color:#fff;font-weight:600;margin-bottom:28px}
+.hero-tagline svg{flex:none}
+.btn-pill{display:inline-flex;align-items:center;height:46px;padding:0 26px;border-radius:999px;background:var(--survey);color:var(--ink);font-weight:600;font-size:14.5px;border:1px solid var(--survey)}
+.btn-pill:hover{background:var(--paper);border-color:var(--paper)}
+/* --- kartu booking melayang --- */
+.book-float{position:relative;margin-top:-52px;z-index:5}
+.book-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px 24px}
+.bb-grid2{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:16px;align-items:end}
+.bbf label{display:block;font-family:var(--font-m);font-size:11px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;margin-bottom:8px;font-weight:600}
+.bbf input,.bbf select{width:100%;height:46px;border:1px solid var(--line);border-radius:8px;background:#fff;padding:0 14px;font-family:var(--font-b);font-size:14px;color:var(--ink)}
+.bbf input:focus,.bbf select:focus{outline:2px solid var(--survey);outline-offset:0;border-color:var(--survey)}
+.btn-check{height:46px;padding:0 24px;border:none;border-radius:8px;background:var(--terra);color:#fff;font-family:var(--font-b);font-weight:600;font-size:13.5px;letter-spacing:.04em;cursor:pointer;white-space:nowrap}
+.btn-check:hover{background:#A93F27}
+.book-card .bb-status{margin-top:14px}
+.book-card .bb-status:empty{margin-top:0}
+/* --- strip kepercayaan --- */
+.trust-strip{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:36px}
+.trust-cell{padding:16px 20px;border-left:1px solid var(--line)}
+.trust-cell:first-child{border-left:none;padding-left:0}
+.t-k{font-family:var(--font-m);font-size:11px;letter-spacing:.16em;color:var(--muted);text-transform:uppercase}
+.t-value{font-size:16px;font-weight:600;margin-top:4px}
+/* --- section & kepala --- */
+.sec-head h2{font-size:28px;font-weight:700}
+.sec-head p{font-size:13.5px;color:var(--muted);line-height:1.6}
+.pkg-zone .sec-head p{color:rgba(241,243,239,.72)}
+.eyebrow{color:var(--survey-deep)}
+.sec-note{font-size:13.5px;color:var(--muted);line-height:1.6;max-width:520px}
+.pkg-zone .sec-head h2{color:var(--paper)}
+.pkg-zone .eyebrow{color:var(--survey)}
+.pkg-zone .sec-note{color:rgba(241,243,239,.72)}
+/* --- penanda kategori (catGrid dilipat ke blok katalog) --- */
+.cat-list{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff;margin-bottom:24px}
+.cat-row{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:#fff;border:none;border-bottom:1px solid var(--line);padding:12px 16px;cursor:pointer;font-family:var(--font-b)}
+.cat-row .no{font-family:var(--font-m);font-size:11px;color:var(--survey-deep);font-weight:600}
+.cat-row .nm{font-size:14px;font-weight:600;flex:1}
+.cat-row .ct{font-family:var(--font-m);font-size:11px;color:var(--muted);letter-spacing:.1em}
+.cat-row .arr{color:var(--muted)}
+.cat-row.active{background:var(--paper-2)}
+.cat-row:hover{background:var(--paper)}
+/* --- saklar mode + toolbar katalog --- */
+.mode-switch{display:inline-flex;gap:4px;border:1px solid var(--line);border-radius:999px;padding:4px;background:#fff;margin-bottom:20px}
+.mode-btn{height:36px;padding:0 20px;border:none;border-radius:999px;background:transparent;font-family:var(--font-b);font-size:13px;font-weight:600;color:var(--muted);cursor:pointer}
+.mode-btn.active{background:var(--ink);color:var(--paper)}
+.cat-tools{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:24px}
+.chip-row{display:flex;gap:8px;flex-wrap:wrap}
+.chip{height:36px;padding:0 16px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:13px;font-weight:500;cursor:pointer;font-family:var(--font-b)}
+.chip.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.search-box{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;background:#fff;padding:0 16px;height:40px;min-width:230px}
+.search-box input{border:none;background:none;outline:none;font-family:var(--font-b);font-size:13.5px;width:100%}
+.search-box svg{width:16px;height:16px;color:var(--muted);flex:none}
+/* --- kartu produk --- */
+.prod-card{border:1px solid var(--line);border-radius:12px;box-shadow:none;background:#fff;overflow:hidden}
+.prod-media{height:176px;background:var(--paper-2);padding:16px;position:relative}
+.prod-media img{width:100%;height:100%;object-fit:contain}
+.badge{border-radius:8px;font-family:var(--font-m);font-size:11px;letter-spacing:.08em;padding:5px 9px;font-weight:600}
+.badge-sale{background:var(--survey);color:var(--ink)}
+.badge-out{background:var(--marker);color:#fff}
+.prod-body{padding:16px;display:flex;flex-direction:column}
+.prod-cat{color:var(--survey-deep);font-family:var(--font-m);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+.prod-name{font-size:16px;font-weight:600;line-height:1.35;margin-top:4px}
+.prod-meta{font-family:var(--font-m);font-size:12px;color:var(--muted);text-transform:uppercase;margin-top:6px;letter-spacing:.04em}
+.avail{margin-top:10px;font-family:var(--font-m);font-size:12px;font-weight:600;display:flex;align-items:center;gap:8px}
+.avail .sq{width:8px;height:8px;border-radius:50%;background:var(--ok);flex:none}
+.avail.full{color:var(--marker)}
+.avail.full .sq{background:var(--marker)}
+.prod-price{margin-top:auto;padding-top:12px}
+.prod-price b{font-size:18px;font-weight:700}
+.prod-price span{font-size:12px;color:var(--muted);text-transform:uppercase}
+.prod-est{font-family:var(--font-m);font-size:11px;color:var(--muted);margin-top:3px;letter-spacing:.05em}
+.add-btn{margin-top:12px;height:44px;border-radius:8px;font-size:13.5px}
+/* --- paket (zona ink) --- */
+.pkg-card{background:var(--paper);border:none;border-radius:12px;box-shadow:none;color:var(--ink)}
+.pkg-card img{display:none}
+.pkg-body{padding:20px}
+.pkg-top{flex-direction:column;align-items:flex-start;gap:4px}
+.pkg-dur{order:-1;background:none;border:none;padding:0;color:var(--survey-deep);font-family:var(--font-m);font-size:11px;letter-spacing:.14em;font-weight:600}
+.pkg-top h3{font-size:18px;font-weight:700}
+.pkg-desc{font-size:13.5px;color:var(--muted);line-height:1.6}
+.legend{background:none;border:none;border-top:1px solid var(--line);border-radius:0;padding:14px 0 0;margin-top:14px}
+.legend .lg-t{font-family:var(--font-m);font-size:11px;letter-spacing:.14em;color:var(--muted);font-weight:600}
+.pkg-items li svg{color:var(--survey-deep)}
+.pkg-price b{font-size:20px;font-weight:700}
+.pkg-price span{font-size:11px}
+/* --- cara sewa + ketentuan --- */
+.steps{gap:28px}
+.step .num{width:44px;height:44px;border-radius:50%;background:var(--ink);color:var(--survey);font-family:var(--font-m);font-size:14px;font-weight:600;border:none;display:flex;align-items:center;justify-content:center}
+.step h3{font-size:16px;font-weight:600}
+.step p{font-size:13.5px;color:var(--muted);line-height:1.65}
+.terms{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:44px}
+.terms > div{border-top:1px solid var(--line);padding-top:16px;background:none;border-radius:0}
+.terms .k{font-size:14px;font-weight:700;font-family:var(--font-b);letter-spacing:0;text-transform:none;color:var(--ink)}
+.terms p{font-size:13px;color:var(--muted);line-height:1.65;margin-top:6px}
+/* --- open trip (kartu ink) --- */
+.trip-card{background:var(--ink);color:var(--paper);border:none;border-radius:12px;box-shadow:none}
+.trip-card img{display:none}
+.trip-body{padding:20px}
+.trip-sign h3{color:var(--paper);font-size:18px;font-weight:700}
+.trip-elev{color:var(--survey);font-family:var(--font-m);font-size:12px;font-weight:600}
+.trip-meta{color:rgba(241,243,239,.75);font-family:var(--font-m);font-size:12px}
+.trip-meta svg{color:var(--survey)}
+.trip-body p{color:rgba(241,243,239,.85);font-size:13.5px;line-height:1.6}
+.quota-bar{background:var(--ink-2);height:6px;border-radius:999px}
+.quota-fill{background:var(--survey)}
+.quota small{color:rgba(241,243,239,.7);font-family:var(--font-m);font-size:11px;letter-spacing:.08em}
+.trip-price b{color:var(--paper);font-size:20px;font-weight:700}
+.trip-price span{color:rgba(241,243,239,.65)}
+.btn-outline-s{border:1px solid var(--survey);color:var(--survey);background:transparent;border-radius:8px;height:44px;padding:0 20px;font-weight:600}
+.btn-outline-s:hover{background:var(--survey);color:var(--ink)}
+/* --- strip lacak --- */
+.track-strip{border:none;border-top:1px solid var(--line);border-bottom:1px solid var(--line);border-radius:0;background:none;padding:20px 0}
+.track-in{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.track-in h2{font-size:20px;font-weight:700}
+.track-in p{font-family:var(--font-m);font-size:11px;letter-spacing:.14em;color:var(--muted);margin-top:4px}
+.btn-ink{border-radius:8px;height:44px}
+/* --- newsletter --- */
+.news-zone{background:var(--paper-2);padding:48px 0;border:none}
+.news-in{display:flex;justify-content:space-between;align-items:center;gap:28px;flex-wrap:wrap}
+.news-in h2{font-size:20px;font-weight:700}
+.news-in p{font-size:13.5px;color:var(--muted);margin-top:6px;line-height:1.6}
+.news-form{display:flex;gap:10px;flex-wrap:wrap}
+.news-form input{height:46px;border:1px solid var(--line);border-radius:8px;background:#fff;padding:0 16px;font-family:var(--font-b);font-size:14px;min-width:250px}
+.news-form button{height:46px;border-radius:8px}
+/* --- footer --- */
+footer.site{padding:48px 0 24px}
+.ft-coords{color:var(--survey)}
+.ft-bottom{font-family:var(--font-m);font-size:11px;opacity:.55;letter-spacing:.06em}
+.socials a{width:40px;height:40px;border-radius:8px;border:1px solid var(--line-dark)}
+/* --- komponen lama: samakan radius/bayangan --- */
+.btn-ghost{border:1px solid var(--line);border-radius:999px;background:#fff;height:44px;padding:0 22px;font-weight:600}
+.drawer{box-shadow:var(--shadow)}
+.modal-card,.member-menu{border-radius:12px;box-shadow:var(--shadow)}
+.add-btn svg{width:16px;height:16px}
+/* --- responsif --- */
+@media(max-width:1020px){ nav.main{display:none} }
+@media(max-width:900px){
+  .hero-inner{min-height:78vh;padding:56px 0 104px}
+  .book-float{margin-top:-40px}
+  .bb-grid2{grid-template-columns:1fr}
+  .btn-check{width:100%}
+  .trust-strip{grid-template-columns:1fr}
+  .trust-cell{border-left:none;border-top:1px solid var(--line);padding-left:0}
+  .trust-cell:first-child{border-top:none}
+  .cat-list{grid-template-columns:1fr}
+  .terms{grid-template-columns:1fr}
+  .announce-r{display:none}
+  .btn-track .bt-t{display:none}
+  .news-form input{min-width:0;flex:1}
+}
+</style>
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-<g id="konturLines" fill="none" stroke="currentColor" stroke-width="1.6">
-<path d="M300 26c96-4 196 58 232 142 34 79 16 184-44 260-58 74-164 118-262 100C128 510 44 430 34 322 24 216 96 108 186 62c36-18 74-34 114-36Z"/>
-<path d="M300 84c78-3 158 48 186 116 27 65 12 150-38 211-49 60-134 95-212 79C158 475 94 409 86 322 78 236 136 150 210 114c29-14 59-28 90-30Z"/>
-<path d="M300 142c60-2 120 38 142 90 21 50 8 116-31 163-38 46-103 72-163 59-60-13-108-66-114-132-6-65 38-132 94-160 23-11 47-19 72-20Z"/>
-<path d="M300 196c44-1 88 28 104 66 15 37 5 85-24 120-28 34-76 52-119 42-44-10-79-49-83-97-4-47 28-96 69-117 17-8 35-13 53-14Z"/>
-<path d="M300 246c30-1 60 19 71 45 10 25 3 58-17 82-19 23-52 35-81 28-30-7-54-33-57-66-2-32 20-65 48-79 11-6 23-9 36-10Z"/>
-<path d="M300 292c17 0 34 11 40 26 6 14 1 32-10 45-11 13-29 19-45 15-17-4-30-19-31-37-1-18 11-36 27-44 6-3 12-4 19-5Z"/>
-</g></defs></svg>
+
+<div class="announce" id="announceBar" hidden>
+  <div class="wrap announce-in"><span id="announceLeft"></span><span class="announce-r" id="announceRight"></span></div>
+</div>
 
 <header class="site">
   <div class="wrap hd-in">
     <a class="logo" href="#beranda">BK ADVENTURE<small>PETA LAPANGAN — MEDAN</small></a>
     <nav class="main">
-      <a href="#katalog">Katalog</a><a href="#paket">Paket</a><a href="#cara-sewa">Cara Sewa</a><a href="#opentrip">Open Trip</a>
+      <a href="#katalog">Katalog</a><a href="#paket">Paket</a><a href="tentang-kami.html">Titik Berangkat</a><a href="#cara-sewa">Cara Sewa</a><a href="#opentrip">Open Trip</a>
     </nav>
     <div class="hd-right">
       <button class="btn-track" id="btnCheckBooking3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg><span class="bt-t">LACAK BOOKING</span><span style="display:none"></span></button>
@@ -463,43 +651,34 @@ footer.site .contour-bg{width:700px;height:700px;right:-240px;top:-300px;opacity
     </div>
   </div>
   <div class="mobile-nav" id="mobileNav">
-    <a href="#katalog">Katalog</a><a href="#paket">Paket Rute</a><a href="#cara-sewa">Cara Sewa</a><a href="#opentrip">Open Trip</a>
+    <a href="#katalog">Katalog</a><a href="#paket">Paket</a><a href="tentang-kami.html">Titik Berangkat</a><a href="#cara-sewa">Cara Sewa</a><a href="#opentrip">Open Trip</a>
   </div>
 </header>
 
 <!-- HERO -->
-<section class="hero" id="beranda">
-  <svg class="contour-bg" aria-hidden="true"><use href="#konturLines"/></svg>
-  <div class="wrap hero-in">
+<section class="hero-full" id="beranda">
+  <img class="hero-img" src="assets/hero-bk-adventure.jpg" alt="Lembah pinus berkabut di kaki gunung — tenda krem dan kabin depot BK Adventure" fetchpriority="high">
+  <div class="wrap hero-inner">
     <div class="hero-copy">
-      <div class="coords"><span>3.5952° N · 98.6722° E</span><span><b>▲</b> MEDAN — SUMATERA UTARA</span></div>
-      <h1>Pilih tanggalnya dulu. <span class="hl">Alatnya menyusul</span> — yang benar-benar tersedia.</h1>
-      <p class="lead">Rental alat outdoor yang bekerja seperti membaca peta: tetapkan tanggal ambil dan durasi, katalog langsung menunjukkan alat yang tersedia untuk rentang itu. Booking, bayar, dan kode terbit di website — tanpa chat bolak-balik.</p>
-      <div class="field-notes">
-        <div><div class="k">Katalog</div><div class="v">18 item asli</div></div>
-        <div><div class="k">Ketersediaan</div><div class="v">Per tanggal dipilih</div></div>
-        <div><div class="k">Booking</div><div class="v">Kode terbit seketika</div></div>
-      </div>
-    </div>
-    <div class="hero-photo">
-      <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=1000&q=80" alt="Tenda di bawah langit malam">
-      <div class="tag">TITIK BERANGKAT — <b>DEPOT BK ADVENTURE, MEDAN</b></div>
-    </div>
-  </div>
-
-  <!-- BOOKING BAR -->
-  <div class="wrap bookbar-zone">
-    <div class="bookbar" id="bookingbar">
-      <div class="bb-title"><span class="step">LANGKAH 01 — TENTUKAN TANGGAL</span><h2>Cek alat yang tersedia untuk tanggalmu</h2></div>
-      <div class="bb-grid">
-        <div class="bb-field"><label for="bbStart">Tanggal Ambil</label><input type="date" id="bbStart"></div>
-        <div class="bb-field"><label for="bbDays">Durasi (hari)</label><input type="number" id="bbDays" min="1" max="30" value="2"></div>
-        <button class="btn btn-survey" id="bbCheck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>Cek Alat Tersedia</button>
-      </div>
-      <div class="bb-status" id="bbStatus"></div>
+      <h1>Udara Segar,<br>Alat Lengkap,<br>Tidur Nyenyak.</h1>
+      <div class="hero-tagline"><svg width="11" height="10" viewBox="0 0 11 10" aria-hidden="true"><path d="M5.5 0 11 10H0Z" fill="#C04E31"/></svg><span>RENTAL ALAT CAMPING &amp; OPEN TRIP — MEDAN</span></div>
+      <a class="btn-pill" href="#katalog">Booking Sekarang</a>
     </div>
   </div>
 </section>
+
+<!-- KARTU BOOKING MELAYANG -->
+<div class="wrap book-float">
+  <div class="book-card" id="bookingbar">
+    <div class="bb-grid2">
+      <div class="bbf"><label for="bbStart">Tanggal Ambil</label><input type="date" id="bbStart"></div>
+      <div class="bbf"><label for="bbDays">Durasi Sewa (hari)</label><input type="number" id="bbDays" min="1" max="30" value="2"></div>
+      <div class="bbf"><label for="bbCat">Kategori</label><select id="bbCat"><option value="Semua">Semua Kategori</option></select></div>
+      <button class="btn-check" id="bbCheck" type="button">CEK KETERSEDIAAN</button>
+    </div>
+    <div class="bb-status" id="bbStatus"></div>
+  </div>
+</div>
 
 <div class="wrap" id="srvError" style="display:none">
   <div class="srv-err">
@@ -509,26 +688,24 @@ footer.site .contour-bg{width:700px;height:700px;right:-240px;top:-300px;opacity
   </div>
 </div>
 
-<!-- KATEGORI -->
-<section class="sec-pad" style="padding-bottom:0">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow">Penanda 01–07 · Daftar Kategori</div>
-      <h2>Baca peta katalognya</h2>
-      <p>Tujuh penanda kategori, disusun seperti legenda peta. Ketuk satu penanda untuk menyaring katalog.</p>
-    </div>
-    <div class="cat-list" id="catGrid"></div>
+<!-- STRIP KEPERCAYAAN -->
+<div class="wrap">
+  <div class="trust-strip">
+    <div class="trust-cell"><div class="t-k">Katalog</div><div class="t-value">18 item asli</div></div>
+    <div class="trust-cell"><div class="t-k">Ketersediaan</div><div class="t-value">Per tanggal dipilih</div></div>
+    <div class="trust-cell"><div class="t-k">Booking</div><div class="t-value">Kode terbit seketika</div></div>
   </div>
-</section>
+</div>
 
 <!-- KATALOG -->
 <section class="sec-pad" id="katalog">
   <div class="wrap">
     <div class="sec-head">
-      <div class="eyebrow">Katalog Alat</div>
+      <div class="eyebrow">Penanda 01–07 · Katalog Alat</div>
       <h2>Alat yang bisa kamu bawa</h2>
-      <p id="catNote">Status stok mengikuti stok siap hari ini. Isi booking bar di atas untuk melihat ketersediaan pada tanggal pilihanmu.</p>
+      <p id="catNote">Status stok mengikuti stok siap hari ini. Isi kartu booking di atas untuk melihat ketersediaan pada tanggal pilihanmu.</p>
     </div>
+    <div class="cat-list" id="catGrid"></div>
     <div class="mode-switch" role="group" aria-label="Mode katalog">
       <button type="button" class="mode-btn active" id="modeBtnRental">Katalog Sewa</button>
       <button type="button" class="mode-btn" id="modeBtnSale">Katalog Jual</button>
@@ -547,12 +724,11 @@ footer.site .contour-bg{width:700px;height:700px;right:-240px;top:-300px;opacity
 
 <!-- PAKET -->
 <section class="pkg-zone sec-pad" id="paket">
-  <svg class="contour-bg" aria-hidden="true"><use href="#konturLines"/></svg>
   <div class="wrap">
     <div class="sec-head">
-      <div class="eyebrow">Rute Siap Jalan</div>
-      <h2>Paket lengkap, tinggal berangkat</h2>
-      <p>Rute yang sudah digambar untukmu: satu paket berisi semua alat wajib untuk ukuran grupmu. Harga per paket untuk durasi tertera — tanpa hitung per item.</p>
+      <div class="eyebrow">Penanda · Paket Bundel</div>
+      <h2>Paket siap berangkat</h2>
+      <p class="sec-note">Bundel alat untuk ukuran grupmu — harga per paket untuk durasi yang tertera, tanpa hitung per item.</p>
     </div>
     <div class="pkg-grid" id="paketGrid"></div>
   </div>
@@ -562,19 +738,19 @@ footer.site .contour-bg{width:700px;height:700px;right:-240px;top:-300px;opacity
 <section class="sec-pad" id="cara-sewa">
   <div class="wrap">
     <div class="sec-head">
-      <div class="eyebrow">Lintasan Booking</div>
-      <h2>Cara sewa dalam 4 titik</h2>
+      <div class="eyebrow">Penanda · Cara Sewa</div>
+      <h2>Dari tanggal ke titik berangkat</h2>
     </div>
     <div class="steps">
-      <div class="step"><div class="num">01</div><h3>Tentukan Tanggal &amp; Alat</h3><p>Isi booking bar, katalog menyaring alat yang tersedia untuk rentang tanggalmu. Masukkan alat ke daftar muatan.</p></div>
-      <div class="step"><div class="num">02</div><h3>Isi Data Booking</h3><p>Nama, nomor WhatsApp, tanggal mulai, dan durasi. Tanggal dari booking bar otomatis terbawa ke formulir.</p></div>
-      <div class="step"><div class="num">03</div><h3>Bayar &amp; Upload Bukti</h3><p>Transfer tepat sebesar total, lalu unggah foto bukti pembayaran di formulir. Kode booking terbit setelah langkah ini.</p></div>
-      <div class="step"><div class="num">04</div><h3>Ambil di Depot</h3><p>Datang pada tanggal mulai, bawa KTP (NIK dicatat di depot), bayar deposit jaminan tunai, dan berangkat.</p></div>
+      <div class="step"><div class="num">01</div><h3>Tentukan Tanggal &amp; Durasi</h3><p>Isi kartu booking: tanggal ambil dan berapa hari. Katalog langsung menyaring alat yang benar-benar tersedia untuk rentang itu.</p></div>
+      <div class="step"><div class="num">02</div><h3>Pilih Alat &amp; Booking</h3><p>Masukkan alat ke keranjang, isi nama dan nomor WhatsApp, lalu kirim booking. Kode booking BK-XXXXX terbit seketika di layar.</p></div>
+      <div class="step"><div class="num">03</div><h3>Bayar &amp; Unggah Bukti</h3><p>Transfer sesuai metode yang dipilih (transfer bank, QRIS, atau e-wallet), tulis nama pengirim, lalu unggah foto/PDF bukti (maks 5MB). Admin memeriksa pembayaranmu — status berubah menjadi DIBAYAR.</p></div>
+      <div class="step"><div class="num">04</div><h3>Ambil &amp; Berangkat</h3><p>Tunjukkan kode booking di basecamp pada tanggal ambil. Admin mencatat jenis kartu identitasmu (KTP/KTM/SIM/Paspor/Kartu Pelajar/lainnya) — nomor atau foto kartunya — deposit jaminan dibayar tunai, dan kamu berangkat.</p></div>
     </div>
     <div class="terms">
-      <div><div class="k">Deposit Jaminan</div><p>Ditahan tunai saat pengambilan dan kembali penuh saat alat pulang lengkap &amp; bersih. Terpisah dari pembayaran sewa.</p></div>
-      <div><div class="k">Keterlambatan</div><p>Pengembalian lewat tanggal dihitung sebagai tambahan hari sewa sesuai tarif item yang dibawa.</p></div>
-      <div><div class="k">Lacak Booking</div><p>Status booking bisa dicek kapan pun dari tombol Lacak Booking di header — cukup kode booking + nomor WhatsApp.</p></div>
+      <div><div class="k">Deposit &amp; Jaminan</div><p>Deposit jaminan dibayar TUNAI saat pengambilan dan kembali penuh saat alat kembali utuh. Besaran per item mengikuti daftar deposit depot.</p></div>
+      <div><div class="k">Keterlambatan</div><p>Pengembalian melewati tanggal selesai dihitung sebagai tambahan hari sewa sesuai tarif harian item yang dibawa. Rencanakan tanggal kembali sejak awal.</p></div>
+      <div><div class="k">Lacak Booking</div><p>Status booking bisa dicek kapan saja dari tombol Lacak Booking — cukup kode booking dan nomor WhatsApp yang dipakai saat booking. Member yang masuk bisa melihat semua bookingnya di menu akun.</p></div>
     </div>
   </div>
 </section>
@@ -583,60 +759,61 @@ footer.site .contour-bg{width:700px;height:700px;right:-240px;top:-300px;opacity
 <section class="sec-pad" id="opentrip" style="padding-top:0">
   <div class="wrap">
     <div class="sec-head">
-      <div class="eyebrow">Papan Informasi Jalur</div>
-      <h2>Open trip berikutnya</h2>
-      <p>Papan jalur di titik berangkat: gunung, tanggal, dan sisa kursi dibaca sekilas seperti papan informasi di kaki gunung.</p>
+      <div class="eyebrow">Penanda · Open Trip</div>
+      <h2>Berangkat bareng, alat sudah termasuk</h2>
+      <p class="sec-note">Trip terjadwal dengan kuota terbatas. Harga per orang — daftar lewat tombol di kartunya.</p>
     </div>
     <div class="trip-grid" id="tripGrid"></div>
   </div>
 </section>
 
 <!-- LACAK STRIP -->
-<section style="padding-bottom:64px">
-  <div class="wrap">
-    <div class="track-strip">
-      <div><div class="tt">Sudah punya kode booking?</div><div class="ts">LACAK DENGAN KODE BK-XXXXX + NOMOR WHATSAPP SAAT BOOKING</div></div>
-      <button class="btn btn-ink" id="btnCheckBooking4">Lacak Booking Saya</button>
-    </div>
+<section class="track-strip" id="lacak">
+  <div class="wrap track-in">
+    <div><h2>Sudah punya kode booking?</h2><p>LACAK DENGAN KODE BK-XXXXX + NOMOR WHATSAPP SAAT BOOKING</p></div>
+    <button class="btn btn-ink" id="btnCheckBooking4">Lacak Booking</button>
   </div>
 </section>
 
 <!-- NEWSLETTER -->
-<section class="news-zone" style="padding:38px 0">
+<section class="news-zone">
   <div class="wrap news-in">
-    <div><h3>Catatan lapangan, sebulan sekali</h3><p>Jadwal open trip, alat baru, dan promo sewa — dikirim hemat, tanpa spam.</p></div>
+    <div><h2>Catatan lapangan, sebulan sekali</h2><p>Jadwal open trip, alat baru, dan promo sewa — dikirim hemat, tanpa spam.</p></div>
     <form class="news-form" id="newsForm">
-      <input type="email" required placeholder="Alamat email kamu" aria-label="Alamat email">
-      <button class="btn btn-survey" type="submit">Ikut</button>
+      <input type="email" required placeholder="alamat@email.com" aria-label="Alamat email">
+      <button class="btn btn-ink" type="submit">Berlangganan</button>
     </form>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer class="site" id="kontak">
-  <svg class="contour-bg" aria-hidden="true"><use href="#konturLines"/></svg>
   <div class="wrap">
     <div class="ft-grid">
       <div class="ft-brand">
         <a class="logo" href="#beranda">BK ADVENTURE<small>PETA LAPANGAN — MEDAN</small></a>
-        <p>Rental alat outdoor dengan booking berbasis tanggal. Pilih tanggal, alat tersedia terlihat jelas, bayar, dan berangkat.</p>
-        <div class="ft-coords">DEPOT — 3.5952° N, 98.6722° E · MEDAN</div>
+        <p>Rental alat camping &amp; open trip berbasis di Medan. Pilih tanggal, lihat alat yang tersedia, bayar, dan berangkat.</p>
+        <div class="ft-coords">3.5952° N, 98.6722° E · MEDAN, SUMATERA UTARA</div>
       </div>
       <div>
         <h4>Jelajah</h4>
         <ul>
-          <li><a href="#katalog">Semua Produk</a></li>
-          <li><a href="#paket">Paket Rute Siap Jalan</a></li>
-          <li><a href="#opentrip">Open Trip</a></li>
+          <li><a href="#beranda">Beranda</a></li>
+          <li><a href="#katalog">Katalog</a></li>
+          <li><a href="#paket">Paket</a></li>
           <li><a href="#cara-sewa">Cara Sewa</a></li>
+          <li><a href="#opentrip">Open Trip</a></li>
+          <li><a href="tentang-kami.html">Titik Berangkat</a></li>
         </ul>
       </div>
       <div>
         <h4>Bantuan</h4>
         <ul>
+          <li><a href="tentang-kami.html">Tentang Kami</a></li>
+          <li><a href="tentang-kami.html#area">Area Layanan</a></li>
+          <li><a href="tentang-kami.html#faq">Tanya Jawab (FAQ)</a></li>
+          <li><a href="tentang-kami.html#kontak">Kontak &amp; Lokasi</a></li>
           <li><a href="#" id="btnCheckBooking2">Lacak / Cek Status Booking</a></li>
-          <li><a href="#cara-sewa">Syarat &amp; Deposit</a></li>
-          <li><a href="#katalog">Cek Ketersediaan</a></li>
         </ul>
       </div>
       <div>
@@ -652,13 +829,13 @@ footer.site .contour-bg{width:700px;height:700px;right:-240px;top:-300px;opacity
       </div>
     </div>
     <div class="ft-bottom">
-      <span>BK ADVENTURE — BK-ADVENTURE.MY.ID</span>
-      <span style="margin-left:auto">PETA LAPANGAN · KONTUR © 2026</span>
+      <span>BK ADVENTURE — JASA-RENTAL.MY.ID/BK-ADVENTURE</span>
+      <span style="margin-left:auto">SEWA ALAT CAMPING &amp; OPEN TRIP — MEDAN</span>
     </div>
   </div>
 </footer>
 
-<!-- DRAWER -->
+
 <div class="backdrop" id="backdrop"></div>
 <div class="drawer-clip">
 <aside class="drawer" id="cartDrawer" aria-label="Daftar muatan">
@@ -773,7 +950,7 @@ footer.site .contour-bg{width:700px;height:700px;right:-240px;top:-300px;opacity
         </div>
         <div id="coSummary" style="font-size:14px;display:grid;gap:5px"></div>
         <div style="background:var(--paper);border:1.5px solid var(--line);border-radius:10px;padding:13px 15px;font-size:13.5px;margin-top:16px">
-          Admin akan memverifikasi bukti pembayaranmu. Langkah berikutnya: datang ke depot pada tanggal mulai, bawa KTP (nomor NIK dicatat di depot), bayar deposit jaminan tunai, lalu ambil barangmu. Admin menghubungimu via WhatsApp bila ada kendala.
+          Admin akan memverifikasi bukti pembayaranmu. Langkah berikutnya: datang ke depot pada tanggal mulai dan tunjukkan kode booking ini. Admin mencatat jenis kartu identitasmu (KTP/KTM/SIM/Paspor/Kartu Pelajar/lainnya) — nomor atau foto kartunya — lalu bayar deposit jaminan tunai dan ambil barangmu. Admin menghubungimu via WhatsApp bila ada kendala.
         </div>
         <button class="btn btn-ink" id="coDone" style="width:100%;justify-content:center;margin-top:16px">Selesai</button>
       </div>
@@ -878,9 +1055,18 @@ function applyConfig() {
   });
   if (SITE.heroHeading) { const h = document.querySelector('.hero-copy h1'); if (h) h.innerHTML = escHtml(SITE.heroHeading); }
   if (SITE.heroDescription) { const p = document.querySelector('.hero-copy p.lead'); if (p) p.textContent = SITE.heroDescription; }
-  if (SITE.heroImage) { const im = document.querySelector('.hero-photo img'); if (im) im.src = SITE.heroImage; }
+  if (SITE.heroImage) { const im = document.querySelector('.hero-img') || document.querySelector('.hero-photo img'); if (im) im.src = SITE.heroImage; }
   const tagB = document.querySelector('.hero-photo .tag b'); if (tagB) tagB.textContent = 'DEPOT ' + brand;
-  const fn = document.querySelector('.field-notes .v'); if (fn) fn.textContent = CATALOG.length + ' item asli';
+  const fn = document.querySelector('.trust-strip .t-value'); if (fn) fn.textContent = CATALOG.length + ' item asli';
+  const ab = document.getElementById('announceBar');
+  if (ab) {
+    const al = SITE.announceLeft || '', ar = SITE.announceRight || '';
+    if (al || ar) {
+      const el = document.getElementById('announceLeft'); if (el) el.textContent = al;
+      const er = document.getElementById('announceRight'); if (er) er.textContent = ar;
+      ab.hidden = false;
+    } else { ab.hidden = true; }
+  }
   const fc = document.querySelector('.ft-coords'); if (fc && SITE.address) fc.textContent = String(SITE.address).toUpperCase();
   const sc = document.querySelector('.stamp .st-coord'); if (sc) sc.textContent = '3.5952° N · 98.6722° E — DEPOT ' + brand;
   const fb = document.querySelector('.ft-bottom span'); if (fb) fb.textContent = brand + ' — JASA-RENTAL.MY.ID/BK-ADVENTURE';
@@ -896,6 +1082,24 @@ function applyConfig() {
   PAYMENT_QR = validPayQrSrc(SITE.paymentQr);
   renderPayMethodOptions();
   if (SITE.openTripEnabled === false) { const t = document.getElementById('opentrip'); if (t) t.style.display = 'none'; }
+  buildLdBusiness(brand);
+}
+
+function buildLdBusiness(brand) {
+  const el = document.getElementById('ldBusiness');
+  if (!el) return;
+  const ld = {
+    '@context': 'https://schema.org',
+    '@type': 'Store',
+    name: brand,
+    url: 'https://jasa-rental.my.id/bk-adventure/',
+    openingHours: 'Mo-Su 08:00-21:00',
+    areaServed: ['Medan', 'Deli Serdang', 'Binjai', 'Berastagi']
+  };
+  const wa = String(SITE.depotPhone || '').replace(/[^0-9]/g, '');
+  if (wa) ld.telephone = '+62' + (wa.startsWith('0') ? wa.slice(1) : wa.replace(/^62/, ''));
+  if (SITE.address) ld.address = { '@type': 'PostalAddress', streetAddress: String(SITE.address), addressRegion: 'Sumatera Utara', addressCountry: 'ID' };
+  el.textContent = JSON.stringify(ld);
 }
 async function loadServerData() {
   const errBox = $('#srvError');
@@ -1041,6 +1245,8 @@ function renderCats() {
        <span class="ct">${r.n} ITEM</span><span class="arr">&rarr;</span></button>`).join("");
   $("#chipRow").innerHTML = ["Semua", ...cats].map(c =>
     `<button class="chip ${activeCat === c ? "active" : ""}" data-cat="${escHtml(c)}">${escHtml(c)}</button>`).join("");
+  const bc = document.getElementById("bbCat");
+  if (bc) bc.innerHTML = rows.map(r => `<option value="${escHtml(r.name)}"${activeCat === r.name ? " selected" : ""}>${escHtml(r.name === "Semua" ? "Semua Kategori" : r.label)}</option>`).join("");
 }
 function setCategory(c) {
   activeCat = c; renderCats(); renderProducts();
@@ -1112,8 +1318,7 @@ function renderProducts() {
       <div class="prod-body">
         <div class="prod-cat">${escHtml(it.category)}</div>
         <div class="prod-name">${escHtml(it.name)}</div>
-        <div class="prod-cond">${escHtml(it.condition || "")}</div>
-        ${spec ? `<div class="prod-spec">${escHtml(spec)}</div>` : ""}
+        <div class="prod-meta">${escHtml([it.condition || "", spec].filter(Boolean).join(" · "))}</div>
         <div class="avail ${av.full ? "full" : ""}"><span class="sq"></span>${av.txt}</div>
         <div class="prod-price">${price}${est}</div>
         ${btn}
@@ -1222,7 +1427,7 @@ function renderPackages() {
     <div class="pkg-body">
       <div class="pkg-top"><h3>${escHtml(p.name)}</h3><span class="pkg-dur">RUTE ${String(i + 1).padStart(2, "0")} · ${escHtml(p.duration || "")}</span></div>
       <p class="pkg-desc">${escHtml(p.description || "")}</p>
-      <div class="legend"><div class="lg-t">Legenda — Isi Paket</div>
+      <div class="legend"><div class="lg-t">ISI PAKET:</div>
       <ul class="pkg-items">${(p.items || []).map(x => `<li>${checkSvg}${escHtml(x)}</li>`).join("")}</ul></div>
       <div class="pkg-foot">
         <div class="pkg-price"><b>${rp(p.price)}</b><span>PER PAKET · ${escHtml(p.duration || "")}</span></div>
@@ -1863,6 +2068,8 @@ document.addEventListener("click", e => {
   if (e.target.closest("[data-close-mb]")) closeMyBookings();
 });
 $("#bbCheck").addEventListener("click", applyBookingBar);
+const bbCatEl = $("#bbCat");
+if (bbCatEl) bbCatEl.addEventListener("change", () => { activeCat = bbCatEl.value; renderCats(); renderProducts(); });
 $("#bbStart").addEventListener("change", () => { if ($("#bbStart").value) applyBookingBar(); });
 $("#btnCheckBooking1").addEventListener("click", () => { closeCart(); openCheck(); });
 $("#btnCheckBooking2").addEventListener("click", e => { e.preventDefault(); openCheck(); });
