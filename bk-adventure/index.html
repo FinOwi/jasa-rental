@@ -455,7 +455,6 @@ footer.site .contour-bg{width:700px;height:700px;right:-240px;top:-300px;opacity
           <button type="button" id="mmLogout">Keluar</button>
         </div>
       </div>
-      <button class="icon-btn" id="btnAdmin" aria-label="Admin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg></button>
       <button class="icon-btn" id="btnCart" aria-label="Keranjang"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg><span class="cart-badge" id="cartCount">0</span></button>
       <button class="icon-btn" id="btnMenu" aria-label="Menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     </div>
@@ -1862,7 +1861,6 @@ $("#coDays").addEventListener("input", refreshCoTotals);
 $("#coStart").addEventListener("change", refreshCoTotals);
 $("#searchInput").addEventListener("input", e => { query = e.target.value; renderProducts(); });
 $("#btnViewAll").addEventListener("click", () => { activeCat = "Semua"; query = ""; $("#searchInput").value = ""; renderCats(); renderProducts(); });
-$("#btnAdmin").addEventListener("click", () => toast("Panel admin khusus pemilik toko — tidak ditautkan dari halaman pelanggan."));
 $("#btnMenu").addEventListener("click", () => $("#mobileNav").classList.toggle("open"));
 document.querySelectorAll("#mobileNav a").forEach(a => a.addEventListener("click", () => $("#mobileNav").classList.remove("open")));
 $("#newsForm").addEventListener("submit", e => { e.preventDefault(); toast("Terima kasih sudah berlangganan. Info trip & promo akan kami kirim ke email kamu."); e.target.reset(); });
