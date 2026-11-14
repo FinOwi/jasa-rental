@@ -481,6 +481,9 @@
     .cfg-form > .cfg-folder { margin-bottom: 0; scroll-margin-top: 78px; }
     .cfg-folder-in { padding: var(--sp-panel); }
     @media (max-width: 720px) { .cfg-folder-in { padding: 18px 16px; } }
+    .cfg-subblock { scroll-margin-top: 120px; }
+    .cfg-subblock + .cfg-subblock { margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--border); }
+    .cfg-subhead { font-family: var(--serif); font-size: 17px; font-weight: 700; color: var(--forest); margin-bottom: 14px; }
 
     /* Responsive */
     @media (max-width: 900px) {
@@ -777,19 +780,21 @@
         <div class="tab-panel" id="tab-identity">
       <form id="formIdentity" onsubmit="saveIdentity(event)" class="cfg-form">
         <div class="cfg-nav">
-        <a href="#sec-brand" onclick="cfgNavGo('brand')">Brand &amp; Logo</a>
-        <a href="#sec-announce" onclick="cfgNavGo('announce')">Announcement</a>
-        <a href="#sec-hero" onclick="cfgNavGo('hero')">Hero</a>
+        <a href="#sec-brand" onclick="cfgNavGo('tampilan')">Brand &amp; Logo</a>
+        <a href="#sec-announce" onclick="cfgNavGo('tampilan')">Announcement</a>
+        <a href="#sec-hero" onclick="cfgNavGo('tampilan')">Hero</a>
         <a href="#sec-paket" onclick="cfgNavGo('paket')">Paket</a>
         <a href="#sec-pembayaran" onclick="cfgNavGo('pembayaran')">Pembayaran</a>
         <a href="#sec-ketentuan" onclick="cfgNavGo('ketentuan')">Ketentuan</a>
         <a href="#sec-lokasi" onclick="cfgNavGo('lokasi')">Lokasi</a>
         <a href="#sec-struk" onclick="cfgNavGo('struk')">Struk</a>
-        <a href="#sec-footer" onclick="cfgNavGo('footer')">Footer</a>
+        <a href="#sec-footer" onclick="cfgNavGo('tampilan')">Footer</a>
         </div>
-        <div class="renter-folder cfg-folder" id="sec-brand" data-cfg-folder="brand">
-          <div class="renter-folder-head" role="button" tabindex="0" aria-expanded="false" onclick="toggleCfgFolder('brand')" onkeydown="cfgFolderKey(event,'brand')"><span class="folder-ic"><svg class="icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span><span class="folder-main"><span class="folder-name">Ganti Identitas Brand</span></span><span class="folder-chevron"><svg class="icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
+        <div class="renter-folder cfg-folder" id="sec-tampilan" data-cfg-folder="tampilan">
+          <div class="renter-folder-head" role="button" tabindex="0" aria-expanded="false" onclick="toggleCfgFolder('tampilan')" onkeydown="cfgFolderKey(event,'tampilan')"><span class="folder-ic"><svg class="icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span><span class="folder-main"><span class="folder-name">Tampilan Website</span></span><span class="folder-chevron"><svg class="icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
           <div class="renter-folder-body"><div class="cfg-folder-in">
+            <div class="cfg-subblock" id="sec-brand">
+              <div class="cfg-subhead">Ganti Identitas Brand</div>
 <div style="background:#EEF5F0; border:1px solid var(--border); border-left:4px solid var(--forest); padding:12px 14px; margin-bottom:18px; font-size:12px; line-height:1.6; color:var(--text-muted);">
                 <strong style="color:var(--forest);">Terhubung ke Index:</strong>
                 perubahan yang disimpan di sini memakai konfigurasi storefront yang sama. Index v25 yang sedang terbuka di tab lain akan memperbarui tampilannya otomatis; index yang baru dibuka akan langsung memakai data terbaru.
@@ -817,11 +822,10 @@
               
 
               <div style="height:1px; background:var(--border); margin:20px 0;"></div>
-        </div></div>
-        </div>
-        <div class="renter-folder cfg-folder" id="sec-announce" data-cfg-folder="announce">
-          <div class="renter-folder-head" role="button" tabindex="0" aria-expanded="false" onclick="toggleCfgFolder('announce')" onkeydown="cfgFolderKey(event,'announce')"><span class="folder-ic"><svg class="icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span><span class="folder-main"><span class="folder-name">Announcement Bar</span></span><span class="folder-chevron"><svg class="icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
-          <div class="renter-folder-body"><div class="cfg-folder-in">
+        
+            </div>
+            <div class="cfg-subblock" id="sec-announce">
+              <div class="cfg-subhead">Announcement Bar</div>
               <div class="form-row">
                 <div class="form-group">
                   <label class="form-label">Teks Kiri Announcement Bar</label>
@@ -833,13 +837,10 @@
                 </div>
               </div>
               <div style="font-size:11px; color:var(--text-subtle);">Announcement bar adalah strip teks tipis di paling atas storefront &mdash; teks kiri tampil di awal bar, teks kanan di ujungnya.</div>
-            </div></div>
-        </div>
-        <div class="renter-folder cfg-folder" id="sec-hero" data-cfg-folder="hero">
-          <div class="renter-folder-head" role="button" tabindex="0" aria-expanded="false" onclick="toggleCfgFolder('hero')" onkeydown="cfgFolderKey(event,'hero')"><span class="folder-ic"><svg class="icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span><span class="folder-main"><span class="folder-name">Konten Hero Section</span></span><span class="folder-chevron"><svg class="icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
-          <div class="renter-folder-body"><div class="cfg-folder-in">
-
-
+            
+            </div>
+            <div class="cfg-subblock" id="sec-hero">
+              <div class="cfg-subhead">Konten Hero Section</div>
               <div class="form-group">
                 <label class="form-label">Foto Hero Background (lebar minimal 1920px)</label>
                 <input type="file" class="form-input" id="cfgHeroImageFile" accept="image/*" onchange="handleHeroImageUpload(event)" style="padding:6px 12px;">
@@ -880,6 +881,28 @@
               </div></div>
 
               <div style="height:1px; background:var(--border); margin:20px 0;"></div>
+        
+            </div>
+            <div class="cfg-subblock" id="sec-footer">
+              <div class="cfg-subhead">Footer Website</div>
+              <div class="form-row">
+                <div class="form-row"><div class="form-group">
+                  <label class="form-label">Nama Brand Footer</label>
+                  <input type="text" class="form-input" id="cfgFooterBrand">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Tagline Footer</label>
+                  <input type="text" class="form-input" id="cfgFooterTagline">
+                </div></div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Teks Copyright Footer</label>
+                <input type="text" class="form-input" id="cfgFooterCopyright">
+              </div>
+
+              <div style="height:1px; background:var(--border); margin:20px 0;"></div>
+        
+            </div>
         </div></div>
         </div>
         <div class="renter-folder cfg-folder" id="sec-paket" data-cfg-folder="paket">
@@ -1065,28 +1088,6 @@
                 </div>
                 <div id="btUnsupported" style="display:none; font-size:12px; color:var(--text-subtle);">Browser ini tidak mendukung Web Bluetooth (perlu Chrome di Android). Cetak tetap bisa lewat tombol STRUK (dialog print) atau PDF.</div>
               </div>
-        </div></div>
-        </div>
-        <div class="renter-folder cfg-folder" id="sec-footer" data-cfg-folder="footer">
-          <div class="renter-folder-head" role="button" tabindex="0" aria-expanded="false" onclick="toggleCfgFolder('footer')" onkeydown="cfgFolderKey(event,'footer')"><span class="folder-ic"><svg class="icon" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span><span class="folder-main"><span class="folder-name">Footer Website</span></span><span class="folder-chevron"><svg class="icon" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></span></div>
-          <div class="renter-folder-body"><div class="cfg-folder-in">
-
-              <div class="form-row">
-                <div class="form-row"><div class="form-group">
-                  <label class="form-label">Nama Brand Footer</label>
-                  <input type="text" class="form-input" id="cfgFooterBrand">
-                </div>
-                <div class="form-group">
-                  <label class="form-label">Tagline Footer</label>
-                  <input type="text" class="form-input" id="cfgFooterTagline">
-                </div></div>
-              </div>
-              <div class="form-group">
-                <label class="form-label">Teks Copyright Footer</label>
-                <input type="text" class="form-input" id="cfgFooterCopyright">
-              </div>
-
-              <div style="height:1px; background:var(--border); margin:20px 0;"></div>
         </div></div>
         </div>
         <div class="cfg-savebar">
