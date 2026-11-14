@@ -913,7 +913,7 @@ footer.site{padding:48px 0 24px}
           <div class="sum-row total" style="margin-bottom:0"><span>Perkiraan Total</span><span class="mono" id="coTotal">Rp0</span></div>
         </div>
         <div class="field"><label>Nama Lengkap</label><input id="coName" required placeholder="Nama penyewa"></div>
-        <div class="field"><label>Nomor WhatsApp</label><input id="coPhone" required inputmode="tel" placeholder="08xxxxxxxxxx"></div>
+        <div class="field"><label>Nomor WhatsApp</label><input type="tel" id="coPhone" required inputmode="tel" placeholder="08xxxxxxxxxx"></div>
         <div class="field-row">
           <div class="field"><label>Tanggal Mulai</label><input type="date" id="coStart" required></div>
           <div class="field"><label>Durasi Sewa (hari)</label><input type="number" id="coDays" min="1" max="30" value="2" required></div>
@@ -980,7 +980,7 @@ footer.site{padding:48px 0 24px}
       <h3 class="ttl">Lacak Status Booking</h3>
       <form id="ckForm">
         <div class="field"><label>Kode Booking</label><input id="ckCode" required placeholder="Contoh: BK-7F3K2" style="text-transform:uppercase"></div>
-        <div class="field"><label>Nomor WhatsApp saat booking</label><input id="ckPhone" required inputmode="tel" placeholder="08xxxxxxxxxx"></div>
+        <div class="field"><label>Nomor WhatsApp saat booking</label><input type="tel" id="ckPhone" required inputmode="tel" placeholder="08xxxxxxxxxx"></div>
         <button class="btn btn-survey" type="submit" style="width:100%;justify-content:center">Lacak Booking</button>
       </form>
       <div id="ckResult" style="display:none;margin-top:18px"></div>
@@ -1736,6 +1736,14 @@ $("#coForm").addEventListener("submit", async e => {
       proofName: coProofFile ? coProofFile.name : ""
     }
   };
+  // Validasi data penyewa DULU — urutan mengikuti urutan isi formulir.
+  // Aturannya sama dengan server (create_booking); klien hanya memberi
+  // tahu lebih cepat supaya pelanggan tidak terlanjur unggah bukti.
+  const todayId = (() => { const t = new Date(); return t.getFullYear() + "-" + String(t.getMonth() + 1).padStart(2, "0") + "-" + String(t.getDate()).padStart(2, "0"); })();
+  if (payload.name.trim().length < 3) { toast("Isi nama penyewa dulu (min. 3 huruf)."); $("#coName").focus(); return; }
+  if (!/^628\d{7,12}$/.test(normPhone(payload.phone))) { toast("Isi nomor WhatsApp yang valid (mulai 08)."); $("#coPhone").focus(); return; }
+  if (!payload.startDate) { toast("Pilih tanggal ambil dulu."); $("#coStart").focus(); return; }
+  if (payload.startDate < todayId) { toast("Tanggal ambil tidak boleh di masa lalu."); $("#coStart").focus(); return; }
   if (!payload.payment.method) { toast("Pilih metode pembayaran dulu."); return; }
   if (payload.payment.sender.trim().length < 3) { toast("Isi nama pengirim pembayaran."); return; }
   if (!coProofFile) { toast("Upload bukti pembayaran dulu — booking wajib dibayar di muka."); $("#coPayProof").focus(); return; }
