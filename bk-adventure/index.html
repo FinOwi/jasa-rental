@@ -1119,10 +1119,35 @@ async function loadServerData() {
     const tid = await sbResolveTenant();
     if (!tid) throw new Error('tenant tidak teratasi');
     const H = { 'apikey': KONFIG.SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + KONFIG.SUPABASE_ANON_KEY };
-    const [rc, rk] = await Promise.all([
-      fetch(KONFIG.SUPABASE_URL + '/rest/v1/site_config?tenant_id=eq.' + tid + '&select=config', { headers: H }),
-      fetch(KONFIG.SUPABASE_URL + '/rest/v1/catalog_items?tenant_id=eq.' + tid + '&select=data&order=item_id', { headers: H })
-    ]);
+    // Baca config & katalog UTAMA lewat RPC per slug (shop_config /
+    // shop_catalog) — jalur ini yang tetap terbuka sesudah policy baca
+    // publik tabel dicabut (hardening RLS). Bila RPC belum terpasang /
+    // gagal, jatuh ke baca tabel langsung seperti sebelumnya.
+    let confRows = null, catRows = null;
+    try {
+      const HJ = Object.assign({ 'Content-Type': 'application/json' }, H);
+      const [rpc, rpk] = await Promise.all([
+        fetch(KONFIG.SUPABASE_URL + '/rest/v1/rpc/shop_config', { method: 'POST', headers: HJ, body: JSON.stringify({ s: TENANT_SLUG }) }),
+        fetch(KONFIG.SUPABASE_URL + '/rest/v1/rpc/shop_catalog', { method: 'POST', headers: HJ, body: JSON.stringify({ s: TENANT_SLUG }) })
+      ]);
+      if (rpc.ok && rpk.ok) {
+        const cfgJ = await rpc.json();
+        const catJ = await rpk.json();
+        if (cfgJ && Array.isArray(catJ)) {
+          confRows = [{ config: cfgJ }];
+          catRows = catJ.map(data => ({ data }));
+        }
+      }
+    } catch (e) { /* RPC tak terjangkau — fallback tabel di bawah */ }
+    if (!confRows) {
+      const [rc, rk] = await Promise.all([
+        fetch(KONFIG.SUPABASE_URL + '/rest/v1/site_config?tenant_id=eq.' + tid + '&select=config', { headers: H }),
+        fetch(KONFIG.SUPABASE_URL + '/rest/v1/catalog_items?tenant_id=eq.' + tid + '&select=data&order=item_id', { headers: H })
+      ]);
+      if (!rc.ok || !rk.ok) throw new Error('HTTP ' + rc.status + '/' + rk.status);
+      confRows = await rc.json();
+      catRows = await rk.json();
+    }
     // Stok live: agregat unit terikat booking TERKONFIRMASI (RPC live_stock).
     // Kegagalan fetch/RPC belum terpasang -> LIVE_HELD kosong -> tampilan
     // persis seperti sebelumnya (stok server apa adanya).
@@ -1134,9 +1159,6 @@ async function loadServerData() {
       });
       LIVE_HELD = rl.ok ? (await rl.json()) || {} : {};
     } catch (e) { LIVE_HELD = {}; }
-    if (!rc.ok || !rk.ok) throw new Error('HTTP ' + rc.status + '/' + rk.status);
-    const confRows = await rc.json();
-    const catRows = await rk.json();
     SITE = (confRows.length && confRows[0].config) || {};
     CATALOG = catRows.map(r => r.data);
     PACKAGES = (SITE.packages || []).map(p => Object.assign({}, p, { type: 'package' }));
