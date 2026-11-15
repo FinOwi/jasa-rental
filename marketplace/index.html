@@ -452,38 +452,13 @@ const CATS = [
   ['elektronik','Elektronik'],['kamera','Kamera & Fotografi'],['hiburan','Mainan & Hiburan'],['event','Event & Pesta'],
   ['alat','Alat & Perkakas'],['bayi','Bayi & Anak'],['properti','Properti & Kos'],['lainnya','Lainnya']
 ];
-let STORES = {
-  bk:   {name:'BK Adventure', city:'Medan', verified:true, rekber:true, pro:true, since:'Terverifikasi sejak Nov 2026', products:18, rating:4.9, reviews:214},
-  rcm:  {name:'RentCar Medan', city:'Medan', verified:true, rekber:true, pro:false, since:'Terverifikasi sejak Okt 2026', products:12, rating:4.9, reviews:187},
-  kks:  {name:'KameraKu Studio', city:'Jakarta', verified:true, rekber:true, pro:true, since:'Terverifikasi sejak Sep 2026', products:26, rating:4.9, reviews:243},
-  ppro: {name:'Panggung Pro', city:'Bandung', verified:true, rekber:false, pro:false, since:'Terverifikasi sejak Agu 2026', products:9, rating:4.7, reviews:58},
-  gb:   {name:'Griya Busana', city:'Surabaya', verified:false, rekber:false, pro:false, since:'', products:14, rating:0, reviews:2},
-  mc:   {name:'Mainan Ceria', city:'Jakarta', verified:true, rekber:false, pro:true, since:'Terverifikasi sejak Okt 2026', products:21, rating:4.8, reviews:129},
-  gr:   {name:'GadgetRent', city:'Bandung', verified:false, rekber:false, pro:false, since:'', products:11, rating:4.6, reviews:54}
-};
-let PRODUCTS = [
-  {id:1, name:'Tenda Dome Kapasitas 4 Orang — Double Layer', store:'bk', cat:'outdoor', catLabel:'Outdoor & Camping', price:45000, period:'hari', stock:6, rating:4.9, reviews:132, img:'https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/8983722fcd7f48c090e38d4bf77b043d~tplv-o3syd03w52-crop-webp:1600:1600.webp?dr=15592&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=e1be8f53&idc=my2&from=2378011839', desc:'Tenda dome double layer, frame alloy, tahan hujan deras. Sudah termasuk footprint & pasak lengkap.', terms:'Jaminan: KTP dititip di depot · Deposit tunai Rp100rb saat ambil, kembali penuh bila barang utuh'},
-  {id:2, name:'Sony A6400 + Lensa Kit 16-50mm', store:'kks', cat:'kamera', catLabel:'Kamera & Fotografi', price:150000, period:'hari', stock:3, rating:4.9, reviews:167, img:'https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//89/MTA-3103882/sony_sony-alpha-a6400-kit-16-50mm_full06.jpg', desc:'Mirrorless APS-C 24MP, cocok untuk konten & event. Termasuk 2 baterai, charger, tas, dan memori 64GB.', terms:'Jaminan: KTP + deposit Rp500rb · Cek fungsi bersama saat serah terima'},
-  {id:3, name:'Toyota Avanza 1.3 G — Lepas Kunci / Dengan Sopir', store:'rcm', cat:'kendaraan', catLabel:'Kendaraan', price:350000, period:'hari', stock:2, rating:4.9, reviews:210, img:'https://www.autocar.co.uk/sites/autocar.co.uk/files/slideshow_image/16_toyota_avanza.jpg', desc:'Unit 2022 terawat, AC dingin, 7 penumpang. BBM awal penuh, kembali penuh. Opsi sopir +Rp150rb/hari.', terms:'Jaminan: KTP + SIM A aktif · Deposit Rp1jt (Rekber dapat menahan deposit juga — segera)'},
-  {id:4, name:'Carrier Gunung 60L — Anti Air', store:'bk', cat:'outdoor', catLabel:'Outdoor & Camping', price:25000, period:'hari', stock:4, rating:4.8, reviews:86, img:'https://cf.shopee.co.id/file/41fc444f0d03fc41e35a0f57e8734439', desc:'Carrier 60 liter dengan rain cover, back system empuk, cocok pendakian 2–4 hari.', terms:'Jaminan: KTP dititip di depot · Kembali bersih & kering'},
-  {id:5, name:'Paket Sound System 5000 Watt + Operator', store:'ppro', cat:'event', catLabel:'Event & Pesta', price:850000, period:'hari', stock:1, rating:0, reviews:2, img:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg2-ocwb490c6V7gYWJXgjfT2kEjhM5fE7X48n9xzp-SOmjey1hET0gdnR4bZ56HVwgtga-X6-a9pXWils5JSgsvX4QM-I5dMO9GecCb9K3OknXoOl3kaMNqRA5LpX8Si8FYd2ZdZLs_7Xw8gj5fT3qxVDFBmxOcV57plOALs3KlFjB7RnPta581RzMSt68/s752/sound-system-6.jpeg', desc:'Line array + subwoofer, mixer digital, 4 mic wireless, termasuk operator & antar-pasang area Bandung.', terms:'Booking H-3 · DP 50% · Pelunasan saat acara selesai'},
-  {id:6, name:'PlayStation 5 + 2 Stik + 10 Game', store:'mc', cat:'hiburan', catLabel:'Mainan & Hiburan', price:60000, period:'hari', stock:2, rating:4.8, reviews:98, img:'https://gamermalaya.my/wp-content/uploads/2020/06/PS5-Melintang-Putih.jpg', desc:'PS5 disc version, 2 DualSense, 10 game bebas pilih dari daftar. Antar-jemput Jakarta +Rp30rb.', terms:'Jaminan: KTP · Deposit Rp200rb'},
-  {id:7, name:'DJI Mini 3 — Drone 4K Ringan', store:'kks', cat:'kamera', catLabel:'Kamera & Fotografi', price:200000, period:'hari', stock:0, rating:4.8, reviews:74, img:'https://bm.soyacincau.com/wp-content/uploads/2022/12/221212-dji-mini-3-01-1024x614.jpg', desc:'Drone di bawah 249 gram, video 4K HDR, 3 baterai + tas. Cocok untuk konten perjalanan & properti.', terms:'Jaminan: KTP + deposit Rp1jt · Dilarang terbang di zona larangan'},
-  {id:8, name:'Kebaya Wisuda Modern — Ukuran S–XL', store:'gb', cat:'fashion', catLabel:'Fashion & Kostum', price:75000, period:'hari', stock:5, rating:0, reviews:1, img:'https://i.pinimg.com/originals/ac/7c/b1/ac7cb12414494787249a498e03047152.jpg', desc:'Kebaya brokat modern dengan rok lilit, sudah laundry & press. Fitting di toko by appointment.', terms:'Jaminan: KTP · Kembali dalam kantong pakaian'},
-  {id:9, name:'Proyektor Mini 1080p — 3000 Lumens', store:'gr', cat:'elektronik', catLabel:'Elektronik', price:50000, period:'hari', stock:7, rating:4.6, reviews:54, img:'https://down-ph.img.susercontent.com/file/ph-11134201-7r98s-m07f8sjnud5026@resize_w423_nl.webp', desc:'Proyektor mini terang untuk nobar, presentasi, dan acara keluarga. Termasuk kabel HDMI & remote.', terms:'Jaminan: KTP · Deposit Rp150rb'},
-  {id:10, name:'Stroller Bayi Lipat Kabin — 0–3 Tahun', store:'mc', cat:'bayi', catLabel:'Bayi & Anak', price:40000, period:'hari', stock:3, rating:4.7, reviews:41, img:'https://down-id.img.susercontent.com/file/id-11134207-8224u-mj84ta5op1j75e', desc:'Stroller lipat satu tangan, ukuran kabin pesawat, kanopi UV, sudah dicuci & disanitasi.', terms:'Jaminan: KTP · Kembali bersih'}
-];
-const REVIEWS = [
-  {by:'Rani P.', stars:5, text:'Barang sesuai foto, bersih, dan admin fast-respon. Proses ambilnya cepat, deposit kembali penuh.', reply:'Makasih banyak kak Rani, ditunggu sewa berikutnya ya.'},
-  {by:'Dimas A.', stars:5, text:'Sudah 3x sewa di sini lewat Rekber, tenang karena uang baru diteruskan sesudah barang kembali. Recommended.', reply:null},
-  {by:'Sari W.', stars:4, text:'Kondisi barang bagus, cuma lokasi depot agak masuk gang. Selain itu oke.', reply:'Makasih masukannya kak, titik maps sudah kami perbaiki.'}
-];
+let STORES = {};
+let PRODUCTS = [];
+let liveLoaded = false, liveFailed = false;
+const REVIEWS = [];
 const rupiah = n => 'Rp' + n.toLocaleString('id-ID');
-let state = {cat:'semua', pill:'semua', mode:'produk', query:'', city:'', sort:'rekomendasi', favs:new Set([1,3])};
-let bookings = [
-  {code:'JR-20261114-8K2Q', pid:1, qty:1, days:2, total:90000, mode:'rekber', status:'Dana ditahan platform', step:2},
-  {code:'JR-20261110-3M7X', pid:6, qty:1, days:1, total:60000, mode:'langsung', status:'Selesai', step:4}
-];
+let state = {cat:'semua', pill:'semua', mode:'produk', query:'', city:'', sort:'rekomendasi', favs:new Set()};
+let bookings = [];
 
 function rateHTML(p){
   if(p.reviews < 3) return '<span class="baru">Baru</span><span class="rc"> · ' + p.reviews + ' ulasan</span>';
@@ -541,10 +516,11 @@ function filtered(){
 }
 function render(){
   const grid = document.getElementById('grid');
+  if(!liveLoaded){ document.getElementById('count').textContent = 'Memuat produk…'; grid.innerHTML = '<div class="empty"><b>Sedang memuat</b>Mengambil produk &amp; stok terbaru langsung dari toko-toko…</div>'; renderFav(); return; }
   if(state.mode==='produk'){
     const list = filtered();
     document.getElementById('count').textContent = list.length + ' produk ditemukan';
-    grid.innerHTML = list.length ? list.map(cardHTML).join('') : '<div class="empty"><b>Tidak ada yang cocok</b>Coba longgarkan filter atau ganti kata kunci pencarianmu.</div>';
+    grid.innerHTML = list.length ? list.map(cardHTML).join('') : (liveFailed ? '<div class="empty"><b>Data toko belum bisa dimuat</b>Periksa koneksimu, lalu <a href="" onclick="location.reload();return false" style="color:var(--green-d);font-weight:800">coba lagi</a>.</div>' : '<div class="empty"><b>Tidak ada yang cocok</b>Coba longgarkan filter atau ganti kata kunci pencarianmu.</div>');
   } else {
     const keys = Object.keys(STORES).filter(k=>{
       const s=STORES[k];
@@ -565,6 +541,7 @@ function renderFav(){
 }
 function renderBookings(){
   const el = document.getElementById('bkList');
+  if(!bookings.length){ el.innerHTML = '<div class="empty"><b>Belum ada booking</b>Booking yang kamu buat akan tampil di sini.</div>'; return; }
   el.innerHTML = bookings.map(b=>{
     const p = PRODUCTS.find(x=>x.id===b.pid), s = STORES[p.store];
     const steps = ['Dibayar','Diambil','Disewa','Selesai'];
@@ -746,9 +723,9 @@ async function loadLive(){
   try{
     const r = await fetch(SB_URL + '/rest/v1/rpc/marketplace_listings', {method:'POST',
       headers:{'apikey':SB_KEY,'Authorization':'Bearer ' + SB_KEY,'Content-Type':'application/json'}, body:'{}'});
-    if(!r.ok) return;
+    if(!r.ok){ liveLoaded = true; liveFailed = true; render(); return; }
     const rows = await r.json();
-    if(!Array.isArray(rows) || !rows.length) return;
+    if(!Array.isArray(rows) || !rows.length){ liveLoaded = true; render(); return; }
     const stores = {}, prods = [];
     rows.forEach((row, i) => {
       if(!stores[row.slug]){
@@ -768,6 +745,7 @@ async function loadLive(){
     const fc = document.getElementById('fCity');
     Object.values(stores).forEach(s => { if(s.city && ![...fc.options].some(o=>o.value===s.city)){ const o=document.createElement('option'); o.value=s.city; o.textContent=s.city; fc.appendChild(o); } });
     document.getElementById('liveNote').style.display = 'block';
+    liveLoaded = true;
     render();
     /* Verifikasi & rating ASLI per toko dari server. Bila fungsi gagal,
        toko tampil tanpa badge dan produk berlabel "Baru" — tidak dikarang. */
@@ -785,7 +763,7 @@ async function loadLive(){
       }
     }));
     render();
-  }catch(e){ /* fungsi belum terpasang / jaringan gagal: data contoh tetap tampil */ }
+  }catch(e){ liveLoaded = true; liveFailed = true; render(); }
 }
 loadLive();
 </script>
