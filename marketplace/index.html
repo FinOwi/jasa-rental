@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Jasa Rental — Marketplace Rental</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#152219; --ink2:#43544a; --mut:#71806f;
+  --bg:#f5f3ee; --card:#ffffff; --line:#e5e1d8;
+  --green:#177245; --green-d:#0d4d2c; --green-soft:#e7f3ec;
+  --gold:#b07d0a; --gold-soft:#faf0d7;
+  --blue:#1a6fd4; --red:#b3261e; --red-soft:#fbeae8;
+  --amber:#8a5a00; --amber-bg:#fdf3d8; --amber-line:#ecd28a;
+  --r:16px; --sh:0 1px 2px rgba(21,34,25,.05),0 8px 24px -18px rgba(21,34,25,.35);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.45;padding-bottom:76px}
+button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,select{font:inherit;color:inherit}
+img{display:block}
+svg{flex:none}
+
+/* ---------- header ---------- */
+header{position:sticky;top:0;z-index:40;background:var(--ink);color:#f3efe4}
+.hwrap{max-width:1180px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:14px}
+.logo{display:flex;align-items:center;gap:9px;font-weight:800;font-size:18px;letter-spacing:-.02em;white-space:nowrap}
+.logo .mark{width:30px;height:30px;border-radius:9px;background:var(--green);display:grid;place-items:center;color:#fff}
+.logo small{display:block;font-size:10px;font-weight:600;color:#b9c6bb;letter-spacing:.08em;text-transform:uppercase}
+.hnav{display:none;gap:4px;margin-left:10px}
+.hnav button{padding:8px 12px;border-radius:99px;font-weight:600;font-size:14px;color:#cfd8cd}
+.hnav button.on{background:#ffffff1f;color:#fff}
+.hright{margin-left:auto;display:flex;align-items:center;gap:10px}
+.member{display:flex;align-items:center;gap:8px;background:#ffffff14;border:1px solid #ffffff2a;padding:6px 12px 6px 6px;border-radius:99px;font-weight:700;font-size:13px}
+.member .av{width:26px;height:26px;border-radius:50%;background:var(--gold-soft);color:var(--gold);display:grid;place-items:center;font-size:12px;font-weight:800}
+@media(min-width:860px){.hnav{display:flex}}
+
+/* ---------- hero & search ---------- */
+.hero{background:var(--ink);color:#f3efe4;padding:6px 16px 58px}
+.hero-in{max-width:1180px;margin:0 auto}
+.hero h1{font-size:clamp(24px,4.6vw,38px);font-weight:800;letter-spacing:-.02em;line-height:1.15;max-width:640px}
+.hero h1 em{font-style:normal;color:#8fd0ab}
+.hero p{color:#c3cec2;margin-top:8px;max-width:560px;font-size:14.5px}
+.search{max-width:1180px;margin:-42px auto 0;padding:0 16px;position:relative;z-index:5}
+.search-card{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--sh);padding:14px;display:grid;gap:10px}
+.sf{display:flex;flex-direction:column;gap:4px}
+.sf label{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--mut);display:flex;align-items:center;gap:5px}
+.sf select,.sf input{border:1px solid var(--line);border-radius:12px;padding:11px 12px;background:#fbfaf7;font-weight:600;width:100%}
+.sf select:focus,.sf input:focus{outline:2px solid var(--green);outline-offset:0;border-color:transparent}
+.btn-cari{background:var(--green);color:#fff;font-weight:800;border-radius:12px;padding:13px 20px;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-cari:active{background:var(--green-d)}
+@media(min-width:860px){.search-card{grid-template-columns:1.1fr 1fr 1fr 1.6fr auto;align-items:end}}
+
+/* ---------- main ---------- */
+main{max-width:1180px;margin:0 auto;padding:18px 16px 8px}
+.cats{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 10px;scrollbar-width:none}
+.cats::-webkit-scrollbar{display:none}
+.cat{flex:none;display:flex;align-items:center;gap:7px;padding:9px 14px;border-radius:99px;background:var(--card);border:1px solid var(--line);font-weight:700;font-size:13.5px;color:var(--ink2)}
+.cat.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.cat svg{opacity:.75}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:6px 0 14px}
+.pills{display:flex;gap:8px;flex-wrap:wrap}
+.pill{padding:8px 13px;border-radius:99px;border:1px solid var(--line);background:var(--card);font-weight:700;font-size:13px;color:var(--ink2);display:flex;align-items:center;gap:6px}
+.pill.on{background:var(--green-soft);border-color:var(--green);color:var(--green-d)}
+.toggle{margin-left:auto;display:flex;background:#eae7de;border-radius:99px;padding:3px}
+.toggle button{padding:7px 16px;border-radius:99px;font-weight:800;font-size:13px;color:var(--ink2)}
+.toggle button.on{background:var(--card);color:var(--ink);box-shadow:var(--sh)}
+.sortrow{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.sortrow .count{font-size:13.5px;color:var(--mut);font-weight:600}
+.sortrow select{margin-left:auto;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:8px 10px;font-weight:700;font-size:13px}
+
+/* ---------- cards ---------- */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(min-width:700px){.grid{grid-template-columns:repeat(3,1fr);gap:16px}}
+@media(min-width:1024px){.grid{grid-template-columns:repeat(4,1fr)}}
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;text-align:left;width:100%;box-shadow:var(--sh);display:flex;flex-direction:column}
+.pcard .ph{position:relative;aspect-ratio:4/3;background:#e9e6dd}
+.pcard .ph img{width:100%;height:100%;object-fit:cover}
+.fav{position:absolute;top:8px;right:8px;width:32px;height:32px;border-radius:50%;background:#fffffff2;display:grid;place-items:center;box-shadow:var(--sh)}
+.fav.on{color:#d33}
+.tagpro{position:absolute;top:8px;left:8px;background:var(--gold);color:#fff;font-size:10.5px;font-weight:800;letter-spacing:.06em;padding:4px 8px;border-radius:7px}
+.tagcat{position:absolute;bottom:8px;left:8px;background:#152219cc;color:#fff;font-size:11px;font-weight:700;padding:4px 9px;border-radius:99px;backdrop-filter:blur(2px)}
+.habistag{position:absolute;inset:0;background:#152219a8;color:#fff;display:grid;place-items:center;font-weight:800;letter-spacing:.04em}
+.pbody{padding:11px 12px 13px;display:flex;flex-direction:column;gap:5px;flex:1}
+.pname{font-weight:800;font-size:14.5px;letter-spacing:-.01em;line-height:1.3}
+.srow{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--ink2);font-weight:600;min-width:0}
+.srow .sav{width:18px;height:18px;border-radius:6px;background:var(--green-soft);color:var(--green-d);display:grid;place-items:center;font-size:10px;font-weight:800;flex:none}
+.srow .sname{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rate{display:flex;align-items:center;gap:5px;font-size:12.5px;font-weight:700}
+.rate .star{color:#e8a10c}
+.rate .rc{color:var(--mut);font-weight:600}
+.baru{font-size:11px;font-weight:800;color:var(--blue);background:#e8f1fc;padding:2px 7px;border-radius:99px}
+.stok{font-size:12.5px;font-weight:700;color:var(--green-d);display:flex;align-items:center;gap:5px}
+.stok.habis{color:var(--red)}
+.stok .dot{width:7px;height:7px;border-radius:50%;background:var(--green)}
+.stok.habis .dot{background:var(--red)}
+.badges{display:flex;gap:5px;flex-wrap:wrap;margin-top:2px}
+.bdg{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:800;padding:3px 7px;border-radius:99px;letter-spacing:.01em}
+.bdg.rekber{background:var(--green-soft);color:var(--green-d)}
+.bdg.verif{background:#e8f1fc;color:#14539e}
+.price{margin-top:auto;padding-top:6px;display:flex;align-items:baseline;gap:3px}
+.price b{font-size:16.5px;font-weight:800;letter-spacing:-.01em}
+.price span{font-size:12px;color:var(--mut);font-weight:600}
+.city{font-size:12px;color:var(--mut);font-weight:600;display:flex;gap:4px;align-items:center}
+
+/* store cards */
+.scard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;box-shadow:var(--sh);display:flex;flex-direction:column;gap:9px;text-align:left;width:100%}
+.scard .shead{display:flex;gap:12px;align-items:center}
+.scard .slogo{width:52px;height:52px;border-radius:14px;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:800;font-size:19px}
+.scard .sname2{font-weight:800;font-size:16px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.btn-toko{margin-top:auto;background:var(--ink);color:#fff;font-weight:800;border-radius:11px;padding:11px;text-align:center}
+.empty{grid-column:1/-1;text-align:center;padding:44px 16px;color:var(--mut);font-weight:600}
+.empty b{display:block;font-size:17px;color:var(--ink);margin-bottom:5px}
+
+/* merchant strip */
+.merchant{margin:26px 0 8px;background:var(--ink);color:#f3efe4;border-radius:20px;padding:22px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.merchant h3{font-size:19px;font-weight:800;letter-spacing:-.01em}
+.merchant p{color:#c3cec2;font-size:13.5px;margin-top:3px;max-width:520px}
+.merchant .cta{margin-left:auto;background:#fff;color:var(--ink);font-weight:800;padding:12px 18px;border-radius:12px}
+.foot{max-width:1180px;margin:0 auto;padding:14px 16px 20px;color:var(--mut);font-size:12px;text-align:center}
+
+/* ---------- bottom nav ---------- */
+.bnav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:#fffffff5;backdrop-filter:blur(8px);border-top:1px solid var(--line);display:flex;padding:8px 6px calc(8px + env(safe-area-inset-bottom))}
+.bnav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;font-weight:700;color:var(--mut);padding:4px 0;border-radius:10px}
+.bnav button.on{color:var(--green-d)}
+@media(min-width:860px){.bnav{display:none}body{padding-bottom:0}}
+
+/* ---------- views ---------- */
+.view{display:none}.view.on{display:block}
+.bk-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;box-shadow:var(--sh);margin-bottom:12px}
+.bk-head{display:flex;gap:12px;align-items:center}
+.bk-head img{width:56px;height:56px;border-radius:12px;object-fit:cover}
+.bk-code{font-size:12px;color:var(--mut);font-weight:700}
+.bk-status{margin-left:auto;font-size:11.5px;font-weight:800;padding:5px 10px;border-radius:99px;background:var(--green-soft);color:var(--green-d);white-space:nowrap}
+.bk-status.langsung{background:var(--gold-soft);color:var(--gold)}
+.steps{display:flex;gap:0;margin-top:14px}
+.step{flex:1;text-align:center;position:relative;font-size:10.5px;font-weight:700;color:var(--mut);padding-top:16px}
+.step:before{content:"";position:absolute;top:4px;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:#d8d3c6;z-index:1}
+.step:after{content:"";position:absolute;top:8px;left:-50%;width:100%;height:2px;background:#d8d3c6}
+.step:first-child:after{display:none}
+.step.done{color:var(--green-d)}.step.done:before{background:var(--green)}.step.done:after{background:var(--green)}
+.label-langsung{margin-top:12px;font-size:12px;font-weight:800;color:var(--gold);background:var(--gold-soft);border:1px dashed var(--gold);border-radius:10px;padding:8px 11px}
+
+/* ---------- sheet ---------- */
+.scrim{position:fixed;inset:0;background:#152219b3;z-index:60;display:none}
+.scrim.on{display:block}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:61;background:#fff;border-radius:22px 22px 0 0;max-height:92dvh;overflow-y:auto;transform:translateY(105%);transition:transform .28s ease;max-width:640px;margin:0 auto}
+.sheet.on{transform:translateY(0)}
+@media(min-width:700px){.sheet{border-radius:22px;bottom:24px}}
+.sheet .grab{width:40px;height:4px;border-radius:99px;background:#ddd6c6;margin:10px auto 2px}
+.sheet-in{padding:8px 18px 22px}
+.sheet .hero-img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:14px}
+.sheet h2{font-size:20px;font-weight:800;letter-spacing:-.01em;margin-top:12px}
+.verifnote{font-size:12px;color:#14539e;background:#e8f1fc;border-radius:10px;padding:8px 11px;font-weight:600;margin-top:10px}
+.rev{border-top:1px solid var(--line);padding:11px 0}
+.rev .rhead{display:flex;gap:7px;align-items:center;font-weight:800;font-size:13px}
+.rev p{font-size:13.5px;color:var(--ink2);margin-top:3px}
+.rev .reply{background:var(--bg);border-radius:10px;padding:8px 11px;margin-top:7px;font-size:12.5px}
+.rev .reply b{color:var(--green-d)}
+.sec-t{font-weight:800;font-size:14px;margin:18px 0 9px}
+.dates{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dates .sf input{padding:10px}
+.qtyrow{display:flex;align-items:center;gap:12px;margin-top:12px;font-weight:700}
+.qty{display:flex;align-items:center;gap:0;border:1px solid var(--line);border-radius:11px;overflow:hidden;margin-left:auto}
+.qty button{width:36px;height:36px;font-size:18px;font-weight:800;background:#fbfaf7}
+.qty span{width:36px;text-align:center;font-weight:800}
+.payopt{display:flex;gap:11px;border:1.5px solid var(--line);border-radius:14px;padding:13px;margin-bottom:10px;cursor:pointer;align-items:flex-start;text-align:left;width:100%;background:#fff}
+.payopt.on{border-color:var(--green);background:var(--green-soft)}
+.payopt .radio{width:19px;height:19px;border-radius:50%;border:2px solid #c9c2b2;margin-top:2px;flex:none;display:grid;place-items:center}
+.payopt.on .radio{border-color:var(--green)}
+.payopt.on .radio:after{content:"";width:10px;height:10px;border-radius:50%;background:var(--green)}
+.payopt b{font-size:14.5px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.payopt p{font-size:12.5px;color:var(--ink2);margin-top:2px}
+.warnbox{display:none;background:var(--amber-bg);border:1.5px solid var(--amber-line);border-radius:14px;padding:13px;margin:2px 0 12px}
+.warnbox.on{display:block}
+.warnbox h4{color:var(--amber);font-size:13px;letter-spacing:.02em;display:flex;gap:7px;align-items:center}
+.warnbox p{font-size:12.8px;color:#5c4303;margin-top:6px}
+.warnbox label{display:flex;gap:9px;align-items:flex-start;margin-top:11px;font-weight:700;font-size:13px;color:#5c4303;cursor:pointer}
+.warnbox input{width:18px;height:18px;margin-top:1px;accent-color:var(--amber)}
+.totalrow{display:flex;justify-content:space-between;align-items:baseline;border-top:1px dashed var(--line);padding-top:12px;margin-top:6px}
+.totalrow b{font-size:19px;font-weight:800}
+.btn-pay{width:100%;background:var(--green);color:#fff;font-weight:800;font-size:15.5px;border-radius:13px;padding:15px;margin-top:13px}
+.btn-pay:disabled{background:#c9c2b2;cursor:not-allowed}
+.btn-ghost{width:100%;border:1px solid var(--line);font-weight:800;border-radius:13px;padding:13px;margin-top:9px;background:#fff}
+.success{text-align:center;padding:12px 0 4px}
+.success .okc{width:62px;height:62px;border-radius:50%;background:var(--green-soft);color:var(--green);display:grid;place-items:center;margin:6px auto 12px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="hwrap">
+    <div class="logo">
+      <span class="mark"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span>
+      <span>Jasa Rental<small>Marketplace Rental Indonesia</small></span>
+    </div>
+    <nav class="hnav">
+      <button class="on" data-nav="jelajahi">Jelajahi</button>
+      <button data-nav="favorit">Favorit</button>
+      <button data-nav="booking">Booking Saya</button>
+    </nav>
+    <div class="hright">
+      <button class="member" data-nav="akun"><span class="av">P</span><span>Penyewa Demo</span></button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ VIEW: JELAJAHI ============ -->
+<section class="view on" id="view-jelajahi">
+  <div class="hero">
+    <div class="hero-in">
+      <h1>Sewa apa saja, dari toko rental <em>terverifikasi</em>.</h1>
+      <p>Tenda, mobil, kamera, sound system, sampai stroller — cari lintas toko, bandingkan rating &amp; stok aslinya, dan lindungi pembayaranmu dengan Rekber Aman.</p>
+    </div>
+  </div>
+  <div class="search">
+    <form class="search-card" id="searchForm">
+      <div class="sf">
+        <label><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Kota / Lokasi</label>
+        <select id="fCity">
+          <option value="">Semua kota</option><option>Medan</option><option>Jakarta</option><option>Bandung</option><option>Surabaya</option>
+        </select>
+      </div>
+      <div class="sf"><label>Tanggal Sewa</label><input type="date" id="fFrom" value="2026-11-21"></div>
+      <div class="sf"><label>Tanggal Kembali</label><input type="date" id="fTo" value="2026-11-22"></div>
+      <div class="sf"><label>Cari Produk / Toko</label><input type="text" id="fQuery" placeholder="cth: tenda, avanza, kamera…"></div>
+      <button class="btn-cari" type="submit"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>Cari</button>
+    </form>
+  </div>
+
+  <main>
+    <div class="cats" id="cats"></div>
+    <div class="toolbar">
+      <div class="pills" id="pills">
+        <button class="pill on" data-pill="semua">Semua</button>
+        <button class="pill" data-pill="rekber"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6z"/><path d="m9 12 2 2 4-4" stroke-linecap="round"/></svg>Rekber Aman</button>
+        <button class="pill" data-pill="verif"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 2.1 3.1-.5 1.1 3 3 1.1-.5 3.1L23 13.2l-1.9 2.4.5 3.1-3 1.1-1.1 3-3.1-.5L12 24.4l-2.4-2.1-3.1.5-1.1-3-3-1.1.5-3.1L1 13.2l1.9-2.4L2.4 7.7l3-1.1 1.1-3 3.1.5z" transform="scale(.92) translate(1,0)"/><path d="m9 12.2 2.2 2.2L15.4 10" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg>Toko Terverifikasi</button>
+        <button class="pill" data-pill="rating"><svg width="13" height="13" viewBox="0 0 24 24" fill="#e8a10c"><path d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.4l-5.8 3.1 1.1-6.5L2.6 9.4l6.5-.9z"/></svg>Rating 4+</button>
+      </div>
+      <div class="toggle">
+        <button class="on" data-mode="produk">Produk</button>
+        <button data-mode="toko">Toko</button>
+      </div>
+    </div>
+    <div class="sortrow">
+      <span class="count" id="count"></span>
+      <select id="fSort">
+        <option value="rekomendasi">Urutkan: Rekomendasi</option>
+        <option value="murah">Harga Terendah</option>
+        <option value="mahal">Harga Tertinggi</option>
+        <option value="rating">Rating Tertinggi</option>
+        <option value="nama">Nama A–Z</option>
+      </select>
+    </div>
+    <div class="grid" id="grid"></div>
+
+    <div class="merchant">
+      <div>
+        <h3>Punya usaha rental?</h3>
+        <p>Tampilkan tokomu di marketplace ini — gratis. Aktifkan Rekber Aman dan langganan PRO agar produkmu tampil pertama saat penyewa mencari.</p>
+      </div>
+      <button class="cta">Daftarkan Tokomu</button>
+    </div>
+  </main>
+</section>
+
+<!-- ============ VIEW: FAVORIT ============ -->
+<section class="view" id="view-favorit">
+  <main>
+    <h2 style="font-size:20px;font-weight:800;margin:6px 0 14px">Favorit Saya</h2>
+    <div class="grid" id="gridFav"></div>
+  </main>
+</section>
+
+<!-- ============ VIEW: BOOKING ============ -->
+<section class="view" id="view-booking">
+  <main>
+    <h2 style="font-size:20px;font-weight:800;margin:6px 0 14px">Booking Saya</h2>
+    <div id="bkList"></div>
+  </main>
+</section>
+
+<!-- ============ VIEW: AKUN ============ -->
+<section class="view" id="view-akun">
+  <main>
+    <div class="bk-card" style="display:flex;gap:13px;align-items:center">
+      <span class="av" style="width:50px;height:50px;border-radius:50%;background:var(--gold-soft);color:var(--gold);display:grid;place-items:center;font-weight:800;font-size:19px">P</span>
+      <div><b style="font-size:16.5px">Penyewa Demo</b><div style="font-size:12.5px;color:var(--mut);font-weight:600">Member sejak 2026 · Login Google</div></div>
+    </div>
+    <div class="bk-card" style="padding:6px 16px">
+      <div style="padding:12px 0;border-bottom:1px solid var(--line);font-weight:700">Profil &amp; alamat</div>
+      <div style="padding:12px 0;border-bottom:1px solid var(--line);font-weight:700">Ketentuan Platform</div>
+      <div style="padding:12px 0;border-bottom:1px solid var(--line);font-weight:700">Bantuan penyewa</div>
+      <div style="padding:12px 0;font-weight:700;color:var(--red)">Keluar</div>
+    </div>
+  </main>
+</section>
+
+<div class="foot">Jasa Rental oleh FinOwi Id · Prototipe UI/UX v1 — data produk &amp; toko adalah contoh untuk review desain, belum data live.</div>
+
+<nav class="bnav">
+  <button class="on" data-nav="jelajahi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>Jelajahi</button>
+  <button data-nav="favorit"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M19.8 5.1a5 5 0 0 0-7.1 0l-.7.7-.7-.7a5 5 0 1 0-7.1 7.1l7.8 7.8 7.8-7.8a5 5 0 0 0 0-7.1z"/></svg>Favorit</button>
+  <button data-nav="booking"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M4 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4z"/><path d="M13 6v2m0 3v2m0 3v2" stroke-linecap="round"/></svg>Booking Saya</button>
+  <button data-nav="akun"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 5-5.5 8-5.5s6.5 1.5 8 5.5"/></svg>Akun</button>
+</nav>
+
+<div class="scrim" id="scrim"></div>
+<div class="sheet" id="sheet"><div class="grab"></div><div class="sheet-in" id="sheetIn"></div></div>
+
+<script>
+const ICON = {
+  star:'<svg class="star" width="13" height="13" viewBox="0 0 24 24" fill="#e8a10c"><path d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.4l-5.8 3.1 1.1-6.5L2.6 9.4l6.5-.9z"/></svg>',
+  pin:'<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
+  shield:'<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6z"/><path d="m9 12 2 2 4-4" stroke-linecap="round"/></svg>',
+  verif:'<svg width="14" height="14" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#1a6fd4"/><path d="m8.2 12.4 2.5 2.5 5-5.4" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  heart:f=>'<svg width="16" height="16" viewBox="0 0 24 24" fill="'+(f?'#d33':'none')+'" stroke="'+(f?'#d33':'#43544a')+'" stroke-width="2.2" stroke-linejoin="round"><path d="M19.8 5.1a5 5 0 0 0-7.1 0l-.7.7-.7-.7a5 5 0 1 0-7.1 7.1l7.8 7.8 7.8-7.8a5 5 0 0 0 0-7.1z"/></svg>'
+};
+const CATS = [
+  ['semua','Semua'],['kendaraan','Kendaraan'],['outdoor','Outdoor & Camping'],['fashion','Fashion & Kostum'],
+  ['elektronik','Elektronik'],['kamera','Kamera & Fotografi'],['hiburan','Mainan & Hiburan'],['event','Event & Pesta'],
+  ['alat','Alat & Perkakas'],['bayi','Bayi & Anak'],['properti','Properti & Kos'],['lainnya','Lainnya']
+];
+const STORES = {
+  bk:   {name:'BK Adventure', city:'Medan', verified:true, rekber:true, pro:true, since:'Terverifikasi sejak Nov 2026', products:18, rating:4.9, reviews:214},
+  rcm:  {name:'RentCar Medan', city:'Medan', verified:true, rekber:true, pro:false, since:'Terverifikasi sejak Okt 2026', products:12, rating:4.9, reviews:187},
+  kks:  {name:'KameraKu Studio', city:'Jakarta', verified:true, rekber:true, pro:true, since:'Terverifikasi sejak Sep 2026', products:26, rating:4.9, reviews:243},
+  ppro: {name:'Panggung Pro', city:'Bandung', verified:true, rekber:false, pro:false, since:'Terverifikasi sejak Agu 2026', products:9, rating:4.7, reviews:58},
+  gb:   {name:'Griya Busana', city:'Surabaya', verified:false, rekber:false, pro:false, since:'', products:14, rating:0, reviews:2},
+  mc:   {name:'Mainan Ceria', city:'Jakarta', verified:true, rekber:false, pro:true, since:'Terverifikasi sejak Okt 2026', products:21, rating:4.8, reviews:129},
+  gr:   {name:'GadgetRent', city:'Bandung', verified:false, rekber:false, pro:false, since:'', products:11, rating:4.6, reviews:54}
+};
+const PRODUCTS = [
+  {id:1, name:'Tenda Dome Kapasitas 4 Orang — Double Layer', store:'bk', cat:'outdoor', catLabel:'Outdoor & Camping', price:45000, period:'hari', stock:6, rating:4.9, reviews:132, img:'https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/8983722fcd7f48c090e38d4bf77b043d~tplv-o3syd03w52-crop-webp:1600:1600.webp?dr=15592&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=e1be8f53&idc=my2&from=2378011839', desc:'Tenda dome double layer, frame alloy, tahan hujan deras. Sudah termasuk footprint & pasak lengkap.', terms:'Jaminan: KTP dititip di depot · Deposit tunai Rp100rb saat ambil, kembali penuh bila barang utuh'},
+  {id:2, name:'Sony A6400 + Lensa Kit 16-50mm', store:'kks', cat:'kamera', catLabel:'Kamera & Fotografi', price:150000, period:'hari', stock:3, rating:4.9, reviews:167, img:'https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//89/MTA-3103882/sony_sony-alpha-a6400-kit-16-50mm_full06.jpg', desc:'Mirrorless APS-C 24MP, cocok untuk konten & event. Termasuk 2 baterai, charger, tas, dan memori 64GB.', terms:'Jaminan: KTP + deposit Rp500rb · Cek fungsi bersama saat serah terima'},
+  {id:3, name:'Toyota Avanza 1.3 G — Lepas Kunci / Dengan Sopir', store:'rcm', cat:'kendaraan', catLabel:'Kendaraan', price:350000, period:'hari', stock:2, rating:4.9, reviews:210, img:'https://www.autocar.co.uk/sites/autocar.co.uk/files/slideshow_image/16_toyota_avanza.jpg', desc:'Unit 2022 terawat, AC dingin, 7 penumpang. BBM awal penuh, kembali penuh. Opsi sopir +Rp150rb/hari.', terms:'Jaminan: KTP + SIM A aktif · Deposit Rp1jt (Rekber dapat menahan deposit juga — segera)'},
+  {id:4, name:'Carrier Gunung 60L — Anti Air', store:'bk', cat:'outdoor', catLabel:'Outdoor & Camping', price:25000, period:'hari', stock:4, rating:4.8, reviews:86, img:'https://cf.shopee.co.id/file/41fc444f0d03fc41e35a0f57e8734439', desc:'Carrier 60 liter dengan rain cover, back system empuk, cocok pendakian 2–4 hari.', terms:'Jaminan: KTP dititip di depot · Kembali bersih & kering'},
+  {id:5, name:'Paket Sound System 5000 Watt + Operator', store:'ppro', cat:'event', catLabel:'Event & Pesta', price:850000, period:'hari', stock:1, rating:0, reviews:2, img:'https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg2-ocwb490c6V7gYWJXgjfT2kEjhM5fE7X48n9xzp-SOmjey1hET0gdnR4bZ56HVwgtga-X6-a9pXWils5JSgsvX4QM-I5dMO9GecCb9K3OknXoOl3kaMNqRA5LpX8Si8FYd2ZdZLs_7Xw8gj5fT3qxVDFBmxOcV57plOALs3KlFjB7RnPta581RzMSt68/s752/sound-system-6.jpeg', desc:'Line array + subwoofer, mixer digital, 4 mic wireless, termasuk operator & antar-pasang area Bandung.', terms:'Booking H-3 · DP 50% · Pelunasan saat acara selesai'},
+  {id:6, name:'PlayStation 5 + 2 Stik + 10 Game', store:'mc', cat:'hiburan', catLabel:'Mainan & Hiburan', price:60000, period:'hari', stock:2, rating:4.8, reviews:98, img:'https://gamermalaya.my/wp-content/uploads/2020/06/PS5-Melintang-Putih.jpg', desc:'PS5 disc version, 2 DualSense, 10 game bebas pilih dari daftar. Antar-jemput Jakarta +Rp30rb.', terms:'Jaminan: KTP · Deposit Rp200rb'},
+  {id:7, name:'DJI Mini 3 — Drone 4K Ringan', store:'kks', cat:'kamera', catLabel:'Kamera & Fotografi', price:200000, period:'hari', stock:0, rating:4.8, reviews:74, img:'https://bm.soyacincau.com/wp-content/uploads/2022/12/221212-dji-mini-3-01-1024x614.jpg', desc:'Drone di bawah 249 gram, video 4K HDR, 3 baterai + tas. Cocok untuk konten perjalanan & properti.', terms:'Jaminan: KTP + deposit Rp1jt · Dilarang terbang di zona larangan'},
+  {id:8, name:'Kebaya Wisuda Modern — Ukuran S–XL', store:'gb', cat:'fashion', catLabel:'Fashion & Kostum', price:75000, period:'hari', stock:5, rating:0, reviews:1, img:'https://i.pinimg.com/originals/ac/7c/b1/ac7cb12414494787249a498e03047152.jpg', desc:'Kebaya brokat modern dengan rok lilit, sudah laundry & press. Fitting di toko by appointment.', terms:'Jaminan: KTP · Kembali dalam kantong pakaian'},
+  {id:9, name:'Proyektor Mini 1080p — 3000 Lumens', store:'gr', cat:'elektronik', catLabel:'Elektronik', price:50000, period:'hari', stock:7, rating:4.6, reviews:54, img:'https://down-ph.img.susercontent.com/file/ph-11134201-7r98s-m07f8sjnud5026@resize_w423_nl.webp', desc:'Proyektor mini terang untuk nobar, presentasi, dan acara keluarga. Termasuk kabel HDMI & remote.', terms:'Jaminan: KTP · Deposit Rp150rb'},
+  {id:10, name:'Stroller Bayi Lipat Kabin — 0–3 Tahun', store:'mc', cat:'bayi', catLabel:'Bayi & Anak', price:40000, period:'hari', stock:3, rating:4.7, reviews:41, img:'https://down-id.img.susercontent.com/file/id-11134207-8224u-mj84ta5op1j75e', desc:'Stroller lipat satu tangan, ukuran kabin pesawat, kanopi UV, sudah dicuci & disanitasi.', terms:'Jaminan: KTP · Kembali bersih'}
+];
+const REVIEWS = [
+  {by:'Rani P.', stars:5, text:'Barang sesuai foto, bersih, dan admin fast-respon. Proses ambilnya cepat, deposit kembali penuh.', reply:'Makasih banyak kak Rani, ditunggu sewa berikutnya ya.'},
+  {by:'Dimas A.', stars:5, text:'Sudah 3x sewa di sini lewat Rekber, tenang karena uang baru diteruskan sesudah barang kembali. Recommended.', reply:null},
+  {by:'Sari W.', stars:4, text:'Kondisi barang bagus, cuma lokasi depot agak masuk gang. Selain itu oke.', reply:'Makasih masukannya kak, titik maps sudah kami perbaiki.'}
+];
+const rupiah = n => 'Rp' + n.toLocaleString('id-ID');
+let state = {cat:'semua', pill:'semua', mode:'produk', query:'', city:'', sort:'rekomendasi', favs:new Set([1,3])};
+let bookings = [
+  {code:'JR-20261114-8K2Q', pid:1, qty:1, days:2, total:90000, mode:'rekber', status:'Dana ditahan platform', step:2},
+  {code:'JR-20261110-3M7X', pid:6, qty:1, days:1, total:60000, mode:'langsung', status:'Selesai', step:4}
+];
+
+function rateHTML(p){
+  if(p.reviews < 3) return '<span class="baru">Baru</span><span class="rc"> · ' + p.reviews + ' ulasan</span>';
+  return ICON.star + '<span>' + p.rating.toFixed(1).replace('.',',') + '</span><span class="rc">(' + p.reviews + ' ulasan)</span>';
+}
+function badgesHTML(s){
+  let h='';
+  if(s.rekber) h += '<span class="bdg rekber">' + ICON.shield + 'Rekber Aman</span>';
+  if(s.verified) h += '<span class="bdg verif">' + ICON.shield + 'Terverifikasi</span>';
+  return h;
+}
+function cardHTML(p){
+  const s = STORES[p.store];
+  return '<article class="pcard" data-open="' + p.id + '">' +
+    '<div class="ph"><img src="' + p.img + '" alt="" loading="lazy">' +
+    (s.pro ? '<span class="tagpro">PRO</span>' : '') +
+    '<button class="fav' + (state.favs.has(p.id)?' on':'') + '" data-fav="' + p.id + '">' + ICON.heart(state.favs.has(p.id)) + '</button>' +
+    '<span class="tagcat">' + p.catLabel + '</span>' +
+    (p.stock===0 ? '<span class="habistag">STOK HABIS</span>' : '') + '</div>' +
+    '<div class="pbody"><div class="pname">' + p.name + '</div>' +
+    '<div class="srow"><span class="sav">' + s.name[0] + '</span><span class="sname">' + s.name + '</span>' + (s.verified?ICON.verif:'') + '</div>' +
+    '<div class="rate">' + rateHTML(p) + '</div>' +
+    '<div class="stok' + (p.stock===0?' habis':'') + '"><span class="dot"></span>' + (p.stock===0?'Stok habis':'Stok siap: ' + p.stock + ' unit') + '</div>' +
+    '<div class="badges">' + badgesHTML(s) + '</div>' +
+    '<div class="price"><b>' + rupiah(p.price) + '</b><span>/' + p.period + '</span></div>' +
+    '<div class="city">' + ICON.pin + s.city + '</div></div></article>';
+}
+function storeCardHTML(key){
+  const s = STORES[key];
+  const rating = s.reviews < 3 ? '<span class="baru">Baru</span>' : ICON.star + '<span>' + s.rating.toFixed(1).replace('.',',') + '</span><span class="rc">(' + s.reviews + ' ulasan)</span>';
+  return '<article class="scard"><div class="shead"><span class="slogo">' + s.name[0] + '</span><div>' +
+    '<div class="sname2">' + s.name + (s.verified?ICON.verif:'') + (s.pro?'<span class="tagpro" style="position:static">PRO</span>':'') + '</div>' +
+    '<div class="city">' + ICON.pin + s.city + ' · ' + s.products + ' produk</div></div></div>' +
+    '<div class="rate">' + rating + '</div><div class="badges">' + badgesHTML(s) + '</div>' +
+    '<button class="btn-toko" data-openstore="' + key + '">Kunjungi Toko</button></article>';
+}
+function filtered(){
+  let list = PRODUCTS.filter(p => {
+    const s = STORES[p.store];
+    if(state.cat!=='semua' && p.cat!==state.cat) return false;
+    if(state.city && s.city!==state.city) return false;
+    if(state.pill==='rekber' && !s.rekber) return false;
+    if(state.pill==='verif' && !s.verified) return false;
+    if(state.pill==='rating' && !(p.reviews>=3 && p.rating>=4)) return false;
+    if(state.query){ const q=state.query.toLowerCase(); if(!(p.name.toLowerCase().includes(q)||s.name.toLowerCase().includes(q)||p.catLabel.toLowerCase().includes(q))) return false; }
+    return true;
+  });
+  const by = {
+    murah:(a,b)=>a.price-b.price, mahal:(a,b)=>b.price-a.price,
+    rating:(a,b)=>(b.reviews>=3?b.rating:0)-(a.reviews>=3?a.rating:0),
+    nama:(a,b)=>a.name.localeCompare(b.name),
+    rekomendasi:(a,b)=>((STORES[b.store].pro?1:0)-(STORES[a.store].pro?1:0)) || ((b.stock>0)-(a.stock>0)) || ((b.reviews>=3?b.rating:0)-(a.reviews>=3?a.rating:0))
+  };
+  return list.sort(by[state.sort]||by.rekomendasi);
+}
+function render(){
+  const grid = document.getElementById('grid');
+  if(state.mode==='produk'){
+    const list = filtered();
+    document.getElementById('count').textContent = list.length + ' produk ditemukan';
+    grid.innerHTML = list.length ? list.map(cardHTML).join('') : '<div class="empty"><b>Tidak ada yang cocok</b>Coba longgarkan filter atau ganti kata kunci pencarianmu.</div>';
+  } else {
+    const keys = Object.keys(STORES).filter(k=>{
+      const s=STORES[k];
+      if(state.city && s.city!==state.city) return false;
+      if(state.pill==='rekber' && !s.rekber) return false;
+      if(state.pill==='verif' && !s.verified) return false;
+      if(state.query && !s.name.toLowerCase().includes(state.query.toLowerCase())) return false;
+      return PRODUCTS.some(p=>p.store===k && (state.cat==='semua'||p.cat===state.cat));
+    });
+    document.getElementById('count').textContent = keys.length + ' toko ditemukan';
+    grid.innerHTML = keys.length ? keys.map(storeCardHTML).join('') : '<div class="empty"><b>Tidak ada toko yang cocok</b>Coba longgarkan filter pencarianmu.</div>';
+  }
+  renderFav(); bindCards();
+}
+function renderFav(){
+  const list = PRODUCTS.filter(p=>state.favs.has(p.id));
+  document.getElementById('gridFav').innerHTML = list.length ? list.map(cardHTML).join('') : '<div class="empty"><b>Belum ada favorit</b>Ketuk hati pada produk untuk menyimpannya di sini.</div>';
+}
+function renderBookings(){
+  const el = document.getElementById('bkList');
+  el.innerHTML = bookings.map(b=>{
+    const p = PRODUCTS.find(x=>x.id===b.pid), s = STORES[p.store];
+    const steps = ['Dibayar','Diambil','Disewa','Selesai'];
+    return '<div class="bk-card"><div class="bk-head"><img src="' + p.img + '"><div><b>' + p.name + '</b>' +
+      '<div class="bk-code">' + b.code + ' · ' + s.name + ' · ' + b.days + ' hari · ' + rupiah(b.total) + '</div></div>' +
+      '<span class="bk-status' + (b.mode==='langsung'?' langsung':'') + '">' + b.status + '</span></div>' +
+      '<div class="steps">' + steps.map((t,i)=>'<div class="step' + (i<b.step?' done':'') + '">' + t + '</div>').join('') + '</div>' +
+      (b.mode==='rekber' ? '<div class="label-langsung" style="color:var(--green-d);background:var(--green-soft);border-color:var(--green)">Rekber Aman — dana ditahan Jasa Rental, diteruskan ke toko sesudah barang kembali &amp; sewa selesai.</div>'
+                         : '<div class="label-langsung">Transaksi Langsung — tanpa perlindungan Rekber</div>') +
+      '</div>';
+  }).join('');
+}
+function bindCards(){
+  document.querySelectorAll('[data-fav]').forEach(b=>b.onclick=e=>{
+    e.stopPropagation(); const id=+b.dataset.fav;
+    state.favs.has(id)?state.favs.delete(id):state.favs.add(id); render();
+  });
+  document.querySelectorAll('[data-open]').forEach(c=>c.onclick=()=>openSheet(+c.dataset.open));
+  document.querySelectorAll('[data-openstore]').forEach(b=>b.onclick=()=>{
+    state.query = STORES[b.dataset.openstore].name; state.mode='produk';
+    document.querySelectorAll('[data-mode]').forEach(x=>x.classList.toggle('on',x.dataset.mode==='produk'));
+    document.getElementById('fQuery').value = state.query; render(); window.scrollTo({top:0,behavior:'smooth'});
+  });
+}
+
+/* ---------- sheet / checkout ---------- */
+let cur = null, payMode = 'rekber', qty = 1;
+function openSheet(id){
+  const p = PRODUCTS.find(x=>x.id===id), s = STORES[p.store];
+  cur = p; qty = 1; payMode = s.rekber ? 'rekber' : 'langsung';
+  const el = document.getElementById('sheetIn');
+  el.innerHTML =
+    '<img class="hero-img" src="' + p.img + '">' +
+    '<div style="display:flex;gap:6px;margin-top:12px;flex-wrap:wrap">' + (s.pro?'<span class="tagpro" style="position:static">PRO</span>':'') + '<span class="tagcat" style="position:static">' + p.catLabel + '</span></div>' +
+    '<h2>' + p.name + '</h2>' +
+    '<div class="srow" style="margin-top:7px"><span class="sav">' + s.name[0] + '</span><span class="sname" style="font-size:13.5px">' + s.name + '</span>' + (s.verified?ICON.verif:'') + '<span style="color:var(--mut)">' + ICON.pin.replace('currentColor','#71806f') + ' ' + s.city + '</span></div>' +
+    (s.verified ? '<div class="verifnote">Identitas pemilik, alamat &amp; rekening toko ini sudah diperiksa Jasa Rental. ' + s.since + '.</div>' : '<div class="verifnote" style="background:var(--amber-bg);color:var(--amber)">Toko ini <b>belum terverifikasi</b> oleh Jasa Rental. Berhati-hatilah sebelum membayar.</div>') +
+    '<div class="rate" style="margin-top:10px">' + rateHTML(p) + '</div>' +
+    '<p style="margin-top:10px;color:var(--ink2);font-size:14px">' + p.desc + '</p>' +
+    '<p style="margin-top:7px;font-size:12.8px;color:var(--mut)"><b>Ketentuan toko:</b> ' + p.terms + '</p>' +
+    '<div class="sec-t">Ulasan penyewa</div>' +
+    REVIEWS.map(r=>'<div class="rev"><div class="rhead">' + r.by + ' <span>' + ICON.star.repeat(r.stars) + '</span></div><p>' + r.text + '</p>' + (r.reply?'<div class="reply"><b>Balasan toko:</b> ' + r.reply + '</div>':'') + '</div>').join('') +
+    '<div class="sec-t">Tanggal &amp; jumlah</div>' +
+    '<div class="dates"><div class="sf"><label>Tanggal Ambil</label><input type="date" id="dFrom" value="2026-11-21"></div>' +
+    '<div class="sf"><label>Tanggal Kembali</label><input type="date" id="dTo" value="2026-11-22"></div></div>' +
+    '<div class="qtyrow">Jumlah unit <div class="qty"><button id="qMinus">−</button><span id="qVal">1</span><button id="qPlus">+</button></div></div>' +
+    '<div class="sec-t">Cara pembayaran</div><div id="payOpts"></div><div class="warnbox" id="warnBox"></div>' +
+    '<div class="totalrow"><span style="font-weight:700;color:var(--ink2)">Total bayar</span><b id="totalVal"></b></div>' +
+    '<div style="font-size:12px;color:var(--mut);margin-top:3px" id="totalNote"></div>' +
+    '<button class="btn-pay" id="btnPay">Bayar Sekarang</button>' +
+    '<button class="btn-ghost" id="btnClose">Nanti Saja</button>';
+  document.getElementById('scrim').classList.add('on');
+  document.getElementById('sheet').classList.add('on');
+  document.body.style.overflow='hidden';
+  document.getElementById('qMinus').onclick=()=>{qty=Math.max(1,qty-1);syncSheet()};
+  document.getElementById('qPlus').onclick=()=>{qty=Math.min(p.stock||1,qty+1);syncSheet()};
+  document.getElementById('dFrom').onchange=syncSheet;
+  document.getElementById('dTo').onchange=syncSheet;
+  document.getElementById('btnClose').onclick=closeSheet;
+  document.getElementById('btnPay').onclick=doPay;
+  renderPayOpts(); syncSheet();
+}
+function days(){
+  const a=new Date(document.getElementById('dFrom').value), b=new Date(document.getElementById('dTo').value);
+  return Math.max(1, Math.round((b-a)/86400000) || 1);
+}
+function renderPayOpts(){
+  const s = STORES[cur.store];
+  let h='';
+  if(s.rekber) h += '<button class="payopt' + (payMode==='rekber'?' on':'') + '" data-pay="rekber"><span class="radio"></span><span><b>' + ICON.shield + ' Rekber Aman <span class="bdg rekber">Dana ditahan Jasa Rental</span></b><p>Uangmu ditahan Jasa Rental dulu dan baru diteruskan ke toko sesudah barang kembali &amp; sewa selesai tanpa sengketa. Biaya Rekber ditanggung toko.</p></span></button>';
+  h += '<button class="payopt' + (payMode==='langsung'?' on':'') + '" data-pay="langsung"><span class="radio"></span><span><b>Bayar Langsung ke Toko</b><p>Pembayaran dikirim langsung ke rekening ' + s.name + ' dan diverifikasi oleh toko.' + (s.rekber?'':' Toko ini belum mengaktifkan Rekber.') + '</p></span></button>';
+  document.getElementById('payOpts').innerHTML = h;
+  document.querySelectorAll('[data-pay]').forEach(b=>b.onclick=()=>{payMode=b.dataset.pay; renderPayOpts(); syncSheet();});
+  const w = document.getElementById('warnBox');
+  w.innerHTML = '<h4><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 3 2 20h20z"/><path d="M12 10v4m0 3v.5"/></svg>PERINGATAN — PEMBAYARAN LANGSUNG KE PENJUAL</h4>' +
+    '<p>Pembayaran ini kamu kirim langsung ke rekening penjual, TIDAK melalui Jasa Rental. Jasa Rental tidak menahan, tidak menjamin, dan tidak bertanggung jawab atas dana ini. Jika terjadi penipuan, barang tidak tersedia/tidak dikirim, atau sengketa lain pada transaksi langsung, penyelesaiannya adalah antara kamu dan penjual, dan Jasa Rental tidak wajib mengganti kerugianmu.</p>' +
+    '<p>Untuk perlindungan, gunakan <b>Rekber Aman</b> bila tersedia: dana ditahan Jasa Rental dan baru diteruskan ke penjual setelah sewa selesai.</p>' +
+    '<label><input type="checkbox" id="warnCheck"> Saya paham pembayaran ini langsung ke penjual dan tidak dilindungi Rekber.</label>';
+  document.getElementById('warnCheck').onchange = syncSheet;
+}
+function syncSheet(){
+  if(!cur) return;
+  const d = days(), total = cur.price * qty * d;
+  document.getElementById('qVal').textContent = qty;
+  document.getElementById('totalVal').textContent = rupiah(total);
+  document.getElementById('totalNote').textContent = rupiah(cur.price) + ' × ' + qty + ' unit × ' + d + ' hari' + (payMode==='rekber' ? ' · dibayar ke rekening penampungan Jasa Rental (Rekber)' : ' · dibayar langsung ke rekening toko');
+  const w = document.getElementById('warnBox');
+  const direct = payMode==='langsung';
+  w.classList.toggle('on', direct);
+  const ok = !direct || (document.getElementById('warnCheck') && document.getElementById('warnCheck').checked);
+  const btn = document.getElementById('btnPay');
+  btn.disabled = !ok || cur.stock===0;
+  btn.textContent = cur.stock===0 ? 'Stok Habis' : ('Bayar ' + rupiah(total));
+}
+function doPay(){
+  const d = days(), total = cur.price * qty * d;
+  const code = 'JR-20261115-' + Math.random().toString(36).slice(2,6).toUpperCase();
+  bookings.unshift({code, pid:cur.id, qty, days:d, total, mode:payMode, status: payMode==='rekber' ? 'Dana ditahan platform' : 'Menunggu verifikasi toko', step:1});
+  const el = document.getElementById('sheetIn');
+  el.innerHTML = '<div class="success"><span class="okc"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.5 5 5 10-11"/></svg></span>' +
+    '<h2 style="margin-top:0">Booking berhasil dibuat</h2>' +
+    '<p style="color:var(--ink2);margin-top:6px">Kode booking <b>' + code + '</b><br>' + cur.name + ' · ' + d + ' hari · Total ' + rupiah(total) + '</p>' +
+    (payMode==='rekber'
+      ? '<div class="label-langsung" style="color:var(--green-d);background:var(--green-soft);border-color:var(--green);text-align:left">Rekber Aman aktif — danamu ditahan Jasa Rental dan baru diteruskan ke toko sesudah barang kembali &amp; sewa selesai.</div>'
+      : '<div class="label-langsung" style="text-align:left">Transaksi Langsung — tanpa perlindungan Rekber. Simpan bukti pembayaranmu.</div>') +
+    '<button class="btn-pay" id="btnGoBk">Lihat Booking Saya</button><button class="btn-ghost" id="btnClose2">Tutup</button></div>';
+  document.getElementById('btnClose2').onclick = closeSheet;
+  document.getElementById('btnGoBk').onclick = ()=>{ closeSheet(); go('booking'); };
+  renderBookings();
+}
+function closeSheet(){
+  document.getElementById('scrim').classList.remove('on');
+  document.getElementById('sheet').classList.remove('on');
+  document.body.style.overflow='';
+}
+document.getElementById('scrim').onclick = closeSheet;
+
+/* ---------- nav & filters ---------- */
+function go(v){
+  document.querySelectorAll('.view').forEach(x=>x.classList.toggle('on', x.id==='view-'+v));
+  document.querySelectorAll('[data-nav]').forEach(b=>b.classList.toggle('on', b.dataset.nav===v));
+  window.scrollTo({top:0});
+}
+document.querySelectorAll('[data-nav]').forEach(b=>b.onclick=()=>go(b.dataset.nav));
+document.getElementById('cats').innerHTML = CATS.map(c=>'<button class="cat' + (c[0]==='semua'?' on':'') + '" data-cat="' + c[0] + '">' + c[1] + '</button>').join('');
+document.querySelectorAll('[data-cat]').forEach(b=>b.onclick=()=>{
+  state.cat=b.dataset.cat;
+  document.querySelectorAll('[data-cat]').forEach(x=>x.classList.toggle('on',x===b)); render();
+});
+document.querySelectorAll('[data-pill]').forEach(b=>b.onclick=()=>{
+  state.pill=b.dataset.pill;
+  document.querySelectorAll('[data-pill]').forEach(x=>x.classList.toggle('on',x===b)); render();
+});
+document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>{
+  state.mode=b.dataset.mode;
+  document.querySelectorAll('[data-mode]').forEach(x=>x.classList.toggle('on',x===b)); render();
+});
+document.getElementById('fCity').onchange=e=>{state.city=e.target.value; render();};
+document.getElementById('fSort').onchange=e=>{state.sort=e.target.value; render();};
+document.getElementById('searchForm').onsubmit=e=>{e.preventDefault(); state.query=document.getElementById('fQuery').value.trim(); state.city=document.getElementById('fCity').value; render(); document.getElementById('grid').scrollIntoView({behavior:'smooth',block:'start'});};
+render(); renderBookings();
+</script>
+</body>
+</html>
