@@ -255,6 +255,7 @@ main{max-width:1180px;margin:0 auto;padding:18px 16px 8px}
         <option value="nama">Nama A–Z</option>
       </select>
     </div>
+    <div id="liveNote" style="display:none;background:var(--green-soft);color:var(--green-d);font-weight:700;font-size:12.8px;border-radius:12px;padding:10px 13px;margin-bottom:11px">Menampilkan produk ASLI dari toko yang sudah bergabung di Jasa Rental — stok mengikuti data server toko saat ini.</div>
     <div class="grid" id="grid"></div>
 
     <div class="merchant">
@@ -324,7 +325,7 @@ const CATS = [
   ['elektronik','Elektronik'],['kamera','Kamera & Fotografi'],['hiburan','Mainan & Hiburan'],['event','Event & Pesta'],
   ['alat','Alat & Perkakas'],['bayi','Bayi & Anak'],['properti','Properti & Kos'],['lainnya','Lainnya']
 ];
-const STORES = {
+let STORES = {
   bk:   {name:'BK Adventure', city:'Medan', verified:true, rekber:true, pro:true, since:'Terverifikasi sejak Nov 2026', products:18, rating:4.9, reviews:214},
   rcm:  {name:'RentCar Medan', city:'Medan', verified:true, rekber:true, pro:false, since:'Terverifikasi sejak Okt 2026', products:12, rating:4.9, reviews:187},
   kks:  {name:'KameraKu Studio', city:'Jakarta', verified:true, rekber:true, pro:true, since:'Terverifikasi sejak Sep 2026', products:26, rating:4.9, reviews:243},
@@ -333,7 +334,7 @@ const STORES = {
   mc:   {name:'Mainan Ceria', city:'Jakarta', verified:true, rekber:false, pro:true, since:'Terverifikasi sejak Okt 2026', products:21, rating:4.8, reviews:129},
   gr:   {name:'GadgetRent', city:'Bandung', verified:false, rekber:false, pro:false, since:'', products:11, rating:4.6, reviews:54}
 };
-const PRODUCTS = [
+let PRODUCTS = [
   {id:1, name:'Tenda Dome Kapasitas 4 Orang — Double Layer', store:'bk', cat:'outdoor', catLabel:'Outdoor & Camping', price:45000, period:'hari', stock:6, rating:4.9, reviews:132, img:'https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/8983722fcd7f48c090e38d4bf77b043d~tplv-o3syd03w52-crop-webp:1600:1600.webp?dr=15592&t=555f072d&ps=933b5bde&shp=8dbd94bf&shcp=e1be8f53&idc=my2&from=2378011839', desc:'Tenda dome double layer, frame alloy, tahan hujan deras. Sudah termasuk footprint & pasak lengkap.', terms:'Jaminan: KTP dititip di depot · Deposit tunai Rp100rb saat ambil, kembali penuh bila barang utuh'},
   {id:2, name:'Sony A6400 + Lensa Kit 16-50mm', store:'kks', cat:'kamera', catLabel:'Kamera & Fotografi', price:150000, period:'hari', stock:3, rating:4.9, reviews:167, img:'https://www.static-src.com/wcsstore/Indraprastha/images/catalog/full//89/MTA-3103882/sony_sony-alpha-a6400-kit-16-50mm_full06.jpg', desc:'Mirrorless APS-C 24MP, cocok untuk konten & event. Termasuk 2 baterai, charger, tas, dan memori 64GB.', terms:'Jaminan: KTP + deposit Rp500rb · Cek fungsi bersama saat serah terima'},
   {id:3, name:'Toyota Avanza 1.3 G — Lepas Kunci / Dengan Sopir', store:'rcm', cat:'kendaraan', catLabel:'Kendaraan', price:350000, period:'hari', stock:2, rating:4.9, reviews:210, img:'https://www.autocar.co.uk/sites/autocar.co.uk/files/slideshow_image/16_toyota_avanza.jpg', desc:'Unit 2022 terawat, AC dingin, 7 penumpang. BBM awal penuh, kembali penuh. Opsi sopir +Rp150rb/hari.', terms:'Jaminan: KTP + SIM A aktif · Deposit Rp1jt (Rekber dapat menahan deposit juga — segera)'},
@@ -473,12 +474,12 @@ function openSheet(id){
     '<div style="display:flex;gap:6px;margin-top:12px;flex-wrap:wrap">' + (s.pro?'<span class="tagpro" style="position:static">PRO</span>':'') + '<span class="tagcat" style="position:static">' + p.catLabel + '</span></div>' +
     '<h2>' + p.name + '</h2>' +
     '<div class="srow" style="margin-top:7px"><span class="sav">' + s.name[0] + '</span><span class="sname" style="font-size:13.5px">' + s.name + '</span>' + (s.verified?ICON.verif:'') + '<span style="color:var(--mut)">' + ICON.pin.replace('currentColor','#71806f') + ' ' + s.city + '</span></div>' +
-    (s.verified ? '<div class="verifnote">Identitas pemilik, alamat &amp; rekening toko ini sudah diperiksa Jasa Rental. ' + s.since + '.</div>' : '<div class="verifnote" style="background:var(--amber-bg);color:var(--amber)">Toko ini <b>belum terverifikasi</b> oleh Jasa Rental. Berhati-hatilah sebelum membayar.</div>') +
+    (p.live ? '<div class="verifnote">Toko ini terdaftar di platform Jasa Rental. Program verifikasi toko &amp; Rekber sedang disiapkan — booking dilakukan di halaman resmi toko ini.</div>' : (s.verified ? '<div class="verifnote">Identitas pemilik, alamat &amp; rekening toko ini sudah diperiksa Jasa Rental. ' + s.since + '.</div>' : '<div class="verifnote" style="background:var(--amber-bg);color:var(--amber)">Toko ini <b>belum terverifikasi</b> oleh Jasa Rental. Berhati-hatilah sebelum membayar.</div>')) +
     '<div class="rate" style="margin-top:10px">' + rateHTML(p) + '</div>' +
     '<p style="margin-top:10px;color:var(--ink2);font-size:14px">' + p.desc + '</p>' +
     '<p style="margin-top:7px;font-size:12.8px;color:var(--mut)"><b>Ketentuan toko:</b> ' + p.terms + '</p>' +
     '<div class="sec-t">Ulasan penyewa</div>' +
-    REVIEWS.map(r=>'<div class="rev"><div class="rhead">' + r.by + ' <span>' + ICON.star.repeat(r.stars) + '</span></div><p>' + r.text + '</p>' + (r.reply?'<div class="reply"><b>Balasan toko:</b> ' + r.reply + '</div>':'') + '</div>').join('') +
+    (p.live ? [{by:'',stars:0,text:'Belum ada ulasan untuk produk ini — jadilah penyewa pertama yang mengulas sesudah menyewa.',reply:''}] : REVIEWS).map(r=>'<div class="rev"><div class="rhead">' + r.by + ' <span>' + ICON.star.repeat(r.stars) + '</span></div><p>' + r.text + '</p>' + (r.reply?'<div class="reply"><b>Balasan toko:</b> ' + r.reply + '</div>':'') + '</div>').join('') +
     '<div class="sec-t">Tanggal &amp; jumlah</div>' +
     '<div class="dates"><div class="sf"><label>Tanggal Ambil</label><input type="date" id="dFrom" value="2026-11-21"></div>' +
     '<div class="sf"><label>Tanggal Kembali</label><input type="date" id="dTo" value="2026-11-22"></div></div>' +
@@ -497,6 +498,7 @@ function openSheet(id){
   document.getElementById('dTo').onchange=syncSheet;
   document.getElementById('btnClose').onclick=closeSheet;
   document.getElementById('btnPay').onclick=doPay;
+  if(p.live){ const bp=document.getElementById('btnPay'); bp.textContent='Booking di Halaman Toko'; bp.onclick=()=>{ location.href='https://jasa-rental.my.id/' + p.slug + '/'; }; document.getElementById('totalNote').textContent='Kamu akan diarahkan ke halaman resmi toko untuk menyelesaikan booking.'; }
   renderPayOpts(); syncSheet();
 }
 function days(){
@@ -578,6 +580,43 @@ document.getElementById('fCity').onchange=e=>{state.city=e.target.value; render(
 document.getElementById('fSort').onchange=e=>{state.sort=e.target.value; render();};
 document.getElementById('searchForm').onsubmit=e=>{e.preventDefault(); state.query=document.getElementById('fQuery').value.trim(); state.city=document.getElementById('fCity').value; render(); document.getElementById('grid').scrollIntoView({behavior:'smooth',block:'start'});};
 render(); renderBookings();
+
+/* ---------- DATA ASLI: marketplace_listings (lintas tenant) ---------- */
+const SB_URL = 'https://nuowbpevzfwobedtgxzm.supabase.co';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im51b3dicGV2emZ3b2JlZHRneHptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQwNjk5MjYsImV4cCI6MjEwOTY0NTkyNn0.-kSflWBRXeKtr2idO8bmEIcoipUO9pbNN-uOWapiS2M';
+const CATMAP = [['kendaraan','kendaraan'],['kamera','kamera'],['fotografi','kamera'],['elektronik','elektronik'],['gadget','elektronik'],['event','event'],['pesta','event'],['fashion','fashion'],['kostum','fashion'],['busana','fashion'],['mainan','hiburan'],['hiburan','hiburan'],['game','hiburan'],['alat','alat'],['perkakas','alat'],['bayi','bayi'],['anak','bayi'],['properti','properti'],['kos','properti'],['tenda','outdoor'],['carrier','outdoor'],['camping','outdoor'],['outdoor','outdoor'],['masak','outdoor'],['tidur','outdoor'],['penerangan','outdoor'],['pakaian','outdoor'],['sepatu','outdoor'],['aksesoris','outdoor'],['shelter','outdoor'],['sleep','outdoor'],['dapur','outdoor'],['hidrasi','outdoor'],['pack','outdoor']];
+function mapCat(c){ const s=(c||'').toLowerCase(); for(const [k,v] of CATMAP) if(s.includes(k)) return v; return 'lainnya'; }
+function catLabelOf(id){ const c = CATS.find(x=>x[0]===id); return c ? c[1] : 'Lainnya'; }
+async function loadLive(){
+  try{
+    const r = await fetch(SB_URL + '/rest/v1/rpc/marketplace_listings', {method:'POST',
+      headers:{'apikey':SB_KEY,'Authorization':'Bearer ' + SB_KEY,'Content-Type':'application/json'}, body:'{}'});
+    if(!r.ok) return;
+    const rows = await r.json();
+    if(!Array.isArray(rows) || !rows.length) return;
+    const stores = {}, prods = [];
+    rows.forEach((row, i) => {
+      if(!stores[row.slug]){
+        const parts = (row.address || '').split(',').map(x=>x.trim()).filter(Boolean);
+        stores[row.slug] = {name: row.shop_name, city: parts[1] || parts[0] || '', verified:false, rekber:false, pro:false, since:'', products:0, rating:0, reviews:0};
+      }
+      stores[row.slug].products++;
+      const cat = mapCat(row.category);
+      const sale = row.type === 'sale';
+      prods.push({id: 1000 + i, live:true, slug: row.slug, name: row.name, store: row.slug, cat, catLabel: catLabelOf(cat),
+        price: sale ? Number(row.price_sale) : Number(row.price_rental), period: sale ? 'jual' : 'hari',
+        stock: Math.max(0, (row.stock_base||0) - (row.committed||0)), rating:0, reviews:0,
+        img: row.image, desc: row.desc || '', terms: sale ? 'Produk dijual lepas oleh toko.' : 'Ketentuan mengikuti halaman resmi toko.'});
+    });
+    STORES = stores; PRODUCTS = prods;
+    state.favs = new Set();
+    const fc = document.getElementById('fCity');
+    Object.values(stores).forEach(s => { if(s.city && ![...fc.options].some(o=>o.value===s.city)){ const o=document.createElement('option'); o.value=s.city; o.textContent=s.city; fc.appendChild(o); } });
+    document.getElementById('liveNote').style.display = 'block';
+    render();
+  }catch(e){ /* fungsi belum terpasang / jaringan gagal: data contoh tetap tampil */ }
+}
+loadLive();
 </script>
 </body>
 </html>
