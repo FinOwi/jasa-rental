@@ -601,12 +601,12 @@ function openSheet(id){
     '<div style="display:flex;gap:6px;margin-top:12px;flex-wrap:wrap">' + (s.pro?'<span class="tagpro" style="position:static">PRO</span>':'') + '<span class="tagcat" style="position:static">' + p.catLabel + '</span></div>' +
     '<h2>' + p.name + '</h2>' +
     '<div class="srow" style="margin-top:7px"><span class="sav">' + s.name[0] + '</span><span class="sname" style="font-size:13.5px">' + s.name + '</span>' + (s.verified?ICON.verif:'') + '<span style="color:var(--mut)">' + ICON.pin.replace('currentColor','#71806f') + ' ' + s.city + '</span></div>' +
-    (p.live ? '<div class="verifnote">Toko ini terdaftar di platform Jasa Rental. Program verifikasi toko &amp; Rekber sedang disiapkan — booking dilakukan di halaman resmi toko ini.</div>' : (s.verified ? '<div class="verifnote">Identitas pemilik, alamat &amp; rekening toko ini sudah diperiksa Jasa Rental. ' + s.since + '.</div>' : '<div class="verifnote" style="background:var(--amber-bg);color:var(--amber)">Toko ini <b>belum terverifikasi</b> oleh Jasa Rental. Berhati-hatilah sebelum membayar.</div>')) +
+    (p.live ? (s.verified ? '<div class="verifnote">Identitas pemilik, alamat &amp; rekening toko ini sudah diperiksa Jasa Rental. ' + s.since + '.</div>' : '<div class="verifnote">Toko ini terdaftar di platform Jasa Rental dan belum menyelesaikan verifikasi toko. Booking dilakukan di halaman resmi toko ini.</div>') : (s.verified ? '<div class="verifnote">Identitas pemilik, alamat &amp; rekening toko ini sudah diperiksa Jasa Rental. ' + s.since + '.</div>' : '<div class="verifnote" style="background:var(--amber-bg);color:var(--amber)">Toko ini <b>belum terverifikasi</b> oleh Jasa Rental. Berhati-hatilah sebelum membayar.</div>')) +
     '<div class="rate" style="margin-top:10px">' + rateHTML(p) + '</div>' +
     '<p style="margin-top:10px;color:var(--ink2);font-size:14px">' + p.desc + '</p>' +
     '<p style="margin-top:7px;font-size:12.8px;color:var(--mut)"><b>Ketentuan toko:</b> ' + p.terms + '</p>' +
     '<div class="sec-t">Ulasan penyewa</div>' +
-    (p.live ? [{by:'',stars:0,text:'Belum ada ulasan untuk produk ini — jadilah penyewa pertama yang mengulas sesudah menyewa.',reply:''}] : REVIEWS).map(r=>'<div class="rev"><div class="rhead">' + r.by + ' <span>' + ICON.star.repeat(r.stars) + '</span></div><p>' + r.text + '</p>' + (r.reply?'<div class="reply"><b>Balasan toko:</b> ' + r.reply + '</div>':'') + '</div>').join('') +
+    (p.live ? '<div id="liveReviews"><div class="rev"><p>Belum ada ulasan untuk produk ini — jadilah penyewa pertama yang mengulas sesudah menyewa.</p></div></div>' : REVIEWS.map(r=>'<div class="rev"><div class="rhead">' + r.by + ' <span>' + ICON.star.repeat(r.stars) + '</span></div><p>' + r.text + '</p>' + (r.reply?'<div class="reply"><b>Balasan toko:</b> ' + r.reply + '</div>':'') + '</div>').join('')) +
     '<div class="sec-t">Tanggal &amp; jumlah</div>' +
     '<div class="dates"><div class="sf"><label>Tanggal Ambil</label><input type="date" id="dFrom" value="2026-11-21"></div>' +
     '<div class="sf"><label>Tanggal Kembali</label><input type="date" id="dTo" value="2026-11-22"></div></div>' +
@@ -627,6 +627,7 @@ function openSheet(id){
   document.getElementById('btnPay').onclick=doPay;
   if(p.live){ const bp=document.getElementById('btnPay'); bp.textContent='Booking di Halaman Toko'; bp.onclick=()=>{ location.href='https://jasa-rental.my.id/' + p.slug + '/'; }; document.getElementById('totalNote').textContent='Kamu akan diarahkan ke halaman resmi toko untuk menyelesaikan booking.'; }
   renderPayOpts(); syncSheet();
+  if(p.live) loadSheetReviews(p);
 }
 function days(){
   const a=new Date(document.getElementById('dFrom').value), b=new Date(document.getElementById('dTo').value);
@@ -714,6 +715,33 @@ const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
 const CATMAP = [['kendaraan','kendaraan'],['kamera','kamera'],['fotografi','kamera'],['elektronik','elektronik'],['gadget','elektronik'],['event','event'],['pesta','event'],['fashion','fashion'],['kostum','fashion'],['busana','fashion'],['mainan','hiburan'],['hiburan','hiburan'],['game','hiburan'],['alat','alat'],['perkakas','alat'],['bayi','bayi'],['anak','bayi'],['properti','properti'],['kos','properti'],['tenda','outdoor'],['carrier','outdoor'],['camping','outdoor'],['outdoor','outdoor'],['masak','outdoor'],['tidur','outdoor'],['penerangan','outdoor'],['pakaian','outdoor'],['sepatu','outdoor'],['aksesoris','outdoor'],['shelter','outdoor'],['sleep','outdoor'],['dapur','outdoor'],['hidrasi','outdoor'],['pack','outdoor']];
 function mapCat(c){ const s=(c||'').toLowerCase(); for(const [k,v] of CATMAP) if(s.includes(k)) return v; return 'lainnya'; }
 function catLabelOf(id){ const c = CATS.find(x=>x[0]===id); return c ? c[1] : 'Lainnya'; }
+async function rpcAnon(name, body){
+  try{
+    const r = await fetch(SB_URL + '/rest/v1/rpc/' + name, {method:'POST',
+      headers:{'apikey':SB_KEY,'Authorization':'Bearer ' + SB_KEY,'Content-Type':'application/json'}, body: JSON.stringify(body || {})});
+    if(!r.ok) return null;
+    return await r.json();
+  }catch(e){ return null; }
+}
+const BULAN_S = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+function sejakLabel(iso){
+  const d = new Date(iso);
+  if(!iso || isNaN(d)) return '';
+  return 'Terverifikasi sejak ' + BULAN_S[d.getMonth()] + ' ' + d.getFullYear();
+}
+function escT(t){ return String(t == null ? '' : t).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+async function loadSheetReviews(p){
+  const data = await rpcAnon('shop_reviews', {s: p.slug, p_item_id: p.itemId, p_limit: 20});
+  const box = document.getElementById('liveReviews');
+  if(!box || !cur || cur.id !== p.id) return;
+  if(!Array.isArray(data) || !data.length) return; /* tetap keadaan kosong yang jujur */
+  box.innerHTML = data.map(r =>
+    '<div class="rev"><div class="rhead">' + escT(r.display_name || 'Penyewa') + ' <span>' + ICON.star.repeat(Math.max(0, Math.min(5, r.rating || 0))) + '</span></div>' +
+    (r.body ? '<p>' + escT(r.body) + '</p>' : '') +
+    (r.photo_url ? '<img src="' + escT(r.photo_url) + '" alt="" loading="lazy" style="width:100%;max-height:180px;object-fit:cover;border-radius:10px;margin-top:7px">' : '') +
+    (r.store_reply ? '<div class="reply"><b>Balasan toko:</b> ' + escT(r.store_reply) + '</div>' : '') + '</div>'
+  ).join('');
+}
 async function loadLive(){
   try{
     const r = await fetch(SB_URL + '/rest/v1/rpc/marketplace_listings', {method:'POST',
@@ -730,7 +758,7 @@ async function loadLive(){
       stores[row.slug].products++;
       const cat = mapCat(row.category);
       const sale = row.type === 'sale';
-      prods.push({id: 1000 + i, live:true, slug: row.slug, name: row.name, store: row.slug, cat, catLabel: catLabelOf(cat),
+      prods.push({id: 1000 + i, live:true, slug: row.slug, itemId: row.item_id, name: row.name, store: row.slug, cat, catLabel: catLabelOf(cat),
         price: sale ? Number(row.price_sale) : Number(row.price_rental), period: sale ? 'jual' : 'hari',
         stock: Math.max(0, (row.stock_base||0) - (row.committed||0)), rating:0, reviews:0,
         img: row.image, desc: row.desc || '', terms: sale ? 'Produk dijual lepas oleh toko.' : 'Ketentuan mengikuti halaman resmi toko.'});
@@ -740,6 +768,22 @@ async function loadLive(){
     const fc = document.getElementById('fCity');
     Object.values(stores).forEach(s => { if(s.city && ![...fc.options].some(o=>o.value===s.city)){ const o=document.createElement('option'); o.value=s.city; o.textContent=s.city; fc.appendChild(o); } });
     document.getElementById('liveNote').style.display = 'block';
+    render();
+    /* Verifikasi & rating ASLI per toko dari server. Bila fungsi gagal,
+       toko tampil tanpa badge dan produk berlabel "Baru" — tidak dikarang. */
+    await Promise.all(Object.keys(stores).map(async slug => {
+      const [ver, srate, irate] = await Promise.all([
+        rpcAnon('shop_verification', {s: slug}),
+        rpcAnon('shop_rating', {s: slug}),
+        rpcAnon('item_ratings', {s: slug})
+      ]);
+      const st = stores[slug];
+      if(ver && ver.verified === true){ st.verified = true; st.since = sejakLabel(ver.since); }
+      if(srate && typeof srate.count === 'number'){ st.rating = Number(srate.avg) || 0; st.reviews = srate.count; }
+      if(irate && typeof irate === 'object'){
+        prods.forEach(p => { if(p.store === slug && irate[p.itemId]){ p.rating = Number(irate[p.itemId].avg) || 0; p.reviews = irate[p.itemId].count || 0; } });
+      }
+    }));
     render();
   }catch(e){ /* fungsi belum terpasang / jaringan gagal: data contoh tetap tampil */ }
 }
