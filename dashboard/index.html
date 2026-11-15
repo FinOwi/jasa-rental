@@ -134,6 +134,15 @@ a{color:inherit}
 .setrow:last-child{border-bottom:none}
 .setrow .st-t{font-weight:800;font-size:14px}
 .setrow .st-s{font-size:12.3px;color:var(--ink2)}
+.revitem{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 15px;margin-bottom:10px}
+.revitem .rh{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.revitem .rn{font-weight:800;font-size:14px}
+.revitem .stars{color:var(--gold);font-size:13px;letter-spacing:1px}
+.revitem .rb{font-size:13.5px;color:var(--ink2);margin-top:6px}
+.revitem .rmeta{font-size:11.5px;color:var(--mut);margin-top:6px}
+.revitem .replybox{background:var(--green-soft);border-radius:10px;padding:9px 11px;font-size:13px;margin-top:9px;color:var(--ink2)}
+.revitem textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:9px 11px;font:inherit;font-size:13.5px;margin-top:9px;background:#fff;resize:vertical}
+.revitem .rbtn{margin-top:8px;background:var(--green);color:#fff;border:none;font:inherit;font-weight:800;font-size:13px;padding:9px 14px;border-radius:10px;cursor:pointer}
 .setrow .chev{margin-left:auto;color:var(--mut);flex:none}
 
 /* bottom nav */
@@ -204,7 +213,7 @@ a{color:inherit}
     <div id="taskList"><div class="emptybox">Memuat…</div></div>
 
     <div class="sect"><h2>Dana Rekber</h2><span>jalur pembayaran Rekber Aman</span></div>
-    <div class="fund">
+    <div class="fund" id="rekberFund">
       <div class="lb">Rekber Aman</div>
       <div class="big">Segera hadir</div>
       <p class="note">Fitur Rekber (dana ditahan platform, diteruskan ke toko sesudah barang kembali &amp; sewa selesai) sedang disiapkan dan belum aktif. Saat ini semua pembayaran di tokomu berjalan langsung dari penyewa ke toko.</p>
@@ -214,7 +223,7 @@ a{color:inherit}
     <div id="prodList"><div class="emptybox">Memuat…</div></div>
 
     <div class="sect" id="ulasan"><h2>Ulasan Terbaru</h2><span>dari booking yang selesai</span></div>
-    <div class="emptybox"><b>Belum ada data ulasan.</b><br>Sistem ulasan &amp; rating penyewa sedang disiapkan. Sesudah aktif, ulasan hanya bisa ditulis penyewa yang bookingnya sudah selesai.</div>
+    <div id="reviewList"><div class="emptybox">Memuat ulasan…</div></div>
     <div class="foot">Dashboard Toko Jasa Rental · Data langsung dari server tokomu</div>
   </section>
 
@@ -355,6 +364,19 @@ async function rest(path, retried) {
   });
   if (r.status === 401 && !retried && (await refreshSession())) return rest(path, true);
   if (!r.ok) { const t = await r.text(); throw new Error('REST ' + r.status + ': ' + t.slice(0, 140)); }
+  const txt = await r.text();
+  return txt ? JSON.parse(txt) : null;
+}
+
+/* ---------- RPC (POST dengan token pengguna) ---------- */
+async function rpc(name, body, retried) {
+  const r = await fetch(KONFIG.SUPABASE_URL + '/rest/v1/rpc/' + name, {
+    method: 'POST',
+    headers: { 'apikey': KONFIG.SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + session.access_token, 'Content-Type': 'application/json' },
+    body: JSON.stringify(body || {})
+  });
+  if (r.status === 401 && !retried && (await refreshSession())) return rpc(name, body, true);
+  if (!r.ok) { const t = await r.text(); throw new Error('RPC ' + r.status + ': ' + t.slice(0, 140)); }
   const txt = await r.text();
   return txt ? JSON.parse(txt) : null;
 }
@@ -616,14 +638,14 @@ function renderShop() {
   const brandName = k => ({ bca: 'BCA', bni: 'BNI', bri: 'BRI', mandiri: 'Mandiri', ovo: 'OVO', dana: 'DANA', gopay: 'GoPay', qris: 'QRIS' }[k] || k.toUpperCase());
   const rows = [
     { t: 'Template Toko', s: 'Tampilan halaman tokomu diatur lewat panel admin & layanan Jasa Rental. Template standar gratis; tema custom seperti BK Adventure adalah layanan berbayar.', c: '' },
-    { t: 'Rekber Aman', s: 'Segera hadir — fitur pembayaran terlindungi sedang disiapkan platform dan belum bisa diaktifkan.', c: '<span class="bdg gold">Segera Hadir</span>' },
+    { id: 'setRekber', t: 'Rekber Aman', s: 'Memuat status Rekber tokomu…', c: '' },
     { t: 'Metode Pembayaran Langsung', s: pm.length ? pm.map(brandName).join(' · ') + ' — tampil di halaman booking tokomu, diatur di panel admin.' : 'Belum diatur — tambahkan lewat panel admin tokomu.', c: '' },
-    { t: 'Verifikasi Toko', s: 'Program verifikasi toko (identitas pemilik, alamat, rekening) sedang disiapkan. Badge terverifikasi belum diterbitkan untuk toko mana pun.', c: '<span class="bdg grey">Belum Dibuka</span>' },
+    { id: 'setVerif', t: 'Verifikasi Toko', s: 'Memuat status verifikasi tokomu…', c: '' },
     { t: 'Lokasi Depot', s: cfg.address ? esc(cfg.address) : 'Alamat belum diisi — lengkapi lewat panel admin tokomu.', c: '' },
     { t: 'Halaman Toko', s: 'jasa-rental.my.id/' + tenant.slug, c: '<a href="/' + tenant.slug + '/" target="_blank" rel="noopener" style="font-weight:800;color:var(--green);text-decoration:none">Buka</a>' }
   ];
   $('shopSettings').innerHTML = rows.map(r =>
-    '<div class="setrow"><span style="flex:1"><span class="st-t">' + r.t + '</span><span class="st-s" style="display:block">' + r.s + '</span></span>' + (r.c || '') + '</div>').join('');
+    '<div class="setrow"' + (r.id ? ' id="' + r.id + '"' : '') + '><span style="flex:1"><span class="st-t">' + r.t + '</span><span class="st-s" style="display:block">' + r.s + '</span></span>' + (r.c || '') + '</div>').join('');
 }
 
 /* ---------- navigasi ---------- */
@@ -657,6 +679,109 @@ function renderAll() {
   renderOrders();
   renderProducts();
   renderShop();
+  loadOwnerExtras();
+}
+
+/* ---------- data pemilik: verifikasi toko, ulasan, dana rekber ---------- */
+const VERIF_ITEMS = [['ktp', 'KTP pemilik'], ['photos', 'Foto tempat usaha & stok asli'], ['address', 'Alamat & titik peta'], ['whatsapp', 'WhatsApp aktif'], ['bank', 'Rekening atas nama pemilik/usaha']];
+const VERIF_STATUS = { unsubmitted: ['Belum Diajukan', 'grey'], pending: ['Sedang Ditinjau', 'gold'], verified: ['Terverifikasi', ''], rejected: ['Belum Lolos', 'grey'], revoked: ['Dicabut', 'grey'] };
+const FUND_STATUS = { ditahan: 'Ditahan platform', siap_cair: 'Siap dicairkan', cair: 'Sudah dicairkan', lepas_sebagian: 'Dilepas sebagian', sengketa: 'Dalam sengketa', refund: 'Dikembalikan ke penyewa' };
+const BULAN_ID = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+function fmtTgl(iso) { if (!iso) return ''; const d = new Date(iso); if (isNaN(d)) return ''; return d.getDate() + ' ' + BULAN_ID[d.getMonth()] + ' ' + d.getFullYear(); }
+function setRow(id, t, s, c) {
+  const el = $(id); if (!el) return;
+  el.innerHTML = '<span style="flex:1"><span class="st-t">' + t + '</span><span class="st-s" style="display:block">' + s + '</span></span>' + (c || '');
+}
+async function loadOwnerExtras() {
+  if (!tenant || !session || !session.access_token) return;
+  const slug = tenant.slug;
+  $('reviewList').innerHTML = '<div class="emptybox">Memuat ulasan…</div>';
+  /* verifikasi toko + status rekber (satu RPC pemilik) */
+  try {
+    const v = await rpc('verification_status_owner', { s: slug });
+    if (!tenant || tenant.slug !== slug) return;
+    if (v && v.ok) {
+      const st = VERIF_STATUS[v.status] || ['—', 'grey'];
+      const chk = VERIF_ITEMS.map(([k, t]) => t + ': ' + (v.checklist && v.checklist[k] ? 'terpenuhi' : 'belum')).join(' · ');
+      setRow('setVerif', 'Verifikasi Toko',
+        chk + (v.status === 'verified' && v.verified_at ? ' · Terverifikasi sejak ' + fmtTgl(v.verified_at) : '') + (v.decision_note ? ' · Catatan platform: ' + esc(v.decision_note) : ''),
+        '<span class="bdg' + (st[1] ? ' ' + st[1] : '') + '">' + st[0] + '</span>');
+      if (v.rekber_enabled) setRow('setRekber', 'Rekber Aman', 'Rekber Aman aktif untuk tokomu — penyewa bisa memilih jalur dana ditahan platform saat checkout.', '<span class="bdg">Aktif</span>');
+      else setRow('setRekber', 'Rekber Aman', v.status === 'verified' ? 'Tokomu sudah terverifikasi, tetapi Rekber belum diaktifkan. Aktivasi & biaya Rekber mengikuti keputusan platform.' : 'Rekber hanya tersedia untuk toko terverifikasi — selesaikan verifikasi toko dulu.', '<span class="bdg grey">Belum Aktif</span>');
+    } else {
+      setRow('setVerif', 'Verifikasi Toko', 'Status verifikasi belum dapat dimuat dari server.', '');
+    }
+  } catch (e) {
+    if (tenant && tenant.slug === slug) setRow('setVerif', 'Verifikasi Toko', 'Status verifikasi belum dapat dimuat dari server.', '');
+  }
+  /* ulasan milik toko ini */
+  try {
+    const rv = await rpc('shop_reviews_owner', { s: slug });
+    if (!tenant || tenant.slug !== slug) return;
+    if (rv && rv.ok) renderOwnerReviews(rv.reviews || []);
+    else $('reviewList').innerHTML = '<div class="emptybox"><b>Ulasan belum dapat dimuat dari server.</b></div>';
+  } catch (e) {
+    if (tenant && tenant.slug === slug) $('reviewList').innerHTML = '<div class="emptybox"><b>Ulasan belum dapat dimuat dari server.</b></div>';
+  }
+  /* ringkasan dana rekber (bila tidak terbaca, kartu jujur yang ada dipertahankan) */
+  try {
+    const rk = await rpc('rekber_store_summary', { s: slug });
+    if (!tenant || tenant.slug !== slug) return;
+    if (rk && rk.ok) renderRekberFund(rk.bookings || []);
+  } catch (e) {}
+}
+function renderOwnerReviews(list) {
+  if (!list.length) {
+    $('reviewList').innerHTML = '<div class="emptybox"><b>Belum ada ulasan.</b><br>Ulasan hanya bisa ditulis penyewa yang bookingnya sudah selesai. Ulasan yang masuk tampil di sini dan di halaman produk tokomu.</div>';
+    return;
+  }
+  $('reviewList').innerHTML = list.map(r => {
+    const itemName = (catalog.find(it => it.id === r.item_id) || {}).name || r.item_id;
+    const stars = '★'.repeat(Math.max(0, Math.min(5, r.rating || 0))) + '☆'.repeat(5 - Math.max(0, Math.min(5, r.rating || 0)));
+    return '<div class="revitem"><div class="rh"><span class="rn">' + esc(r.display_name || 'Penyewa') + '</span>' +
+      '<span class="stars">' + stars + '</span>' +
+      (r.hidden ? '<span class="bdg grey">Disembunyikan Moderator</span>' : '') + '</div>' +
+      (r.body ? '<div class="rb">' + esc(r.body) + '</div>' : '') +
+      (r.photo_url ? '<img src="' + esc(r.photo_url) + '" alt="" loading="lazy" style="width:100%;max-height:200px;object-fit:cover;border-radius:10px;margin-top:8px">' : '') +
+      '<div class="rmeta">' + esc(itemName) + ' · Booking ' + esc(r.booking_code) + ' · ' + fmtTgl(r.created_at) + '</div>' +
+      (r.store_reply
+        ? '<div class="replybox"><b>Balasanmu:</b> ' + esc(r.store_reply) + '</div>'
+        : '<textarea id="reply-' + r.id + '" rows="2" maxlength="2000" placeholder="Tulis balasan untuk ulasan ini…"></textarea><button class="rbtn" data-reply="' + r.id + '">Kirim Balasan</button>') +
+      '</div>';
+  }).join('');
+  document.querySelectorAll('[data-reply]').forEach(b => b.onclick = () => sendReply(b.dataset.reply, b));
+}
+async function sendReply(id, btn) {
+  const ta = $('reply-' + id);
+  const text = (ta.value || '').trim();
+  if (!text) { ta.focus(); return; }
+  btn.disabled = true; btn.textContent = 'Mengirim…';
+  try {
+    const res = await rpc('reply_review', { p_review_id: id, p_reply: text });
+    if (res && res.ok) {
+      const rv = await rpc('shop_reviews_owner', { s: tenant.slug });
+      if (rv && rv.ok) renderOwnerReviews(rv.reviews || []);
+    } else {
+      btn.disabled = false; btn.textContent = (res && res.error) ? 'Gagal: ' + res.error : 'Gagal terkirim — coba lagi';
+    }
+  } catch (e) {
+    btn.disabled = false; btn.textContent = 'Gagal terkirim — coba lagi';
+  }
+}
+function renderRekberFund(bookings) {
+  const el = $('rekberFund'); if (!el) return;
+  if (!bookings.length) {
+    el.innerHTML = '<div class="lb">Rekber Aman</div><div class="big">Belum ada transaksi Rekber</div>' +
+      '<p class="note">Belum ada booking tokomu yang memakai jalur Rekber Aman. Jalur ini tersedia sesudah tokomu terverifikasi dan diaktifkan platform; saat ini pembayaran berjalan langsung dari penyewa ke toko.</p>';
+    return;
+  }
+  let tin = 0, trel = 0, tref = 0;
+  bookings.forEach(b => { tin += Number(b.amount_in || 0); trel += Number(b.amount_released || 0); tref += Number(b.amount_refunded || 0); });
+  const held = tin - trel - tref;
+  el.innerHTML = '<div class="lb">Rekber Aman — Dana di Platform</div>' +
+    '<div class="big">' + rp(held) + ' <span style="font-size:12.5px;color:#b9c6bb;font-weight:600">masih ditahan</span></div>' +
+    bookings.map(b => '<div style="display:flex;justify-content:space-between;gap:10px;border-top:1px solid rgba(255,255,255,.14);padding-top:9px;margin-top:9px;font-size:13px"><span><b>' + esc(b.code) + '</b> · ' + (FUND_STATUS[b.fund_status] || b.fund_status) + '</span><span>' + rp(b.amount_in) + '</span></div>').join('') +
+    '<p class="note">Total masuk ' + rp(tin) + ' · sudah dicairkan ' + rp(trel) + ' · dikembalikan ke penyewa ' + rp(tref) + '. Dana diteruskan ke toko sesudah barang kembali &amp; sewa selesai tanpa sengketa.</p>';
 }
 
 /* ---------- boot ---------- */
