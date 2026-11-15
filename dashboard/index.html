@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Dashboard Toko — Jasa Rental</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#152219; --ink2:#43544a; --mut:#71806f;
+  --bg:#f5f3ee; --card:#fff; --line:#e5e1d8;
+  --green:#177245; --green-d:#0d4d2c; --green-soft:#e7f3ec;
+  --gold:#b07d0a; --gold-soft:#faf0d7;
+  --red:#c0392b; --red-soft:#fdecea;
+  --blue:#14539e; --blue-soft:#e8f1fc;
+  --amber:#a05a00; --amber-soft:#fdf3e0;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:14.5px;line-height:1.5;padding-bottom:78px}
+button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
+a{color:inherit}
+.wrap{max-width:1060px;margin:0 auto;padding:0 14px}
+.view{display:none}.view.on{display:block}
+
+/* gerbang masuk */
+.gate{min-height:100svh;display:grid;place-items:center;padding:22px 14px}
+.gatecard{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:30px 24px;max-width:420px;width:100%;text-align:center}
+.gatecard .logo{width:56px;height:56px;border-radius:16px;background:var(--green);color:#fff;display:grid;place-items:center;margin:0 auto 14px}
+.gatecard h1{font-size:20px;font-weight:800}
+.gatecard p{color:var(--ink2);font-size:13.5px;margin-top:7px}
+.gbtn{margin-top:18px;width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:var(--ink);color:#f3efe4;font-weight:800;font-size:14.5px;padding:13px 16px;border-radius:99px}
+.gbtn:active{transform:scale(.99)}
+.gnote{font-size:12px;color:var(--mut);margin-top:13px}
+.gerr{display:none;background:var(--red-soft);color:var(--red);font-weight:700;font-size:12.8px;border-radius:11px;padding:10px 12px;margin-top:14px}
+.ghostbtn{margin-top:12px;font-weight:800;font-size:13px;color:var(--green-d);background:var(--green-soft);padding:10px 16px;border-radius:99px}
+.spin{width:34px;height:34px;border-radius:50%;border:3.5px solid var(--line);border-top-color:var(--green);margin:6px auto;animation:sp 0.8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* header */
+.dhead{background:var(--ink);color:#f3efe4;position:sticky;top:0;z-index:40}
+.dhead .wrap{display:flex;align-items:center;gap:11px;padding:12px 14px}
+.avatar{width:40px;height:40px;border-radius:50%;background:var(--green);display:grid;place-items:center;font-weight:800;font-size:16px;color:#fff;flex:none;overflow:hidden}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.dhead .nm{font-weight:800;font-size:15.5px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.dhead .sub{font-size:11.5px;color:#b9c6bb;font-weight:600}
+.dhead .acts{margin-left:auto;display:flex;gap:8px}
+.iconbtn{position:relative;width:38px;height:38px;border-radius:50%;background:#ffffff14;display:grid;place-items:center;color:#f3efe4;flex:none}
+.iconbtn .n{position:absolute;top:-3px;right:-3px;background:#e2483d;color:#fff;font-size:9.5px;font-weight:800;min-width:17px;height:17px;border-radius:99px;display:none;place-items:center;padding:0 4px}
+.iconbtn .n.on{display:grid}
+.bdg{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:800;padding:2.5px 7px;border-radius:99px;background:var(--green-soft);color:var(--green-d)}
+.bdg.gold{background:var(--gold-soft);color:var(--gold)}
+.bdg.grey{background:#f0ede4;color:var(--ink2)}
+
+/* greeting + summary */
+.hello{padding:18px 2px 4px}
+.hello h1{font-size:20px;font-weight:800;letter-spacing:-.01em}
+.hello p{color:var(--ink2);font-size:13.5px;margin-top:2px}
+.sumgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}
+@media(min-width:760px){.sumgrid{grid-template-columns:repeat(4,1fr)}}
+.sum{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px}
+.sum .lb{font-size:11.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--mut)}
+.sum .vl{font-size:24px;font-weight:800;margin-top:3px;letter-spacing:-.01em}
+.sum .vl small{font-size:13px;color:var(--mut);font-weight:700}
+.sum .dl{font-size:12px;font-weight:700;margin-top:2px}
+.up{color:var(--green)} .warn{color:var(--amber)} .bad{color:var(--red)}
+
+/* action queue */
+.sect{display:flex;align-items:baseline;gap:9px;margin:22px 2px 11px}
+.sect h2{font-size:16.5px;font-weight:800}
+.sect span{font-size:12.5px;color:var(--mut);font-weight:600}
+.sect a{margin-left:auto;font-size:13px;font-weight:800;color:var(--green);text-decoration:none}
+.task{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:13px 14px;display:flex;gap:12px;align-items:center;margin-bottom:9px}
+.task .ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;flex:none}
+.task .tt{font-weight:800;font-size:14px}
+.task .ts{font-size:12.5px;color:var(--ink2)}
+.task .go{margin-left:auto;background:var(--green);color:#fff;font-weight:800;font-size:12.5px;padding:9px 13px;border-radius:99px;white-space:nowrap;text-decoration:none}
+.task .go.ghost{background:var(--green-soft);color:var(--green-d)}
+.ic.amber{background:var(--amber-soft);color:var(--amber)}
+.ic.red{background:var(--red-soft);color:var(--red)}
+.ic.green{background:var(--green-soft);color:var(--green-d)}
+.ic.blue{background:var(--blue-soft);color:var(--blue)}
+.emptybox{background:var(--card);border:1px dashed var(--line);border-radius:16px;padding:20px 16px;text-align:center;color:var(--ink2);font-size:13.5px;font-weight:600}
+.emptybox b{color:var(--ink)}
+
+/* orders */
+.chips{display:flex;gap:7px;overflow-x:auto;padding-bottom:9px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;padding:7px 13px;border-radius:99px;border:1px solid var(--line);background:var(--card);font-weight:700;font-size:12.5px;color:var(--ink2)}
+.chip.on{background:var(--ink);color:#f3efe4;border-color:var(--ink)}
+.chip .c{background:#e2483d;color:#fff;border-radius:99px;font-size:10px;padding:0 5px;margin-left:3px}
+.order{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:10px}
+.order .oh{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.order .code{font-weight:800;font-size:13.5px}
+.order .who{font-size:12.5px;color:var(--ink2);font-weight:600}
+.st{font-size:10.5px;font-weight:800;padding:3px 9px;border-radius:99px}
+.st.wait{background:var(--amber-soft);color:var(--amber)}
+.st.ready{background:var(--blue-soft);color:var(--blue)}
+.st.out{background:#efe7fb;color:#5b3ba8}
+.st.late{background:var(--red-soft);color:var(--red)}
+.st.done{background:var(--green-soft);color:var(--green-d)}
+.st.off{background:#f0ede4;color:var(--mut)}
+.order .items{font-size:13.5px;margin-top:7px;font-weight:600}
+.order .meta{font-size:12.5px;color:var(--ink2);margin-top:2px}
+.order .of{display:flex;gap:8px;align-items:center;margin-top:11px;flex-wrap:wrap}
+.order .total{font-weight:800;font-size:15px}
+.paytag{font-size:10.5px;font-weight:800;padding:3px 8px;border-radius:6px}
+.paytag.ok{background:var(--green-soft);color:var(--green-d)}
+.paytag.waitp{background:var(--amber-soft);color:var(--amber)}
+.paytag.langsung{background:#f0ede4;color:var(--ink2)}
+.obtn{margin-left:auto;font-weight:800;font-size:12.5px;padding:9px 13px;border-radius:99px;background:var(--green);color:#fff;text-decoration:none}
+.obtn.ghost{background:var(--green-soft);color:var(--green-d);margin-left:0}
+
+/* fund / segera hadir */
+.fund{background:var(--ink);color:#f3efe4;border-radius:18px;padding:18px}
+.fund .lb{font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#b9c6bb}
+.fund .big{font-size:21px;font-weight:800;margin-top:5px}
+.fund .note{font-size:12.5px;color:#b9c6bb;margin-top:8px}
+
+/* products */
+.prod{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 14px;display:flex;gap:12px;align-items:center;margin-bottom:9px}
+.prod img{width:52px;height:52px;border-radius:11px;object-fit:cover;flex:none;background:#eee9db}
+.prod .pn{font-weight:800;font-size:13.5px;line-height:1.3}
+.prod .pm{font-size:12px;color:var(--ink2);font-weight:600}
+.prod .stk{margin-left:auto;text-align:right;flex:none}
+.prod .stk b{font-size:15px}
+.prod .stk span{display:block;font-size:11px;color:var(--mut);font-weight:700}
+.prod .stk.low b{color:var(--red)}
+
+/* settings list */
+.set{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.setrow{display:flex;gap:12px;align-items:center;padding:14px 15px;border-bottom:1px solid var(--line);width:100%;text-align:left}
+.setrow:last-child{border-bottom:none}
+.setrow .st-t{font-weight:800;font-size:14px}
+.setrow .st-s{font-size:12.3px;color:var(--ink2)}
+.setrow .chev{margin-left:auto;color:var(--mut);flex:none}
+
+/* bottom nav */
+.bnav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:#fff;border-top:1px solid var(--line);display:none;padding:7px 4px calc(7px + env(safe-area-inset-bottom))}
+.bnav.on{display:flex}
+.bnav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:1px;font-size:10.5px;font-weight:700;color:var(--mut);position:relative}
+.bnav button.on{color:var(--green)}
+.bnav .n{position:absolute;top:-2px;right:calc(50% - 17px);background:#e2483d;color:#fff;font-size:9px;font-weight:800;min-width:15px;height:15px;border-radius:99px;display:none;place-items:center}
+.bnav .n.on{display:grid}
+.foot{padding:16px 0 4px;text-align:center;color:var(--mut);font-size:11.5px}
+.picker{display:none;background:var(--gold-soft);border:1px solid #ecd9a0;border-radius:14px;padding:12px 14px;margin-top:14px;font-size:13.5px}
+.picker select{margin-top:8px;width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);font:inherit;font-weight:700;background:#fff}
+</style>
+</head>
+<body>
+
+<!-- ================= GERBANG MASUK ================= -->
+<div class="gate" id="gate">
+  <div class="gatecard">
+    <div class="logo"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"><path d="M4 7 5.5 3h13L20 7M4 7h16M4 7v12a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 20 19V7M9.5 20.5v-6h5v6"/></svg></div>
+    <h1>Dashboard Toko</h1>
+    <p id="gateText">Masuk dengan akun Google yang terdaftar sebagai pemilik toko di Jasa Rental. Kamu hanya akan melihat data tokomu sendiri.</p>
+    <div class="spin" id="gateSpin" style="display:none"></div>
+    <button class="gbtn" id="btnLogin"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.9h5.4a4.6 4.6 0 0 1-2 2.7v2.2h3.2c1.9-1.7 3-4.2 3-6.8z"/><path d="M12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.2c-.9.6-2 1-3.4 1-2.6 0-4.8-1.8-5.6-4.1H3.1v2.3A10 10 0 0 0 12 22z"/><path d="M6.4 14.3a6 6 0 0 1 0-4.6V7.4H3.1a10 10 0 0 0 0 9.2z"/><path d="M12 5.6c1.5 0 2.8.5 3.8 1.5L18.6 4A10 10 0 0 0 3.1 7.4l3.3 2.3C7.2 7.4 9.4 5.6 12 5.6z"/></svg>Masuk dengan Google</button>
+    <div class="gerr" id="gateErr"></div>
+    <div id="gateExtra"></div>
+    <p class="gnote">Belum punya toko di Jasa Rental? Pendaftaran toko dibantu tim Jasa Rental — hubungi kami lewat halaman utama jasa-rental.my.id.</p>
+  </div>
+</div>
+
+<!-- ================= APLIKASI ================= -->
+<div id="app" style="display:none">
+<header class="dhead">
+  <div class="wrap">
+    <span class="avatar" id="hAvatar">?</span>
+    <div>
+      <div class="nm"><span id="hName">Toko</span> <span class="bdg" id="hBadge">Toko Terdaftar</span></div>
+      <div class="sub" id="hSub">jasa-rental.my.id</div>
+    </div>
+    <div class="acts">
+      <button class="iconbtn" id="btnBell" aria-label="Perlu tindakan"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"><path d="M18 9a6 6 0 1 0-12 0c0 6-2.5 7-2.5 7h17S18 15 18 9z"/><path d="M10 20a2.2 2.2 0 0 0 4 0"/></svg><span class="n" id="bellN">0</span></button>
+      <a class="iconbtn" id="btnStore" href="#" target="_blank" rel="noopener" aria-label="Lihat toko" style="text-decoration:none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"><path d="M4 7 5.5 3h13L20 7M4 7h16M4 7v12a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 20 19V7M9.5 20.5v-6h5v6"/></svg></a>
+      <button class="iconbtn" id="btnLogout" aria-label="Keluar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3"/><path d="m16 17 5-5-5-5M21 12H9"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="picker" id="tenantPicker">
+    <b>Akunmu mengelola lebih dari satu toko.</b> Pilih toko yang ingin dibuka:
+    <select id="tenantSelect"></select>
+  </div>
+
+  <!-- ================= BERANDA ================= -->
+  <section class="view on" id="v-home">
+    <div class="hello">
+      <h1 id="helloTitle">Selamat datang</h1>
+      <p id="helloSub">Memuat ringkasan tokomu…</p>
+    </div>
+    <div class="sumgrid">
+      <div class="sum"><div class="lb">Pesanan Baru</div><div class="vl" id="sumNew">…</div><div class="dl warn" id="sumNewSub">memuat</div></div>
+      <div class="sum"><div class="lb">Perlu Verifikasi Bayar</div><div class="vl" id="sumVerify">…</div><div class="dl warn" id="sumVerifySub">memuat</div></div>
+      <div class="sum"><div class="lb">Sedang Disewa</div><div class="vl" id="sumOut">…</div><div class="dl" id="sumOutSub">memuat</div></div>
+      <div class="sum"><div class="lb" id="sumRevLabel">Pendapatan Bulan Ini</div><div class="vl" id="sumRev">…</div><div class="dl up" id="sumRevSub">memuat</div></div>
+    </div>
+
+    <div class="sect"><h2>Perlu Tindakan</h2><span>diurutkan paling mendesak</span></div>
+    <div id="taskList"><div class="emptybox">Memuat…</div></div>
+
+    <div class="sect"><h2>Dana Rekber</h2><span>jalur pembayaran Rekber Aman</span></div>
+    <div class="fund">
+      <div class="lb">Rekber Aman</div>
+      <div class="big">Segera hadir</div>
+      <p class="note">Fitur Rekber (dana ditahan platform, diteruskan ke toko sesudah barang kembali &amp; sewa selesai) sedang disiapkan dan belum aktif. Saat ini semua pembayaran di tokomu berjalan langsung dari penyewa ke toko.</p>
+    </div>
+
+    <div class="sect"><h2>Stok Perlu Perhatian</h2><a href="#" id="linkAllProducts">Semua Produk</a></div>
+    <div id="prodList"><div class="emptybox">Memuat…</div></div>
+
+    <div class="sect" id="ulasan"><h2>Ulasan Terbaru</h2><span>dari booking yang selesai</span></div>
+    <div class="emptybox"><b>Belum ada data ulasan.</b><br>Sistem ulasan &amp; rating penyewa sedang disiapkan. Sesudah aktif, ulasan hanya bisa ditulis penyewa yang bookingnya sudah selesai.</div>
+    <div class="foot">Dashboard Toko Jasa Rental · Data langsung dari server tokomu</div>
+  </section>
+
+  <!-- ================= PESANAN ================= -->
+  <section class="view" id="v-orders">
+    <div class="sect" style="margin-top:18px"><h2>Pesanan</h2><span>booking website &amp; kontrak sewa tokomu</span></div>
+    <div class="chips" id="orderChips"></div>
+    <div id="orderList"><div class="emptybox">Memuat…</div></div>
+    <div class="foot">Konfirmasi booking, verifikasi bukti pembayaran, dan serah terima barang dilakukan di panel admin tokomu.</div>
+  </section>
+
+  <!-- ================= PRODUK ================= -->
+  <section class="view" id="v-products">
+    <div class="sect" style="margin-top:18px"><h2>Produk</h2><span id="prodCount"></span></div>
+    <div id="allProdList"><div class="emptybox">Memuat…</div></div>
+    <div class="foot">Stok mengikuti data katalog yang tersimpan di server tokomu.</div>
+  </section>
+
+  <!-- ================= TOKO ================= -->
+  <section class="view" id="v-shop">
+    <div class="sect" style="margin-top:18px"><h2>Pengaturan Toko</h2></div>
+    <div class="set" id="shopSettings"></div>
+    <div class="sect"><h2>Akun</h2></div>
+    <div class="set">
+      <div class="setrow"><span><span class="st-t" id="accEmail">—</span><span class="st-s" style="display:block">Email pemilik yang sedang masuk</span></span>
+      <button class="chev" id="btnLogout2" style="font-weight:800;color:var(--red)">Keluar</button></div>
+    </div>
+    <div class="foot">Satu dashboard per toko — kamu hanya melihat data tokomu sendiri.</div>
+  </section>
+</main>
+
+<nav class="bnav" id="bnav">
+  <button class="on" data-nav="home"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 20z"/></svg>Beranda</button>
+  <button data-nav="orders"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"><path d="M6 3h12l1 5H5z"/><path d="M5 8v11a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 19V8M9.5 12.5h5"/></svg>Pesanan<span class="n" id="navN">0</span></button>
+  <button data-nav="products"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><rect x="3" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5"/></svg>Produk</button>
+  <button data-nav="shop"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"><path d="M4 7 5.5 3h13L20 7M4 7h16M4 7v12a1.5 1.5 0 0 0 1.5 1.5h13A1.5 1.5 0 0 0 20 19V7M9.5 20.5v-6h5v6"/></svg>Toko</button>
+</nav>
+</div>
+
+<script>
+/* ============================================================
+   DASHBOARD TOKO — JASA RENTAL (data asli per tenant)
+   Login: Google via Supabase Auth (tanpa library, pola sama
+   seperti login member storefront). Tenant TIDAK tertanam:
+   sesudah login, baris tabel tenants dibaca dengan token
+   pengguna — RLS (policy tenants_owner_read + fungsi
+   is_tenant_owner) hanya mengembalikan toko yang admin_email-
+   nya sama dengan email JWT. Semua data sesudah itu dibaca
+   per tenant_id dengan token yang sama, sehingga RLS pula
+   yang menjamin tenant hanya melihat datanya sendiri.
+   ============================================================ */
+const KONFIG = {
+  SUPABASE_URL: 'https://nuowbpevzfwobedtgxzm.supabase.co',
+  SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im51b3dicGV2emZ3b2JlZHRneHptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQwNjk5MjYsImV4cCI6MjEwOTY0NTkyNn0.-kSflWBRXeKtr2idO8bmEIcoipUO9pbNN-uOWapiS2M'
+};
+const SESSION_KEY = 'jr_tenant_session_v1';
+const MEMBER_SESSION_KEY = 'jr_member_session_v1'; // sesi member storefront (token Auth yang sama)
+const PICK_KEY = 'jr_tenant_pick_v1';
+const $ = id => document.getElementById(id);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const rp = n => 'Rp' + Number(n || 0).toLocaleString('id-ID');
+const rpShort = n => { n = Number(n || 0); if (n >= 1000000) return 'Rp' + (n / 1000000).toLocaleString('id-ID', {maximumFractionDigits: 2}) + ' jt'; if (n >= 1000) return 'Rp' + Math.round(n / 1000) + ' rb'; return rp(n); };
+
+let session = null;   // {access_token, refresh_token, expires_at}
+let profile = null;   // {email, name, avatar}
+let tenants = [];     // baris tenants milik pengguna (dari RLS)
+let tenant = null;    // tenant aktif
+let cfg = {};         // site_config.config tenant aktif
+let catalog = [];     // data katalog (jsonb per item)
+let bkGroups = [];    // booking website, digrup per kode
+let bkOk = false;     // tabel bookings terbaca?
+let rentals = [];     // baris rentals {contract_id, status, data}
+let rentalsOk = false;
+
+/* ---------- sesi ---------- */
+function saveSession(sv) {
+  session = sv;
+  try { sv ? localStorage.setItem(SESSION_KEY, JSON.stringify(sv)) : localStorage.removeItem(SESSION_KEY); } catch (e) {}
+}
+function loadStoredSession() {
+  try { const s = JSON.parse(localStorage.getItem(SESSION_KEY) || 'null'); if (s && s.access_token) return s; } catch (e) {}
+  // Jembatan: sesi yang tertangkap halaman toko (login member) adalah
+  // token Supabase Auth yang sama — pakai sebagai cadangan baca-saja.
+  try { const m = JSON.parse(localStorage.getItem(MEMBER_SESSION_KEY) || 'null'); if (m && m.access_token) return m; } catch (e) {}
+  return null;
+}
+async function refreshSession() {
+  if (!session || !session.refresh_token) return false;
+  try {
+    const r = await fetch(KONFIG.SUPABASE_URL + '/auth/v1/token?grant_type=refresh_token', {
+      method: 'POST', headers: { 'apikey': KONFIG.SUPABASE_ANON_KEY, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ refresh_token: session.refresh_token })
+    });
+    if (!r.ok) return false;
+    const j = await r.json();
+    if (!j.access_token) return false;
+    saveSession({ access_token: j.access_token, refresh_token: j.refresh_token || session.refresh_token, expires_at: Date.now() + (parseInt(j.expires_in || '3600', 10) * 1000) });
+    return true;
+  } catch (e) { return false; }
+}
+async function ensureSession() {
+  if (!session) return false;
+  if (Date.now() > (session.expires_at || 0) - 60000) return refreshSession();
+  return true;
+}
+async function fetchProfile(retried) {
+  if (!session || !session.access_token) return false;
+  try {
+    const r = await fetch(KONFIG.SUPABASE_URL + '/auth/v1/user', {
+      headers: { 'apikey': KONFIG.SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + session.access_token }
+    });
+    if (!r.ok) {
+      if (r.status === 401 && !retried && (await refreshSession())) return fetchProfile(true);
+      return false;
+    }
+    const u = await r.json();
+    const md = u.user_metadata || {};
+    profile = { email: u.email || '', name: md.full_name || md.name || (u.email || '').split('@')[0], avatar: md.avatar_url || md.picture || '' };
+    return true;
+  } catch (e) { return false; }
+}
+function startGoogleLogin() {
+  location.href = KONFIG.SUPABASE_URL + '/auth/v1/authorize?provider=google&redirect_to=' + encodeURIComponent(location.origin + location.pathname);
+}
+async function doLogout() {
+  try {
+    if (session && session.access_token) await fetch(KONFIG.SUPABASE_URL + '/auth/v1/logout', { method: 'POST', headers: { 'apikey': KONFIG.SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + session.access_token } });
+  } catch (e) {}
+  saveSession(null);
+  location.hash = '';
+  location.reload();
+}
+
+/* ---------- REST (dengan token pengguna; RLS yang membatasi) ---------- */
+async function rest(path, retried) {
+  const r = await fetch(KONFIG.SUPABASE_URL + '/rest/v1/' + path, {
+    headers: { 'apikey': KONFIG.SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + session.access_token, 'Content-Type': 'application/json' }
+  });
+  if (r.status === 401 && !retried && (await refreshSession())) return rest(path, true);
+  if (!r.ok) { const t = await r.text(); throw new Error('REST ' + r.status + ': ' + t.slice(0, 140)); }
+  const txt = await r.text();
+  return txt ? JSON.parse(txt) : null;
+}
+
+/* ---------- resolusi tenant dari email yang login ---------- */
+async function resolveTenants() {
+  // Tanpa filter slug: RLS hanya mengembalikan baris tenants yang
+  // admin_email-nya cocok dengan email pada JWT pengguna.
+  const rows = await rest('tenants?select=id,slug,name&order=name');
+  return rows || [];
+}
+function pickTenant(list) {
+  let picked = null;
+  try { picked = localStorage.getItem(PICK_KEY); } catch (e) {}
+  return list.find(t => t.id === picked) || list[0];
+}
+
+/* ---------- muat data tenant ---------- */
+function groupBookings(rows) {
+  const map = new Map();
+  (rows || []).forEach(r => { if (!map.has(r.code)) map.set(r.code, []); map.get(r.code).push(r); });
+  return [...map.entries()].map(([code, rs]) => ({ code, rows: rs, first: rs[0].data || {}, status: rs[0].status, created: rs[0].created_at }));
+}
+function groupTotal(g) {
+  return g.rows.reduce((a, r) => { const d = r.data || {}; return a + (d.type === 'rental' ? (d.price || 0) * (d.qty || 1) * (d.days || 1) : (d.price || 0) * (d.qty || 1)); }, 0);
+}
+async function loadTenantData(t) {
+  const tid = t.id;
+  const confRows = await rest('site_config?tenant_id=eq.' + tid + '&select=config');
+  cfg = (confRows && confRows[0] && confRows[0].config) || {};
+  const catRows = await rest('catalog_items?tenant_id=eq.' + tid + '&select=item_id,data&order=item_id');
+  catalog = (catRows || []).map(r => r.data || {});
+  try {
+    const bkRows = await rest('bookings?tenant_id=eq.' + tid + '&select=code,item_id,size,status,data,created_at&order=created_at.desc&limit=200');
+    bkGroups = groupBookings(bkRows); bkOk = true;
+  } catch (e) { bkGroups = []; bkOk = false; }
+  try {
+    rentals = await rest('rentals?tenant_id=eq.' + tid + '&select=contract_id,status,data&order=updated_at.desc&limit=300') || [];
+    rentalsOk = true;
+  } catch (e) { rentals = []; rentalsOk = false; }
+}
+
+/* ---------- hitung ringkasan (semua dari data server) ---------- */
+function daysLate(c) {
+  if (!c || !c.returnDate) return 0;
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const ret = new Date(c.returnDate + 'T00:00:00');
+  if (isNaN(ret)) return 0;
+  return Math.floor((today - ret) / 86400000);
+}
+function todayStr() { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+function normPhone(p) {
+  let d = String(p || '').replace(/\D/g, '');
+  if (d.startsWith('0')) d = '62' + d.slice(1);
+  else if (d.startsWith('8')) d = '62' + d;
+  return d.length >= 9 ? d : '';
+}
+function itemReady(it) {
+  if (it && Array.isArray(it.sizes) && it.sizes.length) return it.sizes.reduce((a, s) => a + (Number(s.ready) || 0), 0);
+  return Number((it && it.stockReady) || 0);
+}
+function itemTotalQty(it) {
+  if (it && Array.isArray(it.sizes) && it.sizes.length) return it.sizes.reduce((a, s) => a + (Number(s.ready) || 0) + (Number(s.rented) || 0), 0) || Number(it.stockTotal || 0);
+  return Number((it && it.stockTotal) || 0) || itemReady(it) + Number((it && it.stockRented) || 0);
+}
+function computeStats() {
+  const pendingGroups = bkGroups.filter(g => g.status === 'pending');
+  const verifyGroups = bkGroups.filter(g => ['pending', 'confirmed'].includes(g.status) && g.first.payment && g.first.payment.verified !== true);
+  const activeRentals = rentals.filter(r => r.status === 'active');
+  const outUnits = activeRentals.reduce((a, r) => a + (Number((r.data || {}).qty) || 1), 0);
+  const lateRentals = activeRentals.filter(r => daysLate(r.data) > 0);
+  const pickupToday = bkGroups.filter(g => g.status === 'confirmed' && g.first.startDate === todayStr());
+  const now = new Date();
+  const monthGroups = bkGroups.filter(g => {
+    if (!['confirmed', 'converted'].includes(g.status)) return false;
+    if (!(g.first.payment && g.first.payment.verified === true)) return false;
+    const c = new Date(g.created);
+    return c.getFullYear() === now.getFullYear() && c.getMonth() === now.getMonth();
+  });
+  const revenue = monthGroups.reduce((a, g) => a + groupTotal(g), 0);
+  return { pendingGroups, verifyGroups, activeRentals, outUnits, lateRentals, pickupToday, revenue, monthGroups };
+}
+</script>
+
+<script>
+/* ---------- render ---------- */
+const ICONS = {
+  clock: '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>',
+  card: '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 15h4"/></svg>',
+  box: '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>',
+  bell: '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M18 9a6 6 0 1 0-12 0c0 6-2.5 7-2.5 7h17S18 15 18 9z"/><path d="M10 20a2.2 2.2 0 0 0 4 0"/></svg>'
+};
+function shopName() { return cfg.brandName || tenant.name || 'Toko'; }
+function renderHeader() {
+  const nm = shopName();
+  $('hName').textContent = nm;
+  $('hAvatar').textContent = (nm.trim()[0] || '?').toUpperCase();
+  const sub = 'jasa-rental.my.id/' + tenant.slug;
+  $('hSub').textContent = cfg.address ? sub + ' · ' + cfg.address : sub;
+  $('btnStore').href = '/' + tenant.slug + '/';
+  $('accEmail').textContent = profile ? profile.email : '—';
+}
+function renderHome(st) {
+  const nm = shopName();
+  const h = new Date().getHours();
+  const greet = h < 11 ? 'Selamat pagi' : h < 15 ? 'Selamat siang' : h < 19 ? 'Selamat sore' : 'Selamat malam';
+  $('helloTitle').textContent = greet + ', ' + nm;
+  $('helloSub').textContent = new Date().toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) + ' · Ringkasan tokomu dari data server.';
+
+  if (bkOk) {
+    $('sumNew').textContent = st.pendingGroups.length;
+    $('sumNewSub').textContent = st.pendingGroups.length ? 'booking menunggu konfirmasi' : 'tidak ada booking menunggu';
+    $('sumNewSub').className = 'dl ' + (st.pendingGroups.length ? 'warn' : 'up');
+    $('sumVerify').textContent = st.verifyGroups.length;
+    $('sumVerifySub').textContent = st.verifyGroups.length ? 'bukti terkirim, menunggu aksimu' : 'semua pembayaran beres';
+    $('sumVerifySub').className = 'dl ' + (st.verifyGroups.length ? 'warn' : 'up');
+    const monthName = new Date().toLocaleDateString('id-ID', { month: 'short' });
+    $('sumRevLabel').textContent = 'Pendapatan ' + monthName + ' — Terverifikasi';
+    $('sumRev').innerHTML = rpShort(st.revenue);
+    $('sumRevSub').textContent = 'dari ' + st.monthGroups.length + ' booking web terbayar bulan ini';
+  } else {
+    $('sumNew').textContent = '—'; $('sumNewSub').textContent = 'data booking belum tersedia';
+    $('sumVerify').textContent = '—'; $('sumVerifySub').textContent = 'data booking belum tersedia';
+    $('sumRev').textContent = '—'; $('sumRevSub').textContent = 'data booking belum tersedia';
+  }
+  if (rentalsOk) {
+    $('sumOut').innerHTML = st.outUnits + ' <small>unit</small>';
+    $('sumOutSub').innerHTML = st.lateRentals.length
+      ? '<span class="bad">' + st.lateRentals.length + ' kontrak telat kembali</span>'
+      : 'dari ' + st.activeRentals.length + ' kontrak aktif';
+  } else {
+    $('sumOut').textContent = '—'; $('sumOutSub').textContent = 'data sewa belum tersedia';
+  }
+
+  const actionCount = st.pendingGroups.length + st.lateRentals.length;
+  const bell = $('bellN'), nav = $('navN');
+  bell.textContent = actionCount; nav.textContent = actionCount;
+  bell.classList.toggle('on', actionCount > 0); nav.classList.toggle('on', actionCount > 0);
+
+  /* antrean Perlu Tindakan — hanya yang benar-benar ada */
+  const tasks = [];
+  if (st.lateRentals.length) {
+    const worst = st.lateRentals.slice().sort((a, b) => daysLate(b.data) - daysLate(a.data))[0];
+    const c = worst.data || {};
+    const wa = normPhone(c.renterPhone);
+    const msg = 'Halo ' + (c.renterName || 'kak') + ', kami mengingatkan sewa ' + (c.itemName || '') + ' (kontrak ' + worst.contract_id + ') sudah melewati tanggal kembali ' + (c.returnDate || '') + ' (' + daysLate(c) + ' hari). Mohon segera dikembalikan. Terima kasih!';
+    tasks.push({ cls: 'red', ic: ICONS.clock, tt: st.lateRentals.length + ' kontrak TELAT kembali',
+      ts: 'Paling lama: ' + esc(worst.contract_id) + ' · ' + esc(c.itemName || '') + ' · telat ' + daysLate(c) + ' hari',
+      btn: wa ? '<a class="go" target="_blank" rel="noopener" href="https://wa.me/' + wa + '?text=' + encodeURIComponent(msg) + '">Hubungi Penyewa</a>' : '<button class="go" data-goto="orders">Lihat</button>' });
+  }
+  if (st.verifyGroups.length) {
+    tasks.push({ cls: 'amber', ic: ICONS.card, tt: st.verifyGroups.length + ' bukti pembayaran menunggu verifikasi',
+      ts: 'Bukti transfer/QRIS sudah diunggah penyewa — periksa & putuskan di panel admin tokomu',
+      btn: '<button class="go" data-goto="orders">Periksa</button>' });
+  }
+  if (st.pickupToday.length) {
+    tasks.push({ cls: 'blue', ic: ICONS.box, tt: st.pickupToday.length + ' pesanan diambil hari ini',
+      ts: 'Siapkan barang & catat identitas penyewa saat serah terima di depot',
+      btn: '<button class="go ghost" data-goto="orders">Lihat Daftar</button>' });
+  }
+  if (st.pendingGroups.length) {
+    tasks.push({ cls: 'green', ic: ICONS.bell, tt: st.pendingGroups.length + ' pesanan baru menunggu konfirmasi',
+      ts: 'Booking dari website tokomu — konfirmasi atau tolak di panel admin',
+      btn: '<button class="go ghost" data-goto="orders">Lihat Daftar</button>' });
+  }
+  $('taskList').innerHTML = tasks.length
+    ? tasks.map(t => '<div class="task"><span class="ic ' + t.cls + '">' + t.ic + '</span><div><div class="tt">' + t.tt + '</div><div class="ts">' + t.ts + '</div></div>' + t.btn + '</div>').join('')
+    : '<div class="emptybox"><b>Tidak ada yang perlu ditindak saat ini.</b><br>Booking baru, bukti pembayaran, dan keterlambatan akan muncul di sini.</div>';
+  bindGoto();
+
+  renderStockHome();
+}
+function prodRow(it, lowOnly) {
+  const ready = itemReady(it), tot = itemTotalQty(it);
+  const price = it.type === 'sale' ? (it.priceSale ? rp(it.priceSale) : '') : (it.priceRental ? rp(it.priceRental) + '/hari' : '');
+  const meta = [price, it.category || ''].filter(Boolean).join(' · ');
+  const label = ready === 0 ? 'HABIS' : ready <= 2 ? 'MENIPIS' : 'siap';
+  return '<div class="prod">' + (it.image ? '<img src="' + esc(it.image) + '" alt="" loading="lazy">' : '<img alt="">') +
+    '<div><div class="pn">' + esc(it.name || it.id || '') + '</div><div class="pm">' + esc(meta) + '</div></div>' +
+    '<div class="stk' + (ready <= 2 ? ' low' : '') + '"><b>' + ready + '/' + tot + '</b><span>' + label + '</span></div></div>';
+}
+function renderStockHome() {
+  const low = catalog.filter(it => itemReady(it) <= 2).sort((a, b) => itemReady(a) - itemReady(b)).slice(0, 6);
+  $('prodList').innerHTML = low.length ? low.map(it => prodRow(it)).join('')
+    : '<div class="emptybox"><b>Semua stok dalam keadaan cukup.</b><br>Tidak ada produk dengan stok siap 2 unit atau kurang.</div>';
+}
+function renderProducts() {
+  const sorted = catalog.slice().sort((a, b) => itemReady(a) - itemReady(b));
+  $('prodCount').textContent = catalog.length + ' produk di katalog server';
+  $('allProdList').innerHTML = sorted.length ? sorted.map(it => prodRow(it)).join('')
+    : '<div class="emptybox"><b>Katalog masih kosong.</b><br>Produk yang ditambahkan lewat panel admin akan tampil di sini.</div>';
+}
+
+/* ---------- pesanan ---------- */
+let ofilter = 'semua';
+function orderEntries() {
+  const list = [];
+  bkGroups.forEach(g => {
+    const f = g.first;
+    let cat, stCls, stTx;
+    if (g.status === 'pending') {
+      if (f.payment && f.payment.verified !== true) { cat = 'wait'; stCls = 'wait'; stTx = 'Menunggu Verifikasi Bayar'; }
+      else { cat = 'wait'; stCls = 'wait'; stTx = 'Menunggu Konfirmasi'; }
+    } else if (g.status === 'confirmed') { cat = 'ready'; stCls = 'ready'; stTx = 'Siap Diambil'; }
+    else if (g.status === 'converted') { cat = 'done'; stCls = 'done'; stTx = 'Sudah Diserahkan'; }
+    else { cat = 'batal'; stCls = 'off'; stTx = 'Dibatalkan'; }
+    const items = g.rows.map(r => { const d = r.data || {}; return esc(d.itemName || r.item_id) + (r.size ? ' (Uk: ' + esc(r.size) + ')' : '') + ' ×' + (d.qty || 1); }).join(' · ');
+    const meta = 'Ambil ' + esc(f.startDate || '-') + ' · Kembali ' + esc(f.returnDate || '-') + ' · ' + (f.days || 1) + ' hari · Booking website';
+    let paytag;
+    if (f.payment && f.payment.verified === true) paytag = '<span class="paytag ok">Pembayaran Terverifikasi</span>';
+    else if (f.payment) paytag = '<span class="paytag waitp">Bukti Terkirim — Belum Diverifikasi</span>';
+    else paytag = '<span class="paytag langsung">Transaksi Langsung</span>';
+    const wa = normPhone(f.renterPhone);
+    list.push({ cat, sort: g.created || '', html:
+      '<div class="order"><div class="oh"><span class="code">' + esc(g.code) + '</span><span class="who">' + esc(f.renterName || '') + '</span>' +
+      '<span class="st ' + stCls + '" style="margin-left:auto">' + stTx + '</span></div>' +
+      '<div class="items">' + items + '</div><div class="meta">' + meta + '</div>' +
+      '<div class="of"><span class="total">' + rp(groupTotal(g)) + '</span>' + paytag +
+      (wa ? '<a class="obtn" target="_blank" rel="noopener" href="https://wa.me/' + wa + '">Hubungi Penyewa</a>' : '') + '</div></div>' });
+  });
+  rentals.forEach(r => {
+    const c = r.data || {};
+    const late = r.status === 'active' ? daysLate(c) : 0;
+    let cat, stCls, stTx;
+    if (r.status === 'completed') { cat = 'done'; stCls = 'done'; stTx = 'Selesai'; }
+    else if (late > 0) { cat = 'late'; stCls = 'late'; stTx = 'TELAT ' + late + ' HARI'; }
+    else { cat = 'out'; stCls = 'out'; stTx = 'Sedang Disewa'; }
+    const meta = 'Diambil ' + esc(c.dispatchDate || '-') + ' · Kembali ' + esc(c.returnDate || '-') + ' · ' + (c.days || 1) + ' hari · Kontrak sewa';
+    const wa = normPhone(c.renterPhone);
+    let btn = '';
+    if (wa && late > 0) {
+      const msg = 'Halo ' + (c.renterName || 'kak') + ', kami mengingatkan sewa ' + (c.itemName || '') + ' (kontrak ' + r.contract_id + ') sudah melewati tanggal kembali ' + (c.returnDate || '') + ' (' + late + ' hari). Mohon segera dikembalikan. Terima kasih!';
+      btn = '<a class="obtn" target="_blank" rel="noopener" href="https://wa.me/' + wa + '?text=' + encodeURIComponent(msg) + '">Ingatkan via WA</a>';
+    } else if (wa) btn = '<a class="obtn" target="_blank" rel="noopener" href="https://wa.me/' + wa + '">Hubungi Penyewa</a>';
+    list.push({ cat, sort: c.dispatchTimestamp || 0, html:
+      '<div class="order"><div class="oh"><span class="code">' + esc(r.contract_id) + '</span><span class="who">' + esc(c.renterName || '') + '</span>' +
+      '<span class="st ' + stCls + '" style="margin-left:auto">' + stTx + '</span></div>' +
+      '<div class="items">' + esc(c.itemName || '') + ' ×' + (c.qty || 1) + '</div><div class="meta">' + meta + '</div>' +
+      '<div class="of"><span class="paytag langsung">Kontrak di Depot</span>' + btn + '</div></div>' });
+  });
+  return list.sort((a, b) => String(b.sort).localeCompare(String(a.sort)));
+}
+function renderOrders() {
+  const entries = orderEntries();
+  const counts = { semua: entries.length, wait: 0, ready: 0, out: 0, late: 0, done: 0 };
+  entries.forEach(e => { if (counts[e.cat] !== undefined) counts[e.cat]++; });
+  const chipDef = [['semua', 'Semua'], ['wait', 'Menunggu Verifikasi'], ['ready', 'Siap Diambil'], ['out', 'Sedang Disewa'], ['late', 'Telat'], ['done', 'Selesai']];
+  $('orderChips').innerHTML = chipDef.map(([k, lb]) =>
+    '<button class="chip' + (ofilter === k ? ' on' : '') + '" data-f="' + k + '">' + lb + ((k === 'wait' && counts.wait) || (k === 'late' && counts.late) ? ' <span class="c">' + counts[k] + '</span>' : '') + '</button>').join('');
+  document.querySelectorAll('[data-f]').forEach(b => b.onclick = () => { ofilter = b.dataset.f; renderOrders(); });
+  const list = entries.filter(e => ofilter === 'semua' || e.cat === ofilter);
+  $('orderList').innerHTML = list.length ? list.map(e => e.html).join('')
+    : '<div class="emptybox"><b>Tidak ada pesanan pada status ini.</b></div>';
+}
+
+/* ---------- pengaturan toko ---------- */
+function renderShop() {
+  const pm = cfg.paymentMethods && typeof cfg.paymentMethods === 'object' ? Object.keys(cfg.paymentMethods) : [];
+  const brandName = k => ({ bca: 'BCA', bni: 'BNI', bri: 'BRI', mandiri: 'Mandiri', ovo: 'OVO', dana: 'DANA', gopay: 'GoPay', qris: 'QRIS' }[k] || k.toUpperCase());
+  const rows = [
+    { t: 'Template Toko', s: 'Tampilan halaman tokomu diatur lewat panel admin & layanan Jasa Rental. Template standar gratis; tema custom seperti BK Adventure adalah layanan berbayar.', c: '' },
+    { t: 'Rekber Aman', s: 'Segera hadir — fitur pembayaran terlindungi sedang disiapkan platform dan belum bisa diaktifkan.', c: '<span class="bdg gold">Segera Hadir</span>' },
+    { t: 'Metode Pembayaran Langsung', s: pm.length ? pm.map(brandName).join(' · ') + ' — tampil di halaman booking tokomu, diatur di panel admin.' : 'Belum diatur — tambahkan lewat panel admin tokomu.', c: '' },
+    { t: 'Verifikasi Toko', s: 'Program verifikasi toko (identitas pemilik, alamat, rekening) sedang disiapkan. Badge terverifikasi belum diterbitkan untuk toko mana pun.', c: '<span class="bdg grey">Belum Dibuka</span>' },
+    { t: 'Lokasi Depot', s: cfg.address ? esc(cfg.address) : 'Alamat belum diisi — lengkapi lewat panel admin tokomu.', c: '' },
+    { t: 'Halaman Toko', s: 'jasa-rental.my.id/' + tenant.slug, c: '<a href="/' + tenant.slug + '/" target="_blank" rel="noopener" style="font-weight:800;color:var(--green);text-decoration:none">Buka</a>' }
+  ];
+  $('shopSettings').innerHTML = rows.map(r =>
+    '<div class="setrow"><span style="flex:1"><span class="st-t">' + r.t + '</span><span class="st-s" style="display:block">' + r.s + '</span></span>' + (r.c || '') + '</div>').join('');
+}
+
+/* ---------- navigasi ---------- */
+function go(view) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('on'));
+  $('v-' + view).classList.add('on');
+  document.querySelectorAll('[data-nav]').forEach(b => b.classList.toggle('on', b.dataset.nav === view));
+  window.scrollTo({ top: 0 });
+}
+function bindGoto() {
+  document.querySelectorAll('[data-goto]').forEach(b => b.onclick = () => go(b.dataset.goto));
+}
+document.querySelectorAll('[data-nav]').forEach(b => b.onclick = () => go(b.dataset.nav));
+$('linkAllProducts').onclick = e => { e.preventDefault(); go('products'); };
+$('btnBell').onclick = () => go('orders');
+$('btnLogout').onclick = doLogout;
+$('btnLogout2').onclick = doLogout;
+$('tenantSelect').onchange = async e => {
+  const t = tenants.find(x => x.id === e.target.value);
+  if (!t) return;
+  tenant = t;
+  try { localStorage.setItem(PICK_KEY, t.id); } catch (err) {}
+  $('helloSub').textContent = 'Memuat data ' + (t.name || t.slug) + '…';
+  await loadTenantData(tenant);
+  renderAll();
+};
+function renderAll() {
+  renderHeader();
+  const st = computeStats();
+  renderHome(st);
+  renderOrders();
+  renderProducts();
+  renderShop();
+}
+
+/* ---------- boot ---------- */
+function gateShow(state, msg) {
+  $('gate').style.display = 'grid';
+  $('app').style.display = 'none';
+  $('bnav').classList.remove('on');
+  $('gateSpin').style.display = state === 'loading' ? 'block' : 'none';
+  $('btnLogin').style.display = state === 'login' ? 'flex' : 'none';
+  const err = $('gateErr');
+  if (state === 'error' && msg) { err.style.display = 'block'; err.textContent = msg; } else err.style.display = 'none';
+  $('gateExtra').innerHTML = state === 'notenants'
+    ? '<p class="gnote" style="color:var(--amber);font-weight:700">Email ' + esc(profile ? profile.email : '') + ' belum terdaftar sebagai pemilik toko di Jasa Rental. Bila ini keliru, pastikan kamu masuk dengan email yang sama dengan yang didaftarkan tokomu.</p><button class="ghostbtn" onclick="doLogout()">Keluar & Ganti Akun</button>'
+    : '';
+  if (state === 'loading') $('gateText').textContent = 'Memeriksa sesi & memuat tokomu…';
+}
+async function boot() {
+  // 1) Tangkap token dari hash sesudah kembali dari Google.
+  const raw = location.hash || '';
+  if (raw.length > 1 && (raw.includes('access_token=') || raw.includes('error'))) {
+    const p = new URLSearchParams(raw.slice(1));
+    const at = p.get('access_token');
+    const errMsg = p.get('error_description') || p.get('error');
+    try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
+    if (at) {
+      saveSession({ access_token: at, refresh_token: p.get('refresh_token') || '', expires_at: Date.now() + (parseInt(p.get('expires_in') || '3600', 10) * 1000) });
+    } else if (errMsg) {
+      gateShow('error', 'Login Google gagal di server: ' + String(errMsg).slice(0, 120));
+      $('btnLogin').style.display = 'flex';
+      return;
+    }
+  }
+  if (!session) session = loadStoredSession();
+  if (!session || !session.access_token) { gateShow('login'); return; }
+  gateShow('loading');
+  if (!(await ensureSession())) { saveSession(null); gateShow('login'); return; }
+  if (!(await fetchProfile())) { saveSession(null); gateShow('error', 'Sesi tidak bisa diverifikasi. Silakan masuk lagi.'); $('btnLogin').style.display = 'flex'; return; }
+  try {
+    tenants = await resolveTenants();
+  } catch (e) {
+    gateShow('error', 'Gagal membaca data toko dari server. Coba lagi sebentar.');
+    $('btnLogin').style.display = 'none';
+    return;
+  }
+  if (!tenants.length) { gateShow('notenants'); return; }
+  tenant = pickTenant(tenants);
+  if (tenants.length > 1) {
+    $('tenantPicker').style.display = 'block';
+    $('tenantSelect').innerHTML = tenants.map(t => '<option value="' + t.id + '"' + (t.id === tenant.id ? ' selected' : '') + '>' + esc(t.name || t.slug) + ' (' + esc(t.slug) + ')</option>').join('');
+  }
+  try {
+    await loadTenantData(tenant);
+  } catch (e) {
+    gateShow('error', 'Gagal memuat data toko. Coba lagi sebentar.');
+    return;
+  }
+  $('gate').style.display = 'none';
+  $('app').style.display = 'block';
+  $('bnav').classList.add('on');
+  renderAll();
+}
+$('btnLogin').onclick = startGoogleLogin;
+boot();
+</script>
+</body>
+</html>
