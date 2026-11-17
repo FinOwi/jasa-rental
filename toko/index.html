@@ -111,6 +111,33 @@ img{display:block}
 .bnav a,.bnav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:1px;font-size:10.5px;font-weight:700;color:var(--mut)}
 .bnav .on{color:var(--or)}
 @media(min-width:860px){.bnav{display:none}body{padding-bottom:0}}
+
+/* ===== Keranjang & checkout tenant umum ===== */
+.cartbar{position:fixed;left:12px;right:12px;bottom:76px;z-index:60;background:#123524;color:#fff;border-radius:14px;padding:11px 14px;display:none;align-items:center;gap:10px;box-shadow:0 10px 28px rgba(10,40,24,.35)}
+.cartbar.show{display:flex}
+.cartbar .ci{flex:1;font-size:13px;line-height:1.35}
+.cartbar .ci b{font-size:14.5px}
+.cbtn{background:var(--or);color:#fff;border:none;border-radius:10px;padding:10px 14px;font-weight:700;font-size:13.5px;cursor:pointer}
+.cbtn.ghost{background:transparent;border:1.5px solid rgba(255,255,255,.55)}
+.modal{position:fixed;inset:0;z-index:80;background:rgba(15,25,18,.55);display:none;align-items:flex-end;justify-content:center}
+.modal.open{display:flex}
+.sheet{background:#fff;width:100%;max-width:560px;max-height:92vh;overflow:auto;border-radius:18px 18px 0 0;padding:20px 18px 26px}
+.sheet h3{margin:0 0 4px;font-size:18px}
+.sheet .sub{color:var(--ink2);font-size:13px;margin-bottom:12px}
+.sheet label{display:block;font-size:12.5px;font-weight:700;margin:13px 0 5px;color:#333}
+.sheet input,.sheet select{width:100%;box-sizing:border-box;padding:11px 12px;border:1.5px solid #ddd;border-radius:10px;font-size:14.5px;background:#fff}
+.sheet input[type=file]{padding:9px}
+.paybox{background:var(--or-soft);border:1px solid #cfe5d8;border-radius:12px;padding:12px 13px;font-size:13.5px;line-height:1.55;white-space:pre-line}
+.sumrow{display:flex;justify-content:space-between;font-size:13.5px;padding:6px 0;border-bottom:1px dashed #eee}
+.sumrow.tot{font-weight:800;font-size:15px;border-bottom:none}
+.qtyrow{display:flex;align-items:center;gap:12px}
+.qbtn{width:38px;height:38px;border-radius:10px;border:1.5px solid #ddd;background:#fff;font-size:18px;cursor:pointer}
+.xbtn{float:right;background:#f1f1ee;border:none;width:32px;height:32px;border-radius:50%;font-size:16px;cursor:pointer}
+.err{background:#fdecec;border:1px solid #f3c2c2;color:#8c1d1d;border-radius:10px;padding:10px 12px;font-size:13.5px;margin-top:12px;display:none}
+.okbox{text-align:center;padding:8px 0}
+.okbox .code{font-size:24px;font-weight:900;letter-spacing:1px;color:var(--or-d);margin:8px 0}
+.wabtn{display:inline-block;background:#25d366;color:#fff;font-weight:800;border-radius:11px;padding:12px 18px;text-decoration:none;margin-top:12px}
+.linkbtn{background:none;border:none;color:var(--or);font-weight:700;cursor:pointer;font-size:13.5px;padding:6px 0}
 </style>
 </head>
 <body>
@@ -186,6 +213,7 @@ const PATH_MAP = { kontur: 'bk-adventure' };
 const SLUG = ((new URLSearchParams(location.search).get('toko') || 'kontur').trim().toLowerCase()) || 'kontur';
 const SHOP_PATH = PATH_MAP[SLUG] || SLUG;
 const SHOP_URL = 'https://jasa-rental.my.id/' + SHOP_PATH + '/';
+const OFFICIAL = !!PATH_MAP[SLUG]; /* true hanya bila tenant punya halaman resmi sendiri (BK) */
 
 let SITE = {}, ITEMS = [], HELD = {};
 let tab = 'semua', sortMode = 'toko', query = '';
@@ -250,9 +278,17 @@ function renderHead() {
     bc.href = 'https://wa.me/' + num + '?text=' + encodeURIComponent('Halo ' + name + ', saya melihat katalog toko Anda di Jasa Rental dan ingin bertanya.');
     bc.style.display = '';
   }
-  $('#btnBook').href = SHOP_URL;
-  $('#navShop').href = SHOP_URL;
-  $('#bnBook').href = SHOP_URL;
+  if (OFFICIAL) {
+    $('#btnBook').href = SHOP_URL;
+    $('#navShop').href = SHOP_URL;
+    $('#bnBook').href = SHOP_URL;
+  } else {
+    /* Tenant umum: booking terjadi DI halaman ini (keranjang + checkout),
+       bukan di path /<slug>/ yang tidak ada halamannya. */
+    $('#btnBook').href = '#grid';
+    $('#navShop').href = '#grid';
+    $('#bnBook').href = '#grid';
+  }
   $('#foot').textContent = name + ' — toko tenant Jasa Rental · Template standar Jasa Rental (gratis untuk tenant)';
   /* Statistik jujur — hanya angka yang benar-benar ada datanya di server:
      jumlah produk, jumlah kategori, dan unit tersedia saat ini. */
@@ -290,7 +326,7 @@ function cardHTML(p) {
     '<div class="loc">' + escHtml(p.category || '') + '</div>' +
     (stok === 0
       ? '<span class="btn-card mati">Stok Habis</span>'
-      : '<a class="btn-card" href="' + SHOP_URL + '">Booking di Toko Resmi</a>') +
+      : (OFFICIAL ? '<a class="btn-card" href="' + SHOP_URL + '">Booking di Toko Resmi</a>' : '<button class="btn-card" data-book="' + escHtml(p.id) + '">Booking</button>')) +
     '</div></article>';
 }
 function renderGrid() {
@@ -354,7 +390,7 @@ function fmtD(iso) {
 }
 function syncDates() {
   const a = $('#dFrom').value, b = $('#dTo').value;
-  if (a && b) $('#dateHint').textContent = 'Untuk tanggal ' + fmtD(a) + ' – ' + fmtD(b) + ': stok yang tampil adalah stok siap saat ini; ketersediaan pada tanggalmu diperiksa toko saat booking dibuat di halaman resmi toko.';
+  if (a && b) $('#dateHint').textContent = 'Untuk tanggal ' + fmtD(a) + ' – ' + fmtD(b) + ': stok yang tampil adalah stok siap saat ini; ketersediaan pada tanggalmu diperiksa server saat kamu menyelesaikan booking' + (OFFICIAL ? ' di halaman resmi toko.' : ' di halaman ini.');
 }
 (function initDates() {
   const iso = d => d.toISOString().slice(0, 10);
@@ -370,6 +406,253 @@ $('#q').oninput = e => { query = e.target.value.trim().toLowerCase(); renderGrid
 $('#bnHome').onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 $('#bnProd').onclick = () => $('#grid').scrollIntoView({ behavior: 'smooth', block: 'start' });
 loadShop();
+
+/* ===== Keranjang & checkout — hanya untuk tenant umum (bukan OFFICIAL) ===== */
+let CART = [];
+let sheetItem = null, sheetQty = 1;
+
+function cartQtyTotal() { return CART.reduce((a, c) => a + c.qty, 0); }
+function cartDayTotal() { return CART.reduce((a, c) => a + priceOf(c.item) * c.qty, 0); }
+function itemById(id) { return ITEMS.find(x => x.id === id) || null; }
+
+function renderCartBar() {
+  const bar = document.getElementById('cartBar');
+  if (OFFICIAL || !CART.length) { bar.classList.remove('show'); return; }
+  document.getElementById('cartCount').textContent = cartQtyTotal() + ' item di keranjang';
+  document.getElementById('cartTotal').textContent = rp(cartDayTotal()) + ' /hari';
+  bar.classList.add('show');
+}
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+function openSheet(id) {
+  const p = itemById(id); if (!p) return;
+  sheetItem = p; sheetQty = 1;
+  document.getElementById('shName').textContent = p.name;
+  document.getElementById('shMeta').textContent = rp(priceOf(p)) + (p.type === 'sale' ? '' : ' /hari') + ' · Stok siap: ' + effReady(p) + ' unit';
+  const sel = document.getElementById('shSize');
+  const hasSizes = p.sizes && p.sizes.length;
+  document.getElementById('shSizeLbl').style.display = hasSizes ? '' : 'none';
+  sel.style.display = hasSizes ? '' : 'none';
+  sel.innerHTML = hasSizes ? p.sizes.map(sz => '<option value="' + escHtml(sz.label) + '">' + escHtml(sz.label) + ' — siap ' + (Number(sz.ready) || 0) + '</option>').join('') : '';
+  updSheet();
+  openModal('sheetModal');
+}
+function updSheet() {
+  document.getElementById('shQty').textContent = sheetQty;
+  document.getElementById('shSub').textContent = rp(priceOf(sheetItem) * sheetQty);
+  document.getElementById('shStok').textContent = 'maks ' + effReady(sheetItem) + ' unit';
+}
+function addToCart() {
+  const size = (sheetItem.sizes && sheetItem.sizes.length) ? document.getElementById('shSize').value : '';
+  const ex = CART.find(c => c.item.id === sheetItem.id && c.size === size);
+  if (ex) ex.qty = Math.min(effReady(sheetItem), ex.qty + sheetQty); else CART.push({ item: sheetItem, size, qty: sheetQty });
+  closeModal('sheetModal'); renderCartBar();
+}
+
+function payMethods() {
+  const raw = Array.isArray(SITE.paymentMethods) ? SITE.paymentMethods : [];
+  const brandMap = { bri: 'BRI', mandiri: 'Mandiri', bca: 'BCA', bni: 'BNI', dana: 'DANA', ovo: 'OVO', gopay: 'GoPay', qris: 'QRIS', transfer: 'Transfer Bank', ewallet: 'E-Wallet', 'e-wallet': 'E-Wallet' };
+  const out = [];
+  raw.forEach(m => {
+    if (typeof m === 'string') { out.push({ label: m, value: brandMap[m.toLowerCase()] || m, detail: '' }); return; }
+    if (m && typeof m === 'object') {
+      const brand = String(m.brand || m.name || m.label || '').trim();
+      if (!brand) return;
+      const detail = [m.number || m.account || m.no || '', m.holder || m.owner || ''].filter(Boolean).join(' · ');
+      out.push({ label: brand.toUpperCase(), value: brandMap[brand.toLowerCase()] || brand, detail });
+    }
+  });
+  if (!out.length) ['Transfer Bank', 'QRIS', 'E-Wallet'].forEach(v => out.push({ label: v, value: v, detail: '' }));
+  return out;
+}
+function renderPayBox() {
+  const ms = payMethods();
+  const sel = document.getElementById('ckMethod');
+  sel.innerHTML = ms.map((m, i) => '<option value="' + i + '">' + escHtml(m.label) + '</option>').join('');
+  const info = [];
+  ms.forEach(m => { if (m.detail) info.push(m.label + ': ' + m.detail); });
+  if (SITE.paymentInfo) info.push(String(SITE.paymentInfo));
+  document.getElementById('ckPayInfo').textContent = info.length ? info.join('\n')
+    : 'Pemilik toko belum menampilkan nomor tujuan pembayaran di halaman ini. Selesaikan booking, lalu minta nomor tujuan & konfirmasi langsung ke toko lewat tombol WhatsApp sesudah booking tercatat.';
+  sel.onchange = renderPayBoxDetail;
+}
+function renderPayBoxDetail() { /* detail sudah tampil gabungan di kotak info */ }
+
+function openCheckout() {
+  if (!CART.length) return;
+  document.getElementById('ckForm').style.display = '';
+  document.getElementById('ckDone').style.display = 'none';
+  document.getElementById('ckStatus').style.display = 'none';
+  document.getElementById('ckItems').innerHTML = CART.map(c =>
+    '<div class="sumrow"><span>' + escHtml(c.item.name) + (c.size ? ' · ' + escHtml(c.size) : '') + ' × ' + c.qty + '</span><span>' + rp(priceOf(c.item) * c.qty) + '/hari</span></div>').join('');
+  const dFrom = document.getElementById('dFrom'), dTo = document.getElementById('dTo');
+  if (dFrom && dFrom.value) document.getElementById('ckStart').value = dFrom.value;
+  let days = 2;
+  if (dFrom && dTo && dFrom.value && dTo.value) days = Math.max(1, Math.round((new Date(dTo.value) - new Date(dFrom.value)) / 86400000));
+  document.getElementById('ckDays').value = days;
+  renderPayBox(); updCkTotal();
+  document.getElementById('ckErr').style.display = 'none';
+  openModal('ckModal');
+}
+function updCkTotal() {
+  const d = Math.max(1, parseInt(document.getElementById('ckDays').value || '1', 10));
+  document.getElementById('ckTotal').textContent = rp(cartDayTotal() * d) + ' (' + d + ' hari)';
+}
+function ckFail(msg) { const e = document.getElementById('ckErr'); e.textContent = msg; e.style.display = 'block'; }
+
+async function uploadProof(file) {
+  const ext = (file.name.split('.').pop() || 'jpg').toLowerCase();
+  const path = SLUG + '/' + Date.now() + '-' + Math.random().toString(36).slice(2, 9) + '.' + ext;
+  const r = await fetch(KONFIG.SUPABASE_URL + '/storage/v1/object/payment-proofs/' + path, {
+    method: 'POST',
+    headers: { 'apikey': KONFIG.SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + KONFIG.SUPABASE_ANON_KEY, 'Content-Type': file.type || 'image/jpeg', 'x-upsert': 'false' },
+    body: file
+  });
+  if (!r.ok) throw new Error('Unggah bukti gagal (HTTP ' + r.status + '). Coba lagi.');
+  return path;
+}
+
+async function submitBooking() {
+  const name = document.getElementById('ckName').value.trim();
+  const phone = document.getElementById('ckPhone').value.trim();
+  const start = document.getElementById('ckStart').value;
+  const days = parseInt(document.getElementById('ckDays').value || '0', 10);
+  const sender = document.getElementById('ckSender').value.trim();
+  const file = document.getElementById('ckProof').files[0];
+  const ms = payMethods();
+  const method = ms[parseInt(document.getElementById('ckMethod').value || '0', 10)] || ms[0];
+  if (name.length < 3) return ckFail('Nama penyewa terlalu pendek.');
+  if (!/^0\d{8,13}$/.test(phone.replace(/[^0-9]/g, '')) && !/^62\d{8,13}$/.test(phone.replace(/[^0-9]/g, ''))) return ckFail('Nomor WhatsApp tidak valid.');
+  if (!start) return ckFail('Pilih tanggal mulai sewa.');
+  if (!(days >= 1 && days <= 30)) return ckFail('Durasi sewa 1–30 hari.');
+  if (sender.length < 3) return ckFail('Isi nama pengirim transfer.');
+  if (!file) return ckFail('Bukti pembayaran wajib diunggah sebelum booking.');
+  if (file.size > 5 * 1024 * 1024) return ckFail('Berkas bukti maksimal 5MB.');
+  const btn = document.getElementById('ckSubmit');
+  btn.disabled = true; btn.textContent = 'Mengirim…';
+  try {
+    const proofPath = await uploadProof(file);
+    const payload = {
+      name, phone, startDate: start, days, notes: '',
+      items: CART.map(c => ({ id: c.item.id, size: c.size || '', qty: c.qty })),
+      member: false, memberEmail: '',
+      payment: { method: method.value, sender, proofName: file.name, proofPath }
+    };
+    const res = await rpc('create_booking', { s: SLUG, payload });
+    if (!res || !res.ok) { ckFail((res && res.error) || 'Booking gagal. Coba lagi.'); return; }
+    document.getElementById('ckForm').style.display = 'none';
+    document.getElementById('ckDone').style.display = '';
+    document.getElementById('doneCode').textContent = res.code;
+    document.getElementById('doneMeta').textContent = 'Total ' + rp(res.total) + ' · Kembali ' + (res.returnDate || '') + ' · Status: menunggu konfirmasi toko.';
+    const wa = String(SITE.depotPhone || '').replace(/[^0-9]/g, '');
+    const num = wa.startsWith('0') ? '62' + wa.slice(1) : wa;
+    const shopName = SITE.brandName || SLUG;
+    document.getElementById('doneWa').href = 'https://wa.me/' + num + '?text=' + encodeURIComponent('Halo ' + shopName + ', saya baru saja booking lewat Jasa Rental. Kode booking saya ' + res.code + ' atas nama ' + name + '. Mohon konfirmasinya, terima kasih.');
+    CART = []; renderCartBar();
+    try { HELD = (await rpc('live_stock', { s: SLUG })) || HELD; renderGrid(); } catch (e) {}
+  } catch (e) { ckFail(e.message || 'Terjadi kesalahan. Coba lagi.'); }
+  finally { btn.disabled = false; btn.textContent = 'Kirim Booking'; }
+}
+
+function openStatus() {
+  closeModal('ckModal');
+  document.getElementById('ckForm').style.display = 'none';
+  document.getElementById('ckDone').style.display = 'none';
+  document.getElementById('ckStatus').style.display = '';
+  document.getElementById('stResult').innerHTML = '';
+  document.getElementById('stErr').style.display = 'none';
+  openModal('ckModal');
+}
+async function checkStatus() {
+  const code = document.getElementById('stCode').value.trim();
+  const phone = document.getElementById('stPhone').value.trim();
+  const err = document.getElementById('stErr');
+  err.style.display = 'none';
+  const res = await rpc('booking_status', { s: SLUG, p_code: code, p_phone: phone }).catch(() => null);
+  if (!res || !res.ok) { err.textContent = (res && res.error) || 'Booking tidak ditemukan. Cek kode & nomor WhatsApp.'; err.style.display = 'block'; return; }
+  const label = { pending: 'Menunggu konfirmasi toko', confirmed: 'Terkonfirmasi — siap diambil', cancelled: 'Dibatalkan', done: 'Selesai' }[res.status] || res.status;
+  const items = (res.items || []).map(it => '<div class="sumrow"><span>' + escHtml(it.itemName || it.itemId || '') + (it.size ? ' · ' + escHtml(it.size) : '') + ' × ' + (it.qty || 1) + '</span><span>' + rp(it.price || 0) + '/hari</span></div>').join('');
+  const amt = res.items && res.items[0] && res.items[0].payment ? res.items[0].payment.amount : null;
+  document.getElementById('stResult').innerHTML =
+    '<div class="paybox"><b>' + escHtml(res.code) + '</b> — ' + escHtml(label) + '<br>' +
+    escHtml(res.renterName || '') + ' · ' + escHtml(res.startDate || '') + ' s/d ' + escHtml(res.returnDate || '') + ' (' + (res.days || 1) + ' hari)' +
+    (amt ? '<br>Total: <b>' + rp(amt) + '</b>' : '') + '</div>' + items;
+}
+
+/* ===== ikat peristiwa ===== */
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-book]');
+  if (b) { openSheet(b.dataset.book); return; }
+  const c = e.target.closest('[data-close]');
+  if (c) closeModal(c.dataset.close);
+});
+document.querySelectorAll('.modal').forEach(m => m.addEventListener('click', e => { if (e.target === m) m.classList.remove('open'); }));
+document.getElementById('shMinus').onclick = () => { sheetQty = Math.max(1, sheetQty - 1); updSheet(); };
+document.getElementById('shPlus').onclick = () => { sheetQty = Math.min(effReady(sheetItem), sheetQty + 1); updSheet(); };
+document.getElementById('shAdd').onclick = addToCart;
+document.getElementById('btnCheckout').onclick = openCheckout;
+document.getElementById('ckDays').oninput = updCkTotal;
+document.getElementById('ckSubmit').onclick = submitBooking;
+document.getElementById('btnStatus1').onclick = openStatus;
+document.getElementById('btnStatus2').onclick = openStatus;
+document.getElementById('stGo').onclick = checkStatus;
+if (!OFFICIAL) {
+  document.getElementById('bnBook').addEventListener('click', e => { e.preventDefault(); if (CART.length) openCheckout(); else document.getElementById('grid').scrollIntoView({ behavior: 'smooth' }); });
+  document.getElementById('btnBook').addEventListener('click', e => { e.preventDefault(); document.getElementById('grid').scrollIntoView({ behavior: 'smooth' }); });
+}
 </script>
+
+<div class="cartbar" id="cartBar"><div class="ci"><b id="cartCount">0 item</b><br><span id="cartTotal">Rp0</span></div><button class="cbtn ghost" id="btnStatus1">Cek Status</button><button class="cbtn" id="btnCheckout">Checkout</button></div>
+
+<div class="modal" id="sheetModal"><div class="sheet">
+  <button class="xbtn" data-close="sheetModal">✕</button>
+  <h3 id="shName">Produk</h3><div class="sub" id="shMeta"></div>
+  <label id="shSizeLbl">Ukuran</label><select id="shSize"></select>
+  <label>Jumlah</label>
+  <div class="qtyrow"><button class="qbtn" id="shMinus">−</button><b id="shQty">1</b><button class="qbtn" id="shPlus">+</button><span class="sub" id="shStok" style="margin:0"></span></div>
+  <div class="sumrow tot" style="margin-top:14px"><span>Subtotal /hari</span><span id="shSub">Rp0</span></div>
+  <button class="cbtn" id="shAdd" style="width:100%;margin-top:14px;padding:13px">Tambah ke Keranjang</button>
+</div></div>
+
+<div class="modal" id="ckModal"><div class="sheet">
+  <button class="xbtn" data-close="ckModal">✕</button>
+  <div id="ckForm">
+    <h3>Checkout Booking</h3><div class="sub">Bayar dulu ke rekening toko, unggah buktinya, booking langsung tercatat &amp; stok tertahan untukmu.</div>
+    <div id="ckItems"></div>
+    <label>Nama penyewa</label><input id="ckName" placeholder="Nama lengkap" autocomplete="name">
+    <label>Nomor WhatsApp aktif</label><input id="ckPhone" inputmode="tel" placeholder="08xxxxxxxxxx" autocomplete="tel">
+    <label>Tanggal mulai sewa</label><input id="ckStart" type="date">
+    <label>Durasi (hari)</label><input id="ckDays" type="number" min="1" max="30" value="2">
+    <div class="sumrow tot"><span>Total bayar (perkiraan)</span><span id="ckTotal">Rp0</span></div>
+    <label>Metode pembayaran</label><select id="ckMethod"></select>
+    <div class="paybox" id="ckPayInfo" style="margin-top:9px"></div>
+    <label>Nama pengirim transfer</label><input id="ckSender" placeholder="Nama di rekening / e-wallet pengirim">
+    <label>Bukti pembayaran (foto/PDF, maks 5MB)</label><input id="ckProof" type="file" accept="image/jpeg,image/png,image/webp,application/pdf">
+    <div class="err" id="ckErr"></div>
+    <button class="cbtn" id="ckSubmit" style="width:100%;margin-top:16px;padding:14px;font-size:15px">Kirim Booking</button>
+    <div style="text-align:center"><button class="linkbtn" id="btnStatus2">Sudah punya kode booking? Cek status</button></div>
+  </div>
+  <div id="ckDone" style="display:none">
+    <div class="okbox">
+      <div style="font-size:34px">✅</div>
+      <h3 style="margin:6px 0">Booking tercatat!</h3>
+      <div class="sub">Simpan kode booking ini — dipakai untuk cek status &amp; saat pengambilan barang.</div>
+      <div class="code" id="doneCode">BK-XXXXX</div>
+      <div class="sub" id="doneMeta"></div>
+      <a class="wabtn" id="doneWa" href="#" target="_blank" rel="noopener">Konfirmasi via WhatsApp Toko</a>
+      <div><button class="linkbtn" data-close="ckModal">Tutup</button></div>
+    </div>
+  </div>
+  <div id="ckStatus" style="display:none">
+    <h3>Cek Status Booking</h3><div class="sub">Masukkan kode booking &amp; nomor WhatsApp yang dipakai saat booking.</div>
+    <label>Kode booking</label><input id="stCode" placeholder="BK-XXXXX">
+    <label>Nomor WhatsApp</label><input id="stPhone" inputmode="tel" placeholder="08xxxxxxxxxx">
+    <div class="err" id="stErr"></div>
+    <div id="stResult" style="margin-top:12px"></div>
+    <button class="cbtn" id="stGo" style="width:100%;margin-top:14px;padding:13px">Periksa Status</button>
+    <div style="text-align:center"><button class="linkbtn" data-close="ckModal">Tutup</button></div>
+  </div>
+</div></div>
 </body>
 </html>
