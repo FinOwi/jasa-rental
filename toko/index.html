@@ -223,6 +223,7 @@ img{display:block}
     <div class="sumrow tot"><span>Total bayar (perkiraan)</span><span id="ckTotal">Rp0</span></div>
     <label>Metode pembayaran</label><select id="ckMethod"></select>
     <div class="paybox" id="ckPayInfo" style="margin-top:9px"></div>
+    <div id="ckPayQr" style="margin-top:9px;display:none"></div>
     <label>Nama pengirim transfer</label><input id="ckSender" placeholder="Nama di rekening / e-wallet pengirim">
     <label>Bukti pembayaran (foto/PDF, maks 5MB)</label><input id="ckProof" type="file" accept="image/jpeg,image/png,image/webp,application/pdf">
     <div class="err" id="ckErr"></div>
@@ -509,12 +510,12 @@ function payMethods() {
   const brandMap = { bri: 'BRI', mandiri: 'Mandiri', bca: 'BCA', bni: 'BNI', dana: 'DANA', ovo: 'OVO', gopay: 'GoPay', qris: 'QRIS', transfer: 'Transfer Bank', ewallet: 'E-Wallet', 'e-wallet': 'E-Wallet' };
   const out = [];
   raw.forEach(m => {
-    if (typeof m === 'string') { out.push({ label: m, value: brandMap[m.toLowerCase()] || m, detail: '' }); return; }
+    if (typeof m === 'string') { out.push({ label: m, value: brandMap[m.toLowerCase()] || m, detail: '', image: '' }); return; }
     if (m && typeof m === 'object') {
       const brand = String(m.brand || m.name || m.label || '').trim();
       if (!brand) return;
       const detail = [m.number || m.account || m.no || '', m.holder || m.owner || ''].filter(Boolean).join(' · ');
-      out.push({ label: brand.toUpperCase(), value: brandMap[brand.toLowerCase()] || brand, detail });
+      out.push({ label: brand.toUpperCase(), value: brandMap[brand.toLowerCase()] || brand, detail, image: m.image || m.qr || '' });
     }
   });
   if (!out.length) ['Transfer Bank', 'QRIS', 'E-Wallet'].forEach(v => out.push({ label: v, value: v, detail: '' }));
@@ -530,8 +531,19 @@ function renderPayBox() {
   document.getElementById('ckPayInfo').textContent = info.length ? info.join('\n')
     : 'Pemilik toko belum menampilkan nomor tujuan pembayaran di halaman ini. Selesaikan booking, lalu minta nomor tujuan & konfirmasi langsung ke toko lewat tombol WhatsApp sesudah booking tercatat.';
   sel.onchange = renderPayBoxDetail;
+  renderPayBoxDetail();
 }
-function renderPayBoxDetail() { /* detail sudah tampil gabungan di kotak info */ }
+function renderPayBoxDetail() {
+  const box = document.getElementById('ckPayQr');
+  if (!box) return;
+  const sel = document.getElementById('ckMethod');
+  const m = payMethods()[Number(sel && sel.value ? sel.value : 0)];
+  if (m && m.image) {
+    box.style.display = '';
+    box.innerHTML = '<img src="' + escHtml(m.image) + '" alt="Kode QR QRIS toko" style="width:220px;max-width:100%;border-radius:12px;border:1px solid var(--line);background:#fff" onerror="this.parentNode.style.display=\'none\'">' +
+      '<div style="font-size:12.5px;color:var(--mut);font-weight:600;margin-top:6px">Pindai QRIS di atas untuk membayar ke toko ini.</div>';
+  } else { box.style.display = 'none'; box.innerHTML = ''; }
+}
 
 function openCheckout() {
   if (!CART.length) return;
