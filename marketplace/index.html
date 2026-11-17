@@ -132,20 +132,22 @@
 }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
   --ink:#152219; --ink2:#43544a; --mut:#71806f;
-  --bg:#f5f3ee; --card:#ffffff; --line:#e5e1d8;
+  --bg:#FAF8F3; --card:#ffffff; --line:#E9E4D8;
   --green:#177245; --green-d:#0d4d2c; --green-soft:#e7f3ec;
-  --gold:#b07d0a; --gold-soft:#faf0d7;
+  --gold:#B8862B; --gold-soft:#faf0d7;
   --blue:#1a6fd4; --red:#b3261e; --red-soft:#fbeae8;
   --amber:#8a5a00; --amber-bg:#fdf3d8; --amber-line:#ecd28a;
-  --r:16px; --sh:0 1px 2px rgba(21,34,25,.05),0 8px 24px -18px rgba(21,34,25,.35);
+  --r:20px; --sh:0 1px 2px rgba(23,40,30,.05),0 16px 40px -16px rgba(23,40,30,.16);
+  --sh-lg:0 2px 4px rgba(23,40,30,.06),0 28px 56px -20px rgba(23,40,30,.28);
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth}
-body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.45;padding-bottom:76px}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.5;padding-bottom:76px}
+.hero h1,.price b,.merchant h3,.empty b,.phempty span{font-family:'Fraunces',Georgia,serif}
 button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 input,select{font:inherit;color:inherit}
 img{display:block}
@@ -166,13 +168,13 @@ header{position:sticky;top:0;z-index:40;background:var(--ink);color:#f3efe4}
 @media(min-width:860px){.hnav{display:flex}}
 
 /* ---------- hero & search ---------- */
-.hero{background:var(--ink);color:#f3efe4;padding:6px 16px 58px}
+.hero{background:linear-gradient(120deg,#0C3520,#123B26 58%,#177245);color:#f3efe4;padding:10px 16px 72px}
 .hero-in{max-width:1180px;margin:0 auto}
-.hero h1{font-size:clamp(24px,4.6vw,38px);font-weight:800;letter-spacing:-.02em;line-height:1.15;max-width:640px}
-.hero h1 em{font-style:normal;color:#8fd0ab}
-.hero p{color:#c3cec2;margin-top:8px;max-width:560px;font-size:14.5px}
-.search{max-width:1180px;margin:-42px auto 0;padding:0 16px;position:relative;z-index:5}
-.search-card{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--sh);padding:14px;display:grid;gap:10px}
+.hero h1{font-size:clamp(28px,4.6vw,42px);font-weight:600;letter-spacing:-.01em;line-height:1.12;max-width:640px}
+.hero h1 em{font-style:italic;color:#E9C979}
+.hero p{color:#C9D4C9;margin-top:10px;max-width:560px;font-size:15px}
+.search{max-width:1180px;margin:-48px auto 0;padding:0 16px;position:relative;z-index:5}
+.search-card{background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:var(--sh-lg);padding:18px;display:grid;gap:12px}
 .sf{display:flex;flex-direction:column;gap:4px}
 .sf label{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--mut);display:flex;align-items:center;gap:5px}
 .sf select,.sf input{border:1px solid var(--line);border-radius:12px;padding:11px 12px;background:#fbfaf7;font-weight:600;width:100%}
@@ -200,21 +202,26 @@ main{max-width:1180px;margin:0 auto;padding:18px 16px 8px}
 .sortrow select{margin-left:auto;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:8px 10px;font-weight:700;font-size:13px}
 
 /* ---------- cards ---------- */
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-@media(min-width:700px){.grid{grid-template-columns:repeat(3,1fr);gap:16px}}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+@media(min-width:700px){.grid{grid-template-columns:repeat(3,1fr);gap:20px}}
 @media(min-width:1024px){.grid{grid-template-columns:repeat(4,1fr)}}
-.pcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;text-align:left;width:100%;box-shadow:var(--sh);display:flex;flex-direction:column}
-.pcard .ph{position:relative;aspect-ratio:4/3;background:#e9e6dd}
+.pcard{background:var(--card);border:none;border-radius:var(--r);overflow:hidden;text-align:left;width:100%;box-shadow:var(--sh);display:flex;flex-direction:column;transition:transform .25s ease,box-shadow .25s ease}
+.pcard:hover{transform:translateY(-4px);box-shadow:var(--sh-lg)}
+.pcard .ph{position:relative;aspect-ratio:4/3;background:#E9E4D8}
+.phempty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:linear-gradient(135deg,#0C3520,#1E7A46);color:#F3EFE4}
+.phempty span{font-size:56px;font-weight:600;line-height:1;opacity:.92}
+.phempty small{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.72}
 .pcard .ph img{width:100%;height:100%;object-fit:cover}
 .fav{position:absolute;top:8px;right:8px;width:32px;height:32px;border-radius:50%;background:#fffffff2;display:grid;place-items:center;box-shadow:var(--sh)}
 .fav.on{color:#d33}
 .tagpro{position:absolute;top:8px;left:8px;background:var(--gold);color:#fff;font-size:10.5px;font-weight:800;letter-spacing:.06em;padding:4px 8px;border-radius:7px}
 .tagcat{position:absolute;bottom:8px;left:8px;background:#152219cc;color:#fff;font-size:11px;font-weight:700;padding:4px 9px;border-radius:99px;backdrop-filter:blur(2px)}
-.habistag{position:absolute;inset:0;background:#152219a8;color:#fff;display:grid;place-items:center;font-weight:800;letter-spacing:.04em}
-.pbody{padding:11px 12px 13px;display:flex;flex-direction:column;gap:5px;flex:1}
-.pname{font-weight:800;font-size:14.5px;letter-spacing:-.01em;line-height:1.3}
+.habistag{position:absolute;inset:0;background:rgba(250,248,243,.74);color:var(--ink);display:grid;place-items:center;font-weight:800;letter-spacing:.06em;backdrop-filter:blur(3px)}
+.pbody{padding:15px 16px 17px;display:flex;flex-direction:column;gap:7px;flex:1}
+.pname{font-weight:700;font-size:15px;letter-spacing:-.01em;line-height:1.35}
 .srow{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--ink2);font-weight:600;min-width:0}
-.srow .sav{width:18px;height:18px;border-radius:6px;background:var(--green-soft);color:var(--green-d);display:grid;place-items:center;font-size:10px;font-weight:800;flex:none}
+.srow .sav{width:22px;height:22px;border-radius:50%;background:var(--green-soft);color:var(--green-d);display:grid;place-items:center;font-size:10px;font-weight:800;flex:none}
+.srow img.sav{object-fit:cover;background:#fff;border:1px solid var(--line)}
 .srow .sname{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .rate{display:flex;align-items:center;gap:5px;font-size:12.5px;font-weight:700}
 .rate .star{color:#e8a10c}
@@ -229,22 +236,24 @@ main{max-width:1180px;margin:0 auto;padding:18px 16px 8px}
 .bdg.rekber{background:var(--green-soft);color:var(--green-d)}
 .bdg.verif{background:#e8f1fc;color:#14539e}
 .price{margin-top:auto;padding-top:6px;display:flex;align-items:baseline;gap:3px}
-.price b{font-size:16.5px;font-weight:800;letter-spacing:-.01em}
+.price b{font-size:20px;font-weight:600;letter-spacing:0}
 .price span{font-size:12px;color:var(--mut);font-weight:600}
 .city{font-size:12px;color:var(--mut);font-weight:600;display:flex;gap:4px;align-items:center}
 
 /* store cards */
-.scard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;box-shadow:var(--sh);display:flex;flex-direction:column;gap:9px;text-align:left;width:100%}
+.scard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px;box-shadow:var(--sh);display:flex;flex-direction:column;gap:10px;text-align:left;width:100%;transition:transform .25s ease,box-shadow .25s ease}
+.scard:hover{transform:translateY(-4px);box-shadow:var(--sh-lg)}
 .scard .shead{display:flex;gap:12px;align-items:center}
-.scard .slogo{width:52px;height:52px;border-radius:14px;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:800;font-size:19px}
-.scard .sname2{font-weight:800;font-size:16px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.btn-toko{margin-top:auto;background:var(--ink);color:#fff;font-weight:800;border-radius:11px;padding:11px;text-align:center}
-.empty{grid-column:1/-1;text-align:center;padding:44px 16px;color:var(--mut);font-weight:600}
-.empty b{display:block;font-size:17px;color:var(--ink);margin-bottom:5px}
+.scard .slogo{width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,#0C3520,#1E7A46);color:#fff;display:grid;place-items:center;font-weight:800;font-size:20px;flex:none}
+.scard img.slogo{object-fit:cover;background:#fff;border:1px solid var(--line)}
+.scard .sname2{font-weight:800;font-size:16.5px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.btn-toko{margin-top:auto;background:var(--ink);color:#fff;font-weight:700;border-radius:12px;padding:13px;text-align:center}
+.empty{grid-column:1/-1;text-align:center;padding:56px 16px;color:var(--mut);font-weight:600}
+.empty b{display:block;font-size:20px;font-weight:600;color:var(--ink);margin-bottom:6px}
 
 /* merchant strip */
-.merchant{margin:26px 0 8px;background:var(--ink);color:#f3efe4;border-radius:20px;padding:22px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
-.merchant h3{font-size:19px;font-weight:800;letter-spacing:-.01em}
+.merchant{margin:32px 0 8px;background:linear-gradient(120deg,#0C3520,#14663C);color:#f3efe4;border-radius:24px;padding:28px;display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.merchant h3{font-size:23px;font-weight:600;letter-spacing:0}
 .merchant p{color:#c3cec2;font-size:13.5px;margin-top:3px;max-width:520px}
 .merchant .cta{margin-left:auto;background:#fff;color:var(--ink);font-weight:800;padding:12px 18px;border-radius:12px}
 .foot{max-width:1180px;margin:0 auto;padding:14px 16px 20px;color:var(--mut);font-size:12px;text-align:center}
@@ -464,13 +473,13 @@ function badgesHTML(s){
 function cardHTML(p){
   const s = STORES[p.store];
   return '<article class="pcard" data-open="' + p.id + '">' +
-    '<div class="ph"><img src="' + p.img + '" alt="" loading="lazy" onerror="this.remove()">' +
+    '<div class="ph">' + (p.img ? '<img src="' + p.img + '" alt="" loading="lazy" onerror="this.remove()">' : '<div class="phempty"><span>' + (p.name || 'J').trim().charAt(0).toUpperCase() + '</span><small>' + p.catLabel + '</small></div>') +
     (s.pro ? '<span class="tagpro">PRO</span>' : '') +
     '<button class="fav' + (state.favs.has(p.id)?' on':'') + '" data-fav="' + p.id + '">' + ICON.heart(state.favs.has(p.id)) + '</button>' +
     '<span class="tagcat">' + p.catLabel + '</span>' +
     (p.stock===0 ? '<span class="habistag">STOK HABIS</span>' : '') + '</div>' +
     '<div class="pbody"><div class="pname">' + p.name + '</div>' +
-    '<div class="srow"><span class="sav">' + s.name[0] + '</span><span class="sname">' + s.name + '</span>' + (s.verified?ICON.verif:'') + '</div>' +
+    '<div class="srow">' + (s.logo ? '<img class="sav" src="' + s.logo + '" alt="" loading="lazy" onerror="this.remove()">' : '<span class="sav">' + s.name[0] + '</span>') + '<span class="sname">' + s.name + '</span>' + (s.verified?ICON.verif:'') + '</div>' +
     '<div class="rate">' + rateHTML(p) + '</div>' +
     '<div class="stok' + (p.stock===0?' habis':'') + '"><span class="dot"></span>' + (p.stock===0?'Stok habis':'Stok siap: ' + p.stock + ' unit') + '</div>' +
     '<div class="badges">' + badgesHTML(s) + '</div>' +
@@ -481,7 +490,7 @@ function storeUrl(slug){ return slug === 'kontur' ? 'https://jasa-rental.my.id/b
 function storeCardHTML(key){
   const s = STORES[key];
   const rating = s.reviews < 3 ? '<span class="baru">Baru</span>' : ICON.star + '<span>' + s.rating.toFixed(1).replace('.',',') + '</span><span class="rc">(' + s.reviews + ' ulasan)</span>';
-  return '<article class="scard"><div class="shead"><span class="slogo">' + s.name[0] + '</span><div>' +
+  return '<article class="scard"><div class="shead">' + (s.logo ? '<img class="slogo" src="' + s.logo + '" alt="" loading="lazy" onerror="this.remove()">' : '<span class="slogo">' + s.name[0] + '</span>') + '<div>' +
     '<div class="sname2">' + s.name + (s.verified?ICON.verif:'') + (s.pro?'<span class="tagpro" style="position:static">PRO</span>':'') + '</div>' +
     '<div class="city">' + ICON.pin + s.city + ' · ' + s.products + ' produk</div></div></div>' +
     '<div class="rate">' + rating + '</div><div class="badges">' + badgesHTML(s) + '</div>' +
@@ -719,7 +728,7 @@ async function loadLive(){
     rows.forEach((row, i) => {
       if(!stores[row.slug]){
         const parts = (row.address || '').split(',').map(x=>x.trim()).filter(Boolean);
-        stores[row.slug] = {name: row.shop_name, city: parts[1] || parts[0] || '', verified:false, rekber:false, pro:false, since:'', products:0, rating:0, reviews:0};
+        stores[row.slug] = {name: row.shop_name, city: parts[1] || parts[0] || '', logo: row.logo_url || '', verified:false, rekber:false, pro:false, since:'', products:0, rating:0, reviews:0};
       }
       stores[row.slug].products++;
       const cat = mapCat(row.category);
@@ -738,7 +747,7 @@ async function loadLive(){
       if(Array.isArray(srows)) srows.forEach(sr => {
         if(sr && sr.slug && !stores[sr.slug]){
           const parts = (sr.address || '').split(',').map(x => x.trim()).filter(Boolean);
-          stores[sr.slug] = {name: sr.shop_name || sr.slug, city: parts[1] || parts[0] || '', verified:false, rekber:false, pro:false, since:'', products: Number(sr.products) || 0, rating:0, reviews:0};
+          stores[sr.slug] = {name: sr.shop_name || sr.slug, city: parts[1] || parts[0] || '', logo: '', verified:false, rekber:false, pro:false, since:'', products: Number(sr.products) || 0, rating:0, reviews:0};
         }
       });
     }catch(e){}
