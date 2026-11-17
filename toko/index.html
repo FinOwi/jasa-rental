@@ -464,13 +464,15 @@ let sheetItem = null, sheetQty = 1;
 
 function cartQtyTotal() { return CART.reduce((a, c) => a + c.qty, 0); }
 function cartDayTotal() { return CART.reduce((a, c) => a + priceOf(c.item) * c.qty, 0); }
+function rentalDayTotal() { return CART.reduce((a, c) => a + (c.item.type === 'sale' ? 0 : priceOf(c.item) * c.qty), 0); }
+function saleOnceTotal() { return CART.reduce((a, c) => a + (c.item.type === 'sale' ? priceOf(c.item) * c.qty : 0), 0); }
 function itemById(id) { return ITEMS.find(x => x.id === id) || null; }
 
 function renderCartBar() {
   const bar = document.getElementById('cartBar');
   if (OFFICIAL || !CART.length) { bar.classList.remove('show'); return; }
   document.getElementById('cartCount').textContent = cartQtyTotal() + ' item di keranjang';
-  document.getElementById('cartTotal').textContent = rp(cartDayTotal()) + ' /hari';
+  document.getElementById('cartTotal').textContent = rp(cartDayTotal()) + (saleOnceTotal() && !rentalDayTotal() ? '' : ' /hari');
   bar.classList.add('show');
 }
 function openModal(id) { document.getElementById(id).classList.add('open'); }
@@ -536,7 +538,7 @@ function openCheckout() {
   document.getElementById('ckDone').style.display = 'none';
   document.getElementById('ckStatus').style.display = 'none';
   document.getElementById('ckItems').innerHTML = CART.map(c =>
-    '<div class="sumrow"><span>' + escHtml(c.item.name) + (c.size ? ' · ' + escHtml(c.size) : '') + ' × ' + c.qty + '</span><span>' + rp(priceOf(c.item) * c.qty) + '/hari</span></div>').join('');
+    '<div class="sumrow"><span>' + escHtml(c.item.name) + (c.size ? ' · ' + escHtml(c.size) : '') + ' × ' + c.qty + '</span><span>' + rp(priceOf(c.item) * c.qty) + (c.item.type === 'sale' ? ' (beli)' : '/hari') + '</span></div>').join('');
   const dFrom = document.getElementById('dFrom'), dTo = document.getElementById('dTo');
   if (dFrom && dFrom.value) document.getElementById('ckStart').value = dFrom.value;
   let days = 2;
@@ -548,7 +550,8 @@ function openCheckout() {
 }
 function updCkTotal() {
   const d = Math.max(1, parseInt(document.getElementById('ckDays').value || '1', 10));
-  document.getElementById('ckTotal').textContent = rp(cartDayTotal() * d) + ' (' + d + ' hari)';
+  /* Sewa dihitung per hari; produk JUAL sekali bayar — jangan dikali hari. */
+  document.getElementById('ckTotal').textContent = rp(rentalDayTotal() * d + saleOnceTotal()) + ' (' + d + ' hari)';
 }
 function ckFail(msg) { const e = document.getElementById('ckErr'); e.textContent = msg; e.style.display = 'block'; }
 
