@@ -1067,13 +1067,13 @@ function brandLabel(k) {
 function payMethodsNormalized() {
   const raw = cfg.paymentMethods;
   if (Array.isArray(raw)) return raw.map(m => {
-    if (typeof m === 'string') return { brand: brandLabel(m), number: '', holder: '' };
-    if (m && typeof m === 'object') return { brand: brandLabel(m.brand || m.method || m.name || ''), number: m.number || m.no || m.detail || '', holder: m.holder || m.an || m.name || '' };
+    if (typeof m === 'string') return { brand: brandLabel(m), number: '', holder: '', image: '' };
+    if (m && typeof m === 'object') return { brand: brandLabel(m.brand || m.method || m.name || ''), number: m.number || m.no || m.detail || '', holder: m.holder || m.an || m.name || '', image: m.image || m.qr || '' };
     return null;
   }).filter(x => x && x.brand);
   if (raw && typeof raw === 'object') return Object.entries(raw).map(([k, v]) => {
     const o = (v && typeof v === 'object') ? v : {};
-    return { brand: brandLabel(k), number: o.number || o.no || o.detail || (typeof v === 'string' ? v : ''), holder: o.holder || o.an || o.name || '' };
+    return { brand: brandLabel(k), number: o.number || o.no || o.detail || (typeof v === 'string' ? v : ''), holder: o.holder || o.an || o.name || '', image: o.image || o.qr || '' };
   });
   return [];
 }
@@ -1084,7 +1084,19 @@ function payRowHtml(m) {
   return '<div class="pmrow"><select class="pmbrand">' + opts + '</select>' +
     '<input class="pmnum" placeholder="Nomor / ID tujuan" value="' + esc(m.number) + '">' +
     '<input class="pmholder" placeholder="Atas nama" value="' + esc(m.holder) + '">' +
-    '<button class="pmdel" data-pmdel>Hapus</button></div>';
+    '<button class="pmdel" data-pmdel>Hapus</button>' +
+    '<div class="pmqr" data-qrimg="' + esc(m.image || '') + '" style="flex-basis:100%;display:' + (m.brand === 'QRIS' ? 'flex' : 'none') + ';align-items:center;gap:10px;flex-wrap:wrap">' +
+      '<span class="pmqrprev">' + (m.image ? '<img src="' + esc(m.image) + '" alt="QRIS toko" style="width:74px;height:74px;object-fit:contain;background:#fff;border:1px solid var(--line);border-radius:10px">' : '') + '</span>' +
+      '<label class="pbtn" style="cursor:pointer">Unggah Foto QRIS<input type="file" class="pmqrfile" accept="image/*" hidden></label>' +
+      '<button class="pmdel" data-qrdel style="display:' + (m.image ? '' : 'none') + '">Hapus Foto</button>' +
+      '<span class="pmqrnote" style="font-size:12px;color:var(--mut);font-weight:600">Foto kode QR QRIS tokomu — tampil ke penyewa saat checkout memilih QRIS.</span>' +
+    '</div></div>';
+}
+function renderQrBlock(block) {
+  const url = block.dataset.qrimg || '';
+  block.querySelector('.pmqrprev').innerHTML = url ? '<img src="' + esc(url) + '" alt="QRIS toko" style="width:74px;height:74px;object-fit:contain;background:#fff;border:1px solid var(--line);border-radius:10px">' : '';
+  block.querySelector('[data-qrdel]').style.display = url ? '' : 'none';
+  block.querySelector('.pmqrnote').textContent = url ? 'Foto QRIS terpasang — jangan lupa klik Simpan Metode Pembayaran.' : 'Foto kode QR QRIS tokomu — tampil ke penyewa saat checkout memilih QRIS.';
 }
 function renderPayEditor() {
   const el = $('payEditor');
@@ -1109,8 +1121,13 @@ async function savePayMethods(btn) {
     brand: r.querySelector('.pmbrand').value,
     number: r.querySelector('.pmnum').value.trim(),
     holder: r.querySelector('.pmholder').value.trim(),
+    image: (r.querySelector('.pmqr') ? (r.querySelector('.pmqr').dataset.qrimg || '') : ''),
     seed: r.dataset.seed === '1'
-  })).filter(m => m.brand && (m.number || m.holder || !m.seed)).map(({ brand, number, holder }) => ({ brand, number, holder }));
+  })).filter(m => m.brand && (m.number || m.holder || m.image || !m.seed)).map(m => {
+    const o = { brand: m.brand, number: m.number, holder: m.holder };
+    if (m.image) o.image = m.image;
+    return o;
+  });
   const newCfg = Object.assign({}, cfg, { paymentMethods: rows, paymentInfo: $('pmInfo').value.trim() });
   btn.disabled = true; btn.textContent = 'Menyimpan…';
   try {
@@ -1125,8 +1142,30 @@ async function savePayMethods(btn) {
   }
 }
 
+/* delegasi change: ganti brand (blok QRIS tampil hanya utk QRIS) + unggah foto QRIS */
+document.addEventListener('change', async e => {
+  const bs = e.target.closest('.pmbrand');
+  if (bs) { const row = bs.closest('.pmrow'); const qr = row ? row.querySelector('.pmqr') : null; if (qr) qr.style.display = bs.value === 'QRIS' ? 'flex' : 'none'; return; }
+  const qf = e.target.closest('.pmqrfile');
+  if (qf && qf.files && qf.files[0]) {
+    const block = qf.closest('.pmqr');
+    const note = block.querySelector('.pmqrnote');
+    note.textContent = 'Mengunggah foto QRIS…';
+    try {
+      const url = await uploadItemImage(qf.files[0], 'qris');
+      block.dataset.qrimg = url;
+      renderQrBlock(block);
+      showToast('Foto QRIS terunggah — klik Simpan Metode Pembayaran untuk menyimpan.');
+    } catch (err) {
+      note.textContent = 'Foto kode QR QRIS tokomu — tampil ke penyewa saat checkout memilih QRIS.';
+      showToast('Gagal mengunggah foto QRIS — coba lagi.');
+    }
+  }
+});
+
 /* delegasi klik untuk semua aksi modul pemilik (tahan render ulang) */
 document.addEventListener('click', e => {
+  const qd = e.target.closest('[data-qrdel]'); if (qd) { const block = qd.closest('.pmqr'); if (block) { block.dataset.qrimg = ''; renderQrBlock(block); } return; }
   const pv = e.target.closest('[data-proof]'); if (pv) { signProof(pv.dataset.proof); return; }
   const vf = e.target.closest('[data-verify]'); if (vf) { verifyPayment(vf.dataset.verify, vf); return; }
   const cf = e.target.closest('[data-confirm]'); if (cf) { setBookingStatus(cf.dataset.confirm, 'confirmed', cf); return; }
