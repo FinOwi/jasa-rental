@@ -114,10 +114,10 @@ a{color:inherit}
 .obtn.ghost{background:var(--green-soft);color:var(--green-d);margin-left:0}
 
 /* fund / segera hadir */
-.fund{background:var(--ink);color:#f3efe4;border-radius:18px;padding:18px}
-.fund .lb{font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#b9c6bb}
+.fund{background:linear-gradient(125deg,#F5F9F4,#EAF4ED);color:var(--ink);border:1px solid #D8E6DA;border-radius:18px;padding:18px}
+.fund .lb{font-size:11.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--green-d)}
 .fund .big{font-size:21px;font-weight:800;margin-top:5px}
-.fund .note{font-size:12.5px;color:#b9c6bb;margin-top:8px}
+.fund .note{font-size:12.5px;color:var(--ink2);margin-top:8px}
 
 /* products */
 .prod{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 14px;display:flex;gap:12px;align-items:center;margin-bottom:9px}
@@ -536,9 +536,9 @@ function renderHome(st) {
     $('sumVerifySub').textContent = st.verifyGroups.length ? 'bukti terkirim, menunggu aksimu' : 'semua pembayaran beres';
     $('sumVerifySub').className = 'dl ' + (st.verifyGroups.length ? 'warn' : 'up');
     const monthName = new Date().toLocaleDateString('id-ID', { month: 'short' });
-    $('sumRevLabel').textContent = 'Pendapatan ' + monthName + ' — Terverifikasi';
+    $('sumRevLabel').textContent = 'Pendapatan ' + monthName;
     $('sumRev').innerHTML = rpShort(st.revenue);
-    $('sumRevSub').textContent = 'dari ' + st.monthGroups.length + ' booking web terbayar bulan ini';
+    $('sumRevSub').textContent = 'dari ' + st.monthGroups.length + ' pembayaran terverifikasi bulan ini';
   } else {
     $('sumNew').textContent = '—'; $('sumNewSub').textContent = 'data booking belum tersedia';
     $('sumVerify').textContent = '—'; $('sumVerifySub').textContent = 'data booking belum tersedia';
