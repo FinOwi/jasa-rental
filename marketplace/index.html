@@ -486,6 +486,7 @@ function cardHTML(p){
     '<div class="price"><b>' + rupiah(p.price) + '</b><span>/' + p.period + '</span></div>' +
     '<div class="city">' + ICON.pin + s.city + '</div></div></article>';
 }
+document.addEventListener('error', function(e){ var t = e.target; if(t && t.tagName === 'IMG' && t.closest && t.closest('.pcard .ph')){ var card = t.closest('.pcard'); var nm = (card.querySelector('.pname') || {}).textContent || 'J'; var ct = (card.querySelector('.tagcat') || {}).textContent || ''; var d = document.createElement('div'); d.className = 'phempty'; d.innerHTML = '<span>' + nm.trim().charAt(0).toUpperCase() + '</span><small>' + ct + '</small>'; t.replaceWith(d); } }, true);
 function storeUrl(slug){ return slug === 'kontur' ? 'https://jasa-rental.my.id/bk-adventure/' : 'https://jasa-rental.my.id/toko/?toko=' + encodeURIComponent(slug); }
 function storeCardHTML(key){
   const s = STORES[key];
@@ -728,7 +729,7 @@ async function loadLive(){
     rows.forEach((row, i) => {
       if(!stores[row.slug]){
         const parts = (row.address || '').split(',').map(x=>x.trim()).filter(Boolean);
-        stores[row.slug] = {name: row.shop_name, city: parts[1] || parts[0] || '', logo: row.logo_url || '', verified:false, rekber:false, pro:false, since:'', products:0, rating:0, reviews:0};
+        stores[row.slug] = {name: row.shop_name, city: parts[1] || parts[0] || (row.slug === 'kontur' ? 'Berastagi' : ''), logo: row.logo_url || '', verified:false, rekber:false, pro:false, since:'', products:0, rating:0, reviews:0};
       }
       stores[row.slug].products++;
       const cat = mapCat(row.category);
