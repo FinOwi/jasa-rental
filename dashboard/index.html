@@ -1095,6 +1095,7 @@ function renderPayEditor() {
     '<div class="fld" style="margin-top:13px"><label>Info pembayaran (ditampilkan ke penyewa saat checkout)</label>' +
     '<textarea id="pmInfo" rows="3" maxlength="600" placeholder="Contoh: transfer sebelum pengambilan; tunjukkan bukti saat mengambil barang.">' + esc(cfg.paymentInfo || '') + '</textarea></div>' +
     '<div class="frmacts"><button class="addbtn" id="pmSave">Simpan Metode Pembayaran</button></div>';
+  if (!rows.length) { const seedRow = document.querySelector('#pmRows .pmrow'); if (seedRow) seedRow.dataset.seed = '1'; }
   $('pmAdd').onclick = () => {
     const d = document.createElement('div');
     d.innerHTML = payRowHtml({ brand: 'Transfer Bank', number: '', holder: '' });
@@ -1106,8 +1107,9 @@ async function savePayMethods(btn) {
   const rows = [...document.querySelectorAll('#pmRows .pmrow')].map(r => ({
     brand: r.querySelector('.pmbrand').value,
     number: r.querySelector('.pmnum').value.trim(),
-    holder: r.querySelector('.pmholder').value.trim()
-  })).filter(m => m.brand && (m.number || m.holder));
+    holder: r.querySelector('.pmholder').value.trim(),
+    seed: r.dataset.seed === '1'
+  })).filter(m => m.brand && (m.number || m.holder || !m.seed)).map(({ brand, number, holder }) => ({ brand, number, holder }));
   const newCfg = Object.assign({}, cfg, { paymentMethods: rows, paymentInfo: $('pmInfo').value.trim() });
   btn.disabled = true; btn.textContent = 'Menyimpan…';
   try {
