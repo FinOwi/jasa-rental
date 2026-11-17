@@ -45,7 +45,9 @@ img{display:block}
 .cover{height:190px;background:linear-gradient(120deg,#0C3520,#177245 58%,#238352) center/cover;position:relative}
 @media(min-width:760px){.cover{height:264px}}
 .cover:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,25,16,0) 34%,rgba(10,25,16,.52))}
-.shophead .wrap{position:relative;margin-top:-52px;display:flex;gap:18px;align-items:flex-end;padding-bottom:22px;flex-wrap:wrap}
+.shophead .wrap{position:relative;margin-top:-52px;display:flex;gap:18px;align-items:flex-start;padding-bottom:22px;flex-wrap:wrap}
+.shop-id{padding-top:60px}
+.shop-actions{align-self:flex-end;padding-bottom:2px}
 .avatar{width:96px;height:96px;border-radius:50%;background:linear-gradient(135deg,#0C3520,#1E7A46);color:#fff;display:grid;place-items:center;font-size:38px;font-weight:800;border:4px solid #fff;flex:none;box-shadow:0 12px 28px -8px rgba(10,30,18,.4);overflow:hidden}
 .avatar img{width:100%;height:100%;object-fit:cover;display:block}
 .avatar img{width:100%;height:100%;object-fit:cover}
@@ -350,6 +352,7 @@ function renderHead() {
     $('#bnBook').href = '#grid';
   }
   $('#foot').textContent = name + ' · Didukung oleh Jasa Rental — marketplace rental Indonesia';
+  document.addEventListener('error', function(e){ var t = e.target; if(t && t.tagName === 'IMG' && t.closest && t.closest('.pcard .ph')){ var card = t.closest('.pcard'); var nm = (card.querySelector('.pname') || {}).textContent || 'J'; var ct = (card.querySelector('.loc') || {}).textContent || 'Rental'; var d = document.createElement('div'); d.className = 'phempty'; d.innerHTML = '<span>' + nm.trim().charAt(0).toUpperCase() + '</span><small>' + ct + '</small>'; t.replaceWith(d); } }, true);
   /* Statistik jujur — hanya angka yang benar-benar ada datanya di server:
      jumlah produk, jumlah kategori, dan unit tersedia saat ini. */
   const cats = new Set(ITEMS.map(i => i.category).filter(Boolean));
