@@ -464,7 +464,7 @@ function badgesHTML(s){
 function cardHTML(p){
   const s = STORES[p.store];
   return '<article class="pcard" data-open="' + p.id + '">' +
-    '<div class="ph"><img src="' + p.img + '" alt="" loading="lazy">' +
+    '<div class="ph"><img src="' + p.img + '" alt="" loading="lazy" onerror="this.remove()">' +
     (s.pro ? '<span class="tagpro">PRO</span>' : '') +
     '<button class="fav' + (state.favs.has(p.id)?' on':'') + '" data-fav="' + p.id + '">' + ICON.heart(state.favs.has(p.id)) + '</button>' +
     '<span class="tagcat">' + p.catLabel + '</span>' +
@@ -536,7 +536,7 @@ function renderBookings(){
   el.innerHTML = bookings.map(b=>{
     const p = PRODUCTS.find(x=>x.id===b.pid), s = STORES[p.store];
     const steps = ['Dibayar','Diambil','Disewa','Selesai'];
-    return '<div class="bk-card"><div class="bk-head"><img src="' + p.img + '"><div><b>' + p.name + '</b>' +
+    return '<div class="bk-card"><div class="bk-head"><img src="' + p.img + '" onerror="this.remove()"><div><b>' + p.name + '</b>' +
       '<div class="bk-code">' + b.code + ' · ' + s.name + ' · ' + b.days + ' hari · ' + rupiah(b.total) + '</div></div>' +
       '<span class="bk-status' + (b.mode==='langsung'?' langsung':'') + '">' + b.status + '</span></div>' +
       '<div class="steps">' + steps.map((t,i)=>'<div class="step' + (i<b.step?' done':'') + '">' + t + '</div>').join('') + '</div>' +
@@ -565,7 +565,7 @@ function openSheet(id){
   cur = p; qty = 1; payMode = s.rekber ? 'rekber' : 'langsung';
   const el = document.getElementById('sheetIn');
   el.innerHTML =
-    '<img class="hero-img" src="' + p.img + '">' +
+    '<img class="hero-img" src="' + p.img + '" onerror="this.remove()">' +
     '<div style="display:flex;gap:6px;margin-top:12px;flex-wrap:wrap">' + (s.pro?'<span class="tagpro" style="position:static">PRO</span>':'') + '<span class="tagcat" style="position:static">' + p.catLabel + '</span></div>' +
     '<h2>' + p.name + '</h2>' +
     '<div class="srow" style="margin-top:7px"><span class="sav">' + s.name[0] + '</span><span class="sname" style="font-size:13.5px">' + s.name + '</span>' + (s.verified?ICON.verif:'') + '<span style="color:var(--mut)">' + ICON.pin.replace('currentColor','#71806f') + ' ' + s.city + '</span></div>' +
