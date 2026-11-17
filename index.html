@@ -199,7 +199,7 @@ footer nav{display:flex;gap:16px;flex-wrap:wrap;font-weight:700;color:var(--ink2
       <a href="marketplace/">Marketplace</a><a href="#cara-kerja">Cara Kerja</a><a href="#rekber">Rekber Aman</a><a href="#pemilik">Untuk Pemilik Rental</a><a href="#harga">Harga</a><a href="#faq">FAQ</a>
     </nav>
     <div class="hcta">
-      <a class="btn ghostw" href="marketplace/">Masuk</a>
+      <button class="btn ghostw" id="btnMasuk" type="button">Masuk</button>
       <a class="btn white" href="daftar/">Daftarkan Toko</a>
     </div>
   </div>
@@ -397,9 +397,39 @@ footer nav{display:flex;gap:16px;flex-wrap:wrap;font-weight:700;color:var(--ink2
         <a href="marketplace/">Marketplace</a><a href="#rekber">Rekber Aman</a><a href="#harga">Harga</a><a href="#">Ketentuan Platform</a><a href="#">Bantuan Penyewa</a><a href="#">Bantuan Pemilik Rental</a>
       </nav>
     </div>
-    <div style="margin-top:18px">Prototipe UI/UX v1 — untuk review desain, belum halaman live. © 2026 FinOwi Id.</div>
+    <div style="margin-top:18px">© 2026 FinOwi Id · Jasa Rental — marketplace rental Indonesia.</div>
   </div>
 </footer>
+
+<div id="loginModal" style="display:none;position:fixed;inset:0;background:rgba(16,32,22,.55);z-index:200;align-items:center;justify-content:center;padding:18px">
+  <div style="background:#fff;border-radius:18px;max-width:430px;width:100%;padding:26px 24px;box-shadow:0 24px 60px rgba(0,0,0,.3)">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
+      <div><b style="font-size:19px">Masuk ke Jasa Rental</b><div style="color:var(--mut);font-weight:600;font-size:13.5px;margin-top:3px">Pilih sesuai kebutuhanmu — sama-sama memakai akun Google.</div></div>
+      <button id="loginModalClose" type="button" aria-label="Tutup" style="font-size:19px;font-weight:800;line-height:1;padding:4px 8px">✕</button>
+    </div>
+    <a href="dashboard/" style="display:block;border:1.5px solid var(--line);border-radius:14px;padding:16px 18px;margin-top:18px;text-decoration:none">
+      <b style="font-size:16px;color:var(--ink)">Masuk sebagai Tenant</b>
+      <div style="color:var(--mut);font-weight:600;font-size:13.5px;margin-top:3px">Untuk pemilik toko — kelola pesanan, katalog, pembayaran, dan profil tokomu.</div>
+      <div style="color:var(--green);font-weight:800;font-size:13.5px;margin-top:8px">Ke Dashboard Toko →</div>
+    </a>
+    <a href="marketplace/?masuk=1" style="display:block;border:1.5px solid var(--line);border-radius:14px;padding:16px 18px;margin-top:12px;text-decoration:none">
+      <b style="font-size:16px;color:var(--ink)">Masuk sebagai Pengguna</b>
+      <div style="color:var(--mut);font-weight:600;font-size:13.5px;margin-top:3px">Untuk penyewa — cari barang, simpan favorit, dan pantau bookingmu.</div>
+      <div style="color:var(--green);font-weight:800;font-size:13.5px;margin-top:8px">Ke Marketplace →</div>
+    </a>
+  </div>
+</div>
+<script>
+(function(){
+  var m = document.getElementById('loginModal');
+  var open = function(){ m.style.display = 'flex'; };
+  var close = function(){ m.style.display = 'none'; };
+  document.getElementById('btnMasuk').addEventListener('click', open);
+  document.getElementById('loginModalClose').addEventListener('click', close);
+  m.addEventListener('click', function(e){ if(e.target === m) close(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
+})();
+</script>
 
 <script>
 const CATS = [
