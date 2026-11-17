@@ -302,6 +302,10 @@ let rentalsOk = false;
 function saveSession(sv) {
   session = sv;
   try { sv ? localStorage.setItem(SESSION_KEY, JSON.stringify(sv)) : localStorage.removeItem(SESSION_KEY); } catch (e) {}
+  /* Cermin ke sesi member bersama: satu origin = satu akun masuk. Tanpa ini,
+     login/keluar lewat dashboard tidak terlihat halaman lain (daftar &
+     marketplace), dan halaman itu bisa tetap menampilkan akun lama. */
+  try { sv ? localStorage.setItem(MEMBER_SESSION_KEY, JSON.stringify(sv)) : localStorage.removeItem(MEMBER_SESSION_KEY); } catch (e) {}
 }
 function loadStoredSession() {
   try { const s = JSON.parse(localStorage.getItem(SESSION_KEY) || 'null'); if (s && s.access_token) return s; } catch (e) {}
