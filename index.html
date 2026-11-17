@@ -42,26 +42,28 @@
 }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
   --ink:#152219; --ink2:#43544a; --mut:#71806f;
-  --bg:#f5f3ee; --card:#ffffff; --line:#e5e1d8;
+  --bg:#FAF8F3; --card:#ffffff; --line:#E9E4D8;
   --green:#177245; --green-d:#0d4d2c; --green-soft:#e7f3ec;
-  --gold:#b07d0a; --gold-soft:#faf0d7;
+  --gold:#B8862B; --gold-soft:#faf0d7;
   --blue:#1a6fd4; --blue-soft:#e8f1fc;
-  --sh:0 1px 2px rgba(21,34,25,.05),0 10px 28px -20px rgba(21,34,25,.4);
+  --sh:0 1px 2px rgba(23,40,30,.05),0 16px 40px -16px rgba(23,40,30,.16);
+  --sh-lg:0 2px 4px rgba(23,40,30,.06),0 28px 56px -20px rgba(23,40,30,.28);
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth}
 body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:15.5px;line-height:1.55}
+h1,h2,.hero-vis .hv-card b{font-family:'Fraunces',Georgia,serif}
 a{color:inherit;text-decoration:none}
 button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 .wrap{max-width:1120px;margin:0 auto;padding:0 18px}
-section{padding:56px 0}
+section{padding:72px 0}
 .eyebrow{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--green);display:flex;align-items:center;gap:8px}
 .eyebrow:before{content:"";width:22px;height:2px;background:var(--green)}
-h2{font-size:clamp(23px,3.6vw,32px);font-weight:800;letter-spacing:-.02em;line-height:1.2;margin-top:10px}
+h2{font-size:clamp(25px,3.6vw,34px);font-weight:600;letter-spacing:-.01em;line-height:1.18;margin-top:10px}
 .sub{color:var(--ink2);margin-top:10px;max-width:640px}
 
 /* header */
@@ -71,7 +73,8 @@ header{position:sticky;top:0;z-index:40;background:var(--ink);color:#f3efe4}
 .logo .mark{width:30px;height:30px;border-radius:9px;background:var(--green);display:grid;place-items:center;color:#fff}
 .logo small{display:block;font-size:10px;font-weight:600;color:#b9c6bb;letter-spacing:.08em;text-transform:uppercase}
 nav.main{display:none;gap:2px;margin-left:8px}
-nav.main a{padding:8px 11px;border-radius:99px;font-weight:600;font-size:14px;color:#cfd8cd}
+nav.main a{padding:8px 11px;border-radius:99px;font-weight:600;font-size:14px;color:#cfd8cd;white-space:nowrap}
+header a,header button{white-space:nowrap}
 nav.main a:hover{background:#ffffff1a;color:#fff}
 .hcta{margin-left:auto;display:flex;gap:9px;align-items:center}
 .btn{display:inline-flex;align-items:center;gap:8px;font-weight:800;border-radius:12px;padding:12px 20px;font-size:14.5px;justify-content:center}
@@ -83,14 +86,24 @@ nav.main a:hover{background:#ffffff1a;color:#fff}
 @media(min-width:900px){nav.main{display:flex}}
 
 /* hero */
-.hero{background:var(--ink);color:#f3efe4;padding:52px 0 64px;position:relative;overflow:hidden}
-.hero h1{font-size:clamp(30px,5.6vw,50px);font-weight:800;letter-spacing:-.025em;line-height:1.12;max-width:700px}
-.hero h1 em{font-style:normal;color:#8fd0ab}
-.hero .lead{color:#c3cec2;margin-top:16px;max-width:600px;font-size:16.5px}
+.hero{background:linear-gradient(120deg,#0C3520,#123B26 58%,#177245);color:#f3efe4;padding:60px 0 72px;position:relative;overflow:hidden}
+@media(min-width:960px){.hero .wrap{display:grid;grid-template-columns:1.04fr .96fr;gap:48px;align-items:center}}
+.hero-vis{display:none}
+@media(min-width:960px){.hero-vis{display:grid;grid-column:2;grid-row:1/span 6;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:14px;position:relative}}
+.hv{border-radius:20px;overflow:hidden;background:#1E7A46;box-shadow:0 24px 48px -20px rgba(0,0,0,.5)}
+.hv img{width:100%;height:100%;object-fit:cover}
+.hv.big{grid-row:1/span 2}
+.hv-card{position:absolute;left:-16px;bottom:22px;background:#fff;color:var(--ink);border-radius:16px;padding:12px 16px;box-shadow:var(--sh-lg);display:flex;gap:11px;align-items:center;max-width:300px}
+.hv-card b{font-size:16.5px;font-weight:600;display:block}
+.hv-card span{font-size:12px;color:var(--ink2);font-weight:600;line-height:1.35;display:block}
+.hv-card .sh-ic{width:38px;height:38px;border-radius:12px;background:var(--green-soft);display:grid;place-items:center;flex:none}
+.hero h1{font-size:clamp(32px,5.2vw,52px);font-weight:600;letter-spacing:-.01em;line-height:1.1;max-width:700px}
+.hero h1 em{font-style:italic;color:#E9C979}
+.hero .lead{color:#C9D4C9;margin-top:18px;max-width:600px;font-size:16.5px}
 .hero-cta{display:flex;gap:11px;flex-wrap:wrap;margin-top:26px}
 .trustrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:30px}
 .trust{display:inline-flex;align-items:center;gap:7px;border:1px solid #ffffff2e;background:#ffffff10;border-radius:99px;padding:8px 13px;font-size:13px;font-weight:700}
-.hero-card{margin-top:38px;background:#fff;color:var(--ink);border-radius:20px;padding:16px;box-shadow:var(--sh);max-width:760px}
+.hero-card{margin-top:38px;background:#fff;color:var(--ink);border-radius:22px;padding:18px;box-shadow:var(--sh-lg);max-width:760px}
 .hero-card .hc-t{font-weight:800;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin-bottom:10px}
 .hc-row{display:flex;gap:9px;flex-wrap:wrap}
 .hc-pill{flex:1;min-width:130px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:#fbfaf7}
@@ -101,8 +114,9 @@ nav.main a:hover{background:#ffffff1a;color:#fff}
 .catgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;margin-top:26px}
 @media(min-width:640px){.catgrid{grid-template-columns:repeat(3,1fr)}}
 @media(min-width:980px){.catgrid{grid-template-columns:repeat(4,1fr)}}
-.catbox{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;gap:12px;align-items:flex-start;box-shadow:var(--sh)}
-.catbox .ic{width:42px;height:42px;border-radius:12px;background:var(--green-soft);color:var(--green-d);display:grid;place-items:center;flex:none}
+.catbox{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;display:flex;gap:13px;align-items:flex-start;box-shadow:var(--sh);transition:transform .25s ease,box-shadow .25s ease}
+.catbox:hover{transform:translateY(-3px);box-shadow:var(--sh-lg)}
+.catbox .ic{width:46px;height:46px;border-radius:14px;background:var(--green-soft);color:var(--green-d);display:grid;place-items:center;flex:none}
 .catbox b{font-size:14.5px;display:block}
 .catbox span{font-size:12.3px;color:var(--mut);font-weight:600;line-height:1.4;display:block;margin-top:2px}
 
@@ -152,7 +166,7 @@ nav.main a:hover{background:#ffffff1a;color:#fff}
 /* pricing */
 .prices{display:grid;gap:12px;margin-top:28px}
 @media(min-width:820px){.prices{grid-template-columns:repeat(3,1fr)}}
-.price{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:var(--sh);display:flex;flex-direction:column}
+.price{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:26px;box-shadow:var(--sh);display:flex;flex-direction:column}
 .price.pro{border:2px solid var(--gold);position:relative}
 .price .tag{position:absolute;top:-12px;left:20px;background:var(--gold);color:#fff;font-size:11px;font-weight:800;letter-spacing:.07em;padding:4px 10px;border-radius:99px}
 .price h3{font-size:16px;font-weight:800}
@@ -218,6 +232,12 @@ footer nav{display:flex;gap:16px;flex-wrap:wrap;font-weight:700;color:var(--ink2
       <span class="trust"><svg width="14" height="14" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#7db8f0"/><path d="m8.2 12.4 2.5 2.5 5-5.4" stroke="#152219" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Identitas &amp; rekening toko terverifikasi</span>
       <span class="trust">Stok tampil real-time, bukan angka pajangan</span>
       <span class="trust">Ulasan hanya dari penyewa yang benar-benar menyewa</span>
+    </div>
+    <div class="hero-vis" aria-hidden="true">
+      <div class="hv big"><img src="https://fr.wildbounds.com/cdn/shop/files/big-agnes-copper-spur-ul3-tents-3p-tangelo-tcsul3tgo25-1131358387_600x.jpg?v=1739796548" alt="" loading="lazy" onerror="this.remove()"></div>
+      <div class="hv"><img src="https://images.snowleader.com/cdn-cgi/image/f=auto,fit=scale-down,q=85/https://images.snowleader.com/media/catalog/product/cache/1/image/0dc2d03fe217f8c83829496872af24a0/A/R/ARCT01223_01.jpg" alt="" loading="lazy" onerror="this.remove()"></div>
+      <div class="hv"><img src="https://nuowbpevzfwobedtgxzm.supabase.co/storage/v1/object/public/item-images/catalog/flysheet-itm15.jpg" alt="" loading="lazy" onerror="this.remove()"></div>
+      <div class="hv-card"><span class="sh-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0d4d2c" stroke-width="2.2" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6z"/><path d="m9 12 2 2 4-4" stroke-linecap="round"/></svg></span><span><b>Rekber Aman</b><span>Dana ditahan platform, diteruskan sesudah barang kembali.</span></span></div>
     </div>
     <div class="hero-card">
       <div class="hc-t">Pencarian populer di marketplace</div>
@@ -433,27 +453,41 @@ footer nav{display:flex;gap:16px;flex-wrap:wrap;font-weight:700;color:var(--ink2
 
 <script>
 const CATS = [
-  ['Kendaraan','Mobil, motor, sepeda, bus & truk'],
-  ['Outdoor & Camping','Tenda, carrier, alat mendaki & pancing'],
-  ['Fashion & Kostum','Kebaya, gaun, jas, kostum & baju adat'],
-  ['Elektronik','Proyektor, sound, genset, TV & laptop'],
-  ['Kamera & Fotografi','Mirrorless, lensa, drone & studio'],
-  ['Mainan & Hiburan','PlayStation, mainan anak & alat musik'],
-  ['Event & Pesta','Tenda event, kursi, panggung & dekorasi'],
-  ['Alat & Perkakas','Perkakas, alat konstruksi & kebersihan'],
-  ['Bayi & Anak','Stroller, car seat & perlengkapan bayi'],
-  ['Properti & Kos','Kos, villa, ruang meeting & gudang'],
-  ['Lainnya','Semua kebutuhan sewa lainnya']
+  ['Kendaraan','Mobil, motor, sepeda, bus & truk','car'],
+  ['Outdoor & Camping','Tenda, carrier, alat mendaki & pancing','tent'],
+  ['Fashion & Kostum','Kebaya, gaun, jas, kostum & baju adat','shirt'],
+  ['Elektronik','Proyektor, sound, genset, TV & laptop','speaker'],
+  ['Kamera & Fotografi','Mirrorless, lensa, drone & studio','camera'],
+  ['Mainan & Hiburan','PlayStation, mainan anak & alat musik','game'],
+  ['Event & Pesta','Tenda event, kursi, panggung & dekorasi','flag'],
+  ['Alat & Perkakas','Perkakas, alat konstruksi & kebersihan','tool'],
+  ['Bayi & Anak','Stroller, car seat & perlengkapan bayi','baby'],
+  ['Properti & Kos','Kos, villa, ruang meeting & gudang','home'],
+  ['Lainnya','Semua kebutuhan sewa lainnya','grid']
 ];
+const IC = (inner) => '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">' + inner + '</svg>';
+const ICONS = {
+  car: IC('<path d="M4 16v-4l2-6h12l2 6v4"/><path d="M4 16h16"/><circle cx="7.5" cy="17.5" r="1.6"/><circle cx="16.5" cy="17.5" r="1.6"/><path d="M9.1 17.5h5.8"/>'),
+  tent: IC('<path d="M12 4 2.5 20h19z"/><path d="M12 12 7.5 20h9z"/>'),
+  shirt: IC('<path d="M8.5 4 4 6.5 6 10l2-1v11h8V9l2 1 2-3.5L15.5 4a3.5 3.5 0 0 1-7 0z"/>'),
+  speaker: IC('<rect x="5" y="3" width="14" height="18" rx="2"/><circle cx="12" cy="14.5" r="3.2"/><circle cx="12" cy="7.5" r="1.2"/>'),
+  camera: IC('<path d="M4 8h3l2-2.5h6L17 8h3a1.5 1.5 0 0 1 1.5 1.5V19a1.5 1.5 0 0 1-1.5 1.5H4A1.5 1.5 0 0 1 2.5 19V9.5A1.5 1.5 0 0 1 4 8z"/><circle cx="12" cy="13.5" r="3.6"/>'),
+  game: IC('<rect x="2.5" y="7.5" width="19" height="10" rx="5"/><path d="M8 10.8v3.4M6.3 12.5h3.4"/><circle cx="15.8" cy="11.3" r=".4"/><circle cx="17.8" cy="13.7" r=".4"/>'),
+  flag: IC('<path d="M5 21V4"/><path d="M5 4.8c4-2.2 7 2 12 .3v9.4c-5 1.7-8-2.5-12-.3"/>'),
+  tool: IC('<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>'),
+  baby: IC('<path d="M4 4h2.5l2.2 9h9.6l2-7H8"/><circle cx="9.5" cy="19.5" r="1.5"/><circle cx="17.5" cy="19.5" r="1.5"/>'),
+  home: IC('<path d="m3.5 11 8.5-7.5L20.5 11"/><path d="M6 9.5V20h12V9.5"/><path d="M10 20v-5h4v5"/>'),
+  grid: IC('<rect x="4" y="4" width="7" height="7" rx="1.6"/><rect x="13" y="4" width="7" height="7" rx="1.6"/><rect x="4" y="13" width="7" height="7" rx="1.6"/><rect x="13" y="13" width="7" height="7" rx="1.6"/>')
+};
 const box = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8.2v7.6a2 2 0 0 1-1 1.7l-7 4a2 2 0 0 1-2 0l-7-4A2 2 0 0 1 3 15.8V8.2a2 2 0 0 1 1-1.7l7-4a2 2 0 0 1 2 0l7 4a2 2 0 0 1 1 1.7z"/><path d="m3.3 8.3 8.7 5 8.7-5M12 22V13.3"/></svg>';
 document.getElementById('catgrid').innerHTML = CATS.map(c =>
-  '<a class="catbox" href="marketplace/"><span class="ic">' + box + '</span><span><b>' + c[0] + '</b><span>' + c[1] + '</span></span></a>').join('');
+  '<a class="catbox" href="marketplace/"><span class="ic">' + (ICONS[c[2]] || box) + '</span><span><b>' + c[0] + '</b><span>' + c[1] + '</span></span></a>').join('');
 
 const FAQ = [
   ['Apa itu Rekber Aman?', 'Rekber (rekening bersama) adalah cara bayar di mana uangmu ditahan dulu oleh Jasa Rental, dan baru diteruskan ke toko sesudah barang kembali dan sewa dinyatakan selesai. Bila ada sengketa, dana tetap ditahan dan Jasa Rental memediasi dari bukti kedua pihak. Rekber bersifat pilihan — hanya tersedia di toko Terverifikasi yang mengaktifkannya.'],
   ['Kalau saya bayar langsung ke toko, apakah aman?', 'Pembayaran langsung berarti danamu berada di luar perlindungan Jasa Rental — karena itu setiap checkout langsung selalu menampilkan peringatan penipuan dan meminta persetujuanmu secara aktif sebelum tombol bayar menyala. Untuk toko yang baru pertama kali kamu pakai, kami sarankan memilih toko Terverifikasi dan memakai Rekber Aman bila tersedia.'],
   ['Apakah deposit jaminan juga ditahan Jasa Rental?', 'Untuk saat ini belum. Deposit jaminan (misalnya uang tunai saat pengambilan barang) tetap diatur langsung antara kamu dan toko sesuai ketentuan toko yang tampil sebelum booking. Menahan deposit secara online masuk rencana pengembangan Rekber berikutnya.'],
-  ['Bagaimana cara mendaftarkan usaha rental saya?', 'Klik “Daftarkan Toko”, isi data usaha, katalog, dan metode pembayaranmu. Tim Jasa Rental meninjau dan membantumu sampai toko terbit. Untuk mendapat badge Terverifikasi — syarat mengaktifkan Rekber dan PRO — siapkan KTP pemilik, foto tempat usaha & stok, alamat + titik maps, nomor WhatsApp aktif, dan rekening atas nama pemilik/usaha.'],
+  ['Bagaimana cara mendaftarkan usaha rental saya?', 'Klik “Daftarkan Toko”, masuk dengan akun Google, lalu isi nama toko, kategori, kota, dan nomor WhatsApp — tokomu langsung tayang dan bisa menerima booking. Katalog dan metode pembayaran kamu atur sendiri dari dashboard. Untuk mendapat badge Terverifikasi — syarat mengaktifkan Rekber dan PRO — siapkan KTP pemilik, foto tempat usaha & stok, alamat + titik maps, nomor WhatsApp aktif, dan rekening atas nama pemilik/usaha.'],
   ['Berapa biaya untuk pemilik rental?', 'Tampil di marketplace dan menerima booking pembayaran langsung: gratis, tanpa komisi. Kamu hanya membayar bila memakai Rekber Aman (potongan per transaksi berhasil yang diteruskan ke tokomu) atau berlangganan PRO agar produkmu diprioritaskan di hasil pencarian. Harga final fitur berbayar diumumkan resmi sebelum dinyalakan.'],
   ['Ulasan di Jasa Rental bisa dipercaya?', 'Ulasan hanya bisa ditulis dari booking yang benar-benar selesai — barang sudah kembali dan kontrak ditutup. Toko tidak bisa menghapus ulasan, hanya membalasnya secara publik. Toko dengan ulasan kurang dari tiga ditandai jujur sebagai “Baru”, bukan diberi bintang karangan.']
 ];
