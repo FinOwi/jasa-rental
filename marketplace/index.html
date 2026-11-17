@@ -132,7 +132,7 @@
 }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
   --ink:#152219; --ink2:#43544a; --mut:#71806f;
@@ -147,7 +147,6 @@
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth}
 body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.5;padding-bottom:76px}
-.hero h1,.price b,.merchant h3,.empty b,.phempty span{font-family:'Fraunces',Georgia,serif}
 button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 input,select{font:inherit;color:inherit}
 img{display:block}
@@ -168,10 +167,26 @@ header{position:sticky;top:0;z-index:40;background:var(--ink);color:#f3efe4}
 @media(min-width:860px){.hnav{display:flex}}
 
 /* ---------- hero & search ---------- */
-.hero{background:linear-gradient(120deg,#0C3520,#123B26 58%,#177245);color:#f3efe4;padding:10px 16px 72px}
+.hero{background:linear-gradient(120deg,#0C3520,#123B26 58%,#177245);color:#f3efe4;padding:22px 16px 72px}
+@media(min-width:900px){.hero-in{display:grid;grid-template-columns:1.02fr .98fr;gap:38px;align-items:center}}
+.kick{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:.09em;background:#ffffff1a;border:1px solid #ffffff30;padding:5px 11px;border-radius:99px;margin-bottom:14px}
+.hero-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.btn-hero{background:#fff;color:var(--ink);font-weight:800;padding:12px 20px;border-radius:12px;font-size:14px}
+.btn-hero2{border:1.5px solid #ffffff70;color:#fff;font-weight:700;padding:12px 20px;border-radius:12px;font-size:14px}
+.hero-slide{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:4/3;background:#0A2A19;box-shadow:0 30px 60px -25px rgba(0,0,0,.55);margin-top:20px}
+@media(min-width:900px){.hero-slide{margin-top:0}}
+.hero-slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .8s ease}
+.hero-slide img.on{opacity:1}
+.hchip{position:absolute;left:12px;bottom:12px;background:#fff;color:var(--ink);border-radius:13px;padding:10px 13px;box-shadow:var(--sh-lg);max-width:78%}
+.hchip .hn{font-size:13px;font-weight:800;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:250px}
+.hchip .hp{font-size:16.5px;font-weight:800;color:var(--green-d)}
+.hchip .hs{font-size:11px;color:var(--mut);font-weight:600}
+.hdots{position:absolute;right:12px;bottom:16px;display:flex;gap:5px}
+.hdots span{width:7px;height:7px;border-radius:50%;background:#ffffff80}
+.hdots span.on{background:#fff;width:18px;border-radius:99px}
 .hero-in{max-width:1180px;margin:0 auto}
-.hero h1{font-size:clamp(28px,4.6vw,42px);font-weight:600;letter-spacing:-.01em;line-height:1.12;max-width:640px}
-.hero h1 em{font-style:italic;color:#E9C979}
+.hero h1{font-size:clamp(28px,4.4vw,42px);font-weight:800;letter-spacing:-.02em;line-height:1.13;max-width:640px}
+.hero h1 em{font-style:normal;color:#FFC531}
 .hero p{color:#C9D4C9;margin-top:10px;max-width:560px;font-size:15px}
 .search{max-width:1180px;margin:-48px auto 0;padding:0 16px;position:relative;z-index:5}
 .search-card{background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:var(--sh-lg);padding:18px;display:grid;gap:12px}
@@ -185,10 +200,14 @@ header{position:sticky;top:0;z-index:40;background:var(--ink);color:#f3efe4}
 
 /* ---------- main ---------- */
 main{max-width:1180px;margin:0 auto;padding:18px 16px 8px}
-.cats{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 10px;scrollbar-width:none}
+.cats{display:flex;gap:13px;overflow-x:auto;padding:8px 2px 12px;scrollbar-width:none}
 .cats::-webkit-scrollbar{display:none}
-.cat{flex:none;display:flex;align-items:center;gap:7px;padding:9px 14px;border-radius:99px;background:var(--card);border:1px solid var(--line);font-weight:700;font-size:13.5px;color:var(--ink2)}
-.cat.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.cat{flex:none;display:flex;flex-direction:column;align-items:center;gap:6px;padding:2px;background:none;border:none;font-weight:700;color:var(--ink2)}
+.cat .cic{width:54px;height:54px;border-radius:50%;background:var(--card);border:1px solid var(--line);display:grid;place-items:center;color:var(--green-d);box-shadow:var(--sh);transition:transform .2s}
+.cat:hover .cic{transform:translateY(-2px)}
+.cat .clab{font-size:11px;font-weight:700;max-width:76px;text-align:center;line-height:1.25}
+.cat.on .cic{background:var(--green);color:#fff;border-color:var(--green)}
+.cat.on .clab{color:var(--ink)}
 .cat svg{opacity:.75}
 .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:6px 0 14px}
 .pills{display:flex;gap:8px;flex-wrap:wrap}
@@ -197,6 +216,10 @@ main{max-width:1180px;margin:0 auto;padding:18px 16px 8px}
 .toggle{margin-left:auto;display:flex;background:#eae7de;border-radius:99px;padding:3px}
 .toggle button{padding:7px 16px;border-radius:99px;font-weight:800;font-size:13px;color:var(--ink2)}
 .toggle button.on{background:var(--card);color:var(--ink);box-shadow:var(--sh)}
+.secthead{display:flex;align-items:center;gap:10px;margin:14px 0 2px}
+.secthead .sbar{width:5px;height:23px;border-radius:3px;background:var(--green)}
+.secthead h2{font-size:19.5px;font-weight:800;letter-spacing:-.01em}
+.secthead .snote{margin-left:auto;font-size:12px;color:var(--mut);font-weight:600}
 .sortrow{display:flex;align-items:center;gap:10px;margin-bottom:14px}
 .sortrow .count{font-size:13.5px;color:var(--mut);font-weight:600}
 .sortrow select{margin-left:auto;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:8px 10px;font-weight:700;font-size:13px}
@@ -205,19 +228,20 @@ main{max-width:1180px;margin:0 auto;padding:18px 16px 8px}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
 @media(min-width:700px){.grid{grid-template-columns:repeat(3,1fr);gap:20px}}
 @media(min-width:1024px){.grid{grid-template-columns:repeat(4,1fr)}}
-.pcard{background:var(--card);border:none;border-radius:var(--r);overflow:hidden;text-align:left;width:100%;box-shadow:var(--sh);display:flex;flex-direction:column;transition:transform .25s ease,box-shadow .25s ease}
+.pcard{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;text-align:left;width:100%;box-shadow:0 1px 3px rgba(23,40,30,.07);display:flex;flex-direction:column;transition:transform .25s ease,box-shadow .25s ease}
 .pcard:hover{transform:translateY(-4px);box-shadow:var(--sh-lg)}
 .pcard .ph{position:relative;aspect-ratio:4/3;background:#E9E4D8}
 .phempty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:linear-gradient(135deg,#0C3520,#1E7A46);color:#F3EFE4}
-.phempty span{font-size:56px;font-weight:600;line-height:1;opacity:.92}
+.phempty span{font-size:52px;font-weight:800;line-height:1;opacity:.92}
 .phempty small{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.72}
 .pcard .ph img{width:100%;height:100%;object-fit:cover}
 .fav{position:absolute;top:8px;right:8px;width:32px;height:32px;border-radius:50%;background:#fffffff2;display:grid;place-items:center;box-shadow:var(--sh)}
 .fav.on{color:#d33}
 .tagpro{position:absolute;top:8px;left:8px;background:var(--gold);color:#fff;font-size:10.5px;font-weight:800;letter-spacing:.06em;padding:4px 8px;border-radius:7px}
 .tagcat{position:absolute;bottom:8px;left:8px;background:#152219cc;color:#fff;font-size:11px;font-weight:700;padding:4px 9px;border-radius:99px;backdrop-filter:blur(2px)}
+.taglow{position:absolute;bottom:8px;right:8px;background:#E8A10C;color:#fff;font-size:10px;font-weight:800;letter-spacing:.05em;padding:4px 8px;border-radius:7px}
 .habistag{position:absolute;inset:0;background:rgba(250,248,243,.74);color:var(--ink);display:grid;place-items:center;font-weight:800;letter-spacing:.06em;backdrop-filter:blur(3px)}
-.pbody{padding:15px 16px 17px;display:flex;flex-direction:column;gap:7px;flex:1}
+.pbody{padding:12px 13px 14px;display:flex;flex-direction:column;gap:5px;flex:1}
 .pname{font-weight:700;font-size:15px;letter-spacing:-.01em;line-height:1.35}
 .srow{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--ink2);font-weight:600;min-width:0}
 .srow .sav{width:22px;height:22px;border-radius:50%;background:var(--green-soft);color:var(--green-d);display:grid;place-items:center;font-size:10px;font-weight:800;flex:none}
@@ -236,7 +260,7 @@ main{max-width:1180px;margin:0 auto;padding:18px 16px 8px}
 .bdg.rekber{background:var(--green-soft);color:var(--green-d)}
 .bdg.verif{background:#e8f1fc;color:#14539e}
 .price{margin-top:auto;padding-top:6px;display:flex;align-items:baseline;gap:3px}
-.price b{font-size:20px;font-weight:600;letter-spacing:0}
+.price b{font-size:18.5px;font-weight:800;letter-spacing:-.01em;color:var(--green-d)}
 .price span{font-size:12px;color:var(--mut);font-weight:600}
 .city{font-size:12px;color:var(--mut);font-weight:600;display:flex;gap:4px;align-items:center}
 
@@ -252,8 +276,9 @@ main{max-width:1180px;margin:0 auto;padding:18px 16px 8px}
 .empty b{display:block;font-size:20px;font-weight:600;color:var(--ink);margin-bottom:6px}
 
 /* merchant strip */
-.merchant{margin:32px 0 8px;background:linear-gradient(120deg,#0C3520,#14663C);color:#f3efe4;border-radius:24px;padding:28px;display:flex;flex-wrap:wrap;gap:16px;align-items:center}
-.merchant h3{font-size:23px;font-weight:600;letter-spacing:0}
+.rekber-strip{margin:26px 0 0;background:linear-gradient(120deg,#0C3520,#177245);border-radius:18px;padding:20px 22px;color:#F3EFE4;display:flex;gap:15px;align-items:center;flex-wrap:wrap;box-shadow:var(--sh)}
+.merchant{margin:16px 0 8px;background:linear-gradient(120deg,#0C3520,#14663C);color:#f3efe4;border-radius:24px;padding:28px;display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.merchant h3{font-size:20px;font-weight:800;letter-spacing:-.01em}
 .merchant p{color:#c3cec2;font-size:13.5px;margin-top:3px;max-width:520px}
 .merchant .cta{margin-left:auto;background:#fff;color:var(--ink);font-weight:800;padding:12px 18px;border-radius:12px}
 .foot{max-width:1180px;margin:0 auto;padding:14px 16px 20px;color:var(--mut);font-size:12px;text-align:center}
@@ -348,8 +373,13 @@ main{max-width:1180px;margin:0 auto;padding:18px 16px 8px}
 <section class="view on" id="view-jelajahi">
   <div class="hero">
     <div class="hero-in">
-      <h1>Sewa apa saja, dari toko rental <em>terverifikasi</em>.</h1>
-      <p>Tenda, mobil, kamera, sound system, sampai stroller — cari lintas toko, bandingkan rating &amp; stok aslinya, dan lindungi pembayaranmu dengan Rekber Aman.</p>
+      <div class="hero-txt">
+        <span class="kick">MARKETPLACE RENTAL · TOKO TERPERIKSA</span>
+        <h1>Sewa apa saja, dari toko rental <em>terverifikasi</em>.</h1>
+        <p>Tenda, mobil, kamera, sound system, sampai stroller — cari lintas toko, bandingkan rating &amp; stok aslinya, dan lindungi pembayaranmu dengan Rekber Aman.</p>
+        <div class="hero-cta"><a class="btn-hero" href="#grid" onclick="document.getElementById('grid').scrollIntoView({behavior:'smooth'});return false;">Mulai Cari Barang</a><a class="btn-hero2" href="https://jasa-rental.my.id/#rekber">Cara Kerja Rekber</a></div>
+      </div>
+      <div class="hero-slide" id="heroSlide"></div>
     </div>
   </div>
   <div class="search">
@@ -369,6 +399,7 @@ main{max-width:1180px;margin:0 auto;padding:18px 16px 8px}
 
   <main>
     <div class="cats" id="cats"></div>
+    <div class="secthead"><span class="sbar"></span><h2>Pilihan Hari Ini</h2><span class="snote">Harga &amp; stok langsung dari toko</span></div>
     <div class="toolbar">
       <div class="pills" id="pills">
         <button class="pill on" data-pill="semua">Semua</button>
@@ -394,6 +425,11 @@ main{max-width:1180px;margin:0 auto;padding:18px 16px 8px}
     <div id="liveNote" style="display:none;background:var(--green-soft);color:var(--green-d);font-weight:700;font-size:12.8px;border-radius:12px;padding:10px 13px;margin-bottom:11px">Menampilkan produk ASLI dari toko yang sudah bergabung di Jasa Rental — stok mengikuti data server toko saat ini.</div>
     <div class="grid" id="grid"></div>
 
+    <div class="rekber-strip">
+      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#8FD0AB" stroke-width="2" stroke-linejoin="round" style="flex:none"><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6z"/><path d="m9 12 2 2 4-4" stroke-linecap="round"/></svg>
+      <div><h3 style="font-size:17.5px;font-weight:800">Belanja lebih tenang dengan Rekber Aman</h3><p style="color:#C9D4C9;font-size:13px;margin-top:2px">Uangmu ditahan Jasa Rental dan baru diteruskan ke toko sesudah barang kembali — tersedia di toko Terverifikasi yang mengaktifkannya.</p></div>
+      <a href="https://jasa-rental.my.id/#rekber" style="margin-left:auto;background:#fff;color:var(--ink);font-weight:800;padding:11px 17px;border-radius:11px;font-size:13.5px;white-space:nowrap">Pelajari Rekber</a>
+    </div>
     <div class="merchant">
       <div>
         <h3>Punya usaha rental?</h3>
@@ -476,7 +512,7 @@ function cardHTML(p){
     '<div class="ph">' + (p.img ? '<img src="' + p.img + '" alt="" loading="lazy" onerror="this.remove()">' : '<div class="phempty"><span>' + (p.name || 'J').trim().charAt(0).toUpperCase() + '</span><small>' + p.catLabel + '</small></div>') +
     (s.pro ? '<span class="tagpro">PRO</span>' : '') +
     '<button class="fav' + (state.favs.has(p.id)?' on':'') + '" data-fav="' + p.id + '">' + ICON.heart(state.favs.has(p.id)) + '</button>' +
-    '<span class="tagcat">' + p.catLabel + '</span>' +
+    '<span class="tagcat">' + p.catLabel + '</span>' + (p.stock>0 && p.stock<=2 ? '<span class="taglow">STOK TERBATAS</span>' : '') +
     (p.stock===0 ? '<span class="habistag">STOK HABIS</span>' : '') + '</div>' +
     '<div class="pbody"><div class="pname">' + p.name + '</div>' +
     '<div class="srow">' + (s.logo ? '<img class="sav" src="' + s.logo + '" alt="" loading="lazy" onerror="this.remove()">' : '<span class="sav">' + s.name[0] + '</span>') + '<span class="sname">' + s.name + '</span>' + (s.verified?ICON.verif:'') + '</div>' +
@@ -487,6 +523,20 @@ function cardHTML(p){
     '<div class="city">' + ICON.pin + s.city + '</div></div></article>';
 }
 document.addEventListener('error', function(e){ var t = e.target; if(t && t.tagName === 'IMG' && t.closest && t.closest('.pcard .ph')){ var card = t.closest('.pcard'); var nm = (card.querySelector('.pname') || {}).textContent || 'J'; var ct = (card.querySelector('.tagcat') || {}).textContent || ''; var d = document.createElement('div'); d.className = 'phempty'; d.innerHTML = '<span>' + nm.trim().charAt(0).toUpperCase() + '</span><small>' + ct + '</small>'; t.replaceWith(d); } }, true);
+let heroTimer = null;
+function initHero(){
+  const box = document.getElementById('heroSlide'); if(!box) return;
+  const items = PRODUCTS.filter(p => p.img && p.stock > 0).slice(0, 4);
+  if(!items.length){ box.style.display = 'none'; return; }
+  box.innerHTML = items.map((p, i) => '<img src="' + p.img + '" alt="" loading="lazy" class="' + (i === 0 ? 'on' : '') + '" onerror="this.remove()">').join('') +
+    '<div class="hchip"><div class="hn" id="heroName"></div><div class="hp" id="heroPrice"></div><div class="hs" id="heroStore"></div></div>' +
+    '<div class="hdots">' + items.map((_, i) => '<span class="' + (i === 0 ? 'on' : '') + '"></span>').join('') + '</div>';
+  let idx = 0;
+  const upd = () => { const p = items[idx]; const st = STORES[p.store] || {}; document.getElementById('heroName').textContent = p.name; document.getElementById('heroPrice').textContent = rupiah(p.price) + ' /' + p.period; document.getElementById('heroStore').textContent = (st.name || '') + (st.city ? ' · ' + st.city : ''); };
+  upd();
+  if(heroTimer) clearInterval(heroTimer);
+  if(items.length > 1) heroTimer = setInterval(() => { const imgs = box.querySelectorAll('img'); if(imgs.length < 2) return; imgs[idx % imgs.length].classList.remove('on'); idx = (idx + 1) % items.length; if(imgs[idx]) imgs[idx].classList.add('on'); box.querySelectorAll('.hdots span').forEach((d, i) => d.classList.toggle('on', i === idx)); upd(); }, 4500);
+}
 function storeUrl(slug){ return slug === 'kontur' ? 'https://jasa-rental.my.id/bk-adventure/' : 'https://jasa-rental.my.id/toko/?toko=' + encodeURIComponent(slug); }
 function storeCardHTML(key){
   const s = STORES[key];
@@ -667,7 +717,8 @@ function go(v){
 }
 document.querySelectorAll('[data-nav]').forEach(b=>b.onclick=()=>go(b.dataset.nav));
 if (new URLSearchParams(location.search).get('masuk') === '1') go('akun');
-document.getElementById('cats').innerHTML = CATS.map(c=>'<button class="cat' + (c[0]==='semua'?' on':'') + '" data-cat="' + c[0] + '">' + c[1] + '</button>').join('');
+const CATICON = { semua:'<rect x="4" y="4" width="7" height="7" rx="1.6"/><rect x="13" y="4" width="7" height="7" rx="1.6"/><rect x="4" y="13" width="7" height="7" rx="1.6"/><rect x="13" y="13" width="7" height="7" rx="1.6"/>', kendaraan:'<path d="M4 16v-4l2-6h12l2 6v4"/><path d="M4 16h16"/><circle cx="7.5" cy="17.5" r="1.6"/><circle cx="16.5" cy="17.5" r="1.6"/><path d="M9.1 17.5h5.8"/>', outdoor:'<path d="M12 4 2.5 20h19z"/><path d="M12 12 7.5 20h9z"/>', fashion:'<path d="M8.5 4 4 6.5 6 10l2-1v11h8V9l2 1 2-3.5L15.5 4a3.5 3.5 0 0 1-7 0z"/>', elektronik:'<rect x="5" y="3" width="14" height="18" rx="2"/><circle cx="12" cy="14.5" r="3.2"/><circle cx="12" cy="7.5" r="1.2"/>', kamera:'<path d="M4 8h3l2-2.5h6L17 8h3a1.5 1.5 0 0 1 1.5 1.5V19a1.5 1.5 0 0 1-1.5 1.5H4A1.5 1.5 0 0 1 2.5 19V9.5A1.5 1.5 0 0 1 4 8z"/><circle cx="12" cy="13.5" r="3.6"/>', hiburan:'<rect x="2.5" y="7.5" width="19" height="10" rx="5"/><path d="M8 10.8v3.4M6.3 12.5h3.4"/><circle cx="15.8" cy="11.3" r=".4"/><circle cx="17.8" cy="13.7" r=".4"/>', event:'<path d="M5 21V4"/><path d="M5 4.8c4-2.2 7 2 12 .3v9.4c-5 1.7-8-2.5-12-.3"/>', alat:'<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>', bayi:'<path d="M4 4h2.5l2.2 9h9.6l2-7H8"/><circle cx="9.5" cy="19.5" r="1.5"/><circle cx="17.5" cy="19.5" r="1.5"/>', properti:'<path d="m3.5 11 8.5-7.5L20.5 11"/><path d="M6 9.5V20h12V9.5"/><path d="M10 20v-5h4v5"/>', lainnya:'<circle cx="5" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="19" cy="12" r="1.4"/>' };
+document.getElementById('cats').innerHTML = CATS.map(c=>'<button class="cat' + (c[0]==='semua'?' on':'') + '" data-cat="' + c[0] + '"><span class="cic"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">' + (CATICON[c[0]] || CATICON.lainnya) + '</svg></span><span class="clab">' + c[1] + '</span></button>').join('');
 document.querySelectorAll('[data-cat]').forEach(b=>b.onclick=()=>{
   state.cat=b.dataset.cat;
   document.querySelectorAll('[data-cat]').forEach(x=>x.classList.toggle('on',x===b)); render();
@@ -756,6 +807,7 @@ async function loadLive(){
     const fc = document.getElementById('fCity');
     Object.values(stores).forEach(s => { if(s.city && ![...fc.options].some(o=>o.value===s.city)){ const o=document.createElement('option'); o.value=s.city; o.textContent=s.city; fc.appendChild(o); } });
     document.getElementById('liveNote').style.display = 'block';
+    initHero();
     liveLoaded = true;
     render();
     /* Verifikasi & rating ASLI per toko dari server. Bila fungsi gagal,
