@@ -198,6 +198,57 @@ img{display:block}
   <a href="https://jasa-rental.my.id/marketplace/"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3" stroke-linecap="round"/></svg>Marketplace</a>
 </nav>
 
+<div class="cartbar" id="cartBar"><div class="ci"><b id="cartCount">0 item</b><br><span id="cartTotal">Rp0</span></div><button class="cbtn ghost" id="btnStatus1">Cek Status</button><button class="cbtn" id="btnCheckout">Checkout</button></div>
+
+<div class="modal" id="sheetModal"><div class="sheet">
+  <button class="xbtn" data-close="sheetModal">✕</button>
+  <h3 id="shName">Produk</h3><div class="sub" id="shMeta"></div>
+  <label id="shSizeLbl">Ukuran</label><select id="shSize"></select>
+  <label>Jumlah</label>
+  <div class="qtyrow"><button class="qbtn" id="shMinus">−</button><b id="shQty">1</b><button class="qbtn" id="shPlus">+</button><span class="sub" id="shStok" style="margin:0"></span></div>
+  <div class="sumrow tot" style="margin-top:14px"><span>Subtotal /hari</span><span id="shSub">Rp0</span></div>
+  <button class="cbtn" id="shAdd" style="width:100%;margin-top:14px;padding:13px">Tambah ke Keranjang</button>
+</div></div>
+
+<div class="modal" id="ckModal"><div class="sheet">
+  <button class="xbtn" data-close="ckModal">✕</button>
+  <div id="ckForm">
+    <h3>Checkout Booking</h3><div class="sub">Bayar dulu ke rekening toko, unggah buktinya, booking langsung tercatat &amp; stok tertahan untukmu.</div>
+    <div id="ckItems"></div>
+    <label>Nama penyewa</label><input id="ckName" placeholder="Nama lengkap" autocomplete="name">
+    <label>Nomor WhatsApp aktif</label><input id="ckPhone" inputmode="tel" placeholder="08xxxxxxxxxx" autocomplete="tel">
+    <label>Tanggal mulai sewa</label><input id="ckStart" type="date">
+    <label>Durasi (hari)</label><input id="ckDays" type="number" min="1" max="30" value="2">
+    <div class="sumrow tot"><span>Total bayar (perkiraan)</span><span id="ckTotal">Rp0</span></div>
+    <label>Metode pembayaran</label><select id="ckMethod"></select>
+    <div class="paybox" id="ckPayInfo" style="margin-top:9px"></div>
+    <label>Nama pengirim transfer</label><input id="ckSender" placeholder="Nama di rekening / e-wallet pengirim">
+    <label>Bukti pembayaran (foto/PDF, maks 5MB)</label><input id="ckProof" type="file" accept="image/jpeg,image/png,image/webp,application/pdf">
+    <div class="err" id="ckErr"></div>
+    <button class="cbtn" id="ckSubmit" style="width:100%;margin-top:16px;padding:14px;font-size:15px">Kirim Booking</button>
+    <div style="text-align:center"><button class="linkbtn" id="btnStatus2">Sudah punya kode booking? Cek status</button></div>
+  </div>
+  <div id="ckDone" style="display:none">
+    <div class="okbox">
+      <div style="font-size:34px">✅</div>
+      <h3 style="margin:6px 0">Booking tercatat!</h3>
+      <div class="sub">Simpan kode booking ini — dipakai untuk cek status &amp; saat pengambilan barang.</div>
+      <div class="code" id="doneCode">BK-XXXXX</div>
+      <div class="sub" id="doneMeta"></div>
+      <a class="wabtn" id="doneWa" href="#" target="_blank" rel="noopener">Konfirmasi via WhatsApp Toko</a>
+      <div><button class="linkbtn" data-close="ckModal">Tutup</button></div>
+    </div>
+  </div>
+  <div id="ckStatus" style="display:none">
+    <h3>Cek Status Booking</h3><div class="sub">Masukkan kode booking &amp; nomor WhatsApp yang dipakai saat booking.</div>
+    <label>Kode booking</label><input id="stCode" placeholder="BK-XXXXX">
+    <label>Nomor WhatsApp</label><input id="stPhone" inputmode="tel" placeholder="08xxxxxxxxxx">
+    <div class="err" id="stErr"></div>
+    <div id="stResult" style="margin-top:12px"></div>
+    <button class="cbtn" id="stGo" style="width:100%;margin-top:14px;padding:13px">Periksa Status</button>
+    <div style="text-align:center"><button class="linkbtn" data-close="ckModal">Tutup</button></div>
+  </div>
+</div></div>
 <script>
 /* Template Toko Standar Jasa Rental — dinamis per tenant.
    Data dibaca dari RPC publik yang sama dengan storefront platform
@@ -603,56 +654,5 @@ if (!OFFICIAL) {
 }
 </script>
 
-<div class="cartbar" id="cartBar"><div class="ci"><b id="cartCount">0 item</b><br><span id="cartTotal">Rp0</span></div><button class="cbtn ghost" id="btnStatus1">Cek Status</button><button class="cbtn" id="btnCheckout">Checkout</button></div>
-
-<div class="modal" id="sheetModal"><div class="sheet">
-  <button class="xbtn" data-close="sheetModal">✕</button>
-  <h3 id="shName">Produk</h3><div class="sub" id="shMeta"></div>
-  <label id="shSizeLbl">Ukuran</label><select id="shSize"></select>
-  <label>Jumlah</label>
-  <div class="qtyrow"><button class="qbtn" id="shMinus">−</button><b id="shQty">1</b><button class="qbtn" id="shPlus">+</button><span class="sub" id="shStok" style="margin:0"></span></div>
-  <div class="sumrow tot" style="margin-top:14px"><span>Subtotal /hari</span><span id="shSub">Rp0</span></div>
-  <button class="cbtn" id="shAdd" style="width:100%;margin-top:14px;padding:13px">Tambah ke Keranjang</button>
-</div></div>
-
-<div class="modal" id="ckModal"><div class="sheet">
-  <button class="xbtn" data-close="ckModal">✕</button>
-  <div id="ckForm">
-    <h3>Checkout Booking</h3><div class="sub">Bayar dulu ke rekening toko, unggah buktinya, booking langsung tercatat &amp; stok tertahan untukmu.</div>
-    <div id="ckItems"></div>
-    <label>Nama penyewa</label><input id="ckName" placeholder="Nama lengkap" autocomplete="name">
-    <label>Nomor WhatsApp aktif</label><input id="ckPhone" inputmode="tel" placeholder="08xxxxxxxxxx" autocomplete="tel">
-    <label>Tanggal mulai sewa</label><input id="ckStart" type="date">
-    <label>Durasi (hari)</label><input id="ckDays" type="number" min="1" max="30" value="2">
-    <div class="sumrow tot"><span>Total bayar (perkiraan)</span><span id="ckTotal">Rp0</span></div>
-    <label>Metode pembayaran</label><select id="ckMethod"></select>
-    <div class="paybox" id="ckPayInfo" style="margin-top:9px"></div>
-    <label>Nama pengirim transfer</label><input id="ckSender" placeholder="Nama di rekening / e-wallet pengirim">
-    <label>Bukti pembayaran (foto/PDF, maks 5MB)</label><input id="ckProof" type="file" accept="image/jpeg,image/png,image/webp,application/pdf">
-    <div class="err" id="ckErr"></div>
-    <button class="cbtn" id="ckSubmit" style="width:100%;margin-top:16px;padding:14px;font-size:15px">Kirim Booking</button>
-    <div style="text-align:center"><button class="linkbtn" id="btnStatus2">Sudah punya kode booking? Cek status</button></div>
-  </div>
-  <div id="ckDone" style="display:none">
-    <div class="okbox">
-      <div style="font-size:34px">✅</div>
-      <h3 style="margin:6px 0">Booking tercatat!</h3>
-      <div class="sub">Simpan kode booking ini — dipakai untuk cek status &amp; saat pengambilan barang.</div>
-      <div class="code" id="doneCode">BK-XXXXX</div>
-      <div class="sub" id="doneMeta"></div>
-      <a class="wabtn" id="doneWa" href="#" target="_blank" rel="noopener">Konfirmasi via WhatsApp Toko</a>
-      <div><button class="linkbtn" data-close="ckModal">Tutup</button></div>
-    </div>
-  </div>
-  <div id="ckStatus" style="display:none">
-    <h3>Cek Status Booking</h3><div class="sub">Masukkan kode booking &amp; nomor WhatsApp yang dipakai saat booking.</div>
-    <label>Kode booking</label><input id="stCode" placeholder="BK-XXXXX">
-    <label>Nomor WhatsApp</label><input id="stPhone" inputmode="tel" placeholder="08xxxxxxxxxx">
-    <div class="err" id="stErr"></div>
-    <div id="stResult" style="margin-top:12px"></div>
-    <button class="cbtn" id="stGo" style="width:100%;margin-top:14px;padding:13px">Periksa Status</button>
-    <div style="text-align:center"><button class="linkbtn" data-close="ckModal">Tutup</button></div>
-  </div>
-</div></div>
 </body>
 </html>
