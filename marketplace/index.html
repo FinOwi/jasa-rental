@@ -656,6 +656,7 @@ function go(v){
   window.scrollTo({top:0});
 }
 document.querySelectorAll('[data-nav]').forEach(b=>b.onclick=()=>go(b.dataset.nav));
+if (new URLSearchParams(location.search).get('masuk') === '1') go('akun');
 document.getElementById('cats').innerHTML = CATS.map(c=>'<button class="cat' + (c[0]==='semua'?' on':'') + '" data-cat="' + c[0] + '">' + c[1] + '</button>').join('');
 document.querySelectorAll('[data-cat]').forEach(b=>b.onclick=()=>{
   state.cat=b.dataset.cat;
@@ -837,12 +838,14 @@ function renderMemberUI(){
       '<b style="font-size:17px">Masuk sebagai member</b>' +
       '<p style="color:var(--mut);font-weight:600;font-size:13.5px;margin:8px 0 16px">Satu tombol untuk daftar &amp; masuk — tanpa kata sandi, tanpa form panjang.</p>' +
       '<button onclick="startGoogleLogin()" style="display:inline-flex;align-items:center;gap:10px;background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:11px 20px;font-weight:800;font-size:14.5px;cursor:pointer;color:var(--ink)">' + GLOGO + 'Masuk dengan Google</button>' +
-      '<p style="color:var(--mut);font-weight:600;font-size:12px;margin:14px 0 0">Booking tetap dilakukan di halaman toko masing-masing.</p></div>';
+      '<p style="color:var(--mut);font-weight:600;font-size:12px;margin:14px 0 0">Booking tetap dilakukan di halaman toko masing-masing.</p>' +
+      '<p style="font-size:13px;font-weight:700;margin:16px 0 0;border-top:1px solid var(--line);padding-top:14px">Pemilik toko? <a href="/dashboard/" style="color:var(--green);font-weight:800">Masuk sebagai Tenant →</a></p></div>';
     return;
   }
   box.innerHTML = '<div class="bk-card" style="display:flex;gap:13px;align-items:center">' + avHTML(50) +
     '<div><b style="font-size:16.5px">' + escT(memberProfile.name) + '</b><div style="font-size:12.5px;color:var(--mut);font-weight:600">' + escT(memberProfile.email) + ' · Login Google</div></div></div>' +
     '<div class="bk-card" style="padding:6px 16px">' +
+    '<div style="padding:12px 0;border-bottom:1px solid var(--line);font-weight:700;cursor:pointer" onclick="location.href=\'/dashboard/\'">Dashboard Tenant — kelola tokomu</div>' +
     '<div style="padding:12px 0;border-bottom:1px solid var(--line);font-weight:700;cursor:pointer" onclick="mpToast(\'Nama &amp; foto profil mengikuti akun Google-mu.\')">Profil &amp; alamat</div>' +
     '<div style="padding:12px 0;border-bottom:1px solid var(--line);font-weight:700;cursor:pointer" onclick="mpToast(\'Ketentuan Platform tampil lengkap saat checkout di toko.\')">Ketentuan Platform</div>' +
     '<div style="padding:12px 0;border-bottom:1px solid var(--line);font-weight:700;cursor:pointer" onclick="mpToast(\'Bantuan: hubungi toko lewat tombol Chat di halaman tokonya.\')">Bantuan penyewa</div>' +
