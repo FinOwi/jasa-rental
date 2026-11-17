@@ -649,6 +649,14 @@ document.getElementById('btnStatus1').onclick = openStatus;
 document.getElementById('btnStatus2').onclick = openStatus;
 document.getElementById('stGo').onclick = checkStatus;
 if (!OFFICIAL) {
+  /* Cek status harus selalu bisa dijangkau penyewa, juga saat keranjang
+     kosong / sesudah booking selesai (bilah keranjang hilang). */
+  const stWrap = document.createElement('div');
+  stWrap.style.cssText = 'text-align:right;padding:2px 4px 0';
+  stWrap.innerHTML = '<button class="linkbtn" id="btnStatus3">Cek Status Booking</button>';
+  const gridEl = document.getElementById('grid');
+  gridEl.parentNode.insertBefore(stWrap, gridEl);
+  document.getElementById('btnStatus3').onclick = openStatus;
   document.getElementById('bnBook').addEventListener('click', e => { e.preventDefault(); if (CART.length) openCheckout(); else document.getElementById('grid').scrollIntoView({ behavior: 'smooth' }); });
   document.getElementById('btnBook').addEventListener('click', e => { e.preventDefault(); document.getElementById('grid').scrollIntoView({ behavior: 'smooth' }); });
 }
