@@ -155,6 +155,36 @@ a{color:inherit}
 .foot{padding:16px 0 4px;text-align:center;color:var(--mut);font-size:11.5px}
 .picker{display:none;background:var(--gold-soft);border:1px solid #ecd9a0;border-radius:14px;padding:12px 14px;margin-top:14px;font-size:13.5px}
 .picker select{margin-top:8px;width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);font:inherit;font-weight:700;background:#fff}
+
+/* modul pemilik: aksi pesanan, formulir katalog, editor pembayaran */
+.obtn.act{background:var(--blue);margin-left:0}
+.obtn.act.soft{background:var(--blue-soft);color:var(--blue)}
+.obtn.danger{background:var(--red-soft);color:var(--red);margin-left:0}
+.obtn:disabled{opacity:.55;cursor:wait}
+.addbtn{display:inline-flex;align-items:center;gap:6px;background:var(--green);color:#fff;font-weight:800;font-size:13px;padding:10px 15px;border-radius:99px}
+.addbtn:disabled{opacity:.55;cursor:wait}
+.frmbox{background:var(--card);border:1px solid var(--green);border-radius:16px;padding:16px;margin-bottom:12px}
+.frmbox h3{font-size:15px;font-weight:800;margin-bottom:11px}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fgrid .full{grid-column:1/-1}
+.fld label{display:block;font-size:11px;font-weight:800;color:var(--mut);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.fld input,.fld select,.fld textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:9px 11px;font:inherit;font-size:13.5px;background:#fff}
+.frmacts{display:flex;gap:8px;margin-top:13px;flex-wrap:wrap}
+.prod .pacts{display:flex;gap:6px;margin-top:7px}
+.pbtn{font-weight:800;font-size:12px;padding:7px 11px;border-radius:99px;background:var(--green-soft);color:var(--green-d)}
+.pbtn.del{background:var(--red-soft);color:var(--red)}
+.pbtn:disabled{opacity:.55;cursor:wait}
+.pedit{padding:14px 15px}
+.pedit textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:9px 11px;font:inherit;font-size:13.5px;background:#fff;resize:vertical}
+.previmg{display:block;width:60px;height:60px;object-fit:cover;border-radius:12px;border:1px solid var(--line);margin-top:8px;background:#eee9db}
+.prevhero{display:block;width:100%;max-width:260px;height:90px;object-fit:cover;border-radius:12px;border:1px solid var(--line);margin-top:8px;background:#eee9db}
+.pmrow{display:flex;gap:8px;align-items:center;margin-bottom:8px;flex-wrap:wrap}
+.pmrow select,.pmrow input{border:1px solid var(--line);border-radius:10px;padding:9px 10px;font:inherit;font-size:13px;background:#fff}
+.pmrow select{flex:0 0 132px}
+.pmrow .pmnum{flex:1;min-width:130px}
+.pmrow .pmholder{flex:1;min-width:110px}
+.pmrow .pmdel{background:var(--red-soft);color:var(--red);font-weight:800;border-radius:10px;padding:9px 11px;font-size:12.5px}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:94px;z-index:60;background:var(--ink);color:#f3efe4;font-weight:700;font-size:13.5px;padding:11px 18px;border-radius:99px;box-shadow:0 8px 24px rgba(0,0,0,.25);display:none;max-width:92vw;text-align:center}
 </style>
 </head>
 <body>
@@ -232,19 +262,24 @@ a{color:inherit}
     <div class="sect" style="margin-top:18px"><h2>Pesanan</h2><span>booking website &amp; kontrak sewa tokomu</span></div>
     <div class="chips" id="orderChips"></div>
     <div id="orderList"><div class="emptybox">Memuat…</div></div>
-    <div class="foot">Konfirmasi booking, verifikasi bukti pembayaran, dan serah terima barang dilakukan di panel admin tokomu.</div>
+    <div class="foot">Verifikasi pembayaran &amp; konfirmasi booking bisa dilakukan langsung dari daftar pesanan di atas. Serah terima barang &amp; kontrak sewa fisik dicatat saat pengambilan di depot.</div>
   </section>
 
   <!-- ================= PRODUK ================= -->
   <section class="view" id="v-products">
-    <div class="sect" style="margin-top:18px"><h2>Produk</h2><span id="prodCount"></span></div>
+    <div class="sect" style="margin-top:18px"><h2>Produk</h2><span id="prodCount"></span><button class="addbtn" id="btnAddProd" style="margin-left:auto">+ Tambah Produk</button></div>
+    <div id="prodFormWrap"></div>
     <div id="allProdList"><div class="emptybox">Memuat…</div></div>
     <div class="foot">Stok mengikuti data katalog yang tersimpan di server tokomu.</div>
   </section>
 
   <!-- ================= TOKO ================= -->
   <section class="view" id="v-shop">
-    <div class="sect" style="margin-top:18px"><h2>Pengaturan Toko</h2></div>
+    <div class="sect" style="margin-top:18px"><h2>Profil Toko</h2><span>identitas yang tampil di halaman tokomu</span></div>
+    <div class="set"><div class="pedit" id="profileEditor"><div class="emptybox">Memuat…</div></div></div>
+    <div class="sect"><h2>Metode Pembayaran</h2><span>ditampilkan di halaman booking tokomu</span></div>
+    <div class="set"><div class="pedit" id="payEditor"><div class="emptybox">Memuat…</div></div></div>
+    <div class="sect"><h2>Pengaturan Toko</h2></div>
     <div class="set" id="shopSettings"></div>
     <div class="sect"><h2>Akun</h2></div>
     <div class="set">
@@ -254,6 +289,7 @@ a{color:inherit}
     <div class="foot">Satu dashboard per toko — kamu hanya melihat data tokomu sendiri.</div>
   </section>
 </main>
+<div id="toast" role="status"></div>
 
 <nav class="bnav" id="bnav">
   <button class="on" data-nav="home"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round"><path d="m3 10 9-7 9 7v10a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 20z"/></svg>Beranda</button>
@@ -533,7 +569,7 @@ function renderHome(st) {
   }
   if (st.verifyGroups.length) {
     tasks.push({ cls: 'amber', ic: ICONS.card, tt: st.verifyGroups.length + ' bukti pembayaran menunggu verifikasi',
-      ts: 'Bukti transfer/QRIS sudah diunggah penyewa — periksa & putuskan di panel admin tokomu',
+      ts: 'Bukti transfer/QRIS sudah diunggah penyewa — periksa & putuskan di tab Pesanan',
       btn: '<button class="go" data-goto="orders">Periksa</button>' });
   }
   if (st.pickupToday.length) {
@@ -543,7 +579,7 @@ function renderHome(st) {
   }
   if (st.pendingGroups.length) {
     tasks.push({ cls: 'green', ic: ICONS.bell, tt: st.pendingGroups.length + ' pesanan baru menunggu konfirmasi',
-      ts: 'Booking dari website tokomu — konfirmasi atau tolak di panel admin',
+      ts: 'Booking dari website tokomu — konfirmasi atau tolak di tab Pesanan',
       btn: '<button class="go ghost" data-goto="orders">Lihat Daftar</button>' });
   }
   $('taskList').innerHTML = tasks.length
@@ -553,13 +589,14 @@ function renderHome(st) {
 
   renderStockHome();
 }
-function prodRow(it, lowOnly) {
+function prodRow(it, lowOnly, editable) {
   const ready = itemReady(it), tot = itemTotalQty(it);
   const price = it.type === 'sale' ? (it.priceSale ? rp(it.priceSale) : '') : (it.priceRental ? rp(it.priceRental) + '/hari' : '');
   const meta = [price, it.category || ''].filter(Boolean).join(' · ');
   const label = ready === 0 ? 'HABIS' : ready <= 2 ? 'MENIPIS' : 'siap';
+  const acts = editable ? '<div class="pacts"><button class="pbtn" data-edit-prod="' + esc(it.id || '') + '">Edit</button><button class="pbtn del" data-del-prod="' + esc(it.id || '') + '">Hapus</button></div>' : '';
   return '<div class="prod">' + (it.image ? '<img src="' + esc(it.image) + '" alt="" loading="lazy">' : '<img alt="">') +
-    '<div><div class="pn">' + esc(it.name || it.id || '') + '</div><div class="pm">' + esc(meta) + '</div></div>' +
+    '<div><div class="pn">' + esc(it.name || it.id || '') + '</div><div class="pm">' + esc(meta) + '</div>' + acts + '</div>' +
     '<div class="stk' + (ready <= 2 ? ' low' : '') + '"><b>' + ready + '/' + tot + '</b><span>' + label + '</span></div></div>';
 }
 function renderStockHome() {
@@ -570,8 +607,8 @@ function renderStockHome() {
 function renderProducts() {
   const sorted = catalog.slice().sort((a, b) => itemReady(a) - itemReady(b));
   $('prodCount').textContent = catalog.length + ' produk di katalog server';
-  $('allProdList').innerHTML = sorted.length ? sorted.map(it => prodRow(it)).join('')
-    : '<div class="emptybox"><b>Katalog masih kosong.</b><br>Produk yang ditambahkan lewat panel admin akan tampil di sini.</div>';
+  $('allProdList').innerHTML = sorted.length ? sorted.map(it => prodRow(it, false, true)).join('')
+    : '<div class="emptybox"><b>Katalog masih kosong.</b><br>Tambahkan produk pertamamu dengan tombol "+ Tambah Produk" di atas.</div>';
 }
 
 /* ---------- pesanan ---------- */
@@ -594,11 +631,17 @@ function orderEntries() {
     else if (f.payment) paytag = '<span class="paytag waitp">Bukti Terkirim — Belum Diverifikasi</span>';
     else paytag = '<span class="paytag langsung">Transaksi Langsung</span>';
     const wa = normPhone(f.renterPhone);
+    /* aksi pemilik langsung dari dashboard (modul pemilik) */
+    let acts = '';
+    if (f.payment && f.payment.proofPath) acts += '<button class="obtn act soft" data-proof="' + esc(f.payment.proofPath) + '">Lihat Bukti</button>';
+    if (g.status === 'pending' && f.payment && f.payment.verified !== true) acts += '<button class="obtn act" data-verify="' + esc(g.code) + '">Verifikasi Bayar</button>';
+    if (g.status === 'pending' && f.payment && f.payment.verified === true) acts += '<button class="obtn act" data-confirm="' + esc(g.code) + '">Konfirmasi</button>';
+    if (g.status === 'pending' || g.status === 'confirmed') acts += '<button class="obtn danger" data-cancel="' + esc(g.code) + '">Tolak/Batalkan</button>';
     list.push({ cat, sort: g.created || '', html:
       '<div class="order"><div class="oh"><span class="code">' + esc(g.code) + '</span><span class="who">' + esc(f.renterName || '') + '</span>' +
       '<span class="st ' + stCls + '" style="margin-left:auto">' + stTx + '</span></div>' +
       '<div class="items">' + items + '</div><div class="meta">' + meta + '</div>' +
-      '<div class="of"><span class="total">' + rp(groupTotal(g)) + '</span>' + paytag +
+      '<div class="of"><span class="total">' + rp(groupTotal(g)) + '</span>' + paytag + acts +
       (wa ? '<a class="obtn" target="_blank" rel="noopener" href="https://wa.me/' + wa + '">Hubungi Penyewa</a>' : '') + '</div></div>' });
   });
   rentals.forEach(r => {
@@ -638,18 +681,10 @@ function renderOrders() {
 
 /* ---------- pengaturan toko ---------- */
 function renderShop() {
-  const brandName = k => ({ bca: 'BCA', bni: 'BNI', bri: 'BRI', mandiri: 'Mandiri', ovo: 'OVO', dana: 'DANA', gopay: 'GoPay', qris: 'QRIS' }[String(k).toLowerCase()] || k);
-  /* paymentMethods bisa berbentuk objek per brand (panel BK) ATAU array string/objek (tenant mandiri) — tampilkan keduanya dengan benar. */
-  const pmRaw = cfg.paymentMethods;
-  const pm = Array.isArray(pmRaw)
-    ? pmRaw.map(m => typeof m === 'string' ? m : (m && (m.brand || m.method || m.name)) ? brandName(m.brand || m.method || m.name) : '').filter(Boolean)
-    : (pmRaw && typeof pmRaw === 'object' ? Object.keys(pmRaw).map(brandName) : []);
   const rows = [
     { t: 'Template Toko', s: 'Tampilan halaman tokomu diatur lewat panel admin & layanan Jasa Rental. Template standar gratis; tema custom seperti BK Adventure adalah layanan berbayar.', c: '' },
     { id: 'setRekber', t: 'Rekber Aman', s: 'Memuat status Rekber tokomu…', c: '' },
-    { t: 'Metode Pembayaran Langsung', s: pm.length ? pm.join(' · ') + ' — tampil di halaman booking tokomu, diatur di panel admin.' : 'Belum diatur — tambahkan lewat panel admin tokomu.', c: '' },
     { id: 'setVerif', t: 'Verifikasi Toko', s: 'Memuat status verifikasi tokomu…', c: '' },
-    { t: 'Lokasi Depot', s: cfg.address ? esc(cfg.address) : 'Alamat belum diisi — lengkapi lewat panel admin tokomu.', c: '' },
     { t: 'Halaman Toko', s: 'jasa-rental.my.id/toko/?toko=' + tenant.slug, c: '<a href="../toko/?toko=' + tenant.slug + '" target="_blank" rel="noopener" style="font-weight:800;color:var(--green);text-decoration:none">Buka</a>' }
   ];
   $('shopSettings').innerHTML = rows.map(r =>
@@ -687,6 +722,8 @@ function renderAll() {
   renderOrders();
   renderProducts();
   renderShop();
+  renderProfileEditor();
+  renderPayEditor();
   loadOwnerExtras();
 }
 
@@ -791,6 +828,311 @@ function renderRekberFund(bookings) {
     bookings.map(b => '<div style="display:flex;justify-content:space-between;gap:10px;border-top:1px solid rgba(255,255,255,.14);padding-top:9px;margin-top:9px;font-size:13px"><span><b>' + esc(b.code) + '</b> · ' + (FUND_STATUS[b.fund_status] || b.fund_status) + '</span><span>' + rp(b.amount_in) + '</span></div>').join('') +
     '<p class="note">Total masuk ' + rp(tin) + ' · sudah dicairkan ' + rp(trel) + ' · dikembalikan ke penyewa ' + rp(tref) + '. Dana diteruskan ke toko sesudah barang kembali &amp; sewa selesai tanpa sengketa.</p>';
 }
+
+/* ============================================================
+   MODUL PEMILIK — proses pesanan, kelola katalog, editor
+   pembayaran, langsung dari dashboard. Semua tulis memakai
+   token pengguna; RLS (is_tenant_owner) yang membatasi ke
+   toko miliknya sendiri. Tanpa panel admin lama.
+   ============================================================ */
+async function writeApi(method, path, body, retried) {
+  const r = await fetch(KONFIG.SUPABASE_URL + '/rest/v1/' + path, {
+    method,
+    headers: { 'apikey': KONFIG.SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + session.access_token, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+    body: body === undefined ? undefined : JSON.stringify(body)
+  });
+  if (r.status === 401 && !retried && (await refreshSession())) return writeApi(method, path, body, true);
+  if (!r.ok) { const t = await r.text(); throw new Error(method + ' ' + path.split('?')[0] + ' → ' + r.status + ': ' + t.slice(0, 140)); }
+  return true;
+}
+function showToast(msg) {
+  const t = $('toast'); if (!t) return;
+  t.textContent = msg; t.style.display = 'block';
+  clearTimeout(showToast._h);
+  showToast._h = setTimeout(() => { t.style.display = 'none'; }, 3400);
+}
+async function reloadDashboard(msg) {
+  await loadTenantData(tenant);
+  renderAll();
+  if (msg) showToast(msg);
+}
+
+/* ---------- aksi pesanan ---------- */
+async function signProof(path) {
+  const w = window.open('', '_blank');
+  try {
+    const r = await fetch(KONFIG.SUPABASE_URL + '/storage/v1/object/sign/payment-proofs/' + path, {
+      method: 'POST',
+      headers: { 'apikey': KONFIG.SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + session.access_token, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ expiresIn: 600 })
+    });
+    if (!r.ok) throw new Error('sign ' + r.status);
+    const j = await r.json();
+    const url = KONFIG.SUPABASE_URL + '/storage/v1' + j.signedURL;
+    if (w) w.location = url; else location.href = url;
+  } catch (e) {
+    if (w) w.close();
+    showToast('Bukti pembayaran belum bisa dibuka — coba lagi.');
+  }
+}
+async function verifyPayment(code, btn) {
+  const g = bkGroups.find(x => x.code === code);
+  if (!g) return;
+  btn.disabled = true; btn.textContent = 'Memproses…';
+  try {
+    /* data jsonb bersifat per baris (itemName/qty/price berbeda tiap baris) —
+       gabung & tulis per baris agar baris lain dalam satu kode tidak tertimpa. */
+    for (const row of g.rows) {
+      const d = Object.assign({}, row.data || {});
+      d.payment = Object.assign({}, d.payment || {}, { verified: true });
+      let filter = 'bookings?tenant_id=eq.' + tenant.id + '&code=eq.' + encodeURIComponent(code) + '&item_id=eq.' + encodeURIComponent(row.item_id);
+      /* ukuran kosong tersimpan sebagai '' (bukan NULL) oleh create_booking — tangkap keduanya */
+      filter += row.size ? '&size=eq.' + encodeURIComponent(row.size) : '&or=(size.is.null,size.eq.)';
+      await writeApi('PATCH', filter, { data: d });
+    }
+    await reloadDashboard('Pembayaran ' + code + ' terverifikasi.');
+  } catch (e) {
+    btn.disabled = false; btn.textContent = 'Verifikasi Bayar';
+    showToast('Gagal memverifikasi pembayaran — coba lagi.');
+  }
+}
+async function setBookingStatus(code, status, btn) {
+  if (status === 'cancelled' && !confirm('Batalkan booking ' + code + '? Stok yang tertahan untuk booking ini akan dilepas.')) return;
+  btn.disabled = true; btn.textContent = 'Memproses…';
+  try {
+    await writeApi('PATCH', 'bookings?tenant_id=eq.' + tenant.id + '&code=eq.' + encodeURIComponent(code), { status });
+    await reloadDashboard(status === 'confirmed' ? 'Booking ' + code + ' dikonfirmasi — siap diambil.' : 'Booking ' + code + ' dibatalkan.');
+  } catch (e) {
+    btn.disabled = false; btn.textContent = status === 'confirmed' ? 'Konfirmasi' : 'Tolak/Batalkan';
+    showToast('Gagal memproses booking — coba lagi.');
+  }
+}
+
+/* ---------- kelola katalog ---------- */
+let prodFormItem = null;
+function fldHtml(label, control, cls) {
+  return '<div class="fld' + (cls ? ' ' + cls : '') + '"><label>' + label + '</label>' + control + '</div>';
+}
+function openProdForm(itemId) {
+  const it = itemId ? catalog.find(x => x.id === itemId) : null;
+  prodFormItem = it || null;
+  const v = it || {};
+  $('prodFormWrap').innerHTML =
+    '<div class="frmbox"><h3>' + (it ? 'Edit Produk' : 'Tambah Produk Baru') + '</h3><div class="fgrid">' +
+    fldHtml('Nama produk', '<input id="pfName" maxlength="120" value="' + esc(v.name || '') + '">', 'full') +
+    fldHtml('Tipe', '<select id="pfType"><option value="rental"' + (v.type !== 'sale' ? ' selected' : '') + '>Sewa</option><option value="sale"' + (v.type === 'sale' ? ' selected' : '') + '>Jual</option></select>') +
+    fldHtml('Kategori', '<input id="pfCat" maxlength="60" placeholder="mis. Tenda, Kamera" value="' + esc(v.category || '') + '">') +
+    fldHtml('Harga sewa (Rp/hari)', '<input id="pfPriceRental" type="number" min="0" step="1000" value="' + (v.priceRental || 0) + '">') +
+    fldHtml('Harga jual (Rp)', '<input id="pfPriceSale" type="number" min="0" step="1000" value="' + (v.priceSale || 0) + '">') +
+    fldHtml('Stok total (unit)', '<input id="pfStockTotal" type="number" min="0" step="1" value="' + (it ? itemTotalQty(it) : 1) + '">') +
+    (it ? fldHtml('Stok siap saat ini (unit)', '<input id="pfStockReady" type="number" min="0" step="1" value="' + itemReady(it) + '">') : '') +
+    fldHtml('Kondisi', '<input id="pfCondition" maxlength="60" placeholder="mis. Baik, Baru" value="' + esc(v.condition || '') + '">') +
+    fldHtml('Spesifikasi', '<input id="pfSpecs" maxlength="300" value="' + esc(v.specs || '') + '">') +
+    fldHtml('Deskripsi', '<textarea id="pfDesc" rows="3" maxlength="1000">' + esc(v.desc || '') + '</textarea>', 'full') +
+    fldHtml('Foto produk (opsional' + (it && v.image ? ', kosongkan untuk mempertahankan foto lama' : '') + ')', '<input id="pfPhoto" type="file" accept="image/*">', 'full') +
+    '</div><div class="frmacts"><button class="addbtn" id="pfSave">Simpan Produk</button>' +
+    '<button class="pbtn" id="pfCancel" style="padding:10px 15px">Batal</button></div></div>';
+  $('pfSave').onclick = e => saveProduct(e.currentTarget);
+  $('pfCancel').onclick = () => { $('prodFormWrap').innerHTML = ''; prodFormItem = null; };
+  $('prodFormWrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+async function saveProduct(btn) {
+  const name = $('pfName').value.trim();
+  if (!name) { $('pfName').focus(); showToast('Nama produk wajib diisi.'); return; }
+  const total = Math.max(0, parseInt($('pfStockTotal').value || '0', 10) || 0);
+  btn.disabled = true; btn.textContent = 'Menyimpan…';
+  try {
+    let image = prodFormItem ? (prodFormItem.image || '') : '';
+    const fileEl = $('pfPhoto');
+    if (fileEl && fileEl.files && fileEl.files[0]) {
+      const f = fileEl.files[0];
+      const ext = ((f.name.split('.').pop() || 'jpg').toLowerCase().replace(/[^a-z0-9]/g, '')) || 'jpg';
+      const path = tenant.slug + '/' + Date.now() + '-' + Math.random().toString(36).slice(2, 8) + '.' + ext;
+      const up = await fetch(KONFIG.SUPABASE_URL + '/storage/v1/object/item-images/' + path, {
+        method: 'POST',
+        headers: { 'apikey': KONFIG.SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + session.access_token, 'Content-Type': f.type || 'application/octet-stream' },
+        body: f
+      });
+      if (!up.ok) { const t = await up.text(); throw new Error('upload ' + up.status + ': ' + t.slice(0, 120)); }
+      image = KONFIG.SUPABASE_URL + '/storage/v1/object/public/item-images/' + path;
+    }
+    const data = {
+      name,
+      type: $('pfType').value,
+      category: $('pfCat').value.trim(),
+      priceRental: Math.max(0, parseInt($('pfPriceRental').value || '0', 10) || 0),
+      priceSale: Math.max(0, parseInt($('pfPriceSale').value || '0', 10) || 0),
+      desc: $('pfDesc').value.trim(),
+      specs: $('pfSpecs').value.trim(),
+      condition: $('pfCondition').value.trim(),
+      image
+    };
+    if (prodFormItem) {
+      const readyEl = $('pfStockReady');
+      const ready = readyEl ? Math.max(0, parseInt(readyEl.value || '0', 10) || 0) : itemReady(prodFormItem);
+      const merged = Object.assign({}, prodFormItem, data, { stockTotal: total, stockReady: ready });
+      await writeApi('PATCH', 'catalog_items?tenant_id=eq.' + tenant.id + '&item_id=eq.' + encodeURIComponent(prodFormItem.id), { data: merged });
+      $('prodFormWrap').innerHTML = ''; prodFormItem = null;
+      await reloadDashboard('Produk diperbarui.');
+    } else {
+      const itemId = 'ITM-' + Date.now().toString(36).toUpperCase();
+      const nd = Object.assign({ id: itemId, sku: '' }, data, { stockReady: total, stockRented: 0, stockTotal: total, sizes: [] });
+      await writeApi('POST', 'catalog_items', { tenant_id: tenant.id, item_id: itemId, data: nd });
+      $('prodFormWrap').innerHTML = ''; prodFormItem = null;
+      await reloadDashboard('Produk ditambahkan ke katalog.');
+    }
+  } catch (e) {
+    btn.disabled = false; btn.textContent = 'Simpan Produk';
+    showToast('Gagal menyimpan produk — coba lagi.');
+  }
+}
+async function deleteProduct(id, btn) {
+  const it = catalog.find(x => x.id === id);
+  if (!confirm('Hapus produk "' + (it ? (it.name || id) : id) + '" dari katalog tokomu?')) return;
+  btn.disabled = true;
+  try {
+    await writeApi('DELETE', 'catalog_items?tenant_id=eq.' + tenant.id + '&item_id=eq.' + encodeURIComponent(id));
+    await reloadDashboard('Produk dihapus.');
+  } catch (e) {
+    btn.disabled = false;
+    showToast('Gagal menghapus produk — coba lagi.');
+  }
+}
+
+/* ---------- editor profil toko ---------- */
+async function uploadItemImage(file, baseName) {
+  const ext = ((file.name.split('.').pop() || 'jpg').toLowerCase().replace(/[^a-z0-9]/g, '')) || 'jpg';
+  const path = tenant.slug + '/' + baseName + '-' + Date.now() + '.' + ext;
+  const up = await fetch(KONFIG.SUPABASE_URL + '/storage/v1/object/item-images/' + path, {
+    method: 'POST',
+    headers: { 'apikey': KONFIG.SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + session.access_token, 'Content-Type': file.type || 'application/octet-stream' },
+    body: file
+  });
+  if (!up.ok) { const t = await up.text(); throw new Error('upload ' + up.status + ': ' + t.slice(0, 120)); }
+  return KONFIG.SUPABASE_URL + '/storage/v1/object/public/item-images/' + path;
+}
+function renderProfileEditor() {
+  const el = $('profileEditor');
+  if (!el) return;
+  el.innerHTML =
+    '<div class="fgrid">' +
+    fldHtml('Nama toko', '<input id="spName" maxlength="80" value="' + esc(cfg.brandName || tenant.name || '') + '">', 'full') +
+    fldHtml('Logo toko', '<input id="spLogo" type="file" accept="image/*">' + (cfg.logoUrl ? '<img class="previmg" src="' + esc(cfg.logoUrl) + '" alt="Logo saat ini" loading="lazy">' : '')) +
+    fldHtml('Foto sampul', '<input id="spHero" type="file" accept="image/*">' + (cfg.heroImage ? '<img class="prevhero" src="' + esc(cfg.heroImage) + '" alt="Sampul saat ini" loading="lazy">' : '')) +
+    fldHtml('Alamat / kota tampilan', '<input id="spAddress" maxlength="160" placeholder="mis. Jl. Merdeka No. 1, Medan" value="' + esc(cfg.address || '') + '">', 'full') +
+    fldHtml('Nomor WhatsApp depot', '<input id="spPhone" maxlength="30" placeholder="08xxxxxxxxxx" value="' + esc(cfg.depotPhone || '') + '">') +
+    fldHtml('Tautan peta (boleh kosong)', '<input id="spMaps" maxlength="400" placeholder="https://maps.google.com/…" value="' + esc(cfg.mapsUrl || '') + '">') +
+    '</div>' +
+    '<div class="frmacts"><button class="addbtn" id="spSave">Simpan Profil Toko</button></div>';
+  $('spSave').onclick = e => saveProfile(e.currentTarget);
+}
+async function saveProfile(btn) {
+  const brandName = $('spName').value.trim();
+  if (!brandName) { $('spName').focus(); showToast('Nama toko wajib diisi.'); return; }
+  btn.disabled = true; btn.textContent = 'Menyimpan…';
+  try {
+    let logoUrl = cfg.logoUrl || '';
+    let heroImage = cfg.heroImage || '';
+    const lf = $('spLogo'), hf = $('spHero');
+    if (lf && lf.files && lf.files[0]) logoUrl = await uploadItemImage(lf.files[0], 'logo');
+    if (hf && hf.files && hf.files[0]) heroImage = await uploadItemImage(hf.files[0], 'hero');
+    const newCfg = Object.assign({}, cfg, {
+      brandName,
+      logoUrl,
+      heroImage,
+      address: $('spAddress').value.trim(),
+      depotPhone: $('spPhone').value.trim(),
+      mapsUrl: $('spMaps').value.trim()
+    });
+    await writeApi('PATCH', 'site_config?tenant_id=eq.' + tenant.id, { config: newCfg });
+    cfg = newCfg;
+    renderHeader();
+    renderShop();
+    renderProfileEditor();
+    showToast('Profil toko tersimpan.');
+  } catch (e) {
+    btn.disabled = false; btn.textContent = 'Simpan Profil Toko';
+    showToast('Gagal menyimpan profil toko — coba lagi.');
+  }
+}
+
+/* ---------- editor pembayaran ---------- */
+const PAY_BRANDS = ['Transfer Bank', 'BRI', 'Mandiri', 'BCA', 'BNI', 'DANA', 'OVO', 'GoPay', 'QRIS'];
+function brandLabel(k) {
+  return ({ bca: 'BCA', bni: 'BNI', bri: 'BRI', mandiri: 'Mandiri', ovo: 'OVO', dana: 'DANA', gopay: 'GoPay', qris: 'QRIS', 'transfer bank': 'Transfer Bank' })[String(k || '').toLowerCase()] || k;
+}
+/* paymentMethods tersimpan bisa berbentuk: array string, array objek {brand,number,holder},
+   atau OBJEK per brand ala panel BK {bca:{no, an}, ...} — normalkan semuanya ke baris editor. */
+function payMethodsNormalized() {
+  const raw = cfg.paymentMethods;
+  if (Array.isArray(raw)) return raw.map(m => {
+    if (typeof m === 'string') return { brand: brandLabel(m), number: '', holder: '' };
+    if (m && typeof m === 'object') return { brand: brandLabel(m.brand || m.method || m.name || ''), number: m.number || m.no || m.detail || '', holder: m.holder || m.an || m.name || '' };
+    return null;
+  }).filter(x => x && x.brand);
+  if (raw && typeof raw === 'object') return Object.entries(raw).map(([k, v]) => {
+    const o = (v && typeof v === 'object') ? v : {};
+    return { brand: brandLabel(k), number: o.number || o.no || o.detail || (typeof v === 'string' ? v : ''), holder: o.holder || o.an || o.name || '' };
+  });
+  return [];
+}
+function payRowHtml(m) {
+  const known = PAY_BRANDS.includes(m.brand);
+  const opts = PAY_BRANDS.map(b => '<option value="' + b + '"' + (b === m.brand ? ' selected' : '') + '>' + b + '</option>').join('') +
+    (!known && m.brand ? '<option value="' + esc(m.brand) + '" selected>' + esc(m.brand) + '</option>' : '');
+  return '<div class="pmrow"><select class="pmbrand">' + opts + '</select>' +
+    '<input class="pmnum" placeholder="Nomor / ID tujuan" value="' + esc(m.number) + '">' +
+    '<input class="pmholder" placeholder="Atas nama" value="' + esc(m.holder) + '">' +
+    '<button class="pmdel" data-pmdel>Hapus</button></div>';
+}
+function renderPayEditor() {
+  const el = $('payEditor');
+  if (!el) return;
+  const rows = payMethodsNormalized();
+  el.innerHTML =
+    '<div id="pmRows">' + (rows.length ? rows.map(payRowHtml).join('') : payRowHtml({ brand: 'Transfer Bank', number: '', holder: '' })) + '</div>' +
+    '<button class="pbtn" id="pmAdd">+ Tambah Metode</button>' +
+    '<div class="fld" style="margin-top:13px"><label>Info pembayaran (ditampilkan ke penyewa saat checkout)</label>' +
+    '<textarea id="pmInfo" rows="3" maxlength="600" placeholder="Contoh: transfer sebelum pengambilan; tunjukkan bukti saat mengambil barang.">' + esc(cfg.paymentInfo || '') + '</textarea></div>' +
+    '<div class="frmacts"><button class="addbtn" id="pmSave">Simpan Metode Pembayaran</button></div>';
+  $('pmAdd').onclick = () => {
+    const d = document.createElement('div');
+    d.innerHTML = payRowHtml({ brand: 'Transfer Bank', number: '', holder: '' });
+    $('pmRows').appendChild(d.firstChild);
+  };
+  $('pmSave').onclick = e => savePayMethods(e.currentTarget);
+}
+async function savePayMethods(btn) {
+  const rows = [...document.querySelectorAll('#pmRows .pmrow')].map(r => ({
+    brand: r.querySelector('.pmbrand').value,
+    number: r.querySelector('.pmnum').value.trim(),
+    holder: r.querySelector('.pmholder').value.trim()
+  })).filter(m => m.brand && (m.number || m.holder));
+  const newCfg = Object.assign({}, cfg, { paymentMethods: rows, paymentInfo: $('pmInfo').value.trim() });
+  btn.disabled = true; btn.textContent = 'Menyimpan…';
+  try {
+    await writeApi('PATCH', 'site_config?tenant_id=eq.' + tenant.id, { config: newCfg });
+    cfg = newCfg;
+    renderShop();
+    renderPayEditor();
+    showToast('Metode pembayaran tersimpan.');
+  } catch (e) {
+    btn.disabled = false; btn.textContent = 'Simpan Metode Pembayaran';
+    showToast('Gagal menyimpan metode pembayaran — coba lagi.');
+  }
+}
+
+/* delegasi klik untuk semua aksi modul pemilik (tahan render ulang) */
+document.addEventListener('click', e => {
+  const pv = e.target.closest('[data-proof]'); if (pv) { signProof(pv.dataset.proof); return; }
+  const vf = e.target.closest('[data-verify]'); if (vf) { verifyPayment(vf.dataset.verify, vf); return; }
+  const cf = e.target.closest('[data-confirm]'); if (cf) { setBookingStatus(cf.dataset.confirm, 'confirmed', cf); return; }
+  const cx = e.target.closest('[data-cancel]'); if (cx) { setBookingStatus(cx.dataset.cancel, 'cancelled', cx); return; }
+  const ep = e.target.closest('[data-edit-prod]'); if (ep) { openProdForm(ep.dataset.editProd); return; }
+  const dp = e.target.closest('[data-del-prod]'); if (dp) { deleteProduct(dp.dataset.delProd, dp); return; }
+  const pd = e.target.closest('[data-pmdel]'); if (pd) { const row = pd.closest('.pmrow'); if (row) row.remove(); return; }
+});
+$('btnAddProd').onclick = () => openProdForm(null);
 
 /* ---------- boot ---------- */
 function gateShow(state, msg) {
