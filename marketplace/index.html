@@ -716,7 +716,7 @@ async function loadLive(){
       headers:{'apikey':SB_KEY,'Authorization':'Bearer ' + SB_KEY,'Content-Type':'application/json'}, body:'{}'});
     if(!r.ok){ liveLoaded = true; liveFailed = true; render(); return; }
     const rows = await r.json();
-    if(!Array.isArray(rows) || !rows.length){ liveLoaded = true; render(); return; }
+    if(!Array.isArray(rows)){ liveLoaded = true; liveFailed = true; render(); return; }
     const stores = {}, prods = [];
     rows.forEach((row, i) => {
       if(!stores[row.slug]){
@@ -732,6 +732,18 @@ async function loadLive(){
         img: row.image, desc: row.desc || '', terms: sale ? 'Produk dijual lepas oleh toko.' : 'Ketentuan mengikuti halaman resmi toko.'});
     });
     STORES = stores; PRODUCTS = prods;
+    /* Direktori toko: toko terdaftar yang belum punya produk tetap tampil
+       di mode Toko (sumber RPC marketplace_stores) — toko baru tidak lagi
+       tak terlihat hanya karena katalognya masih kosong. */
+    try{
+      const srows = await rpcAnon('marketplace_stores', {});
+      if(Array.isArray(srows)) srows.forEach(sr => {
+        if(sr && sr.slug && !stores[sr.slug]){
+          const parts = (sr.address || '').split(',').map(x => x.trim()).filter(Boolean);
+          stores[sr.slug] = {name: sr.shop_name || sr.slug, city: parts[1] || parts[0] || '', verified:false, rekber:false, pro:false, since:'', products: Number(sr.products) || 0, rating:0, reviews:0};
+        }
+      });
+    }catch(e){}
     state.favs = new Set();
     const fc = document.getElementById('fCity');
     Object.values(stores).forEach(s => { if(s.city && ![...fc.options].some(o=>o.value===s.city)){ const o=document.createElement('option'); o.value=s.city; o.textContent=s.city; fc.appendChild(o); } });
