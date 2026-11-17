@@ -477,6 +477,7 @@ function cardHTML(p){
     '<div class="price"><b>' + rupiah(p.price) + '</b><span>/' + p.period + '</span></div>' +
     '<div class="city">' + ICON.pin + s.city + '</div></div></article>';
 }
+function storeUrl(slug){ return slug === 'kontur' ? 'https://jasa-rental.my.id/bk-adventure/' : 'https://jasa-rental.my.id/toko/?toko=' + encodeURIComponent(slug); }
 function storeCardHTML(key){
   const s = STORES[key];
   const rating = s.reviews < 3 ? '<span class="baru">Baru</span>' : ICON.star + '<span>' + s.rating.toFixed(1).replace('.',',') + '</span><span class="rc">(' + s.reviews + ' ulasan)</span>';
@@ -551,10 +552,7 @@ function bindCards(){
     state.favs.has(id)?state.favs.delete(id):state.favs.add(id); render();
   });
   document.querySelectorAll('[data-open]').forEach(c=>c.onclick=()=>openSheet(+c.dataset.open));
-  document.querySelectorAll('[data-openstore]').forEach(b=>b.onclick=()=>{
-    state.query = STORES[b.dataset.openstore].name; state.mode='produk';
-    document.querySelectorAll('[data-mode]').forEach(x=>x.classList.toggle('on',x.dataset.mode==='produk'));
-    document.getElementById('fQuery').value = state.query; render(); window.scrollTo({top:0,behavior:'smooth'});
+  document.querySelectorAll('[data-openstore]').forEach(b=>b.onclick=()=>{ location.href = storeUrl(b.dataset.openstore); });
   });
 }
 
@@ -568,7 +566,7 @@ function openSheet(id){
     '<img class="hero-img" src="' + p.img + '" onerror="this.remove()">' +
     '<div style="display:flex;gap:6px;margin-top:12px;flex-wrap:wrap">' + (s.pro?'<span class="tagpro" style="position:static">PRO</span>':'') + '<span class="tagcat" style="position:static">' + p.catLabel + '</span></div>' +
     '<h2>' + p.name + '</h2>' +
-    '<div class="srow" style="margin-top:7px"><span class="sav">' + s.name[0] + '</span><span class="sname" style="font-size:13.5px">' + s.name + '</span>' + (s.verified?ICON.verif:'') + '<span style="color:var(--mut)">' + ICON.pin.replace('currentColor','#71806f') + ' ' + s.city + '</span></div>' +
+    '<a class="srow" href="' + storeUrl(p.slug) + '" style="margin-top:7px;text-decoration:none;color:inherit;cursor:pointer"><span class="sav">' + s.name[0] + '</span><span class="sname" style="font-size:13.5px">' + s.name + '</span>' + (s.verified?ICON.verif:'') + '<span style="color:var(--mut)">' + ICON.pin.replace('currentColor','#71806f') + ' ' + s.city + '</span><span style="margin-left:auto;font-weight:800;color:var(--green);font-size:12.5px;white-space:nowrap">Kunjungi Toko ›</span></a>' +
     (p.live ? (s.verified ? '<div class="verifnote">Identitas pemilik, alamat &amp; rekening toko ini sudah diperiksa Jasa Rental. ' + s.since + '.</div>' : '<div class="verifnote">Toko ini terdaftar di platform Jasa Rental dan belum menyelesaikan verifikasi toko. Booking dilakukan di halaman resmi toko ini.</div>') : (s.verified ? '<div class="verifnote">Identitas pemilik, alamat &amp; rekening toko ini sudah diperiksa Jasa Rental. ' + s.since + '.</div>' : '<div class="verifnote" style="background:var(--amber-bg);color:var(--amber)">Toko ini <b>belum terverifikasi</b> oleh Jasa Rental. Berhati-hatilah sebelum membayar.</div>')) +
     '<div class="rate" style="margin-top:10px">' + rateHTML(p) + '</div>' +
     '<p style="margin-top:10px;color:var(--ink2);font-size:14px">' + p.desc + '</p>' +
@@ -593,7 +591,7 @@ function openSheet(id){
   document.getElementById('dTo').onchange=syncSheet;
   document.getElementById('btnClose').onclick=closeSheet;
   document.getElementById('btnPay').onclick=doPay;
-  if(p.live){ const bp=document.getElementById('btnPay'); bp.textContent='Booking di Halaman Toko'; bp.onclick=()=>{ location.href='https://jasa-rental.my.id/' + p.slug + '/'; }; document.getElementById('totalNote').textContent='Kamu akan diarahkan ke halaman resmi toko untuk menyelesaikan booking.'; }
+  if(p.live){ const bp=document.getElementById('btnPay'); bp.textContent='Booking di Halaman Toko'; bp.onclick=()=>{ location.href=storeUrl(p.slug); }; document.getElementById('totalNote').textContent='Kamu akan diarahkan ke halaman resmi toko untuk menyelesaikan booking.'; }
   renderPayOpts(); syncSheet();
   if(p.live) loadSheetReviews(p);
 }
