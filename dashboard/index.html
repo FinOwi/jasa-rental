@@ -474,9 +474,9 @@ function renderHeader() {
   const nm = shopName();
   $('hName').textContent = nm;
   $('hAvatar').textContent = (nm.trim()[0] || '?').toUpperCase();
-  const sub = 'jasa-rental.my.id/' + tenant.slug;
+  const sub = 'jasa-rental.my.id/toko/?toko=' + tenant.slug;
   $('hSub').textContent = cfg.address ? sub + ' · ' + cfg.address : sub;
-  $('btnStore').href = '/' + tenant.slug + '/';
+  $('btnStore').href = '../toko/?toko=' + tenant.slug;
   $('accEmail').textContent = profile ? profile.email : '—';
 }
 function renderHome(st) {
@@ -642,7 +642,7 @@ function renderShop() {
     { t: 'Metode Pembayaran Langsung', s: pm.length ? pm.map(brandName).join(' · ') + ' — tampil di halaman booking tokomu, diatur di panel admin.' : 'Belum diatur — tambahkan lewat panel admin tokomu.', c: '' },
     { id: 'setVerif', t: 'Verifikasi Toko', s: 'Memuat status verifikasi tokomu…', c: '' },
     { t: 'Lokasi Depot', s: cfg.address ? esc(cfg.address) : 'Alamat belum diisi — lengkapi lewat panel admin tokomu.', c: '' },
-    { t: 'Halaman Toko', s: 'jasa-rental.my.id/' + tenant.slug, c: '<a href="/' + tenant.slug + '/" target="_blank" rel="noopener" style="font-weight:800;color:var(--green);text-decoration:none">Buka</a>' }
+    { t: 'Halaman Toko', s: 'jasa-rental.my.id/toko/?toko=' + tenant.slug, c: '<a href="../toko/?toko=' + tenant.slug + '" target="_blank" rel="noopener" style="font-weight:800;color:var(--green);text-decoration:none">Buka</a>' }
   ];
   $('shopSettings').innerHTML = rows.map(r =>
     '<div class="setrow"' + (r.id ? ' id="' + r.id + '"' : '') + '><span style="flex:1"><span class="st-t">' + r.t + '</span><span class="st-s" style="display:block">' + r.s + '</span></span>' + (r.c || '') + '</div>').join('');
