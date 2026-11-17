@@ -330,7 +330,7 @@ main{max-width:1180px;margin:0 auto;padding:18px 16px 8px}
       <button data-nav="booking">Booking Saya</button>
     </nav>
     <div class="hright">
-      <button class="member" data-nav="akun"><span class="av">P</span><span>Penyewa Demo</span></button>
+      <button class="member" id="memberBtn" data-nav="akun"><span class="av">?</span><span>Masuk</span></button>
     </div>
   </div>
 </header>
@@ -414,20 +414,11 @@ main{max-width:1180px;margin:0 auto;padding:18px 16px 8px}
 <!-- ============ VIEW: AKUN ============ -->
 <section class="view" id="view-akun">
   <main>
-    <div class="bk-card" style="display:flex;gap:13px;align-items:center">
-      <span class="av" style="width:50px;height:50px;border-radius:50%;background:var(--gold-soft);color:var(--gold);display:grid;place-items:center;font-weight:800;font-size:19px">P</span>
-      <div><b style="font-size:16.5px">Penyewa Demo</b><div style="font-size:12.5px;color:var(--mut);font-weight:600">Member sejak 2026 · Login Google</div></div>
-    </div>
-    <div class="bk-card" style="padding:6px 16px">
-      <div style="padding:12px 0;border-bottom:1px solid var(--line);font-weight:700">Profil &amp; alamat</div>
-      <div style="padding:12px 0;border-bottom:1px solid var(--line);font-weight:700">Ketentuan Platform</div>
-      <div style="padding:12px 0;border-bottom:1px solid var(--line);font-weight:700">Bantuan penyewa</div>
-      <div style="padding:12px 0;font-weight:700;color:var(--red)">Keluar</div>
-    </div>
+    <div id="akunBox"></div>
   </main>
 </section>
 
-<div class="foot">Jasa Rental oleh FinOwi Id · Prototipe UI/UX v1 — data produk &amp; toko adalah contoh untuk review desain, belum data live.</div>
+<div class="foot">Jasa Rental oleh FinOwi Id · Marketplace rental Indonesia — produk, harga &amp; stok langsung dari toko-toko rental.</div>
 
 <nav class="bnav">
   <button class="on" data-nav="jelajahi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>Jelajahi</button>
@@ -765,6 +756,96 @@ async function loadLive(){
     render();
   }catch(e){ liveLoaded = true; liveFailed = true; render(); }
 }
+/* ===== Member: login HANYA Google (Supabase Auth, sesi sama dengan toko) ===== */
+const MEMBER_KEY = 'jr_member_session_v1';
+let memberSession = null, memberProfile = null;
+function loadMemberSession(){ try { return JSON.parse(localStorage.getItem(MEMBER_KEY) || 'null'); } catch(e){ return null; } }
+function saveMemberSession(sv){ memberSession = sv; try { sv ? localStorage.setItem(MEMBER_KEY, JSON.stringify(sv)) : localStorage.removeItem(MEMBER_KEY); } catch(e){} }
+function startGoogleLogin(){ location.href = SB_URL + '/auth/v1/authorize?provider=google&redirect_to=' + encodeURIComponent(location.origin + location.pathname); }
+async function refreshMemberSession(){
+  if(!memberSession || !memberSession.refresh_token) return false;
+  try{
+    const r = await fetch(SB_URL + '/auth/v1/token?grant_type=refresh_token', {method:'POST', headers:{'apikey':SB_KEY,'Content-Type':'application/json'}, body: JSON.stringify({refresh_token: memberSession.refresh_token})});
+    if(!r.ok) return false;
+    const j = await r.json(); if(!j.access_token) return false;
+    memberSession.access_token = j.access_token; if(j.refresh_token) memberSession.refresh_token = j.refresh_token;
+    memberSession.expires_at = Date.now() + (parseInt(j.expires_in || '3600', 10) * 1000);
+    saveMemberSession(memberSession); return true;
+  }catch(e){ return false; }
+}
+async function fetchMemberProfile(retried){
+  if(!memberSession || !memberSession.access_token) return false;
+  try{
+    const r = await fetch(SB_URL + '/auth/v1/user', {headers:{'apikey':SB_KEY,'Authorization':'Bearer ' + memberSession.access_token}});
+    if(!r.ok){
+      if(r.status === 401 && !retried && (await refreshMemberSession())) return fetchMemberProfile(true);
+      saveMemberSession(null); memberProfile = null; return false;
+    }
+    const u = await r.json(); const md = u.user_metadata || {};
+    memberProfile = { email: u.email || '', name: md.full_name || md.name || (u.email || '').split('@')[0], avatar: md.avatar_url || md.picture || '' };
+    memberSession.profile = memberProfile; saveMemberSession(memberSession); return true;
+  }catch(e){ return false; }
+}
+async function captureAuthFromHash(){
+  const raw = location.hash || '';
+  if(raw.length > 1 && (raw.includes('access_token=') || raw.includes('error'))){
+    const p = new URLSearchParams(raw.slice(1));
+    const at = p.get('access_token'); const err = p.get('error_description') || p.get('error');
+    try { history.replaceState(null, '', location.pathname + location.search); } catch(e){}
+    if(at){
+      saveMemberSession({access_token: at, refresh_token: p.get('refresh_token') || '', expires_at: Date.now() + (parseInt(p.get('expires_in') || '3600', 10) * 1000)});
+      await fetchMemberProfile();
+    } else if(err){ console.warn('Google OAuth error:', err); mpToast('Login Google gagal: ' + err); }
+  }
+}
+function memberLogout(){
+  try { if(memberSession && memberSession.access_token) fetch(SB_URL + '/auth/v1/logout', {method:'POST', headers:{'apikey':SB_KEY,'Authorization':'Bearer ' + memberSession.access_token}}); } catch(e){}
+  saveMemberSession(null); memberProfile = null; renderMemberUI(); mpToast('Kamu sudah keluar.');
+}
+let mpToastTimer = null;
+function mpToast(msg){
+  let t = document.getElementById('mpToast');
+  if(!t){ t = document.createElement('div'); t.id = 'mpToast'; t.style.cssText = 'position:fixed;left:50%;bottom:86px;transform:translateX(-50%);background:#14231a;color:#fff;padding:11px 16px;border-radius:12px;font-weight:700;font-size:13.5px;z-index:99;box-shadow:0 10px 30px rgba(0,0,0,.25);max-width:88vw;text-align:center'; document.body.appendChild(t); }
+  t.textContent = msg; t.style.display = 'block';
+  clearTimeout(mpToastTimer); mpToastTimer = setTimeout(()=>{ t.style.display = 'none'; }, 3400);
+}
+const GLOGO = '<svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 8 3l5.7-5.7C34.3 6.1 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 8 3l5.7-5.7C34.3 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.9 39.2 44 34 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>';
+function avHTML(sz){
+  if(memberProfile && memberProfile.avatar) return '<img class="av" src="' + escT(memberProfile.avatar) + '" alt="" style="width:' + sz + 'px;height:' + sz + 'px;border-radius:50%;object-fit:cover">';
+  const ini = memberProfile ? (memberProfile.name || '?').trim().charAt(0).toUpperCase() : '?';
+  return '<span class="av" style="width:' + sz + 'px;height:' + sz + 'px;font-size:' + Math.round(sz*0.42) + 'px">' + escT(ini) + '</span>';
+}
+function renderMemberUI(){
+  const btn = document.getElementById('memberBtn');
+  if(btn){
+    if(memberProfile) btn.innerHTML = avHTML(26) + '<span>' + escT(memberProfile.name.split(/\s+/)[0]) + '</span>';
+    else btn.innerHTML = '<span class="av">M</span><span>Masuk</span>';
+  }
+  const box = document.getElementById('akunBox');
+  if(!box) return;
+  if(!memberProfile){
+    box.innerHTML = '<div class="bk-card" style="text-align:center;padding:26px 18px">' +
+      '<b style="font-size:17px">Masuk sebagai member</b>' +
+      '<p style="color:var(--mut);font-weight:600;font-size:13.5px;margin:8px 0 16px">Satu tombol untuk daftar &amp; masuk — tanpa kata sandi, tanpa form panjang.</p>' +
+      '<button onclick="startGoogleLogin()" style="display:inline-flex;align-items:center;gap:10px;background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:11px 20px;font-weight:800;font-size:14.5px;cursor:pointer;color:var(--ink)">' + GLOGO + 'Masuk dengan Google</button>' +
+      '<p style="color:var(--mut);font-weight:600;font-size:12px;margin:14px 0 0">Booking tetap dilakukan di halaman toko masing-masing.</p></div>';
+    return;
+  }
+  box.innerHTML = '<div class="bk-card" style="display:flex;gap:13px;align-items:center">' + avHTML(50) +
+    '<div><b style="font-size:16.5px">' + escT(memberProfile.name) + '</b><div style="font-size:12.5px;color:var(--mut);font-weight:600">' + escT(memberProfile.email) + ' · Login Google</div></div></div>' +
+    '<div class="bk-card" style="padding:6px 16px">' +
+    '<div style="padding:12px 0;border-bottom:1px solid var(--line);font-weight:700;cursor:pointer" onclick="mpToast(\'Nama &amp; foto profil mengikuti akun Google-mu.\')">Profil &amp; alamat</div>' +
+    '<div style="padding:12px 0;border-bottom:1px solid var(--line);font-weight:700;cursor:pointer" onclick="mpToast(\'Ketentuan Platform tampil lengkap saat checkout di toko.\')">Ketentuan Platform</div>' +
+    '<div style="padding:12px 0;border-bottom:1px solid var(--line);font-weight:700;cursor:pointer" onclick="mpToast(\'Bantuan: hubungi toko lewat tombol Chat di halaman tokonya.\')">Bantuan penyewa</div>' +
+    '<div style="padding:12px 0;font-weight:700;color:var(--red);cursor:pointer" onclick="memberLogout()">Keluar</div></div>';
+}
+(async function initMember(){
+  memberSession = loadMemberSession();
+  await captureAuthFromHash();
+  if(memberSession){ memberProfile = memberSession.profile || null; if(!memberProfile) await fetchMemberProfile(); }
+  renderMemberUI();
+})();
+
 loadLive();
 </script>
 </body>
