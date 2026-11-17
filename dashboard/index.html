@@ -594,16 +594,16 @@ function prodRow(it, lowOnly, editable) {
   const ready = itemReady(it), tot = itemTotalQty(it);
   const price = it.type === 'sale' ? (it.priceSale ? rp(it.priceSale) : '') : (it.priceRental ? rp(it.priceRental) + '/hari' : '');
   const meta = [price, it.category || ''].filter(Boolean).join(' · ');
-  const label = ready === 0 ? 'HABIS' : ready <= 2 ? 'MENIPIS' : 'siap';
+  const label = ready === 0 ? 'HABIS' : ready < tot ? 'MENIPIS' : 'siap';
   const acts = editable ? '<div class="pacts"><button class="pbtn" data-edit-prod="' + esc(it.id || '') + '">Edit</button><button class="pbtn del" data-del-prod="' + esc(it.id || '') + '">Hapus</button></div>' : '';
   return '<div class="prod">' + (it.image ? '<img src="' + esc(it.image) + '" alt="" loading="lazy">' : '<img alt="">') +
     '<div><div class="pn">' + esc(it.name || it.id || '') + '</div><div class="pm">' + esc(meta) + '</div>' + acts + '</div>' +
-    '<div class="stk' + (ready <= 2 ? ' low' : '') + '"><b>' + ready + '/' + tot + '</b><span>' + label + '</span></div></div>';
+    '<div class="stk' + (ready < tot ? ' low' : '') + '"><b>' + ready + '/' + tot + '</b><span>' + label + '</span></div></div>';
 }
 function renderStockHome() {
-  const low = catalog.filter(it => itemReady(it) <= 2).sort((a, b) => itemReady(a) - itemReady(b)).slice(0, 6);
+  const low = catalog.filter(it => itemReady(it) < itemTotalQty(it)).sort((a, b) => itemReady(a) - itemReady(b)).slice(0, 6);
   $('prodList').innerHTML = low.length ? low.map(it => prodRow(it)).join('')
-    : '<div class="emptybox"><b>Semua stok dalam keadaan cukup.</b><br>Tidak ada produk dengan stok siap 2 unit atau kurang.</div>';
+    : '<div class="emptybox"><b>Semua stok dalam keadaan cukup.</b><br>Tidak ada produk yang stok siapnya berkurang dari jumlah penuh.</div>';
 }
 function renderProducts() {
   const sorted = catalog.slice().sort((a, b) => itemReady(a) - itemReady(b));
