@@ -42,7 +42,7 @@
 }
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
   --ink:#152219; --ink2:#43544a; --mut:#71806f;
@@ -56,14 +56,13 @@
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth}
 body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:15.5px;line-height:1.55}
-h1,h2,.hero-vis .hv-card b{font-family:'Fraunces',Georgia,serif}
 a{color:inherit;text-decoration:none}
 button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 .wrap{max-width:1120px;margin:0 auto;padding:0 18px}
 section{padding:72px 0}
 .eyebrow{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--green);display:flex;align-items:center;gap:8px}
 .eyebrow:before{content:"";width:22px;height:2px;background:var(--green)}
-h2{font-size:clamp(25px,3.6vw,34px);font-weight:600;letter-spacing:-.01em;line-height:1.18;margin-top:10px}
+h2{font-size:clamp(24px,3.6vw,32px);font-weight:800;letter-spacing:-.02em;line-height:1.2;margin-top:10px}
 .sub{color:var(--ink2);margin-top:10px;max-width:640px}
 
 /* header */
@@ -89,16 +88,21 @@ nav.main a:hover{background:#ffffff1a;color:#fff}
 .hero{background:linear-gradient(120deg,#0C3520,#123B26 58%,#177245);color:#f3efe4;padding:60px 0 72px;position:relative;overflow:hidden}
 @media(min-width:960px){.hero .wrap{display:grid;grid-template-columns:1.04fr .96fr;gap:48px;align-items:center}}
 .hero-vis{display:none}
-@media(min-width:960px){.hero-vis{display:grid;grid-column:2;grid-row:1/span 6;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:14px;position:relative}}
+@media(min-width:960px){.hero-vis{display:block;grid-column:2;grid-row:1/span 6;position:relative}}
 .hv{border-radius:20px;overflow:hidden;background:#1E7A46;box-shadow:0 24px 48px -20px rgba(0,0,0,.5)}
 .hv img{width:100%;height:100%;object-fit:cover}
-.hv.big{grid-row:1/span 2}
+.hv.big{grid-row:auto;height:100%;min-height:350px}
+.hv-price{position:absolute;top:16px;right:16px;background:#fff;color:var(--ink);border-radius:14px;padding:11px 14px;box-shadow:var(--sh-lg);max-width:250px}
+.hv-price small{display:block;font-size:10px;font-weight:800;letter-spacing:.08em;color:var(--green)}
+.hv-price b{display:block;font-size:14px;line-height:1.3;margin-top:2px}
+.hv-price span{display:block;font-size:12.5px;color:var(--ink2);font-weight:700;margin-top:2px}
+.hv-price span b{display:inline;font-size:13.5px;color:var(--green-d)}
 .hv-card{position:absolute;left:-16px;bottom:22px;background:#fff;color:var(--ink);border-radius:16px;padding:12px 16px;box-shadow:var(--sh-lg);display:flex;gap:11px;align-items:center;max-width:300px}
-.hv-card b{font-size:16.5px;font-weight:600;display:block}
+.hv-card b{font-size:16px;font-weight:800;display:block}
 .hv-card span{font-size:12px;color:var(--ink2);font-weight:600;line-height:1.35;display:block}
 .hv-card .sh-ic{width:38px;height:38px;border-radius:12px;background:var(--green-soft);display:grid;place-items:center;flex:none}
-.hero h1{font-size:clamp(32px,5.2vw,52px);font-weight:600;letter-spacing:-.01em;line-height:1.1;max-width:700px}
-.hero h1 em{font-style:italic;color:#E9C979}
+.hero h1{font-size:clamp(32px,5.2vw,50px);font-weight:800;letter-spacing:-.02em;line-height:1.12;max-width:700px}
+.hero h1 em{font-style:normal;color:#FFC531}
 .hero .lead{color:#C9D4C9;margin-top:18px;max-width:600px;font-size:16.5px}
 .hero-cta{display:flex;gap:11px;flex-wrap:wrap;margin-top:26px}
 .trustrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:30px}
@@ -116,7 +120,7 @@ nav.main a:hover{background:#ffffff1a;color:#fff}
 @media(min-width:980px){.catgrid{grid-template-columns:repeat(4,1fr)}}
 .catbox{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;display:flex;gap:13px;align-items:flex-start;box-shadow:var(--sh);transition:transform .25s ease,box-shadow .25s ease}
 .catbox:hover{transform:translateY(-3px);box-shadow:var(--sh-lg)}
-.catbox .ic{width:46px;height:46px;border-radius:14px;background:var(--green-soft);color:var(--green-d);display:grid;place-items:center;flex:none}
+.catbox .ic{width:46px;height:46px;border-radius:50%;background:var(--green-soft);color:var(--green-d);display:grid;place-items:center;flex:none}
 .catbox b{font-size:14.5px;display:block}
 .catbox span{font-size:12.3px;color:var(--mut);font-weight:600;line-height:1.4;display:block;margin-top:2px}
 
@@ -235,8 +239,7 @@ footer nav{display:flex;gap:16px;flex-wrap:wrap;font-weight:700;color:var(--ink2
     </div>
     <div class="hero-vis" aria-hidden="true">
       <div class="hv big"><img src="https://fr.wildbounds.com/cdn/shop/files/big-agnes-copper-spur-ul3-tents-3p-tangelo-tcsul3tgo25-1131358387_600x.jpg?v=1739796548" alt="" loading="lazy" onerror="this.remove()"></div>
-      <div class="hv"><img src="https://www.tradeinn.com/f/65/654991/black-diamond-trail-ergo-cork.webp" alt="" loading="lazy" onerror="this.remove()"></div>
-      <div class="hv"><img src="https://nuowbpevzfwobedtgxzm.supabase.co/storage/v1/object/public/item-images/catalog/flysheet-itm15.jpg" alt="" loading="lazy" onerror="this.remove()"></div>
+      <div class="hv-price"><small>TENDA FAVORIT</small><b>Big Agnes Copper Spur HV UL3</b><span><b>Rp80.000</b>/hari · BK ADVENTURE</span></div>
       <div class="hv-card"><span class="sh-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0d4d2c" stroke-width="2.2" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6z"/><path d="m9 12 2 2 4-4" stroke-linecap="round"/></svg></span><span><b>Rekber Aman</b><span>Dana ditahan platform, diteruskan sesudah barang kembali.</span></span></div>
     </div>
     <div class="hero-card">
@@ -257,6 +260,16 @@ footer nav{display:flex;gap:16px;flex-wrap:wrap;font-weight:700;color:var(--ink2
     <h2>Satu tempat untuk semua yang bisa disewa</h2>
     <p class="sub">Bukan cuma outdoor. Setiap kategori punya toko-toko lokal yang bisa kamu bandingkan harga, rating, dan ketersediaan stoknya.</p>
     <div class="catgrid" id="catgrid"></div>
+  </div>
+</section>
+
+<section id="pilihan" style="padding-top:6px">
+  <div class="wrap">
+    <div class="eyebrow">Etalase Marketplace</div>
+    <h2>Produk pilihan dari toko asli</h2>
+    <p class="sub">Harga dan stok di bawah ini diambil langsung dari katalog toko yang bergabung — bukan gambar contoh.</p>
+    <div class="dgrid" id="dealGrid"><div class="dload">Sedang memuat produk…</div></div>
+    <div style="margin-top:22px;text-align:center"><a class="btn green" href="marketplace/">Lihat Semua Produk di Marketplace</a></div>
   </div>
 </section>
 
@@ -494,6 +507,43 @@ const FAQ = [
 document.getElementById('faqList').innerHTML = FAQ.map(f =>
   '<div class="faqitem"><button>' + f[0] + '<svg class="chev" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></button><div class="ans">' + f[1] + '</div></div>').join('');
 document.querySelectorAll('.faqitem button').forEach(b => b.onclick = () => b.parentElement.classList.toggle('open'));
+</script>
+<style>
+.dgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:26px}
+@media(min-width:760px){.dgrid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1024px){.dgrid{grid-template-columns:repeat(4,1fr)}}
+.dload{grid-column:1/-1;text-align:center;color:var(--mut);font-weight:600;padding:26px 0}
+.dcard{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 1px 3px rgba(23,40,30,.07);display:flex;flex-direction:column;transition:transform .25s ease,box-shadow .25s ease}
+.dcard:hover{transform:translateY(-4px);box-shadow:var(--sh-lg)}
+.dcard .dph{position:relative;aspect-ratio:4/3;background:#E9E4D8}
+.dcard .dph img{width:100%;height:100%;object-fit:cover}
+.dcard .phempty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0C3520,#1E7A46);color:#F3EFE4}
+.dcard .phempty span{font-size:46px;font-weight:800;opacity:.92}
+.dcard .dbody{padding:12px 13px 14px;display:flex;flex-direction:column;gap:4px}
+.dcard .dname{font-weight:700;font-size:14px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:38px}
+.dcard .dstore{font-size:12px;color:var(--mut);font-weight:600}
+.dcard .dprice{font-size:17.5px;font-weight:800;color:var(--green-d)}
+.dcard .dprice span{font-size:11.5px;color:var(--mut);font-weight:600}
+</style>
+<script>
+(function(){
+  var grid = document.getElementById('dealGrid'); if(!grid) return;
+  var SB = 'https://nuowbpevzfwobedtgxzm.supabase.co', KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im51b3dicGV2emZ3b2JlZHRneHptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQwNjk5MjYsImV4cCI6MjEwOTY0NTkyNn0.-kSflWBRXeKtr2idO8bmEIcoipUO9pbNN-uOWapiS2M';
+  function rp(n){ return 'Rp' + Number(n || 0).toLocaleString('id-ID'); }
+  fetch(SB + '/rest/v1/rpc/marketplace_listings', {method:'POST', headers:{'apikey':KEY, 'Authorization':'Bearer ' + KEY, 'Content-Type':'application/json'}, body:'{}'})
+    .then(function(r){ return r.json(); })
+    .then(function(rows){
+      if(!Array.isArray(rows)) throw new Error('bad');
+      var items = rows.filter(function(x){ return (x.stock_base || 0) - (x.committed || 0) > 0; }).slice(0, 8);
+      if(!items.length){ document.getElementById('pilihan').style.display = 'none'; return; }
+      grid.innerHTML = items.map(function(x){
+        var sale = x.type === 'sale';
+        var ph = x.image ? '<img src="' + x.image + '" alt="" loading="lazy" onerror="this.remove()">' : '<div class="phempty"><span>' + (x.name || 'J').trim().charAt(0).toUpperCase() + '</span></div>';
+        return '<a class="dcard" href="marketplace/"><div class="dph">' + ph + '</div><div class="dbody"><div class="dname">' + x.name + '</div><div class="dstore">' + x.shop_name + '</div><div class="dprice">' + rp(sale ? x.price_sale : x.price_rental) + '<span>' + (sale ? ' · dijual' : ' /hari') + '</span></div></div></a>';
+      }).join('');
+    })
+    .catch(function(){ var p = document.getElementById('pilihan'); if(p) p.style.display = 'none'; });
+})();
 </script>
 </body>
 </html>
