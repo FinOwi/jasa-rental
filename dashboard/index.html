@@ -638,12 +638,16 @@ function renderOrders() {
 
 /* ---------- pengaturan toko ---------- */
 function renderShop() {
-  const pm = cfg.paymentMethods && typeof cfg.paymentMethods === 'object' ? Object.keys(cfg.paymentMethods) : [];
-  const brandName = k => ({ bca: 'BCA', bni: 'BNI', bri: 'BRI', mandiri: 'Mandiri', ovo: 'OVO', dana: 'DANA', gopay: 'GoPay', qris: 'QRIS' }[k] || k.toUpperCase());
+  const brandName = k => ({ bca: 'BCA', bni: 'BNI', bri: 'BRI', mandiri: 'Mandiri', ovo: 'OVO', dana: 'DANA', gopay: 'GoPay', qris: 'QRIS' }[String(k).toLowerCase()] || k);
+  /* paymentMethods bisa berbentuk objek per brand (panel BK) ATAU array string/objek (tenant mandiri) — tampilkan keduanya dengan benar. */
+  const pmRaw = cfg.paymentMethods;
+  const pm = Array.isArray(pmRaw)
+    ? pmRaw.map(m => typeof m === 'string' ? m : (m && (m.brand || m.method || m.name)) ? brandName(m.brand || m.method || m.name) : '').filter(Boolean)
+    : (pmRaw && typeof pmRaw === 'object' ? Object.keys(pmRaw).map(brandName) : []);
   const rows = [
     { t: 'Template Toko', s: 'Tampilan halaman tokomu diatur lewat panel admin & layanan Jasa Rental. Template standar gratis; tema custom seperti BK Adventure adalah layanan berbayar.', c: '' },
     { id: 'setRekber', t: 'Rekber Aman', s: 'Memuat status Rekber tokomu…', c: '' },
-    { t: 'Metode Pembayaran Langsung', s: pm.length ? pm.map(brandName).join(' · ') + ' — tampil di halaman booking tokomu, diatur di panel admin.' : 'Belum diatur — tambahkan lewat panel admin tokomu.', c: '' },
+    { t: 'Metode Pembayaran Langsung', s: pm.length ? pm.join(' · ') + ' — tampil di halaman booking tokomu, diatur di panel admin.' : 'Belum diatur — tambahkan lewat panel admin tokomu.', c: '' },
     { id: 'setVerif', t: 'Verifikasi Toko', s: 'Memuat status verifikasi tokomu…', c: '' },
     { t: 'Lokasi Depot', s: cfg.address ? esc(cfg.address) : 'Alamat belum diisi — lengkapi lewat panel admin tokomu.', c: '' },
     { t: 'Halaman Toko', s: 'jasa-rental.my.id/toko/?toko=' + tenant.slug, c: '<a href="../toko/?toko=' + tenant.slug + '" target="_blank" rel="noopener" style="font-weight:800;color:var(--green);text-decoration:none">Buka</a>' }
