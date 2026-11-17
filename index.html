@@ -66,15 +66,15 @@ h2{font-size:clamp(24px,3.6vw,32px);font-weight:800;letter-spacing:-.02em;line-h
 .sub{color:var(--ink2);margin-top:10px;max-width:640px}
 
 /* header */
-header{position:sticky;top:0;z-index:40;background:var(--ink);color:#f3efe4}
+header{position:sticky;top:0;z-index:40;background:#fff;color:var(--ink);box-shadow:0 1px 0 var(--line),0 10px 30px -24px rgba(20,40,28,.35)}
 .hwrap{max-width:1120px;margin:0 auto;padding:12px 18px;display:flex;align-items:center;gap:16px}
 .logo{display:flex;align-items:center;gap:9px;font-weight:800;font-size:18px;letter-spacing:-.02em}
 .logo .mark{width:30px;height:30px;border-radius:9px;background:var(--green);display:grid;place-items:center;color:#fff}
-.logo small{display:block;font-size:10px;font-weight:600;color:#b9c6bb;letter-spacing:.08em;text-transform:uppercase}
+.logo small{display:block;font-size:10px;font-weight:600;color:var(--mut);letter-spacing:.08em;text-transform:uppercase}
 nav.main{display:none;gap:2px;margin-left:8px}
-nav.main a{padding:8px 11px;border-radius:99px;font-weight:600;font-size:14px;color:#cfd8cd;white-space:nowrap}
+nav.main a{padding:8px 11px;border-radius:99px;font-weight:600;font-size:14px;color:var(--ink2);white-space:nowrap}
 header a,header button{white-space:nowrap}
-nav.main a:hover{background:#ffffff1a;color:#fff}
+nav.main a:hover{background:var(--green-soft);color:var(--green-d)}
 .hcta{margin-left:auto;display:flex;gap:9px;align-items:center}
 .btn{display:inline-flex;align-items:center;gap:8px;font-weight:800;border-radius:99px;padding:12px 22px;font-size:14.5px;justify-content:center}
 .btn.green{background:var(--green);color:#fff}.btn.green:active{background:var(--green-d)}
@@ -521,7 +521,7 @@ document.querySelectorAll('.faqitem button').forEach(b => b.onclick = () => b.pa
 .dcard:hover{transform:translateY(-4px);box-shadow:var(--sh-lg)}
 .dcard .dph{position:relative;aspect-ratio:4/3;background:#E9E4D8}
 .dcard .dph img{width:100%;height:100%;object-fit:cover}
-.dcard .phempty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0C3520,#1E7A46);color:#F3EFE4}
+.dcard .phempty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#EAF4ED,#DDEBDF);color:var(--green-d)}
 .dcard .phempty span{font-size:46px;font-weight:800;opacity:.92}
 .dcard .dbody{padding:12px 13px 14px;display:flex;flex-direction:column;gap:4px}
 .dcard .dname{font-weight:700;font-size:14px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:38px}
