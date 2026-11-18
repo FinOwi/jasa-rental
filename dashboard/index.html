@@ -188,7 +188,7 @@ a{color:inherit}
 .pmrow .pmdel{background:var(--red-soft);color:var(--red);font-weight:800;border-radius:10px;padding:9px 11px;font-size:12.5px}
 #toast{position:fixed;left:50%;transform:translateX(-50%);bottom:94px;z-index:60;background:var(--ink);color:#EAF2EC;font-weight:700;font-size:13.5px;padding:11px 18px;border-radius:99px;box-shadow:0 8px 24px rgba(0,0,0,.25);display:none;max-width:92vw;text-align:center}
 
-/* === Perbaikan mobile (18 Nov, E2E zgg) === */
+/* ===== SISTEM RESPONSIF TERPADU — otomatis menyesuaikan HP (<=640px), tablet (641-1024px), desktop (>1024px). Ditulis bow 18 Nov atas permintaan zgg. ===== */
 html,body{overflow-x:clip}
 @media(max-width:640px){
  .dhead .wrap{gap:8px;padding:10px 12px}
@@ -198,13 +198,10 @@ html,body{overflow-x:clip}
  .acts{flex-wrap:wrap}
  .sum{padding:13px}
  .wrap{padding:0 12px}
-}
-
-/* === Perbaikan mobile 2 — anti-zoom iOS & kerapatan (18 Nov) === */
-@media(max-width:640px){
+ .fgrid{grid-template-columns:1fr}
+ .order .obtn{min-height:44px}
  .fld input,.fld select,.fld textarea{font-size:16px}
  .pmrow select,.pmrow input{font-size:16px}
- .dhead select{max-width:36vw;text-overflow:ellipsis}
 }
 </style>
 </head>
