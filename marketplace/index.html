@@ -358,7 +358,7 @@ main{max-width:1180px;margin:0 auto;padding:18px 16px 8px}
 .success{text-align:center;padding:12px 0 4px}
 .success .okc{width:62px;height:62px;border-radius:50%;background:var(--green-soft);color:var(--green);display:grid;place-items:center;margin:6px auto 12px}
 
-/* === Perbaikan mobile (18 Nov, E2E zgg) === */
+/* ===== SISTEM RESPONSIF TERPADU — otomatis menyesuaikan HP (<=640px), tablet (641-1024px), desktop (>1024px). Ditulis bow 18 Nov atas permintaan zgg. ===== */
 html,body{overflow-x:clip}
 @media(max-width:640px){
  .grid{gap:12px}
@@ -368,12 +368,10 @@ html,body{overflow-x:clip}
  .pname{font-size:14px}
  #memberBtn{max-width:46vw}
  #memberBtn span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-}
-
-/* === Perbaikan mobile 2 — anti-zoom iOS & kerapatan (18 Nov) === */
-@media(max-width:640px){
- .search-card input,.search-card select,.sheet input,.sheet select{font-size:16px}
  .rekber-strip{padding:16px 18px}
+ .sortrow select{font-size:16px}
+ .search-card input,.search-card select,.sheet input,.sheet select{font-size:16px}
+ .bk-card{padding:14px}
 }
 </style>
 </head>
