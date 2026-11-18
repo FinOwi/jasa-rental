@@ -46,10 +46,10 @@
 <style>
 :root{
   --ink:#152219; --ink2:#43544a; --mut:#71806f;
-  --bg:#FAF8F3; --card:#ffffff; --line:#E9E4D8;
-  --green:#177245; --green-d:#0d4d2c; --green-soft:#e7f3ec;
-  --gold:#B8862B; --gold-soft:#faf0d7;
-  --blue:#1a6fd4; --blue-soft:#e8f1fc;
+  --bg:#F7F9F7; --card:#ffffff; --line:#E2EAE3;
+  --green:#0E5B36; --green-d:#083D24; --green-soft:#e7f3ec;
+  --gold:#0E5B36; --gold-soft:#E7F2EA;
+  --blue:#0E5B36; --blue-soft:#E7F2EA;
   --sh:0 1px 2px rgba(23,40,30,.05),0 16px 40px -16px rgba(23,40,30,.16);
   --sh-lg:0 2px 4px rgba(23,40,30,.06),0 28px 56px -20px rgba(23,40,30,.28);
 }
@@ -114,7 +114,7 @@ nav.main a:hover{background:var(--green-soft);color:var(--green-d)}
 .hero-card{margin-top:38px;background:#fff;color:var(--ink);border-radius:22px;padding:18px;box-shadow:var(--sh-lg);max-width:760px}
 .hero-card .hc-t{font-weight:800;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin-bottom:10px}
 .hc-row{display:flex;gap:9px;flex-wrap:wrap}
-.hc-pill{flex:1;min-width:130px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:#fbfaf7}
+.hc-pill{flex:1;min-width:130px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:#FFFFFF}
 .hc-pill small{display:block;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
 .hc-pill b{font-size:14px}
 
@@ -137,18 +137,18 @@ nav.main a:hover{background:var(--green-soft);color:var(--green-d)}
 .step p{color:var(--ink2);font-size:14px;margin-top:5px}
 
 /* rekber band */
-.band{background:var(--ink);color:#f3efe4;border-radius:26px;padding:30px 24px;margin:8px 0}
+.band{background:var(--ink);color:#EAF2EC;border-radius:26px;padding:30px 24px;margin:8px 0}
 @media(min-width:820px){.band{padding:42px}}
 .band h2{color:#fff}
 .band .sub{color:#c3cec2}
 .flow{display:grid;gap:10px;margin-top:24px}
 @media(min-width:820px){.flow{grid-template-columns:repeat(4,1fr)}}
 .fstep{background:#ffffff0d;border:1px solid #ffffff22;border-radius:16px;padding:16px}
-.fstep .no{font-size:11px;font-weight:800;letter-spacing:.1em;color:#8fd0ab;text-transform:uppercase}
+.fstep .no{font-size:11px;font-weight:800;letter-spacing:.1em;color:#7FBF97;text-transform:uppercase}
 .fstep b{display:block;margin-top:6px;font-size:15px}
 .fstep p{font-size:13px;color:#c3cec2;margin-top:4px}
 .band .note{margin-top:20px;font-size:13px;color:#aebba9;border-top:1px dashed #ffffff30;padding-top:16px}
-.band .note b{color:#f3efe4}
+.band .note b{color:#EAF2EC}
 
 /* two ways */
 .twoways{display:grid;gap:12px;margin-top:26px}
@@ -236,15 +236,15 @@ footer nav{display:flex;gap:16px;flex-wrap:wrap;font-weight:700;color:var(--ink2
       <a class="btn ghostw" href="#pemilik">Punya Usaha Rental?</a>
     </div>
     <div class="trustrow">
-      <span class="trust"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8fd0ab" stroke-width="2.4" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6z"/><path d="m9 12 2 2 4-4" stroke-linecap="round"/></svg>Rekber Aman tersedia</span>
-      <span class="trust"><svg width="14" height="14" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#7db8f0"/><path d="m8.2 12.4 2.5 2.5 5-5.4" stroke="#152219" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Identitas &amp; rekening toko terverifikasi</span>
+      <span class="trust"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7FBF97" stroke-width="2.4" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6z"/><path d="m9 12 2 2 4-4" stroke-linecap="round"/></svg>Rekber Aman tersedia</span>
+      <span class="trust"><svg width="14" height="14" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#0E5B36"/><path d="m8.2 12.4 2.5 2.5 5-5.4" stroke="#152219" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Identitas &amp; rekening toko terverifikasi</span>
       <span class="trust">Stok tampil real-time, bukan angka pajangan</span>
       <span class="trust">Ulasan hanya dari penyewa yang benar-benar menyewa</span>
     </div>
     <div class="hero-vis" aria-hidden="true">
       <div class="hv big"><img src="https://fr.wildbounds.com/cdn/shop/files/big-agnes-copper-spur-ul3-tents-3p-tangelo-tcsul3tgo25-1131358387_600x.jpg?v=1739796548" alt="" loading="lazy" onerror="this.remove()"></div>
       <div class="hv-price"><small>TENDA FAVORIT</small><b>Big Agnes Copper Spur HV UL3</b><span><b>Rp80.000</b>/hari · BK ADVENTURE</span></div>
-      <div class="hv-card"><span class="sh-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0d4d2c" stroke-width="2.2" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6z"/><path d="m9 12 2 2 4-4" stroke-linecap="round"/></svg></span><span><b>Rekber Aman</b><span>Dana ditahan platform, diteruskan sesudah barang kembali.</span></span></div>
+      <div class="hv-card"><span class="sh-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#083D24" stroke-width="2.2" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6z"/><path d="m9 12 2 2 4-4" stroke-linecap="round"/></svg></span><span><b>Rekber Aman</b><span>Dana ditahan platform, diteruskan sesudah barang kembali.</span></span></div>
     </div>
     <div class="hero-card">
       <div class="hc-t">Pencarian populer di marketplace</div>
@@ -292,7 +292,7 @@ footer nav{display:flex;gap:16px;flex-wrap:wrap;font-weight:700;color:var(--ink2
 <section id="rekber" style="padding-top:6px">
   <div class="wrap">
     <div class="band">
-      <div class="eyebrow" style="color:#8fd0ab">Pembeda Jasa Rental</div>
+      <div class="eyebrow" style="color:#7FBF97">Pembeda Jasa Rental</div>
       <h2>Rekber Aman — uangmu tidak langsung berpindah tangan</h2>
       <p class="sub">Rekening bersama dari Jasa Rental. Penyewa tenang karena dana belum sampai ke toko sebelum barang diterima; toko tenang karena pembayaran penyewa sudah terkonfirmasi platform sebelum barang dilepas.</p>
       <div class="flow">
@@ -337,7 +337,7 @@ footer nav{display:flex;gap:16px;flex-wrap:wrap;font-weight:700;color:var(--ink2
       <div class="featbox"><span class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 19V5m0 14h16M8 15v-4m4 4V8m4 7v-6"/></svg></span><h3>Stok live yang jujur</h3><p>Stok di marketplace berkurang otomatis hanya sesudah booking terkonfirmasi dan pembayaran terverifikasi — penyewa tidak lagi dijanjikan barang yang sudah keluar.</p></div>
       <div class="featbox"><span class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6z"/><path d="m9 12 2 2 4-4" stroke-linecap="round"/></svg></span><h3>Rekber Aman untuk tokomu</h3><p>Berani melepas barang ke penyewa baru: pembayarannya dijamin platform, bukan janji transfer. Bukti transfer palsu bukan lagi risikomu.</p></div>
       <div class="featbox"><span class="ic"><svg width="19" height="19" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor" opacity=".18"/><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="m8.2 12.4 2.5 2.5 5-5.4" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><h3>Badge Terverifikasi</h3><p>Identitas, alamat, dan rekeningmu diperiksa platform. Badge ini yang membuat penyewa berani membayar — dan menjadi syarat mengaktifkan Rekber &amp; PRO.</p></div>
-      <div class="featbox"><span class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="#e8a10c"><path d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.4l-5.8 3.1 1.1-6.5L2.6 9.4l6.5-.9z"/></svg></span><h3>Ulasan dari transaksi nyata</h3><p>Rating tokomu dibangun hanya dari booking yang selesai — tidak bisa dibeli, tidak bisa dihapus, bisa kamu balas secara publik.</p></div>
+      <div class="featbox"><span class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="#0E5B36"><path d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.4l-5.8 3.1 1.1-6.5L2.6 9.4l6.5-.9z"/></svg></span><h3>Ulasan dari transaksi nyata</h3><p>Rating tokomu dibangun hanya dari booking yang selesai — tidak bisa dibeli, tidak bisa dihapus, bisa kamu balas secara publik.</p></div>
       <div class="featbox"><span class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 20V10m8 10V4m8 16v-8"/></svg></span><h3>PRO — tampil pertama</h3><p>Langganan PRO menaikkan produkmu ke kelompok teratas hasil pencarian yang relevan, seperti iklan. Penyewa tetap melihat label PRO secara terbuka.</p></div>
     </div>
   </div>
@@ -517,9 +517,9 @@ document.querySelectorAll('.faqitem button').forEach(b => b.onclick = () => b.pa
 @media(min-width:760px){.dgrid{grid-template-columns:repeat(3,1fr)}}
 @media(min-width:1024px){.dgrid{grid-template-columns:repeat(4,1fr)}}
 .dload{grid-column:1/-1;text-align:center;color:var(--mut);font-weight:600;padding:26px 0}
-.dcard{background:var(--card);border:1px solid #EDEAE0;border-radius:18px;overflow:hidden;box-shadow:0 2px 10px rgba(23,40,30,.05);display:flex;flex-direction:column;transition:transform .25s ease,box-shadow .25s ease}
+.dcard{background:var(--card);border:1px solid #E2EAE3;border-radius:18px;overflow:hidden;box-shadow:0 2px 10px rgba(23,40,30,.05);display:flex;flex-direction:column;transition:transform .25s ease,box-shadow .25s ease}
 .dcard:hover{transform:translateY(-4px);box-shadow:var(--sh-lg)}
-.dcard .dph{position:relative;aspect-ratio:4/3;background:#E9E4D8}
+.dcard .dph{position:relative;aspect-ratio:4/3;background:#E2EAE3}
 .dcard .dph img{width:100%;height:100%;object-fit:cover}
 .dcard .phempty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#EAF4ED,#DDEBDF);color:var(--green-d)}
 .dcard .phempty span{font-size:46px;font-weight:800;opacity:.92}
