@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--green:#177245;--green-d:#0f5132;--ink:#152219;--mut:#5c6f62;--line:#e2eae4;--gold:#b07d0a;--gold-soft:#f7ecd2;--red:#c0392b;--bg:#f6f9f6}
+:root{--green:#0E5B36;--green-d:#083D24;--ink:#152219;--mut:#5c6f62;--line:#e2eae4;--gold:#0E5B36;--gold-soft:#E7F2EA;--red:#c0392b;--bg:#f6f9f6}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
 header{background:#fff;border-bottom:1px solid var(--line)}
@@ -158,7 +158,7 @@ async function renderForm(){
   const opts = CATS.map(c => '<option value="' + c[0] + '">' + c[1] + '</option>').join('');
   document.getElementById('box').innerHTML = mine +
     '<div class="card"><h2>' + (stores.length ? 'Buka toko lagi' : 'Langkah 2 — Data toko') + '</h2>' +
-    '<p class="sub">Masuk sebagai <b>' + esc(profile ? profile.email : '') + '</b>. Toko langsung tayang sesudah disimpan. <button type="button" style="background:none;border:none;color:#177245;font-weight:700;cursor:pointer;padding:0;font-size:13px;text-decoration:underline" onclick="logoutDaftar()">Keluar / ganti akun</button></p>' +
+    '<p class="sub">Masuk sebagai <b>' + esc(profile ? profile.email : '') + '</b>. Toko langsung tayang sesudah disimpan. <button type="button" style="background:none;border:none;color:#0E5B36;font-weight:700;cursor:pointer;padding:0;font-size:13px;text-decoration:underline" onclick="logoutDaftar()">Keluar / ganti akun</button></p>' +
     '<label for="fName">Nama toko</label><input id="fName" maxlength="60" placeholder="cth: SewaKita Outdoor">' +
     '<label for="fSlug">Alamat toko (slug)</label><input id="fSlug" maxlength="32" placeholder="cth: sewakita-outdoor">' +
     '<div class="hint" id="slugHint">Alamat tokomu: jasa-rental.my.id/toko/?toko=<b>slug-kamu</b> — huruf kecil, angka, dan tanda hubung.</div>' +
