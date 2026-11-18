@@ -54,6 +54,17 @@ html,body{overflow-x:clip}
  .card{padding:18px}
  .hwrap{padding:12px 14px}
 }
+
+/* === Perbaikan mobile 2 — anti-zoom iOS & kerapatan (18 Nov) === */
+@media(max-width:640px){
+ input,select,textarea{font-size:16px}
+ .hero h1{font-size:26px}
+ .logo small{display:none}
+ .hnav a{margin-left:10px;font-size:13px}
+ .store-row{flex-wrap:wrap}
+ .store-row b{min-width:0}
+ .gbtn{padding:12px 18px;font-size:14.5px}
+}
 </style>
 </head>
 <body>
@@ -214,7 +225,7 @@ async function submitDaftar(){
 }
 function renderSuccess(res){
   document.getElementById('box').innerHTML =
-    '<div class="card"><div class="big-ok">🎉</div><h2 style="margin-top:8px">Tokomu sudah tayang!</h2>' +
+    '<div class="card"><div class="big-ok" style="color:#0E5B36"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" fill="#E7F2EA" stroke="none"/><path d="m8 12.5 2.6 2.6L16 9.5"/></svg></div><h2 style="margin-top:8px">Tokomu sudah tayang!</h2>' +
     '<p class="sub">Alamat toko: <b>jasa-rental.my.id/toko/?toko=' + esc(res.slug) + '</b><span class="ok-badge">Baru</span></p>' +
     '<p class="sub" style="margin-top:10px">Status awal semua toko baru: <b>belum terverifikasi</b>. Lengkapi katalog &amp; metode pembayaran, lalu ajukan verifikasi dari dashboard untuk membuka Rekber Aman &amp; PRO.</p>' +
     '<div class="links"><a href="../toko/?toko=' + esc(res.slug) + '">Lihat Tokomu</a><a class="alt" href="../dashboard/">Buka Dashboard</a><a class="alt" href="../marketplace/">Ke Marketplace</a></div></div>';
