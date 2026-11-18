@@ -938,6 +938,10 @@ function renderMemberUI(){
   renderMemberUI();
 })();
 
+(function(){ try{ var u = new URLSearchParams(location.search); var q = u.get('q'); var kat = u.get('kat');
+  if(q){ state.query = q; var fq = document.getElementById('fQuery'); if(fq) fq.value = q; }
+  if(kat && CATS.some(function(c){ return c[0] === kat; })){ state.cat = kat; document.querySelectorAll('[data-cat]').forEach(function(x){ x.classList.toggle('on', x.dataset.cat === kat); }); }
+}catch(e){} })();
 loadLive();
 </script>
 </body>
