@@ -538,7 +538,9 @@ document.querySelectorAll('.faqitem button').forEach(b => b.onclick = () => b.pa
     .then(function(r){ return r.json(); })
     .then(function(rows){
       if(!Array.isArray(rows)) throw new Error('bad');
-      var items = rows.filter(function(x){ return (x.stock_base || 0) - (x.committed || 0) > 0; }).slice(0, 8);
+      var items = rows.filter(function(x){ return (x.stock_base || 0) - (x.committed || 0) > 0; });
+      items.sort(function(a, b){ return (b.image ? 1 : 0) - (a.image ? 1 : 0); });
+      items = items.slice(0, 8);
       if(!items.length){ document.getElementById('pilihan').style.display = 'none'; return; }
       grid.innerHTML = items.map(function(x){
         var sale = x.type === 'sale';
