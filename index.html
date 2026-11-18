@@ -205,6 +205,21 @@ nav.main a:hover{background:var(--green-soft);color:var(--green-d)}
 footer{padding:34px 0 40px;color:var(--mut);font-size:13px}
 footer .frow{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start}
 footer nav{display:flex;gap:16px;flex-wrap:wrap;font-weight:700;color:var(--ink2)}
+
+/* === Perbaikan mobile (18 Nov, E2E zgg) === */
+html,body{overflow-x:clip}
+@media(max-width:640px){
+ .hwrap{gap:10px;padding:10px 14px}
+ .hcta{gap:7px}
+ .hcta .btn{padding:10px 14px;font-size:13.5px}
+ .hero .wrap{padding:44px 16px 66px}
+ .hsearch button{padding:12px 20px}
+ .statsbar{padding:14px 4px}
+ .statsbar b{font-size:19px}
+ .statsbar span{font-size:11px}
+ .trust{font-size:12px;padding:7px 11px}
+}
+@media(max-width:400px){.logo small{display:none}}
 </style>
 </head>
 <body>
@@ -216,8 +231,8 @@ footer nav{display:flex;gap:16px;flex-wrap:wrap;font-weight:700;color:var(--ink2
       <a href="marketplace/">Marketplace</a><a href="#cara-kerja">Cara Kerja</a><a href="#rekber">Rekber Aman</a><a href="#pemilik">Untuk Pemilik Rental</a><a href="#harga">Harga</a><a href="#faq">FAQ</a>
     </nav>
     <div class="hcta">
-      <button class="btn ghostw" id="btnMasuk" type="button">Masuk</button>
-      <a class="btn white" href="daftar/">Daftarkan Toko</a>
+      <button class="btn line" id="btnMasuk" type="button">Masuk</button>
+      <a class="btn green" href="daftar/">Daftarkan Toko</a>
     </div>
   </div>
 </header>
