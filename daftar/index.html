@@ -46,6 +46,14 @@ input:focus,select:focus{outline:2px solid var(--green);border-color:var(--green
 .links a.alt{background:#fff;color:var(--green-d);border:1.5px solid var(--line)}
 .foot{max-width:1060px;margin:0 auto;padding:0 20px 40px;color:var(--mut);font-weight:600;font-size:13px}
 #toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:#14231a;color:#fff;padding:11px 16px;border-radius:12px;font-weight:700;font-size:13.5px;z-index:99;display:none;max-width:88vw;text-align:center}
+
+/* === Perbaikan mobile (18 Nov, E2E zgg) === */
+html,body{overflow-x:clip}
+@media(max-width:640px){
+ main{padding:24px 14px 48px}
+ .card{padding:18px}
+ .hwrap{padding:12px 14px}
+}
 </style>
 </head>
 <body>
