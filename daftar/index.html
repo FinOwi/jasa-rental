@@ -47,16 +47,12 @@ input:focus,select:focus{outline:2px solid var(--green);border-color:var(--green
 .foot{max-width:1060px;margin:0 auto;padding:0 20px 40px;color:var(--mut);font-weight:600;font-size:13px}
 #toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:#14231a;color:#fff;padding:11px 16px;border-radius:12px;font-weight:700;font-size:13.5px;z-index:99;display:none;max-width:88vw;text-align:center}
 
-/* === Perbaikan mobile (18 Nov, E2E zgg) === */
+/* ===== SISTEM RESPONSIF TERPADU — otomatis menyesuaikan HP (<=640px), tablet (641-1024px), desktop (>1024px). Ditulis bow 18 Nov atas permintaan zgg. ===== */
 html,body{overflow-x:clip}
 @media(max-width:640px){
  main{padding:24px 14px 48px}
  .card{padding:18px}
  .hwrap{padding:12px 14px}
-}
-
-/* === Perbaikan mobile 2 — anti-zoom iOS & kerapatan (18 Nov) === */
-@media(max-width:640px){
  input,select,textarea{font-size:16px}
  .hero h1{font-size:26px}
  .logo small{display:none}
@@ -64,6 +60,7 @@ html,body{overflow-x:clip}
  .store-row{flex-wrap:wrap}
  .store-row b{min-width:0}
  .gbtn{padding:12px 18px;font-size:14.5px}
+ .links a{flex:1 1 140px;text-align:center}
 }
 </style>
 </head>
