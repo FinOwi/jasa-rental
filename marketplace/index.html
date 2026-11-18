@@ -139,7 +139,7 @@
   --bg:#F7F9F7; --card:#ffffff; --line:#E2EAE3;
   --green:#0E5B36; --green-d:#083D24; --green-soft:#e7f3ec;
   --gold:#0E5B36; --gold-soft:#E7F2EA;
-  --blue:#0E5B36; --red:#C0392B; --red-soft:#fbeae8;
+  --blue:#0E5B36; --red:#152219; --red-soft:#EFF3F0;
   --amber:#083D24; --amber-bg:#E7F2EA; --amber-line:#C9DFCF;
   --r:20px; --sh:0 1px 2px rgba(23,40,30,.05),0 16px 40px -16px rgba(23,40,30,.16);
   --sh-lg:0 2px 4px rgba(23,40,30,.06),0 28px 56px -20px rgba(23,40,30,.28);
@@ -244,7 +244,7 @@ main{max-width:1180px;margin:0 auto;padding:18px 16px 8px}
 .phempty small{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.72}
 .pcard .ph img{width:100%;height:100%;object-fit:cover}
 .fav{position:absolute;top:8px;right:8px;width:32px;height:32px;border-radius:50%;background:#fffffff2;display:grid;place-items:center;box-shadow:var(--sh)}
-.fav.on{color:#C0392B}
+.fav.on{color:#152219}
 .tagpro{position:absolute;top:8px;left:8px;background:var(--gold);color:#fff;font-size:10.5px;font-weight:800;letter-spacing:.06em;padding:4px 8px;border-radius:7px}
 .tagcat{position:absolute;bottom:8px;left:8px;background:#152219cc;color:#fff;font-size:11px;font-weight:700;padding:4px 9px;border-radius:99px;backdrop-filter:blur(2px)}
 .taglow{position:absolute;bottom:8px;right:8px;background:#0E5B36;color:#fff;font-size:10px;font-weight:800;letter-spacing:.05em;padding:4px 8px;border-radius:7px}
@@ -495,7 +495,7 @@ const ICON = {
   pin:'<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
   shield:'<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6z"/><path d="m9 12 2 2 4-4" stroke-linecap="round"/></svg>',
   verif:'<svg width="14" height="14" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#0E5B36"/><path d="m8.2 12.4 2.5 2.5 5-5.4" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-  heart:f=>'<svg width="16" height="16" viewBox="0 0 24 24" fill="'+(f?'#C0392B':'none')+'" stroke="'+(f?'#C0392B':'#43544a')+'" stroke-width="2.2" stroke-linejoin="round"><path d="M19.8 5.1a5 5 0 0 0-7.1 0l-.7.7-.7-.7a5 5 0 1 0-7.1 7.1l7.8 7.8 7.8-7.8a5 5 0 0 0 0-7.1z"/></svg>'
+  heart:f=>'<svg width="16" height="16" viewBox="0 0 24 24" fill="'+(f?'#152219':'none')+'" stroke="'+(f?'#152219':'#43544a')+'" stroke-width="2.2" stroke-linejoin="round"><path d="M19.8 5.1a5 5 0 0 0-7.1 0l-.7.7-.7-.7a5 5 0 1 0-7.1 7.1l7.8 7.8 7.8-7.8a5 5 0 0 0 0-7.1z"/></svg>'
 };
 const CATS = [
   ['semua','Semua'],['kendaraan','Kendaraan'],['outdoor','Outdoor & Camping'],['fashion','Fashion & Kostum'],
