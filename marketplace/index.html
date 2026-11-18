@@ -357,6 +357,18 @@ main{max-width:1180px;margin:0 auto;padding:18px 16px 8px}
 .btn-ghost{width:100%;border:1px solid var(--line);font-weight:800;border-radius:13px;padding:13px;margin-top:9px;background:#fff}
 .success{text-align:center;padding:12px 0 4px}
 .success .okc{width:62px;height:62px;border-radius:50%;background:var(--green-soft);color:var(--green);display:grid;place-items:center;margin:6px auto 12px}
+
+/* === Perbaikan mobile (18 Nov, E2E zgg) === */
+html,body{overflow-x:clip}
+@media(max-width:640px){
+ .grid{gap:12px}
+ .search-card{padding:14px}
+ .hero-slide{aspect-ratio:16/10}
+ .hero-in{padding:22px 18px 18px}
+ .pname{font-size:14px}
+ #memberBtn{max-width:46vw}
+ #memberBtn span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+}
 </style>
 </head>
 <body>
