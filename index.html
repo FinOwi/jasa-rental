@@ -84,39 +84,34 @@ nav.main a:hover{background:var(--green-soft);color:var(--green-d)}
 .btn.line{border:1.5px solid var(--line);background:#fff;color:var(--ink)}
 @media(min-width:900px){nav.main{display:flex}}
 
-/* hero */
-.hero{padding:16px 16px 6px;position:relative}
-.hero .wrap{background:linear-gradient(125deg,#F5F9F4,#EAF4ED 60%,#E2F0E5);border-radius:28px;padding-top:36px;padding-bottom:36px;box-shadow:var(--sh)}
-@media(min-width:960px){.hero .wrap{padding:46px 48px}}
-.hero .btn.white{background:var(--green);color:#fff;box-shadow:0 12px 24px -10px rgba(23,114,69,.55)}
-.hero .btn.ghostw{border:1px solid var(--line);color:var(--ink);background:#fff}
-@media(min-width:960px){.hero .wrap{display:grid;grid-template-columns:1.04fr .96fr;gap:48px;align-items:center}}
-.hero-vis{display:none}
-@media(min-width:960px){.hero-vis{display:block;grid-column:2;grid-row:1/span 6;position:relative}}
-.hv{border-radius:22px;overflow:hidden;background:#DCE9DE;box-shadow:0 24px 44px -22px rgba(16,42,26,.35)}
-.hv img{width:100%;height:100%;object-fit:cover}
-.hv.big{grid-row:auto;height:100%;min-height:350px}
-.hv-price{position:absolute;top:16px;right:16px;background:#fff;color:var(--ink);border-radius:14px;padding:11px 14px;box-shadow:var(--sh-lg);max-width:250px}
-.hv-price small{display:block;font-size:10px;font-weight:800;letter-spacing:.08em;color:var(--green)}
-.hv-price b{display:block;font-size:14px;line-height:1.3;margin-top:2px}
-.hv-price span{display:block;font-size:12.5px;color:var(--ink2);font-weight:700;margin-top:2px}
-.hv-price span b{display:inline;font-size:13.5px;color:var(--green-d)}
-.hv-card{position:absolute;left:-16px;bottom:22px;background:#fff;color:var(--ink);border-radius:16px;padding:12px 16px;box-shadow:var(--sh-lg);display:flex;gap:11px;align-items:center;max-width:300px}
-.hv-card b{font-size:16px;font-weight:800;display:block}
-.hv-card span{font-size:12px;color:var(--ink2);font-weight:600;line-height:1.35;display:block}
-.hv-card .sh-ic{width:38px;height:38px;border-radius:12px;background:var(--green-soft);display:grid;place-items:center;flex:none}
-.hero h1{font-size:clamp(32px,5.2vw,50px);font-weight:800;letter-spacing:-.02em;line-height:1.12;max-width:700px}
-.hero h1 em{font-style:normal;color:var(--green)}
-.hero .lead{color:var(--ink2);margin-top:18px;max-width:600px;font-size:16.5px}
+/* hero — foto besar + pencarian (arah 1, pilihan zgg 18 Nov) */
+.hero{position:relative;background:#083D24 url('/bk-adventure/assets/hero-bk-adventure.jpg') center 38%/cover no-repeat}
+.hero::before{content:'';position:absolute;inset:0;background:linear-gradient(100deg,rgba(8,61,36,.90) 0%,rgba(8,61,36,.66) 48%,rgba(14,91,54,.30) 80%,rgba(14,91,54,.16))}
+.hero .wrap{position:relative;z-index:1;padding:54px 20px 74px}
+@media(min-width:960px){.hero .wrap{padding:76px 48px 96px}}
+.hkick{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.45);color:#fff;font-size:12px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;padding:7px 13px;border-radius:99px}
+.hero h1{font-size:clamp(34px,6vw,58px);font-weight:800;letter-spacing:-.02em;line-height:1.1;max-width:720px;color:#fff;margin-top:18px}
+.hero h1 em{font-style:normal;color:#7FBF97}
+.hero .lead{color:rgba(255,255,255,.93);margin-top:16px;max-width:620px;font-size:16.5px}
+.hsearch{display:flex;gap:6px;background:#fff;border-radius:99px;padding:6px;max-width:660px;margin-top:28px;box-shadow:0 24px 44px -18px rgba(4,32,18,.55)}
+.hsearch input{flex:1;border:0;outline:none;font:inherit;font-size:16px;padding:11px 16px;background:transparent;color:var(--ink);min-width:0}
+.hsearch button{flex:none;background:var(--green);color:#fff;border:0;border-radius:99px;padding:12px 28px;font:inherit;font-weight:800;font-size:15.5px;cursor:pointer}
+.hsearch button:hover{background:var(--green-d)}
+.hchips{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}
+.hchips a{color:#fff;border:1px solid rgba(255,255,255,.55);background:rgba(255,255,255,.14);padding:8px 14px;border-radius:99px;font-weight:700;font-size:13px;text-decoration:none}
+.hchips a:hover{background:rgba(255,255,255,.28)}
 .hero-cta{display:flex;gap:11px;flex-wrap:wrap;margin-top:26px}
-.trustrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:30px}
+.trustrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:26px}
 .trust{display:inline-flex;align-items:center;gap:7px;border:1px solid #D8E6DA;background:#fff;border-radius:99px;padding:8px 13px;font-size:13px;font-weight:700;color:var(--ink2);box-shadow:var(--sh)}
-.hero-card{margin-top:38px;background:#fff;color:var(--ink);border-radius:22px;padding:18px;box-shadow:var(--sh-lg);max-width:760px}
-.hero-card .hc-t{font-weight:800;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin-bottom:10px}
-.hc-row{display:flex;gap:9px;flex-wrap:wrap}
-.hc-pill{flex:1;min-width:130px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:#FFFFFF}
-.hc-pill small{display:block;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
-.hc-pill b{font-size:14px}
+.hero .trust{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.38);color:#fff;box-shadow:none}
+.hown{margin-top:20px;color:rgba(255,255,255,.85);font-size:14px;font-weight:600}
+.hown a{color:#fff;font-weight:800;text-decoration:underline;text-underline-offset:3px}
+.statswrap{padding:0 16px}
+.statsbar{position:relative;z-index:2;max-width:1040px;margin:-36px auto 0;background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--sh-lg);display:grid;grid-template-columns:repeat(3,1fr);padding:18px 8px}
+.statsbar .stat{text-align:center;padding:0 6px}
+.statsbar .stat + .stat{border-left:1px solid var(--line)}
+.statsbar b{display:block;font-size:23px;font-weight:800;color:var(--green-d);letter-spacing:-.01em}
+.statsbar span{display:block;font-size:12.3px;color:var(--ink2);font-weight:600;margin-top:2px;line-height:1.35}
 
 /* categories */
 .catgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;margin-top:26px}
@@ -229,11 +224,19 @@ footer nav{display:flex;gap:16px;flex-wrap:wrap;font-weight:700;color:var(--ink2
 
 <div class="hero">
   <div class="wrap">
+    <span class="hkick">Marketplace Rental Indonesia</span>
     <h1>Sewa apa saja, dari toko rental yang <em>sudah diperiksa</em>.</h1>
     <p class="lead">Jasa Rental adalah marketplace untuk semua kebutuhan sewa — kendaraan, kamera, alat event, perlengkapan bayi, sampai tenda camping. Bandingkan harga, rating, dan stok asli lintas toko, lalu pilih sendiri cara bayarmu: langsung ke toko, atau ditahan dulu dengan Rekber Aman.</p>
-    <div class="hero-cta">
-      <a class="btn green" href="marketplace/">Cari Barang Sewa</a>
-      <a class="btn ghostw" href="#pemilik">Punya Usaha Rental?</a>
+    <form class="hsearch" action="marketplace/" method="get" role="search">
+      <input type="search" name="q" placeholder="Mau sewa apa hari ini? Coba 'tenda dome' atau 'kamera'…" aria-label="Cari barang sewa">
+      <button type="submit">Cari</button>
+    </form>
+    <div class="hchips">
+      <a href="marketplace/?kat=outdoor">Outdoor &amp; Camping</a>
+      <a href="marketplace/?kat=kamera">Kamera &amp; Fotografi</a>
+      <a href="marketplace/?kat=kendaraan">Kendaraan</a>
+      <a href="marketplace/?kat=event">Event &amp; Pesta</a>
+      <a href="marketplace/?kat=elektronik">Elektronik</a>
     </div>
     <div class="trustrow">
       <span class="trust"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7FBF97" stroke-width="2.4" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6z"/><path d="m9 12 2 2 4-4" stroke-linecap="round"/></svg>Rekber Aman tersedia</span>
@@ -241,22 +244,14 @@ footer nav{display:flex;gap:16px;flex-wrap:wrap;font-weight:700;color:var(--ink2
       <span class="trust">Stok tampil real-time, bukan angka pajangan</span>
       <span class="trust">Ulasan hanya dari penyewa yang benar-benar menyewa</span>
     </div>
-    <div class="hero-vis" aria-hidden="true">
-      <div class="hv big"><img src="https://fr.wildbounds.com/cdn/shop/files/big-agnes-copper-spur-ul3-tents-3p-tangelo-tcsul3tgo25-1131358387_600x.jpg?v=1739796548" alt="" loading="lazy" onerror="this.remove()"></div>
-      <div class="hv-price"><small>TENDA FAVORIT</small><b>Big Agnes Copper Spur HV UL3</b><span><b>Rp80.000</b>/hari · BK ADVENTURE</span></div>
-      <div class="hv-card"><span class="sh-ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#083D24" stroke-width="2.2" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6z"/><path d="m9 12 2 2 4-4" stroke-linecap="round"/></svg></span><span><b>Rekber Aman</b><span>Dana ditahan platform, diteruskan sesudah barang kembali.</span></span></div>
-    </div>
-    <div class="hero-card">
-      <div class="hc-t">Pencarian populer di marketplace</div>
-      <div class="hc-row">
-        <div class="hc-pill"><small>Kota</small><b>Berastagi</b></div>
-        <div class="hc-pill"><small>Kategori</small><b>Outdoor &amp; Camping</b></div>
-        <div class="hc-pill"><small>Kata kunci</small><b>tenda dome 4 orang</b></div>
-        <a class="btn green" href="marketplace/" style="align-self:stretch">Lihat Hasilnya</a>
-      </div>
-    </div>
+    <p class="hown">Punya usaha rental? <a href="#pemilik">Daftarkan tokomu gratis</a> — tokomu langsung tayang di marketplace.</p>
   </div>
 </div>
+<div class="statswrap"><div class="statsbar">
+  <div class="stat"><b id="statToko">3</b><span>Toko terdaftar</span></div>
+  <div class="stat"><b id="statProduk">21</b><span>Produk siap sewa &amp; beli</span></div>
+  <div class="stat"><b>Rekber Aman</b><span>Dana ditahan sampai sewa selesai</span></div>
+</div></div>
 
 <section id="kategori">
   <div class="wrap">
@@ -538,6 +533,7 @@ document.querySelectorAll('.faqitem button').forEach(b => b.onclick = () => b.pa
     .then(function(r){ return r.json(); })
     .then(function(rows){
       if(!Array.isArray(rows)) throw new Error('bad');
+      var sp = document.getElementById('statProduk'); if(sp) sp.textContent = rows.length;
       var items = rows.filter(function(x){ return (x.stock_base || 0) - (x.committed || 0) > 0; });
       items.sort(function(a, b){ return (b.image ? 1 : 0) - (a.image ? 1 : 0); });
       items = items.slice(0, 8);
@@ -550,6 +546,10 @@ document.querySelectorAll('.faqitem button').forEach(b => b.onclick = () => b.pa
       }).join('');
     })
     .catch(function(){ var p = document.getElementById('pilihan'); if(p) p.style.display = 'none'; });
+  fetch(SB + '/rest/v1/rpc/marketplace_stores', {method:'POST', headers:{'apikey':KEY, 'Authorization':'Bearer ' + KEY, 'Content-Type':'application/json'}, body:'{}'})
+    .then(function(r){ return r.json(); })
+    .then(function(st){ if(Array.isArray(st)){ var el = document.getElementById('statToko'); if(el) el.textContent = st.length; } })
+    .catch(function(){});
 })();
 </script>
 </body>
