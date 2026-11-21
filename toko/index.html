@@ -4,206 +4,238 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Toko Tenant — Jasa Rental</title>
+<!-- SWISS MONOCHROME V4 -->
 <meta name="description" content="Halaman toko tenant Jasa Rental dengan template standar gratis: katalog, harga, dan stok langsung dari server toko.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --or:#0E5B36; --or-d:#083D24; --or-soft:#e7f3ec;
-  --ink:#1D2420; --ink2:#57645C; --mut:#97A29A;
-  --bg:#F7F9F7; --card:#fff; --line:#E2EAE3;
-  --sh:0 1px 2px rgba(23,40,30,.05),0 16px 40px -16px rgba(23,40,30,.16);
-  --sh-lg:0 2px 4px rgba(23,40,30,.06),0 28px 56px -20px rgba(23,40,30,.28);
-  --green:#0E5B36; --green-soft:#e7f3ec;
-  --gold:#0E5B36; --gold-soft:#E7F2EA;
+  --white:#FFFFFF; --paper:#F5F5F5; --hover:#ECECEC; --rule:#E2E2E2; --rule-mid:#BFBFBF;
+  --ink-3:#767676; --ink-2:#404040; --black:#0A0A0A;
+  /* alias nama variabel lama — dirujuk string JS (var(--line), var(--mut), dst); semua monokrom */
+  --or:#0A0A0A; --or-d:#0A0A0A; --or-soft:#F5F5F5;
+  --ink:#0A0A0A; --ink2:#404040; --mut:#767676;
+  --bg:#FFFFFF; --card:#fff; --line:#E2E2E2;
+  --green:#0A0A0A; --green-soft:#F5F5F5; --gold:#0A0A0A; --gold-soft:#F5F5F5;
+  --sh:none; --sh-lg:none;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.55;padding-bottom:70px}
-.shop-name{font-weight:800;letter-spacing:-.02em}
-.sect-t h3{font-weight:800;letter-spacing:-.01em}
+html,body{overflow-x:clip}
+body{font-family:"Helvetica Neue",Helvetica,-apple-system,BlinkMacSystemFont,"Inter",Arial,sans-serif;background:var(--white);color:var(--black);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;padding-bottom:70px}
+.mono{font-family:ui-monospace,SFMono-Regular,"JetBrains Mono",Menlo,Consolas,monospace;font-variant-numeric:tabular-nums}
+.micro{font-size:10px;letter-spacing:.11em;text-transform:uppercase;font-weight:600}
 button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 a{color:inherit;text-decoration:none}
 img{display:block}
 .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
 
-/* top platform bar */
-.topbar{background:#152219;color:#EAF2EC}
-.topbar .wrap{display:flex;align-items:center;gap:10px;padding:9px 12px}
-.topbar b{font-size:13.5px}
-.topbar span{font-size:12px;color:#b9c6bb}
-.topbar .tag{margin-left:auto;font-size:10px;font-weight:800;letter-spacing:.06em;background:#0E5B36;padding:3px 8px;border-radius:99px;white-space:nowrap}
+/* tombol Swiss */
+.sw-btn-solid{background:var(--black);color:#fff;border:1px solid var(--black);border-radius:0;font-size:11px;letter-spacing:.09em;text-transform:uppercase;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:11px 20px;transition:background .14s ease,color .14s ease}
+.sw-btn-solid:hover{background:#2A2A2A;border-color:#2A2A2A}
+.sw-btn-outline{background:#fff;color:var(--black);border:1px solid var(--black);border-radius:0;font-size:11px;letter-spacing:.09em;text-transform:uppercase;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:11px 20px;transition:background .14s ease,color .14s ease}
+.sw-btn-outline:hover{background:var(--black);color:#fff}
+.sw-btn-ghost{background:#fff;color:var(--black);border:1px solid var(--rule-mid);border-radius:0;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:11px 16px;transition:border-color .14s ease,background .14s ease}
+.sw-btn-ghost:hover{border-color:var(--black)}
+.sw-btn-solid:disabled{background:#D9D9D9;border-color:#D9D9D9;color:#767676;cursor:not-allowed}
 
-/* strip pencarian platform */
-.searchstrip{background:linear-gradient(120deg,#083D24,#0E5B36);padding:14px 0 16px}
-.searchstrip .wrap{display:flex;gap:10px;align-items:center}
-.sbox{flex:1;background:#fff;border-radius:14px;display:flex;align-items:center;padding:0 6px 0 15px;height:46px;box-shadow:0 8px 20px -10px rgba(0,0,0,.35)}
-.sbox input{flex:1;border:none;outline:none;font:inherit;font-size:14px;min-width:0}
-.sbox .sbtn{background:var(--or);color:#fff;border-radius:9px;width:52px;height:32px;display:grid;place-items:center;flex:none}
-.shopbtn{color:#fff;display:flex;flex-direction:column;align-items:center;gap:1px;font-size:10px;font-weight:700;padding:2px 4px}
+/* lencana monokrom (inversi isian & gaya garis — pola prototipe) */
+.badge-rekber{display:inline-flex;align-items:center;gap:5px;background:var(--black);color:#fff;font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;padding:2px 7px;line-height:1.5}
+.badge-direct{display:inline-flex;align-items:center;gap:5px;background:#fff;color:var(--ink-2);border:1px dashed #8C8C8C;font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;padding:1px 6px;line-height:1.5}
+.badge-type{display:inline-flex;align-items:center;background:#fff;color:var(--black);border:1px solid var(--black);font-size:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;padding:1px 6px;line-height:1.5}
 
-/* shop header */
-.shophead{background:var(--card);border-bottom:1px solid var(--line)}
-.cover{height:190px;background:linear-gradient(125deg,#EAF4ED,#D8EADC) center/cover;position:relative;max-width:1180px;margin:14px auto 0;width:calc(100% - 32px);border-radius:24px}
+/* bilah platform atas */
+.topbar{background:#fff;border-bottom:1px solid var(--black)}
+.topbar .wrap{display:flex;align-items:center;gap:14px;padding:10px 20px}
+.brand{display:flex;align-items:center;gap:10px}
+.jr-mark{width:26px;height:26px;background:var(--black);color:#fff;display:grid;place-items:center;font-size:11px;font-weight:700}
+.brand-name{font-size:14px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.topnav{margin-left:auto;display:flex;align-items:center;gap:18px}
+.topnav a{font-size:11px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2)}
+.topnav a:hover{color:var(--black)}
+.topnav .topnav-cta{border:1px solid var(--black);color:var(--black);padding:7px 12px}
+.topnav .topnav-cta:hover{background:var(--black);color:#fff}
+
+/* pita identitas toko */
+.idband{background:var(--paper);border-bottom:1px solid var(--rule);padding:16px 0 0}
+.cover{height:190px;background-color:var(--hover);background-position:center;background-size:cover;border:1px solid var(--rule)}
 @media(min-width:760px){.cover{height:250px}}
-.cover:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,25,16,0) 34%,rgba(10,25,16,.52))}
-.shophead .cover + .wrap{position:relative;margin-top:-52px;display:flex;gap:18px;align-items:flex-start;padding-bottom:22px;flex-wrap:wrap}
-.shop-id{padding-top:60px}
-.shop-actions{align-self:flex-end;padding-bottom:2px}
-.avatar{width:96px;height:96px;border-radius:50%;background:#EAF4ED;color:var(--or-d);display:grid;place-items:center;font-size:38px;font-weight:800;border:4px solid #fff;flex:none;box-shadow:0 12px 28px -8px rgba(10,30,18,.4);overflow:hidden}
-.avatar img{width:100%;height:100%;object-fit:cover;display:block}
+.idrow{display:flex;gap:16px;align-items:flex-start;padding:16px 0 18px;flex-wrap:wrap}
+.avatar{width:72px;height:72px;background:var(--black);color:#fff;display:grid;place-items:center;font-size:26px;font-weight:700;border:1px solid var(--black);flex:none;overflow:hidden;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
 .avatar img{width:100%;height:100%;object-fit:cover}
 .shop-id{flex:1;min-width:210px}
-.shop-name{font-size:28px;font-weight:600;letter-spacing:-.01em;display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:2px}
-.shop-sub{font-size:13px;color:var(--ink2);margin-top:4px}
-.shop-actions{display:flex;gap:8px;flex-wrap:wrap}
-.btn-book{background:var(--or);color:#fff;font-weight:700;padding:12px 24px;border-radius:99px;font-size:14px;display:inline-flex;gap:7px;align-items:center;box-shadow:0 10px 22px -10px rgba(18,92,54,.6)}
-.btn-chat{border:1.5px solid var(--or);color:var(--or);font-weight:700;padding:12px 24px;border-radius:99px;background:#fff;font-size:14px;display:inline-flex;gap:7px;align-items:center}
-.stats{display:flex;border-top:1px solid var(--line)}
-.stat{flex:1;text-align:center;padding:17px 4px;border-right:1px solid var(--line)}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px}
+.badges:empty{display:none}
+.shop-name{font-size:26px;font-weight:600;letter-spacing:-.02em;line-height:1.15}
+.shop-sub{font-size:13px;color:var(--ink-2);margin-top:3px}
+.shop-actions{display:flex;gap:8px;flex-wrap:wrap;align-self:flex-end}
+.stats{display:flex;border-top:1px solid var(--rule)}
+.stat{flex:1;text-align:center;padding:13px 4px;border-right:1px solid var(--rule)}
 .stat:last-child{border-right:none}
-.stat b{font-size:21px;font-weight:600;color:var(--ink);display:block}
-.stat span{font-size:10.5px;color:var(--mut);font-weight:700;letter-spacing:.07em;text-transform:uppercase}
+.stat b{font-size:19px;font-weight:600;display:block;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-variant-numeric:tabular-nums}
+.stat span{font-size:10px;color:var(--ink-3);font-weight:600;letter-spacing:.11em;text-transform:uppercase}
 
-/* date bar rental */
-.datebar{margin-top:16px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 18px;box-shadow:var(--sh);display:flex;gap:10px;align-items:end;flex-wrap:wrap}
-.datebar label{font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);display:block;margin-bottom:3px}
-.datebar input{border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit;font-size:16px;font-weight:600}
-.datebar .hint{font-size:12px;color:var(--green);font-weight:700;margin-left:auto;max-width:420px}
+/* bilah tanggal */
+.datebar{margin-top:16px;background:#fff;border:1px solid var(--rule);padding:14px 16px;display:flex;gap:12px;align-items:end;flex-wrap:wrap}
+.datebar label{font-size:10px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:4px}
+.datebar input{border:1px solid var(--rule);border-radius:0;padding:9px 10px;font:inherit;font-size:16px;font-weight:600;background:#fff;color:var(--black)}
+.datebar input:focus{outline:none;border-color:var(--black)}
+.datebar .hint{font-size:12px;color:var(--ink-2);margin-left:auto;max-width:430px}
 
-/* tabs */
-.tabs{position:sticky;top:0;z-index:30;background:var(--card);display:flex;gap:2px;border-bottom:1px solid var(--line);margin-top:14px;overflow-x:auto;scrollbar-width:none}
+/* tab kategori */
+.tabs{display:flex;gap:8px;margin-top:16px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
 .tabs::-webkit-scrollbar{display:none}
-.tab{flex:none;padding:12px 15px;font-weight:700;font-size:13.5px;color:var(--ink2);border-bottom:2.5px solid transparent}
-.tab.on{color:var(--or);border-color:var(--or)}
+.tab{flex:none;padding:8px 14px;font-weight:600;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);border:1px solid var(--rule);background:#fff}
+.tab.on{color:#fff;background:var(--black);border-color:var(--black)}
 
-/* grid produk padat */
-.sect-t{display:flex;align-items:center;margin:30px 2px 14px}
-.sect-t h3{font-size:21px;font-weight:600;color:var(--ink)}
-.sect-t select{margin-left:auto;border:1px solid #ddd;background:#fff;border-radius:6px;padding:7px 9px;font:inherit;font-size:12.5px;font-weight:700}
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+/* bilah alat katalog: judul + cari + urutkan */
+.toolbar{display:flex;gap:10px;align-items:center;margin-top:16px;flex-wrap:wrap}
+.toolbar .micro{color:var(--black);white-space:nowrap;font-size:11px}
+.sbox{flex:1;min-width:170px;background:#fff;border:1px solid var(--rule);display:flex;align-items:center;height:42px}
+.sbox:focus-within{border-color:var(--black)}
+.sbox input{flex:1;border:none;outline:none;font:inherit;font-size:14px;min-width:0;padding:0 12px;background:transparent;color:var(--black)}
+.sbox .sbtn{background:var(--black);color:#fff;width:52px;height:100%;display:grid;place-items:center;flex:none}
+.sw-input{background:#fff;border:1px solid var(--rule);border-radius:0;color:var(--black);font:inherit;font-size:13px;padding:10px 10px;cursor:pointer}
+.sw-input:focus{outline:none;border-color:var(--black)}
+
+/* matriks katalog terbuka (sel berbatas — pola prototipe & marketplace) */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:1px solid var(--rule);border-left:1px solid var(--rule);margin-top:14px}
 @media(min-width:680px){.grid{grid-template-columns:repeat(3,1fr)}}
 @media(min-width:980px){.grid{grid-template-columns:repeat(4,1fr)}}
-.pcard{background:var(--card);border-radius:18px;overflow:hidden;width:100%;box-shadow:0 2px 10px rgba(23,40,30,.05);display:flex;flex-direction:column;border:1px solid #E2EAE3;transition:transform .25s ease,box-shadow .25s ease}
-.pcard:hover{transform:translateY(-4px);box-shadow:var(--sh-lg)}
-.pcard .ph{position:relative;aspect-ratio:4/3;background:#E2EAE3}
-.phempty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:linear-gradient(135deg,#EAF4ED,#DDEBDF);color:var(--or-d)}
-.phempty span{font-size:54px;font-weight:800;line-height:1;opacity:.92}
-.phempty small{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.72}
-.pcard .ph img{width:100%;height:100%;object-fit:cover}
-.pbody{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
-.pname{font-size:14.5px;font-weight:600;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:41px}
+.pcard{background:#fff;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);display:flex;flex-direction:column;transition:background .15s ease}
+.pcard:hover{background:var(--paper)}
+.pcard .ph{position:relative;aspect-ratio:4/3;background:var(--paper);border-bottom:1px solid var(--rule);overflow:hidden}
+.pcard .ph img{width:100%;height:100%;object-fit:cover;transition:transform .45s cubic-bezier(.22,1,.36,1)}
+.pcard:hover .ph img{transform:scale(1.03)}
+.phempty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;background:var(--paper);color:var(--black)}
+.phempty span{font-size:44px;font-weight:700;line-height:1;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.phempty small{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.pbody{padding:13px 14px 15px;display:flex;flex-direction:column;gap:6px;flex:1}
+.pname{font-size:14px;font-weight:600;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:40px}
 .ptags{display:flex;gap:4px;flex-wrap:wrap}
-.ptag{font-size:9.5px;font-weight:800;padding:1.5px 5px;border-radius:3px;border:1px solid var(--or);color:var(--or)}
-.ptag.g{border-color:var(--green);color:var(--green)}
+.ptag{font-size:9.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 6px;border:1px solid var(--black);color:var(--black)}
+.ptag.g{border-color:var(--rule-mid);color:var(--ink-2)}
 .prow{display:flex;align-items:baseline;gap:6px;margin-top:2px}
-.price{color:var(--ink);font-weight:800;font-size:19px;letter-spacing:-.01em}
-.price small{font-size:11.5px;font-weight:700}
-.per{font-size:11px;color:var(--mut);font-weight:600}
-.stok{font-size:11.3px;font-weight:700;color:var(--green)}
-.stok.habis{color:#152219}
-.loc{font-size:11.3px;color:var(--mut);margin-top:auto;padding-top:2px}
-.btn-card{margin-top:10px;background:var(--or-soft);color:var(--or-d);font-weight:800;font-size:13.5px;text-align:center;padding:11px 10px;border-radius:11px;display:block;width:100%}
-.btn-card.mati{background:#bbb;pointer-events:none}
-.note{grid-column:1/-1;text-align:center;padding:48px 20px;color:var(--ink2);font-weight:600;background:var(--card);border:1px solid var(--line);border-radius:20px}
-.note b{color:var(--ink);display:block;font-size:15px;margin-bottom:5px}
-.note a{color:var(--or);font-weight:800;text-decoration:underline}
+.price{font-weight:700;font-size:18px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-variant-numeric:tabular-nums}
+.price small{font-size:11px;font-weight:700}
+.per{font-size:11px;color:var(--ink-3);font-weight:600}
+.stok{font-size:11px;font-weight:600;color:var(--ink-2);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.stok.habis{color:var(--ink-3);text-decoration:line-through}
+.loc{font-size:10px;letter-spacing:.11em;text-transform:uppercase;font-weight:600;color:var(--ink-3);margin-top:auto;padding-top:2px}
+.btn-card{margin-top:10px;background:var(--black);color:#fff;font-weight:600;font-size:11px;letter-spacing:.09em;text-transform:uppercase;text-align:center;padding:11px 10px;display:block;width:100%;border:1px solid var(--black)}
+.btn-card:hover{background:#2A2A2A}
+.btn-card.mati{background:var(--paper);color:var(--ink-3);border-color:var(--rule);pointer-events:none}
+.note{grid-column:1/-1;text-align:center;padding:44px 20px;color:var(--ink-2);font-weight:500;background:#fff;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.note b{color:var(--black);display:block;font-size:15px;margin-bottom:5px}
+.note a{color:var(--black);font-weight:700;text-decoration:underline}
 
 /* info & footer */
-.info{margin-top:22px;background:var(--card);border-radius:20px;border:1px solid var(--line);padding:24px;box-shadow:var(--sh)}
-.info h3{font-size:18px;font-weight:600;margin-bottom:10px}
-.info p{font-size:13px;color:var(--ink2);margin-top:5px;white-space:pre-line}
+.info{margin-top:22px;background:#fff;border:1px solid var(--rule);padding:22px}
+.info h3{font-size:15px;font-weight:600;margin-bottom:10px}
+.info p{font-size:13px;color:var(--ink-2);margin-top:5px;white-space:pre-line}
 .info .cols{display:grid;gap:13px}
 @media(min-width:760px){.info .cols{grid-template-columns:repeat(3,1fr)}}
-.info a{color:var(--or);font-weight:700}
-.foot{padding:18px 0 8px;text-align:center;color:var(--mut);font-size:11.5px}
+.info a{color:var(--black);font-weight:700;text-decoration:underline}
+.foot{padding:18px 0 10px;text-align:center;color:var(--ink-3);font-size:11.5px}
 
-/* bottom nav mobile */
-.bnav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:#fff;border-top:1px solid var(--line);display:flex;padding:7px 4px calc(7px + env(safe-area-inset-bottom))}
-.bnav a,.bnav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:1px;font-size:10.5px;font-weight:700;color:var(--mut)}
-.bnav .on{color:var(--or)}
+/* navigasi bawah mobile */
+.bnav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:#fff;border-top:1px solid var(--black);display:flex;padding:7px 4px calc(7px + env(safe-area-inset-bottom))}
+.bnav a,.bnav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:1px;font-size:10.5px;font-weight:600;color:var(--ink-3)}
+.bnav .on{color:var(--black)}
 @media(min-width:860px){.bnav{display:none}body{padding-bottom:0}}
 
-/* ===== Keranjang & checkout tenant umum ===== */
-.cartbar{position:fixed;left:12px;right:12px;bottom:76px;z-index:60;background:#083D24;color:#fff;border-radius:14px;padding:11px 14px;display:none;align-items:center;gap:10px;box-shadow:0 10px 28px rgba(10,40,24,.35)}
+/* ===== Keranjang & checkout ===== */
+.cartbar{position:fixed;left:12px;right:12px;bottom:76px;z-index:60;background:var(--black);color:#fff;border:1px solid var(--black);padding:12px 14px;display:none;align-items:center;gap:10px}
+@media(min-width:860px){.cartbar{bottom:16px}}
 .cartbar.show{display:flex}
 .cartbar .ci{flex:1;font-size:13px;line-height:1.35}
 .cartbar .ci b{font-size:14.5px}
-.cbtn{background:var(--or);color:#fff;border:none;border-radius:10px;padding:10px 14px;font-weight:700;font-size:13.5px;cursor:pointer}
-.cbtn.ghost{background:transparent;border:1.5px solid rgba(255,255,255,.55)}
-.modal{position:fixed;inset:0;z-index:80;background:rgba(15,25,18,.55);display:none;align-items:flex-end;justify-content:center}
-.sheet input,.sheet select,.modal input,.modal select{font-size:16px}
+.cartbar .cbtn{background:#fff;color:var(--black);border:1px solid #fff;padding:10px 14px;font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+.cartbar .cbtn.ghost{background:transparent;color:#fff;border-color:#8C8C8C}
+.modal{position:fixed;inset:0;z-index:90;background:rgba(10,10,10,.45);display:none;align-items:flex-end;justify-content:center}
 .modal.open{display:flex}
-.sheet{background:#fff;width:100%;max-width:560px;max-height:92vh;overflow:auto;border-radius:22px 22px 0 0;padding:24px 22px 30px}
-.sheet h3{margin:0 0 4px;font-size:22px;font-weight:600}
-.sheet .sub{color:var(--ink2);font-size:13px;margin-bottom:12px}
-.sheet label{display:block;font-size:12.5px;font-weight:700;margin:13px 0 5px;color:#333}
-.sheet input,.sheet select{width:100%;box-sizing:border-box;padding:11px 12px;border:1.5px solid #ddd;border-radius:10px;font-size:14.5px;background:#fff}
-.sheet input[type=file]{padding:9px}
-.paybox{background:var(--or-soft);border:1px solid #cfe5d8;border-radius:12px;padding:12px 13px;font-size:13.5px;line-height:1.55;white-space:pre-line}
-.sumrow{display:flex;justify-content:space-between;font-size:13.5px;padding:6px 0;border-bottom:1px dashed #eee}
-.sumrow.tot{font-weight:800;font-size:15px;border-bottom:none}
+@media(min-width:640px){.modal{align-items:center;padding:16px}}
+.sheet{background:#fff;width:100%;max-width:560px;max-height:92vh;overflow:auto;padding:24px 22px 30px;border-top:2px solid var(--black)}
+@media(min-width:640px){.sheet{border:1px solid var(--black)}}
+.sheet h3{margin:0 0 4px;font-size:21px;font-weight:600;letter-spacing:-.01em}
+.sheet .sub{color:var(--ink-2);font-size:13px;margin-bottom:12px}
+.sheet label{display:block;font-size:10px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-3);margin:14px 0 5px}
+.sheet input,.sheet select{width:100%;box-sizing:border-box;padding:11px 12px;border:1px solid var(--rule);border-radius:0;font:inherit;font-size:16px;background:#fff;color:var(--black)}
+.sheet input:focus,.sheet select:focus{outline:none;border-color:var(--black)}
+.sheet input[type=file]{padding:9px;font-size:14px}
+.sheet .cbtn{background:var(--black);color:#fff;border:1px solid var(--black);padding:11px 14px;font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+.sheet .cbtn:disabled{opacity:.55;cursor:wait}
+.paybox{background:var(--paper);border:1px solid var(--rule);padding:12px 13px;font-size:13.5px;line-height:1.55;white-space:pre-line}
+.sumrow{display:flex;justify-content:space-between;gap:12px;font-size:13.5px;padding:7px 0;border-bottom:1px dashed var(--rule)}
+.sumrow.tot{font-weight:700;font-size:15px;border-bottom:none;border-top:1px solid var(--black);margin-top:4px;padding-top:10px}
 .qtyrow{display:flex;align-items:center;gap:12px}
-.qbtn{width:38px;height:38px;border-radius:10px;border:1.5px solid #ddd;background:#fff;font-size:18px;cursor:pointer}
-.xbtn{float:right;background:#f1f1ee;border:none;width:32px;height:32px;border-radius:50%;font-size:16px;cursor:pointer}
-.err{background:#EFF3F0;border:1px solid #D5DFD6;color:#152219;border-radius:10px;padding:10px 12px;font-size:13.5px;margin-top:12px;display:none}
+.qbtn{width:38px;height:38px;border:1px solid var(--black);background:#fff;font-size:18px;color:var(--black);cursor:pointer}
+.qbtn:active{background:var(--black);color:#fff}
+.xbtn{float:right;background:#fff;border:1px solid var(--black);width:32px;height:32px;font-size:15px;color:var(--black);cursor:pointer}
+.err{background:var(--paper);border:1px dashed var(--black);color:var(--black);padding:10px 12px;font-size:13.5px;margin-top:12px;display:none}
 .okbox{text-align:center;padding:8px 0}
-.okbox .code{font-size:24px;font-weight:900;letter-spacing:1px;color:var(--or-d);margin:8px 0}
-.wabtn{display:inline-block;background:#0E5B36;color:#fff;font-weight:800;border-radius:11px;padding:12px 18px;text-decoration:none;margin-top:12px}
-.linkbtn{background:none;border:none;color:var(--or);font-weight:700;cursor:pointer;font-size:13.5px;padding:6px 0}
+.okmark{width:52px;height:52px;background:var(--black);display:grid;place-items:center;margin:0 auto 4px}
+.okbox .code{font-size:24px;font-weight:700;letter-spacing:1px;margin:8px 0;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.wabtn{display:inline-block;background:var(--black);color:#fff;font-weight:600;font-size:11px;letter-spacing:.09em;text-transform:uppercase;padding:12px 18px;text-decoration:none;margin-top:12px;border:1px solid var(--black)}
+.linkbtn{background:none;border:none;color:var(--black);font-weight:600;cursor:pointer;font-size:13.5px;padding:6px 0;text-decoration:underline}
 
-/* ===== SISTEM RESPONSIF TERPADU — otomatis menyesuaikan HP (<=640px), tablet (641-1024px), desktop (>1024px). Ditulis bow 18 Nov atas permintaan zgg. ===== */
-html,body{overflow-x:clip}
+/* pilihan jalur pembayaran (pola ck-pay prototipe) */
+.payrow{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.payopt{border:1px solid var(--rule);background:#fff;padding:12px;text-align:left;display:flex;flex-direction:column;gap:3px;color:var(--black);cursor:pointer}
+.payopt .payopt-sub{font-size:11px;color:var(--ink-3)}
+.payopt.on{background:var(--black);border-color:var(--black);color:#fff}
+.payopt.on .payopt-sub{color:#CFCFCF}
+.warnbox{border:1px dashed var(--black);background:var(--paper);padding:14px;margin-top:10px}
+.warnbox h4{font-size:11px;letter-spacing:.09em;font-weight:700;display:flex;gap:7px;align-items:center;margin:0 0 4px}
+.warnbox p{font-size:12.5px;color:var(--ink-2);margin-top:6px}
+.warnbox .consent{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;font-weight:500;letter-spacing:0;text-transform:none;color:var(--black);margin:12px 0 0;cursor:pointer}
+.warnbox .consent input{width:16px;height:16px;flex:none;accent-color:var(--black);margin-top:1px;padding:0}
+.rekberbox{border:1px solid var(--black);background:#fff;padding:14px;margin-top:10px}
+.rekberbox p{font-size:12.5px;color:var(--ink-2);margin-top:6px}
+
+/* ===== responsif terpadu: HP <=640 / tablet 641-1024 / desktop >1024 ===== */
 @media(max-width:640px){
- .shop-name{font-size:23px}
- .avatar{width:76px;height:76px}
- .shophead .cover + .wrap{margin-top:-40px;gap:12px}
+ .shop-name{font-size:22px}
+ .avatar{width:60px;height:60px;font-size:21px}
  .cover{height:150px}
- .datebar{padding:13px 14px}
+ .idrow{gap:12px;padding:14px 0 16px}
+ .datebar{padding:12px 13px}
  .datebar>div{flex:1 1 128px}
  .datebar input{width:100%}
- .grid{gap:12px}
- .sheet{padding:20px 16px 26px}
-}
-
-/* tambahan: audit semua section (18 Nov) */
-@media(max-width:640px){
- .topbar span{display:none}
- .sect-t select{font-size:16px}
- .info{padding:18px}
  .datebar .hint{margin-left:0;flex:1 1 100%}
- .shop-actions .btn-book,.shop-actions .btn-chat{padding:11px 18px}
+ .sheet{padding:20px 16px 26px}
+ .info{padding:18px}
+ .topnav{gap:10px}
+ .topnav a{font-size:10px}
+ .shop-actions .sw-btn-solid,.shop-actions .sw-btn-outline,.shop-actions .sw-btn-ghost{padding:10px 14px}
 }
 </style>
 </head>
 <body>
 
-<div class="topbar"><div class="wrap"><b>Jasa Rental</b><span>Marketplace rental Indonesia</span></div></div>
+<header class="topbar"><div class="wrap">
+  <a class="brand" href="https://jasa-rental.my.id/"><span class="jr-mark mono">JR</span><span class="brand-name">Jasa Rental</span></a>
+  <nav class="topnav">
+    <a href="https://jasa-rental.my.id/marketplace/">Marketplace</a>
+    <a href="#" id="navShop">Toko Resmi</a>
+    <a href="https://jasa-rental.my.id/daftar/" class="topnav-cta">Daftarkan Toko</a>
+  </nav>
+</div></header>
 
-<div class="searchstrip">
-  <div class="wrap">
-    <div class="sbox">
-      <input type="text" id="q" placeholder="Cari di toko ini…">
-      <span class="sbtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span>
-    </div>
-    <a class="shopbtn" id="navShop" href="#"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 7 5.5 3h13L20 7M4 7h16M4 7v13a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V7M9.5 21v-6h5v6"/></svg>Toko Resmi</a>
-  </div>
-</div>
-
-<div class="shophead">
+<div class="idband"><div class="wrap">
   <div class="cover" id="cover"></div>
-  <div class="wrap">
+  <div class="idrow">
     <span class="avatar" id="avatar">·</span>
     <div class="shop-id">
+      <div class="badges" id="shopBadges"></div>
       <div class="shop-name"><span id="shopName">Memuat toko…</span></div>
       <div class="shop-sub" id="shopSub">Menghubungi server toko…</div>
     </div>
     <div class="shop-actions">
-      <a class="btn-book" id="btnBook" href="#">Booking Sekarang</a>
-      <a class="btn-chat" id="btnChat" href="#" target="_blank" rel="noopener" style="display:none"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.2 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.4-.7-2.9-1.2-4.7-4.1-4.9-4.3-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.4 1.8 2.2 1.2 1.1 2.3 1.5 2.6 1.6.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2.1 1c.3.2.5.3.6.4 0 .1 0 .7-.2 1.2z"/></svg>Chat Toko</a>
+      <button class="sw-btn-ghost" id="btnStatus0" style="display:none">Cek Status Booking</button>
+      <a class="sw-btn-outline" id="btnChat" href="#" target="_blank" rel="noopener" style="display:none"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.2 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.4-.7-2.9-1.2-4.7-4.1-4.9-4.3-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.4 1.8 2.2 1.2 1.1 2.3 1.5 2.6 1.6.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2.1 1c.3.2.5.3.6.4 0 .1 0 .7-.2 1.2z"/></svg>Chat Toko</a>
+      <a class="sw-btn-solid" id="btnBook" href="#">Booking Sekarang</a>
     </div>
   </div>
-  <div class="wrap"><div class="stats" id="stats"></div></div>
-</div>
+  <div class="stats" id="stats"></div>
+</div></div>
 
 <div class="wrap">
   <div class="datebar">
@@ -214,8 +246,13 @@ html,body{overflow-x:clip}
 
   <div class="tabs" id="tabs"></div>
 
-  <div class="sect-t"><h3 id="gridTitle">Semua Produk</h3>
-    <select id="sort"><option value="toko">Urutan Toko</option><option value="murah">Harga Terendah</option><option value="mahal">Harga Tertinggi</option><option value="stok">Stok Terbanyak</option><option value="nama">Nama A–Z</option></select>
+  <div class="toolbar">
+    <span class="micro" id="gridTitle">Semua Produk</span>
+    <div class="sbox">
+      <input type="text" id="q" placeholder="Cari di toko ini…">
+      <span class="sbtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span>
+    </div>
+    <select id="sort" class="sw-input"><option value="toko">Urutan Toko</option><option value="murah">Harga Terendah</option><option value="mahal">Harga Tertinggi</option><option value="stok">Stok Terbanyak</option><option value="nama">Nama A–Z</option></select>
   </div>
   <div class="grid" id="grid"><div class="note"><b>Memuat katalog…</b>Sedang mengambil produk &amp; stok terbaru dari server toko.</div></div>
 
@@ -241,36 +278,57 @@ html,body{overflow-x:clip}
   <label id="shSizeLbl">Ukuran</label><select id="shSize"></select>
   <label>Jumlah</label>
   <div class="qtyrow"><button class="qbtn" id="shMinus">−</button><b id="shQty">1</b><button class="qbtn" id="shPlus">+</button><span class="sub" id="shStok" style="margin:0"></span></div>
-  <div class="sumrow tot" style="margin-top:14px"><span>Subtotal /hari</span><span id="shSub">Rp0</span></div>
+  <div class="sumrow tot" style="margin-top:14px"><span>Subtotal /hari</span><span class="mono" id="shSub">Rp0</span></div>
   <button class="cbtn" id="shAdd" style="width:100%;margin-top:14px;padding:13px">Tambah ke Keranjang</button>
 </div></div>
 
 <div class="modal" id="ckModal"><div class="sheet">
   <button class="xbtn" aria-label="Tutup" data-close="ckModal">✕</button>
   <div id="ckForm">
-    <h3>Checkout Booking</h3><div class="sub">Bayar dulu ke rekening toko, unggah buktinya, booking langsung tercatat &amp; stok tertahan untukmu.</div>
+    <div class="micro" style="color:var(--ink-3)">Checkout</div>
+    <h3>Checkout Booking</h3><div class="sub">Bayar dulu, unggah buktinya, booking langsung tercatat &amp; stok tertahan untukmu.</div>
     <div id="ckItems"></div>
     <label>Nama penyewa</label><input id="ckName" placeholder="Nama lengkap" autocomplete="name">
     <label>Nomor WhatsApp aktif</label><input id="ckPhone" inputmode="tel" placeholder="08xxxxxxxxxx" autocomplete="tel">
     <label>Tanggal mulai sewa</label><input id="ckStart" type="date">
     <label>Durasi (hari)</label><input id="ckDays" type="number" min="1" max="30" value="2">
-    <div class="sumrow tot"><span>Total bayar (perkiraan)</span><span id="ckTotal">Rp0</span></div>
+    <label>Jalur pembayaran</label>
+    <div class="payrow" id="ckPayRow">
+      <button type="button" class="payopt" id="ckPayRekber"><span class="micro">■ Rekber Aman</span><span class="mono payopt-sub" id="ckPayRekberSub">+3% · Terlindungi</span></button>
+      <button type="button" class="payopt" id="ckPayDirect"><span class="micro">□ Bayar Langsung</span><span class="mono payopt-sub">0% · Transfer ke Toko</span></button>
+    </div>
+    <div class="warnbox" id="ckDirectBox">
+      <h4><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 3 2 20h20z"/><path d="M12 10v4m0 3v.5"/></svg>PERINGATAN — PEMBAYARAN LANGSUNG KE PENJUAL</h4>
+      <p>Pembayaran ini kamu kirim langsung ke rekening penjual, TIDAK melalui Jasa Rental. Jasa Rental tidak menahan, tidak menjamin, dan tidak bertanggung jawab atas dana ini. Jika terjadi penipuan, barang tidak tersedia/tidak dikirim, atau sengketa lain pada transaksi langsung, penyelesaiannya adalah antara kamu dan penjual, dan Jasa Rental tidak wajib mengganti kerugianmu.</p>
+      <p>Untuk perlindungan, gunakan <b>Rekber Aman</b> bila tersedia: dana ditahan Jasa Rental dan baru diteruskan ke penjual setelah sewa selesai.</p>
+      <label class="consent"><input type="checkbox" id="ckConsent"><span>Saya paham pembayaran ini langsung ke penjual dan tidak dilindungi Rekber</span></label>
+      <div style="margin-top:10px"><span class="badge-direct">Transaksi Langsung — tanpa perlindungan Rekber</span></div>
+    </div>
+    <div class="rekberbox" id="ckRekberBox" style="display:none">
+      <div class="micro">■ Rekber Aman — Dana Ditahan Jasa Rental</div>
+      <p>Uangmu ditahan Jasa Rental dulu dan baru diteruskan ke toko sesudah barang kembali &amp; sewa selesai tanpa sengketa. Biaya Rekber <b id="ckFeeNote">3%</b> dari subtotal ditambahkan pada total bayar.</p>
+      <p>Tetap bayar ke metode toko yang kamu pilih di bawah dan unggah buktinya — bookingmu dicatat sebagai Rekber Aman.</p>
+    </div>
     <label>Metode pembayaran</label><select id="ckMethod"></select>
     <div class="paybox" id="ckPayInfo" style="margin-top:9px"></div>
     <div id="ckPayQr" style="margin-top:9px;display:none"></div>
     <label>Nama pengirim transfer</label><input id="ckSender" placeholder="Nama di rekening / e-wallet pengirim">
     <label>Bukti pembayaran (foto/PDF, maks 5MB)</label><input id="ckProof" type="file" accept="image/jpeg,image/png,image/webp,application/pdf">
+    <div class="sumrow" style="margin-top:14px"><span id="ckDaysLine">Subtotal</span><span class="mono" id="ckSubVal">Rp0</span></div>
+    <div class="sumrow" id="ckFeeRow" style="display:none"><span>Biaya Rekber Aman (<span id="ckFeePct">3</span>%)</span><span class="mono" id="ckFeeVal">Rp0</span></div>
+    <div class="sumrow tot"><span>Total bayar</span><span class="mono" id="ckTotal">Rp0</span></div>
     <div class="err" id="ckErr"></div>
     <button class="cbtn" id="ckSubmit" style="width:100%;margin-top:16px;padding:14px;font-size:15px">Kirim Booking</button>
     <div style="text-align:center"><button class="linkbtn" id="btnStatus2">Sudah punya kode booking? Cek status</button></div>
   </div>
   <div id="ckDone" style="display:none">
     <div class="okbox">
-      <div style="font-size:34px">✅</div>
+      <div class="okmark"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.5 5 5 10-11"/></svg></div>
       <h3 style="margin:6px 0">Booking tercatat!</h3>
       <div class="sub">Simpan kode booking ini — dipakai untuk cek status &amp; saat pengambilan barang.</div>
       <div class="code" id="doneCode">BK-XXXXX</div>
-      <div class="sub" id="doneMeta"></div>
+      <div><span class="badge-direct" id="doneModeBadge">Transaksi Langsung — tanpa perlindungan Rekber</span></div>
+      <div class="sub" id="doneMeta" style="margin-top:8px"></div>
       <a class="wabtn" id="doneWa" href="#" target="_blank" rel="noopener">Konfirmasi via WhatsApp Toko</a>
       <div><button class="linkbtn" data-close="ckModal">Tutup</button></div>
     </div>
@@ -285,6 +343,7 @@ html,body{overflow-x:clip}
     <div style="text-align:center"><button class="linkbtn" data-close="ckModal">Tutup</button></div>
   </div>
 </div></div>
+
 <script>
 /* Template Toko Standar Jasa Rental — dinamis per tenant.
    Data dibaca dari RPC publik yang sama dengan storefront platform
@@ -303,6 +362,9 @@ const SHOP_URL = 'https://jasa-rental.my.id/' + SHOP_PATH + '/';
 const OFFICIAL = !!PATH_MAP[SLUG]; /* true hanya bila tenant punya halaman resmi sendiri (BK) */
 
 let SITE = {}, ITEMS = [], HELD = {};
+let VERIF = { verified: false, since: null };
+let FEE_PCT = 3;
+let payMode = 'langsung';
 let tab = 'semua', sortMode = 'toko', query = '';
 let loadFailed = false;
 
@@ -352,6 +414,13 @@ function renderHead() {
   if (SITE.brandSubtitle) sub.push(SITE.brandSubtitle);
   if (SITE.address) sub.push(SITE.address);
   $('#shopSub').textContent = sub.join(' · ') || 'Toko tenant Jasa Rental';
+  const bd = document.getElementById('shopBadges');
+  if (bd) {
+    const bh = [];
+    if (VERIF.verified) bh.push('<span class="badge-rekber">■ Terverifikasi' + (rekberAvailable() ? ' · Rekber Aman' : '') + '</span>');
+    if (SITE.address) { const parts = String(SITE.address).split(',').map(x => x.trim()).filter(Boolean); const city = parts[1] || parts[0]; if (city) bh.push('<span class="badge-type">' + escHtml(city) + '</span>'); }
+    bd.innerHTML = bh.join('');
+  }
   const av = $('#avatar');
   const logo = resolveAsset(SITE.logoUrl);
   if (logo) av.innerHTML = '<img src="' + escHtml(logo) + '" alt="" onerror="this.remove()">';
@@ -461,10 +530,16 @@ function showError(notFound) {
 }
 async function loadShop() {
   try {
-    const [cfg, cat] = await Promise.all([rpc('shop_config', { s: SLUG }), rpc('shop_catalog', { s: SLUG })]);
+    const [cfg, cat, ver, feeCfg] = await Promise.all([
+      rpc('shop_config', { s: SLUG }), rpc('shop_catalog', { s: SLUG }),
+      rpc('shop_verification', { s: SLUG }).catch(() => null),
+      rpc('get_platform_config', { p_key: 'rekber_fee_percent' }).catch(() => null)
+    ]);
     if (!cfg || !Array.isArray(cat)) { showError(true); return; }
     SITE = cfg || {};
     ITEMS = cat;
+    if (ver && typeof ver === 'object') VERIF = ver;
+    if (feeCfg && typeof feeCfg.value === 'number' && feeCfg.value > 0) FEE_PCT = feeCfg.value;
     try { HELD = (await rpc('live_stock', { s: SLUG })) || {}; } catch (e) { HELD = {}; }
     renderHead(); renderTabs(); renderGrid(); renderInfo();
   } catch (e) { showError(false); }
@@ -575,7 +650,7 @@ function renderPayBoxDetail() {
   const m = payMethods()[Number(sel && sel.value ? sel.value : 0)];
   if (m && m.image) {
     box.style.display = '';
-    box.innerHTML = '<img src="' + escHtml(m.image) + '" alt="Kode QR QRIS toko" style="width:220px;max-width:100%;border-radius:12px;border:1px solid var(--line);background:#fff" onerror="this.parentNode.style.display=\'none\'">' +
+    box.innerHTML = '<img src="' + escHtml(m.image) + '" alt="Kode QR QRIS toko" style="width:220px;max-width:100%;border-radius:0;border:1px solid var(--line);background:#fff" onerror="this.parentNode.style.display=\'none\'">' +
       '<div style="font-size:12.5px;color:var(--mut);font-weight:600;margin-top:6px">Pindai QRIS di atas untuk membayar ke toko ini.</div>';
   } else { box.style.display = 'none'; box.innerHTML = ''; }
 }
@@ -592,14 +667,71 @@ function openCheckout() {
   let days = 2;
   if (dFrom && dTo && dFrom.value && dTo.value) days = Math.max(1, Math.round((new Date(dTo.value) - new Date(dFrom.value)) / 86400000));
   document.getElementById('ckDays').value = days;
-  renderPayBox(); updCkTotal();
+  renderPayBox();
+  payMode = rekberAvailable() ? 'rekber' : 'langsung';
+  document.getElementById('ckConsent').checked = false;
+  document.getElementById('ckPayRekberSub').textContent = '+' + FEE_PCT + '% · Terlindungi';
+  document.getElementById('ckFeeNote').textContent = FEE_PCT + '%';
+  renderPayMode();
   document.getElementById('ckErr').style.display = 'none';
   openModal('ckModal');
 }
 function updCkTotal() {
   const d = Math.max(1, parseInt(document.getElementById('ckDays').value || '1', 10));
-  /* Sewa dihitung per hari; produk JUAL sekali bayar — jangan dikali hari. */
-  document.getElementById('ckTotal').textContent = rp(rentalDayTotal() * d + saleOnceTotal()) + ' (' + d + ' hari)';
+  /* Sewa dihitung per hari; produk JUAL sekali bayar — jangan dikali hari.
+     Jalur Rekber: biaya platform (dari platform_config) ditambahkan di atas subtotal. */
+  const sub = rentalDayTotal() * d + saleOnceTotal();
+  const fee = payMode === 'rekber' ? Math.round(sub * FEE_PCT / 100) : 0;
+  document.getElementById('ckDaysLine').textContent = 'Subtotal · durasi ' + d + ' hari';
+  document.getElementById('ckSubVal').textContent = rp(sub);
+  document.getElementById('ckFeeRow').style.display = payMode === 'rekber' ? '' : 'none';
+  document.getElementById('ckFeePct').textContent = FEE_PCT;
+  document.getElementById('ckFeeVal').textContent = rp(fee);
+  document.getElementById('ckTotal').textContent = rp(sub + fee);
+}
+/* Gerbang Rekber: hanya toko Terverifikasi (shop_verification publik) yang
+   boleh menawarkan jalur dana ditahan; bila backend kelak mengekspos
+   rekber_enabled secara publik, nilai false-nya tetap menghormati opt-out pemilik. */
+function rekberAvailable() { return VERIF.verified === true && VERIF.rekber_enabled !== false; }
+function renderPayMode() {
+  const avail = rekberAvailable();
+  if (!avail && payMode === 'rekber') payMode = 'langsung';
+  document.getElementById('ckPayRow').style.display = avail ? '' : 'none';
+  document.getElementById('ckPayRekber').classList.toggle('on', payMode === 'rekber');
+  document.getElementById('ckPayDirect').classList.toggle('on', payMode === 'langsung');
+  document.getElementById('ckDirectBox').style.display = payMode === 'langsung' ? '' : 'none';
+  document.getElementById('ckRekberBox').style.display = payMode === 'rekber' ? '' : 'none';
+  updCkTotal();
+}
+/* Identitas member dari sesi bersama satu origin (marketplace/daftar):
+   email menjadi klaim member create_booking; token yang masih berlaku
+   dipakai sebagai Bearer supaya JWT terverifikasi yang menang di server. */
+function memberInfo() {
+  try {
+    const raw = localStorage.getItem('jr_member_session_v1') || localStorage.getItem('jr_tenant_session_v1');
+    if (!raw) return { email: '', token: '' };
+    const s = JSON.parse(raw);
+    if (!s || !s.access_token) return { email: '', token: '' };
+    let email = (s.profile && s.profile.email) || '';
+    if (!email) {
+      try {
+        const p = JSON.parse(atob(s.access_token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')));
+        email = p.email || '';
+      } catch (e) {}
+    }
+    const valid = !s.expires_at || Date.now() < s.expires_at - 30000;
+    return { email: email || '', token: valid ? s.access_token : '' };
+  } catch (e) { return { email: '', token: '' }; }
+}
+async function rpcAuth(name, body) {
+  const mem = memberInfo();
+  const r = await fetch(KONFIG.SUPABASE_URL + '/rest/v1/rpc/' + name, {
+    method: 'POST',
+    headers: { 'apikey': KONFIG.SUPABASE_ANON_KEY, 'Authorization': 'Bearer ' + (mem.token || KONFIG.SUPABASE_ANON_KEY), 'Content-Type': 'application/json' },
+    body: JSON.stringify(body || {})
+  });
+  if (!r.ok) throw new Error(name + ' HTTP ' + r.status);
+  return r.json();
 }
 function ckFail(msg) { const e = document.getElementById('ckErr'); e.textContent = msg; e.style.display = 'block'; }
 
@@ -631,21 +763,26 @@ async function submitBooking() {
   if (sender.length < 3) return ckFail('Isi nama pengirim transfer.');
   if (!file) return ckFail('Bukti pembayaran wajib diunggah sebelum booking.');
   if (file.size > 5 * 1024 * 1024) return ckFail('Berkas bukti maksimal 5MB.');
+  if (payMode === 'langsung' && !document.getElementById('ckConsent').checked) return ckFail('Centang dulu kotak persetujuan: pembayaran langsung ke penjual tidak dilindungi Rekber.');
   const btn = document.getElementById('ckSubmit');
   btn.disabled = true; btn.textContent = 'Mengirim…';
   try {
     const proofPath = await uploadProof(file);
+    const mem = memberInfo();
     const payload = {
-      name, phone, startDate: start, days, notes: '',
+      name, phone, startDate: start, days, notes: payMode === 'rekber' ? 'Rekber Aman' : '',
       items: CART.map(c => ({ id: c.item.id, size: c.size || '', qty: c.qty })),
-      member: false, memberEmail: '',
+      member: !!mem.email, memberEmail: mem.email,
       payment: { method: method.value, sender, proofName: file.name, proofPath }
     };
-    const res = await rpc('create_booking', { s: SLUG, payload });
+    const res = await rpcAuth('create_booking', { s: SLUG, payload });
     if (!res || !res.ok) { ckFail((res && res.error) || 'Booking gagal. Coba lagi.'); return; }
     document.getElementById('ckForm').style.display = 'none';
     document.getElementById('ckDone').style.display = '';
     document.getElementById('doneCode').textContent = res.code;
+    const dmb = document.getElementById('doneModeBadge');
+    if (payMode === 'rekber') { dmb.className = 'badge-rekber'; dmb.textContent = 'Rekber Aman — dana ditahan Jasa Rental'; }
+    else { dmb.className = 'badge-direct'; dmb.textContent = 'Transaksi Langsung — tanpa perlindungan Rekber'; }
     document.getElementById('doneMeta').textContent = 'Total ' + rp(res.total) + ' · Kembali ' + (res.returnDate || '') + ' · Status: menunggu konfirmasi toko.';
     const wa = String(SITE.depotPhone || '').replace(/[^0-9]/g, '');
     const num = wa.startsWith('0') ? '62' + wa.slice(1) : wa;
@@ -699,6 +836,8 @@ document.getElementById('ckSubmit').onclick = submitBooking;
 document.getElementById('btnStatus1').onclick = openStatus;
 document.getElementById('btnStatus2').onclick = openStatus;
 document.getElementById('stGo').onclick = checkStatus;
+document.getElementById('ckPayRekber').onclick = () => { payMode = 'rekber'; renderPayMode(); };
+document.getElementById('ckPayDirect').onclick = () => { payMode = 'langsung'; renderPayMode(); };
 if (!OFFICIAL) {
   /* Cek status harus selalu bisa dijangkau penyewa, juga saat keranjang
      kosong / sesudah booking selesai (bilah keranjang hilang). */
@@ -708,6 +847,8 @@ if (!OFFICIAL) {
   const gridEl = document.getElementById('grid');
   gridEl.parentNode.insertBefore(stWrap, gridEl);
   document.getElementById('btnStatus3').onclick = openStatus;
+  const b0 = document.getElementById('btnStatus0');
+  if (b0) { b0.style.display = ''; b0.onclick = openStatus; }
   document.getElementById('bnBook').addEventListener('click', e => { e.preventDefault(); if (CART.length) openCheckout(); else document.getElementById('grid').scrollIntoView({ behavior: 'smooth' }); });
   document.getElementById('btnBook').addEventListener('click', e => { e.preventDefault(); document.getElementById('grid').scrollIntoView({ behavior: 'smooth' }); });
 }
