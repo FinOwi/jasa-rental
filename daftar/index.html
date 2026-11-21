@@ -4,68 +4,66 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Daftarkan Tokomu — Jasa Rental</title>
+<!-- SWISS MONOCHROME V4 -->
 <meta name="description" content="Buka toko rentalmu di Jasa Rental: gratis, langsung punya halaman toko online dan dashboard pemilik. Masuk dengan Google, isi data toko, toko langsung tayang.">
 <link rel="canonical" href="https://jasa-rental.my.id/daftar/">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--green:#0E5B36;--green-d:#083D24;--ink:#152219;--mut:#5c6f62;--line:#e2eae4;--gold:#0E5B36;--gold-soft:#E7F2EA;--red:#152219;--bg:#f6f9f6}
+:root{--white:#FFFFFF;--paper:#F5F5F5;--hover:#ECECEC;--rule:#E2E2E2;--rule-mid:#BFBFBF;--ink-3:#767676;--ink-2:#404040;--black:#0A0A0A;
+--green:#0A0A0A;--green-d:#0A0A0A;--ink:#0A0A0A;--mut:#767676;--line:#E2E2E2;--gold:#0A0A0A;--gold-soft:#F5F5F5;--red:#0A0A0A;--bg:#FFFFFF}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
-header{background:#fff;border-bottom:1px solid var(--line)}
-.hwrap{max-width:1060px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px}
-.logo{display:flex;gap:10px;align-items:center;font-weight:800;font-size:18px}
-.logo .mk{width:34px;height:34px;border-radius:10px;background:var(--green);color:#fff;display:grid;place-items:center;font-size:17px}
-.logo small{display:block;font-size:11px;color:var(--mut);font-weight:600}
-.hnav a{color:var(--ink);text-decoration:none;font-weight:700;font-size:14px;margin-left:18px}
+body{font-family:"Helvetica Neue",Helvetica,-apple-system,BlinkMacSystemFont,"Inter",Arial,sans-serif;color:var(--black);background:#fff;line-height:1.55;font-size:14px;-webkit-font-smoothing:antialiased}
+.mono{font-family:ui-monospace,SFMono-Regular,"JetBrains Mono",Menlo,Consolas,monospace;font-variant-numeric:tabular-nums}
+.micro{font-size:10px;letter-spacing:.11em;text-transform:uppercase;font-weight:600}
+header{background:#fff;border-bottom:1px solid var(--black)}
+.hwrap{max-width:1060px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.logo{display:flex;gap:10px;align-items:center;font-weight:700;font-size:15px;letter-spacing:.04em;text-transform:uppercase}
+.logo .mk{width:30px;height:30px;background:var(--black);color:#fff;display:grid;place-items:center;font-size:11px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-weight:700}
+.logo small{display:block;font-size:10px;color:var(--ink-3);font-weight:600;letter-spacing:.11em;text-transform:uppercase}
+.hnav a{color:var(--ink-2);text-decoration:none;font-weight:600;font-size:11px;letter-spacing:.09em;text-transform:uppercase;margin-left:18px}
+.hnav a:hover{color:var(--black)}
 main{max-width:1060px;margin:0 auto;padding:34px 20px 60px}
 .hero{max-width:640px}
-.hero h1{font-size:30px;line-height:1.2;letter-spacing:-.5px}
-.hero p{color:var(--mut);font-weight:600;margin-top:10px}
-.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;margin-top:24px;max-width:640px;box-shadow:0 6px 24px rgba(21,34,25,.05)}
-.card h2{font-size:19px;margin-bottom:6px}
-.card .sub{color:var(--mut);font-weight:600;font-size:14px}
-.gbtn{display:inline-flex;align-items:center;gap:10px;background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:12px 22px;font-weight:800;font-size:15px;cursor:pointer;color:var(--ink);font-family:inherit;margin-top:16px}
-.gbtn:hover{border-color:var(--green)}
-label{display:block;font-weight:700;font-size:13.5px;margin:16px 0 6px}
-input,select{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;font:inherit;font-size:15px;background:#fff}
-input:focus,select:focus{outline:2px solid var(--green);border-color:var(--green)}
-.hint{font-size:12.5px;color:var(--mut);font-weight:600;margin-top:5px}
-.hint.ok{color:var(--green-d)} .hint.bad{color:var(--red)}
-.submit{width:100%;margin-top:22px;background:var(--green);color:#fff;border:none;border-radius:12px;padding:14px;font:inherit;font-weight:800;font-size:16px;cursor:pointer}
+.hero h1{font-size:29px;line-height:1.2;letter-spacing:-.02em;font-weight:600}
+.hero p{color:var(--ink-2);margin-top:10px}
+.card{background:#fff;border:1px solid var(--rule);padding:24px;margin-top:24px;max-width:640px}
+.card h2{font-size:18px;font-weight:600;margin-bottom:6px}
+.card .sub{color:var(--ink-2);font-size:14px}
+.gbtn{display:inline-flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--black);padding:12px 22px;font-weight:600;font-size:14px;cursor:pointer;color:var(--black);font-family:inherit;margin-top:16px}
+.gbtn:hover{background:var(--paper)}
+label{display:block;font-weight:600;font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-3);margin:16px 0 6px}
+input,select{width:100%;padding:12px 13px;border:1px solid var(--rule);border-radius:0;font:inherit;font-size:15px;background:#fff;color:var(--black)}
+input:focus,select:focus{outline:none;border-color:var(--black)}
+.hint{font-size:12.5px;color:var(--ink-3);margin-top:5px}
+.hint.ok{color:var(--black);font-weight:700}
+.hint.bad{color:var(--black);background:var(--paper);border:1px dashed var(--black);padding:7px 9px}
+.submit{width:100%;margin-top:22px;background:var(--black);color:#fff;border:1px solid var(--black);padding:14px;font:inherit;font-weight:600;font-size:12px;letter-spacing:.09em;text-transform:uppercase;cursor:pointer}
+.submit:hover{background:#2A2A2A}
 .submit:disabled{opacity:.55;cursor:wait}
-.err{background:#EFF3F0;color:var(--red);border-radius:12px;padding:12px 14px;font-weight:700;font-size:14px;margin-top:16px;display:none}
-.store-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
+.err{background:var(--paper);border:1px dashed var(--black);color:var(--black);padding:12px 14px;font-weight:600;font-size:14px;margin-top:16px;display:none}
+.store-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--rule)}
 .store-row:last-child{border-bottom:none}
-.store-row b{font-size:15px}
-.store-row a{color:var(--green-d);font-weight:800;text-decoration:none;font-size:13.5px;white-space:nowrap}
-.ok-badge{display:inline-block;background:var(--gold-soft);color:var(--gold);font-weight:800;font-size:12px;border-radius:999px;padding:3px 10px;margin-left:8px;vertical-align:2px}
+.store-row b{font-size:15px;font-weight:600}
+.store-row a{color:var(--black);font-weight:700;text-decoration:underline;font-size:13.5px;white-space:nowrap}
+.ok-badge{display:inline-block;background:var(--black);color:#fff;font-weight:600;font-size:10px;letter-spacing:.09em;text-transform:uppercase;padding:3px 9px;margin-left:8px;vertical-align:2px}
 .big-ok{font-size:40px}
 .links{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-.links a{background:var(--green);color:#fff;text-decoration:none;font-weight:800;border-radius:12px;padding:12px 18px;font-size:14.5px}
-.links a.alt{background:#fff;color:var(--green-d);border:1.5px solid var(--line)}
-.foot{max-width:1060px;margin:0 auto;padding:0 20px 40px;color:var(--mut);font-weight:600;font-size:13px}
-#toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:#14231a;color:#fff;padding:11px 16px;border-radius:12px;font-weight:700;font-size:13.5px;z-index:99;display:none;max-width:88vw;text-align:center}
-
-/* ===== SISTEM RESPONSIF TERPADU — otomatis menyesuaikan HP (<=640px), tablet (641-1024px), desktop (>1024px). Ditulis bow 18 Nov atas permintaan zgg. ===== */
+.links a{background:var(--black);color:#fff;text-decoration:none;font-weight:600;font-size:11px;letter-spacing:.09em;text-transform:uppercase;border:1px solid var(--black);padding:12px 18px}
+.links a.alt{background:#fff;color:var(--black)}
+.foot{max-width:1060px;margin:0 auto;padding:0 20px 40px;color:var(--ink-3);font-size:13px}
+#toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:var(--black);color:#fff;padding:11px 16px;font-weight:600;font-size:13.5px;z-index:99;display:none;max-width:88vw;text-align:center}
 html,body{overflow-x:clip}
 @media(max-width:640px){
  main{padding:24px 14px 48px}
  .card{padding:18px}
  .hwrap{padding:12px 14px}
  input,select,textarea{font-size:16px}
- .hero h1{font-size:26px}
+ .hero h1{font-size:25px}
  .logo small{display:none}
- .hnav a{margin-left:10px;font-size:13px}
+ .hnav a{margin-left:10px;font-size:10px}
  .store-row{flex-wrap:wrap}
- .store-row b{min-width:0}
- .gbtn{padding:12px 18px;font-size:14.5px}
+ .gbtn{padding:12px 18px;font-size:14px}
  .links a{flex:1 1 140px;text-align:center}
-}
-
-/* tambahan: audit semua section (18 Nov) */
-@media(max-width:640px){
- .card h2{font-size:17.5px}
+ .card h2{font-size:17px}
  .hero p{font-size:14.5px}
 }
 </style>
@@ -73,7 +71,7 @@ html,body{overflow-x:clip}
 <body>
 <header>
   <div class="hwrap">
-    <div class="logo"><span class="mk">J</span><span>Jasa Rental<small>Marketplace Rental Indonesia</small></span></div>
+    <div class="logo"><span class="mk">JR</span><span>Jasa Rental<small>Marketplace Rental Indonesia</small></span></div>
     <nav class="hnav"><a href="../marketplace/">Marketplace</a><a href="../dashboard/">Dashboard</a></nav>
   </div>
 </header>
@@ -180,7 +178,7 @@ async function renderForm(){
   const opts = CATS.map(c => '<option value="' + c[0] + '">' + c[1] + '</option>').join('');
   document.getElementById('box').innerHTML = mine +
     '<div class="card"><h2>' + (stores.length ? 'Buka toko lagi' : 'Langkah 2 — Data toko') + '</h2>' +
-    '<p class="sub">Masuk sebagai <b>' + esc(profile ? profile.email : '') + '</b>. Toko langsung tayang sesudah disimpan. <button type="button" style="background:none;border:none;color:#0E5B36;font-weight:700;cursor:pointer;padding:0;font-size:13px;text-decoration:underline" onclick="logoutDaftar()">Keluar / ganti akun</button></p>' +
+    '<p class="sub">Masuk sebagai <b>' + esc(profile ? profile.email : '') + '</b>. Toko langsung tayang sesudah disimpan. <button type="button" style="background:none;border:none;color:#0A0A0A;font-weight:700;cursor:pointer;padding:0;font-size:13px;text-decoration:underline" onclick="logoutDaftar()">Keluar / ganti akun</button></p>' +
     '<label for="fName">Nama toko</label><input id="fName" maxlength="60" placeholder="cth: SewaKita Outdoor">' +
     '<label for="fSlug">Alamat toko (slug)</label><input id="fSlug" maxlength="32" placeholder="cth: sewakita-outdoor">' +
     '<div class="hint" id="slugHint">Alamat tokomu: jasa-rental.my.id/toko/?toko=<b>slug-kamu</b> — huruf kecil, angka, dan tanda hubung.</div>' +
@@ -228,7 +226,7 @@ async function submitDaftar(){
 }
 function renderSuccess(res){
   document.getElementById('box').innerHTML =
-    '<div class="card"><div class="big-ok" style="color:#0E5B36"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" fill="#E7F2EA" stroke="none"/><path d="m8 12.5 2.6 2.6L16 9.5"/></svg></div><h2 style="margin-top:8px">Tokomu sudah tayang!</h2>' +
+    '<div class="card"><div class="big-ok" style="color:#0A0A0A"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" fill="#F5F5F5" stroke="none"/><path d="m8 12.5 2.6 2.6L16 9.5"/></svg></div><h2 style="margin-top:8px">Tokomu sudah tayang!</h2>' +
     '<p class="sub">Alamat toko: <b>jasa-rental.my.id/toko/?toko=' + esc(res.slug) + '</b><span class="ok-badge">Baru</span></p>' +
     '<p class="sub" style="margin-top:10px">Status awal semua toko baru: <b>belum terverifikasi</b>. Lengkapi katalog &amp; metode pembayaran, lalu ajukan verifikasi dari dashboard untuk membuka Rekber Aman &amp; PRO.</p>' +
     '<div class="links"><a href="../toko/?toko=' + esc(res.slug) + '">Lihat Tokomu</a><a class="alt" href="../dashboard/">Buka Dashboard</a><a class="alt" href="../marketplace/">Ke Marketplace</a></div></div>';
