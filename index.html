@@ -4,583 +4,586 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Jasa Rental — Marketplace Rental Indonesia</title>
-<meta name="description" content="Jasa Rental adalah marketplace rental Indonesia oleh FinOwi Id — sewa perlengkapan outdoor, kendaraan, kamera, dan lainnya dari toko rental di berbagai kota, dengan opsi Rekber Aman dan toko terverifikasi. Pemilik usaha rental bisa bergabung gratis.">
+<meta name="description" content="Marketplace rental Indonesia: sewa kendaraan, tenda, kamera, alat event, dan lainnya dari toko rental terverifikasi. Ada Rekber Aman — dana ditahan sampai barang diterima. Daftarkan tokomu gratis.">
 <link rel="canonical" href="https://jasa-rental.my.id/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Jasa Rental">
-<meta property="og:locale" content="id_ID">
 <meta property="og:title" content="Jasa Rental — Marketplace Rental Indonesia">
-<meta property="og:description" content="Jasa Rental adalah marketplace rental Indonesia oleh FinOwi Id — sewa perlengkapan outdoor, kendaraan, kamera, dan lainnya dari toko rental di berbagai kota, dengan opsi Rekber Aman dan toko terverifikasi. Pemilik usaha rental bisa bergabung gratis.">
+<meta property="og:description" content="Sewa apa saja dari toko rental terverifikasi, dengan opsi Rekber Aman. Daftarkan tokomu gratis.">
 <meta property="og:url" content="https://jasa-rental.my.id/">
 <meta name="twitter:card" content="summary">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "@id": "https://jasa-rental.my.id/#org",
-      "name": "Jasa Rental",
-      "url": "https://jasa-rental.my.id/",
-      "description": "Jasa Rental adalah marketplace rental Indonesia oleh FinOwi Id — sewa perlengkapan outdoor, kendaraan, kamera, dan lainnya dari toko rental di berbagai kota, dengan opsi Rekber Aman dan toko terverifikasi. Pemilik usaha rental bisa bergabung gratis.",
-      "parentOrganization": {
-        "@type": "Organization",
-        "name": "FinOwi Id"
-      }
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://jasa-rental.my.id/#site",
-      "url": "https://jasa-rental.my.id/",
-      "name": "Jasa Rental",
-      "inLanguage": "id-ID",
-      "publisher": {
-        "@id": "https://jasa-rental.my.id/#org"
-      }
-    }
-  ]
-}
+{"@context":"https://schema.org","@graph":[{"@type":"Organization","name":"Jasa Rental","url":"https://jasa-rental.my.id/","description":"Marketplace rental Indonesia — sewa dari toko terverifikasi dengan opsi Rekber Aman."},{"@type":"WebSite","name":"Jasa Rental","url":"https://jasa-rental.my.id/","potentialAction":{"@type":"SearchAction","target":"https://jasa-rental.my.id/marketplace/?q={query}","query-input":"required name=query"}}]}
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
 <style>
-:root{
-  --ink:#152219; --ink2:#43544a; --mut:#71806f;
-  --bg:#F7F9F7; --card:#ffffff; --line:#E2EAE3;
-  --green:#0E5B36; --green-d:#083D24; --green-soft:#e7f3ec;
-  --gold:#0E5B36; --gold-soft:#E7F2EA;
-  --blue:#0E5B36; --blue-soft:#E7F2EA;
-  --sh:0 1px 2px rgba(23,40,30,.05),0 16px 40px -16px rgba(23,40,30,.16);
-  --sh-lg:0 2px 4px rgba(23,40,30,.06),0 28px 56px -20px rgba(23,40,30,.28);
-}
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{scroll-behavior:smooth}
-body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:15.5px;line-height:1.55}
-a{color:inherit;text-decoration:none}
-button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
-.wrap{max-width:1120px;margin:0 auto;padding:0 18px}
-section{padding:72px 0}
-.eyebrow{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--green);display:flex;align-items:center;gap:8px}
-.eyebrow:before{content:"";width:22px;height:2px;background:var(--green)}
-h2{font-size:clamp(24px,3.6vw,32px);font-weight:800;letter-spacing:-.02em;line-height:1.2;margin-top:10px}
-.sub{color:var(--ink2);margin-top:10px;max-width:640px}
+  /* ============ SWISS MONOCHROME V4 (porting Tahap 1: landing) ============ */
+  :root{
+    --white:#FFFFFF; --paper:#F5F5F5; --hover:#ECECEC; --rule:#E2E2E2; --rule-mid:#BFBFBF;
+    --ink-3:#767676; --ink-2:#404040; --black:#0A0A0A;
+  }
+  *{box-sizing:border-box}
+  html{overflow-x:clip;scroll-behavior:smooth}
+  body{margin:0;background:var(--white);color:var(--black);font-family:"Helvetica Neue",Helvetica,-apple-system,"Inter",Arial,sans-serif;font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:clip}
+  ::selection{background:var(--black);color:var(--white)}
+  .mono{font-family:ui-monospace,"SF Mono","JetBrains Mono",Menlo,monospace;font-variant-numeric:tabular-nums}
+  .micro{font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+  img{display:block}
+  a{color:inherit}
+  button{font-family:inherit;cursor:pointer}
+  input,select{font-family:inherit;font-size:14px}
+  @media (max-width:640px){ input,select{font-size:16px} }
 
-/* header */
-header{position:sticky;top:0;z-index:40;background:#fff;color:var(--ink);box-shadow:0 1px 0 var(--line),0 10px 30px -24px rgba(20,40,28,.35)}
-.hwrap{max-width:1120px;margin:0 auto;padding:12px 18px;display:flex;align-items:center;gap:16px}
-.logo{display:flex;align-items:center;gap:9px;font-weight:800;font-size:18px;letter-spacing:-.02em}
-.logo .mark{width:30px;height:30px;border-radius:9px;background:var(--green);display:grid;place-items:center;color:#fff}
-.logo small{display:block;font-size:10px;font-weight:600;color:var(--mut);letter-spacing:.08em;text-transform:uppercase}
-nav.main{display:none;gap:2px;margin-left:8px}
-nav.main a{padding:8px 11px;border-radius:99px;font-weight:600;font-size:14px;color:var(--ink2);white-space:nowrap}
-header a,header button{white-space:nowrap}
-nav.main a:hover{background:var(--green-soft);color:var(--green-d)}
-.hcta{margin-left:auto;display:flex;gap:9px;align-items:center}
-.btn{display:inline-flex;align-items:center;gap:8px;font-weight:800;border-radius:99px;padding:12px 22px;font-size:14.5px;justify-content:center}
-.btn.green{background:var(--green);color:#fff}.btn.green:active{background:var(--green-d)}
-.btn.white{background:#fff;color:var(--ink)}
-.btn.ghostw{border:1px solid #ffffff45;color:#fff;padding:11px 18px}
-.btn.ink{background:var(--ink);color:#fff}
-.btn.line{border:1.5px solid var(--line);background:#fff;color:var(--ink)}
-@media(min-width:900px){nav.main{display:flex}}
+  .sw-btn-solid{display:inline-flex;align-items:center;gap:8px;background:var(--black);color:var(--white);border:1.5px solid var(--black);padding:10px 18px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:background .15s,color .15s;white-space:nowrap}
+  .sw-btn-solid:hover{background:var(--white);color:var(--black)}
+  .sw-btn-outline{display:inline-flex;align-items:center;gap:8px;background:var(--white);color:var(--black);border:1.5px solid var(--black);padding:10px 18px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:background .15s,color .15s;white-space:nowrap}
+  .sw-btn-outline:hover{background:var(--black);color:var(--white)}
+  .sw-btn-ghost{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--black);border:1.5px solid transparent;padding:10px 12px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:border-color .15s;white-space:nowrap}
+  .sw-btn-ghost:hover{border-color:var(--black)}
 
-/* hero — foto besar + pencarian (arah 1, pilihan zgg 18 Nov) */
-.hero{position:relative;background:#083D24 url('/bk-adventure/assets/hero-bk-adventure.jpg') center 38%/cover no-repeat}
-.hero::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,61,36,.80) 0%,rgba(8,61,36,.64) 55%,rgba(8,61,36,.74) 100%)}
-.hero .wrap{position:relative;z-index:1;padding:54px 20px 74px;text-align:center}
-@media(min-width:960px){.hero .wrap{padding:76px 48px 96px}}
-.hkick{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.45);color:#fff;font-size:12px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;padding:7px 13px;border-radius:99px}
-.hero h1{font-size:clamp(34px,6vw,58px);font-weight:800;letter-spacing:-.02em;line-height:1.1;max-width:760px;color:#fff;margin:18px auto 0}
-.hero h1 em{font-style:normal;color:#7FBF97}
-.hero .lead{color:rgba(255,255,255,.93);margin:16px auto 0;max-width:640px;font-size:16.5px}
-.hsearch{display:flex;gap:6px;background:#fff;border-radius:99px;padding:6px;max-width:660px;margin:28px auto 0;box-shadow:0 24px 44px -18px rgba(4,32,18,.55);text-align:left}
-.hsearch input{flex:1;border:0;outline:none;font:inherit;font-size:16px;padding:11px 16px;background:transparent;color:var(--ink);min-width:0}
-.hsearch button{flex:none;background:var(--green);color:#fff;border:0;border-radius:99px;padding:12px 28px;font:inherit;font-weight:800;font-size:15.5px;cursor:pointer}
-.hsearch button:hover{background:var(--green-d)}
-.hchips{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px;justify-content:center}
-.hchips a{color:#fff;border:1px solid rgba(255,255,255,.55);background:rgba(255,255,255,.14);padding:8px 14px;border-radius:99px;font-weight:700;font-size:13px;text-decoration:none}
-.hchips a:hover{background:rgba(255,255,255,.28)}
-.hero-cta{display:flex;gap:11px;flex-wrap:wrap;margin-top:26px}
-.trustrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:26px;justify-content:center}
-.trust{display:inline-flex;align-items:center;gap:7px;border:1px solid #D8E6DA;background:#fff;border-radius:99px;padding:8px 13px;font-size:13px;font-weight:700;color:var(--ink2);box-shadow:var(--sh)}
-.hero .trust{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.38);color:#fff;box-shadow:none}
-.hown{margin-top:20px;color:rgba(255,255,255,.85);font-size:14px;font-weight:600}
-.hown a{color:#fff;font-weight:800;text-decoration:underline;text-underline-offset:3px}
-.statswrap{padding:0 16px}
-.statsbar{position:relative;z-index:2;max-width:1040px;margin:-36px auto 0;background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--sh-lg);display:grid;grid-template-columns:repeat(3,1fr);padding:18px 8px}
-.statsbar .stat{text-align:center;padding:0 6px}
-.statsbar .stat + .stat{border-left:1px solid var(--line)}
-.statsbar b{display:block;font-size:23px;font-weight:800;color:var(--green-d);letter-spacing:-.01em}
-.statsbar span{display:block;font-size:12.3px;color:var(--ink2);font-weight:600;margin-top:2px;line-height:1.35}
+  .badge-rekber{display:inline-flex;align-items:center;background:var(--black);color:var(--white);font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 8px}
+  .badge-direct{display:inline-flex;align-items:center;background:var(--white);color:var(--ink-2);border:1px dashed var(--ink-3);font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 8px}
+  .badge-type{display:inline-flex;align-items:center;background:var(--white);color:var(--black);border:1px solid var(--black);font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 8px}
+  .badge-out{display:inline-flex;align-items:center;background:var(--paper);color:var(--ink-3);font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 8px}
 
-/* categories */
-.catgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;margin-top:26px}
-@media(min-width:640px){.catgrid{grid-template-columns:repeat(3,1fr)}}
-@media(min-width:980px){.catgrid{grid-template-columns:repeat(4,1fr)}}
-.catbox{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;display:flex;gap:13px;align-items:flex-start;box-shadow:var(--sh);transition:transform .25s ease,box-shadow .25s ease}
-.catbox:hover{transform:translateY(-3px);box-shadow:var(--sh-lg)}
-.catbox .ic{width:46px;height:46px;border-radius:50%;background:var(--green-soft);color:var(--green-d);display:grid;place-items:center;flex:none}
-.catbox b{font-size:14.5px;display:block}
-.catbox span{font-size:12.3px;color:var(--mut);font-weight:600;line-height:1.4;display:block;margin-top:2px}
+  .nav-tab{position:relative;background:none;border:none;padding:8px 2px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);text-decoration:none;transition:color .15s}
+  .nav-tab:hover{color:var(--black)}
+  .nav-tab.active{color:var(--black)}
+  .nav-tab.active::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--black)}
 
-/* steps */
-.steps{display:grid;gap:12px;margin-top:28px}
-@media(min-width:820px){.steps{grid-template-columns:repeat(3,1fr)}}
-.step{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--sh)}
-.step .no{width:34px;height:34px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:800;font-size:14px}
-.step h3{font-size:16.5px;font-weight:800;margin-top:13px}
-.step p{color:var(--ink2);font-size:14px;margin-top:5px}
+  .sw-input{width:100%;background:var(--white);border:1px solid var(--rule);color:var(--black);padding:11px 12px;outline:none;transition:border-color .15s;border-radius:0;appearance:none}
+  .sw-input:focus{border-color:var(--black)}
+  .sw-input::placeholder{color:var(--ink-3)}
 
-/* rekber band */
-.band{background:var(--ink);color:#EAF2EC;border-radius:26px;padding:30px 24px;margin:8px 0}
-@media(min-width:820px){.band{padding:42px}}
-.band h2{color:#fff}
-.band .sub{color:#c3cec2}
-.flow{display:grid;gap:10px;margin-top:24px}
-@media(min-width:820px){.flow{grid-template-columns:repeat(4,1fr)}}
-.fstep{background:#ffffff0d;border:1px solid #ffffff22;border-radius:16px;padding:16px}
-.fstep .no{font-size:11px;font-weight:800;letter-spacing:.1em;color:#7FBF97;text-transform:uppercase}
-.fstep b{display:block;margin-top:6px;font-size:15px}
-.fstep p{font-size:13px;color:#c3cec2;margin-top:4px}
-.band .note{margin-top:20px;font-size:13px;color:#aebba9;border-top:1px dashed #ffffff30;padding-top:16px}
-.band .note b{color:#EAF2EC}
+  .sw-cell{position:relative;background:var(--white);transition:background .15s;text-decoration:none;color:inherit;display:block}
+  .sw-cell:hover{background:#FAFAFA}
+  .sw-cell .sw-photo{overflow:hidden}
+  .sw-cell .sw-photo img{transition:transform .5s cubic-bezier(.22,.61,.36,1)}
+  .sw-cell:hover .sw-photo img{transform:scale(1.03)}
+  .sw-cta-bar{position:absolute;left:0;right:0;bottom:0;background:var(--black);color:var(--white);padding:9px 14px;display:flex;justify-content:space-between;align-items:center;opacity:0;transform:translateY(4px);transition:opacity .2s,transform .2s;pointer-events:none}
+  .sw-cell:hover .sw-cta-bar{opacity:1;transform:translateY(0)}
+  @media (hover:none){ .sw-cta-bar{opacity:1;transform:none} }
+  .sw-photo-empty{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:var(--paper);color:var(--ink-3)}
 
-/* two ways */
-.twoways{display:grid;gap:12px;margin-top:26px}
-@media(min-width:820px){.twoways{grid-template-columns:1fr 1fr}}
-.way{border-radius:18px;padding:21px;border:1.5px solid var(--line);background:var(--card);box-shadow:var(--sh)}
-.way.rek{border-color:var(--green);background:var(--green-soft)}
-.way h3{font-size:17px;font-weight:800;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.way ul{margin:11px 0 0 18px;color:var(--ink2);font-size:14px}
-.way li{margin-top:5px}
-.bdg{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:800;padding:3px 8px;border-radius:99px}
-.bdg.rekber{background:var(--green);color:#fff}
-.bdg.warn{background:var(--gold-soft);color:var(--gold);border:1px dashed var(--gold)}
+  .hero-num-btn{flex:1;background:var(--white);border:1px solid var(--rule);padding:9px 0;font-size:11px;color:var(--ink-3);transition:all .15s}
+  .hero-num-btn:hover{border-color:var(--black);color:var(--black)}
+  .hero-num-btn.on{background:var(--black);color:var(--white);border-color:var(--black)}
 
-/* merchant */
-.feat{display:grid;gap:12px;margin-top:28px}
-@media(min-width:640px){.feat{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:980px){.feat{grid-template-columns:repeat(3,1fr)}}
-.featbox{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:19px;box-shadow:var(--sh)}
-.featbox .ic{width:40px;height:40px;border-radius:11px;background:var(--green-soft);color:var(--green-d);display:grid;place-items:center}
-.featbox h3{font-size:15.5px;font-weight:800;margin-top:12px}
-.featbox p{font-size:13.8px;color:var(--ink2);margin-top:4px}
+  .sw-chip{display:inline-flex;align-items:center;gap:6px;background:var(--white);border:1px solid var(--rule-mid);color:var(--ink-2);padding:7px 12px;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;transition:all .15s}
+  .sw-chip:hover{border-color:var(--black);color:var(--black)}
 
-/* pricing */
-.prices{display:grid;gap:12px;margin-top:28px}
-@media(min-width:820px){.prices{grid-template-columns:repeat(3,1fr)}}
-.price{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:26px;box-shadow:var(--sh);display:flex;flex-direction:column}
-.price.pro{border:2px solid var(--gold);position:relative}
-.price .tag{position:absolute;top:-12px;left:20px;background:var(--gold);color:#fff;font-size:11px;font-weight:800;letter-spacing:.07em;padding:4px 10px;border-radius:99px}
-.price h3{font-size:16px;font-weight:800}
-.price .amt{font-size:27px;font-weight:800;letter-spacing:-.02em;margin-top:9px}
-.price .amt span{font-size:13px;color:var(--mut);font-weight:700}
-.price ul{margin:13px 0 18px 18px;color:var(--ink2);font-size:13.8px}
-.price li{margin-top:5px}
-.price .btn{margin-top:auto}
-.footnote{font-size:12px;color:var(--mut);margin-top:12px}
+  .catcell{display:flex;flex-direction:column;gap:8px;padding:20px;text-decoration:none;color:inherit;background:var(--white);transition:background .15s}
+  .catcell:hover{background:var(--paper)}
+  .catcell .cic{width:38px;height:38px;border:1.5px solid var(--black);display:flex;align-items:center;justify-content:center;color:var(--black)}
+  .catcell .cic svg{width:20px;height:20px}
 
-/* verification list */
-.vlist{display:grid;gap:10px;margin-top:24px}
-@media(min-width:820px){.vlist{grid-template-columns:repeat(2,1fr)}}
-.vitem{display:flex;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:15px;padding:15px 16px;align-items:flex-start;box-shadow:var(--sh)}
-.vitem .ck{width:26px;height:26px;border-radius:50%;background:var(--blue-soft);color:var(--blue);display:grid;place-items:center;flex:none;margin-top:1px}
-.vitem b{font-size:14.5px}
-.vitem p{font-size:13px;color:var(--ink2)}
+  .sw-faq{border-bottom:1px solid var(--rule)}
+  .sw-faq>button{width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:none;text-align:left;padding:18px 4px;font-size:14px;font-weight:600;color:var(--black)}
+  .sw-faq .fi{font-size:18px;font-weight:300;color:var(--ink-3);transition:transform .2s;flex:none}
+  .sw-faq.open .fi{transform:rotate(45deg)}
+  .sw-faq .fa{display:none;padding:0 4px 18px;color:var(--ink-2);font-size:13.5px;max-width:720px}
+  .sw-faq.open .fa{display:block}
 
-/* faq */
-.faq{margin-top:24px;border-top:1px solid var(--line)}
-.faqitem{border-bottom:1px solid var(--line)}
-.faqitem button{width:100%;display:flex;justify-content:space-between;gap:14px;align-items:center;text-align:left;padding:17px 2px;font-weight:800;font-size:15px}
-.faqitem .ans{display:none;padding:0 2px 17px;color:var(--ink2);font-size:14.3px;max-width:760px}
-.faqitem.open .ans{display:block}
-.faqitem .chev{transition:transform .2s;color:var(--mut)}
-.faqitem.open .chev{transform:rotate(180deg)}
+  .price-cell{padding:26px;background:var(--white)}
+  .price-cell.hot{background:var(--black);color:var(--white)}
+  .price-cell.hot .micro,.price-cell.hot .pnote{color:#BFBFBF}
 
-/* final cta + footer */
-.final{background:var(--green);color:#fff;border-radius:26px;padding:34px 24px;text-align:center}
-.final h2{color:#fff}
-.final p{color:#d7ecdd;margin:10px auto 0;max-width:520px}
-.final .hero-cta{justify-content:center}
-footer{padding:34px 0 40px;color:var(--mut);font-size:13px}
-footer .frow{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start}
-footer nav{display:flex;gap:16px;flex-wrap:wrap;font-weight:700;color:var(--ink2)}
-
-/* ===== SISTEM RESPONSIF TERPADU — otomatis menyesuaikan HP (<=640px), tablet (641-1024px), desktop (>1024px). Ditulis bow 18 Nov atas permintaan zgg. ===== */
-html,body{overflow-x:clip}
-@media(max-width:640px){
- section{padding:42px 0}
- section h2{font-size:24px}
- .hwrap{gap:10px;padding:10px 14px}
- .hcta{gap:7px}
- .hcta .btn{padding:10px 14px;font-size:13.5px}
- .hero .wrap{padding:44px 16px 66px}
- .hsearch button{padding:12px 20px}
- .statsbar{padding:14px 4px}
- .statsbar b{font-size:19px}
- .statsbar span{font-size:11px}
- .trust{font-size:12px;padding:7px 11px}
- .price{padding:20px}
- .final .hero-cta{flex-direction:column;align-items:stretch}
- input,select,textarea{font-size:16px}
-}
-@media(max-width:400px){.logo small{display:none}}
-
-/* tambahan: audit semua section (18 Nov) */
-@media(max-width:640px){
- .catbox{padding:14px}
- .catbox .ic{width:40px;height:40px}
- .band{padding:24px 17px;border-radius:20px}
- .final{padding:28px 18px;border-radius:20px}
- .faqitem button{padding:15px 2px}
- .price .amt{font-size:24px}
-}
+  /* modal login (dipertahankan dari live, gaya V4) */
+  #loginModal{position:fixed;inset:0;z-index:90;background:rgba(10,10,10,.45);align-items:center;justify-content:center;padding:16px}
+  .login-card{background:var(--white);border:1.5px solid var(--black);width:100%;max-width:430px;padding:26px;position:relative}
+  .login-opt{display:flex;gap:14px;align-items:flex-start;width:100%;text-align:left;background:var(--white);border:1.5px solid var(--rule);padding:16px;cursor:pointer;transition:border-color .15s;margin-top:12px}
+  .login-opt:hover{border-color:var(--black)}
+  .login-opt .lo-ic{width:42px;height:42px;flex:none;background:var(--black);color:var(--white);display:flex;align-items:center;justify-content:center}
+  .login-opt .lo-ic svg{width:21px;height:21px}
+  .login-opt b{display:block;font-size:15px}
+  .login-opt span{display:block;color:var(--ink-3);font-size:12.5px;margin-top:2px;line-height:1.45}
+  .login-opt .lo-go{display:block;margin-top:8px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--black)}
+  #loginModalClose{position:absolute;top:10px;right:10px;width:34px;height:34px;border:none;background:var(--paper);font-size:16px;line-height:1;color:var(--black)}
+  #loginModalClose:hover{background:var(--hover)}
 </style>
 </head>
 <body>
 
-<header>
-  <div class="hwrap">
-    <a class="logo" href="#"><span class="mark"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span><span>Jasa Rental<small>Marketplace Rental Indonesia</small></span></a>
-    <nav class="main">
-      <a href="marketplace/">Marketplace</a><a href="#cara-kerja">Cara Kerja</a><a href="#rekber">Rekber Aman</a><a href="#pemilik">Untuk Pemilik Rental</a><a href="#harga">Harga</a><a href="#faq">FAQ</a>
-    </nav>
-    <div class="hcta">
-      <button class="btn line" id="btnMasuk" type="button">Masuk</button>
-      <a class="btn green" href="daftar/">Daftarkan Toko</a>
+<!-- ================= HEADER ================= -->
+<header class="sticky top-0 z-40 bg-white" style="border-bottom:1.5px solid var(--black)">
+  <div class="max-w-[1240px] mx-auto px-4 md:px-6">
+    <div class="flex items-center gap-5 md:gap-8 h-[60px]">
+      <a href="#" class="flex items-center gap-3 no-underline flex-none">
+        <span class="flex items-center justify-center text-white font-bold" style="width:34px;height:34px;background:var(--black);font-size:12px;letter-spacing:.04em">JR</span>
+        <span class="leading-none">
+          <span class="block font-bold" style="font-size:16px;letter-spacing:-.01em">Jasa Rental</span>
+          <span class="micro block mt-1" style="color:var(--ink-3)">Marketplace Rental Indonesia</span>
+        </span>
+      </a>
+      <nav class="hidden lg:flex items-center gap-6 flex-1">
+        <a class="nav-tab" href="marketplace/">Marketplace</a>
+        <a class="nav-tab" href="#cara-kerja">Cara Kerja</a>
+        <a class="nav-tab" href="#rekber">Rekber Aman</a>
+        <a class="nav-tab" href="#pemilik">Untuk Pemilik</a>
+        <a class="nav-tab" href="#harga">Harga</a>
+        <a class="nav-tab" href="#faq">FAQ</a>
+      </nav>
+      <div class="flex items-center gap-2 ml-auto lg:ml-0 flex-none">
+        <button class="sw-btn-ghost" id="btnMasuk" type="button">Masuk</button>
+        <a class="sw-btn-solid" href="daftar/">Daftarkan Toko</a>
+      </div>
     </div>
   </div>
 </header>
 
-<div class="hero">
-  <div class="wrap">
-    <span class="hkick">Marketplace Rental Indonesia</span>
-    <h1>Sewa apa saja, dari toko rental yang <em>sudah diperiksa</em>.</h1>
-    <p class="lead">Jasa Rental adalah marketplace untuk semua kebutuhan sewa — kendaraan, kamera, alat event, perlengkapan bayi, sampai tenda camping. Bandingkan harga, rating, dan stok asli lintas toko, lalu pilih sendiri cara bayarmu: langsung ke toko, atau ditahan dulu dengan Rekber Aman.</p>
-    <form class="hsearch" action="marketplace/" method="get" role="search">
-      <input type="search" name="q" placeholder="Mau sewa apa hari ini? Coba 'tenda dome' atau 'kamera'…" aria-label="Cari barang sewa">
-      <button type="submit">Cari</button>
-    </form>
-    <div class="hchips">
-      <a href="marketplace/?kat=outdoor">Outdoor &amp; Camping</a>
-      <a href="marketplace/?kat=kamera">Kamera &amp; Fotografi</a>
-      <a href="marketplace/?kat=kendaraan">Kendaraan</a>
-      <a href="marketplace/?kat=event">Event &amp; Pesta</a>
-      <a href="marketplace/?kat=elektronik">Elektronik</a>
-    </div>
-    <div class="trustrow">
-      <span class="trust"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#7FBF97" stroke-width="2.4" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6z"/><path d="m9 12 2 2 4-4" stroke-linecap="round"/></svg>Rekber Aman tersedia</span>
-      <span class="trust"><svg width="14" height="14" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#0E5B36"/><path d="m8.2 12.4 2.5 2.5 5-5.4" stroke="#152219" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Identitas &amp; rekening toko terverifikasi</span>
-      <span class="trust">Stok tampil real-time, bukan angka pajangan</span>
-      <span class="trust">Ulasan hanya dari penyewa yang benar-benar menyewa</span>
-    </div>
-    <p class="hown">Punya usaha rental? <a href="#pemilik">Daftarkan tokomu gratis</a> — tokomu langsung tayang di marketplace.</p>
-  </div>
-</div>
-<div class="statswrap"><div class="statsbar">
-  <div class="stat"><b id="statToko">3</b><span>Toko terdaftar</span></div>
-  <div class="stat"><b id="statProduk">21</b><span>Produk siap sewa &amp; beli</span></div>
-  <div class="stat"><b>Rekber Aman</b><span>Dana ditahan sampai sewa selesai</span></div>
-</div></div>
+<!-- ================= HERO ================= -->
+<section style="border-bottom:1px solid var(--rule)">
+  <div class="max-w-[1240px] mx-auto px-4 md:px-6 py-10 md:py-16 grid lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+    <div class="lg:col-span-7">
+      <p class="micro flex items-center gap-2" style="color:var(--ink-3)"><span style="width:7px;height:7px;background:var(--black);display:inline-block"></span> Marketplace Rental Indonesia · FinOwi Id</p>
+      <h1 class="font-bold" style="font-size:clamp(32px,4.6vw,52px);line-height:1.04;letter-spacing:-.02em;margin:18px 0 0">Sewa apa saja, dari toko rental yang sudah diperiksa.</h1>
+      <p class="mt-5" style="color:var(--ink-2);font-size:15.5px;max-width:560px">Satu tempat untuk menyewa kendaraan, tenda, kamera, alat event, dan banyak lagi — langsung dari toko rental di berbagai kota. Bayar lewat <b>Rekber Aman</b> (dana ditahan sampai barang diterima) atau langsung ke toko.</p>
 
+      <form class="mt-8" action="marketplace/" method="get">
+        <div class="grid grid-cols-12" style="border:1.5px solid var(--black)">
+          <div class="col-span-12 sm:col-span-8" style="border-right:1.5px solid var(--black)">
+            <label class="micro block px-3 pt-2.5" style="color:var(--ink-3)" for="heroQ">Kata Kunci</label>
+            <input class="w-full px-3 pb-2.5 pt-0.5 outline-none" id="heroQ" type="search" name="q" placeholder="Cari tenda, kamera, mobil…" style="border:none;background:transparent" autocomplete="off">
+          </div>
+          <button class="col-span-12 sm:col-span-4 text-white font-bold micro flex items-center justify-center gap-2 py-3.5 sm:py-0" type="submit" style="background:var(--black);letter-spacing:.14em">Cari Unit <span aria-hidden="true">→</span></button>
+        </div>
+      </form>
+
+      <div class="flex flex-wrap gap-2 mt-4" aria-label="Kategori populer">
+        <a class="sw-chip" href="marketplace/?kat=outdoor">Outdoor &amp; Camping</a>
+        <a class="sw-chip" href="marketplace/?kat=kamera">Kamera</a>
+        <a class="sw-chip" href="marketplace/?kat=kendaraan">Kendaraan</a>
+        <a class="sw-chip" href="marketplace/?kat=event">Event &amp; Pesta</a>
+        <a class="sw-chip" href="marketplace/?kat=elektronik">Elektronik</a>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 mt-10" style="border:1px solid var(--rule)">
+        <div class="p-4" style="border-right:1px solid var(--rule)"><div class="mono font-bold" style="font-size:26px" id="statToko">3</div><div class="micro mt-1" style="color:var(--ink-3)">Toko Terdaftar</div></div>
+        <div class="p-4" style="border-right:1px solid var(--rule)"><div class="mono font-bold" style="font-size:26px" id="statProduk">21</div><div class="micro mt-1" style="color:var(--ink-3)">Produk Siap Sewa &amp; Beli</div></div>
+        <div class="p-4" style="border-right:1px solid var(--rule)"><div class="mono font-bold" style="font-size:26px">3%</div><div class="micro mt-1" style="color:var(--ink-3)">Biaya Rekber Aman</div></div>
+        <div class="p-4"><div class="mono font-bold" style="font-size:26px">5/5</div><div class="micro mt-1" style="color:var(--ink-3)">Syarat Verifikasi Toko</div></div>
+      </div>
+      <p class="micro mt-4" style="color:var(--ink-3)">Statistik toko &amp; produk diperbarui langsung dari data platform.</p>
+    </div>
+
+    <div class="lg:col-span-5" id="heroPanel">
+      <div class="relative" style="border:1.5px solid var(--black);background:var(--paper);aspect-ratio:4/3;overflow:hidden">
+        <img id="heroImg" alt="Produk pilihan dari toko di Jasa Rental" class="absolute inset-0 w-full h-full object-cover" style="display:none">
+        <div id="heroEmpty" class="absolute inset-0 flex flex-col items-center justify-center gap-2" style="color:var(--ink-3)">
+          <span class="mono font-bold" style="font-size:44px;color:var(--black)">JR</span>
+          <span class="micro">Katalog Langsung dari Toko</span>
+        </div>
+        <div class="absolute top-3 left-3 flex gap-2">
+          <span class="badge-rekber">■ Rekber Aman</span>
+          <span class="badge-type" id="heroCity" style="display:none"></span>
+        </div>
+        <span class="mono absolute bottom-3 right-3 text-white" id="heroIndex" style="background:var(--black);font-size:11px;padding:5px 9px;display:none">01 / 03</span>
+      </div>
+      <div class="flex items-end justify-between gap-4 mt-4">
+        <div class="min-w-0">
+          <p class="micro" id="heroStore" style="color:var(--ink-3)">Produk Pilihan</p>
+          <h3 class="font-bold truncate" id="heroName" style="font-size:17px;margin-top:3px">Memuat katalog…</h3>
+          <p class="mono font-bold mt-1" style="font-size:16px"><span id="heroPrice"></span><span style="color:var(--ink-3);font-weight:400;font-size:12px" id="heroSuffix"></span></p>
+        </div>
+        <a class="sw-btn-solid flex-none" href="marketplace/">Lihat di Marketplace →</a>
+      </div>
+      <div class="flex gap-2 mt-4" id="heroBtns" role="tablist" aria-label="Pilihan produk unggulan"></div>
+    </div>
+  </div>
+  <div class="max-w-[1240px] mx-auto px-4 md:px-6 pb-10 md:pb-14">
+    <div class="grid grid-cols-2 lg:grid-cols-4" style="border:1px solid var(--rule)">
+      <div class="p-4 flex items-center gap-3" style="border-right:1px solid var(--rule)"><span style="width:8px;height:8px;background:var(--black);flex:none"></span><span class="micro" style="letter-spacing:.1em">Rekber Aman Tersedia</span></div>
+      <div class="p-4 flex items-center gap-3" style="border-right:1px solid var(--rule)"><span style="width:8px;height:8px;background:var(--black);flex:none"></span><span class="micro" style="letter-spacing:.1em">Identitas &amp; Rekening Toko Terverifikasi</span></div>
+      <div class="p-4 flex items-center gap-3" style="border-right:1px solid var(--rule)"><span style="width:8px;height:8px;background:var(--black);flex:none"></span><span class="micro" style="letter-spacing:.1em">Stok Tampil Real-Time</span></div>
+      <div class="p-4 flex items-center gap-3"><span style="width:8px;height:8px;background:var(--black);flex:none"></span><span class="micro" style="letter-spacing:.1em">Ulasan Hanya dari Penyewa Nyata</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= KATEGORI ================= -->
 <section id="kategori">
-  <div class="wrap">
-    <div class="eyebrow">Semua Kategori Rental</div>
-    <h2>Satu tempat untuk semua yang bisa disewa</h2>
-    <p class="sub">Bukan cuma outdoor. Setiap kategori punya toko-toko lokal yang bisa kamu bandingkan harga, rating, dan ketersediaan stoknya.</p>
-    <div class="catgrid" id="catgrid"></div>
-  </div>
-</section>
-
-<section id="pilihan" style="padding-top:6px">
-  <div class="wrap">
-    <div class="eyebrow">Etalase Marketplace</div>
-    <h2>Produk pilihan dari toko asli</h2>
-    <p class="sub">Harga dan stok di bawah ini diambil langsung dari katalog toko yang bergabung — bukan gambar contoh.</p>
-    <div class="dgrid" id="dealGrid"><div class="dload">Sedang memuat produk…</div></div>
-    <div style="margin-top:22px;text-align:center"><a class="btn green" href="marketplace/">Lihat Semua Produk di Marketplace</a></div>
-  </div>
-</section>
-
-<section id="cara-kerja" style="padding-top:6px">
-  <div class="wrap">
-    <div class="eyebrow">Cara Kerja Penyewa</div>
-    <h2>Sewa dalam tiga langkah</h2>
-    <div class="steps">
-      <div class="step"><span class="no">1</span><h3>Cari &amp; bandingkan</h3><p>Pilih kota, tanggal, dan kategori. Kartu produk menampilkan harga, rating dari transaksi nyata, dan stok yang benar-benar siap — bukan stok karangan.</p></div>
-      <div class="step"><span class="no">2</span><h3>Pilih cara bayarmu</h3><p>Bayar langsung ke toko, atau aktifkan Rekber Aman bila tokonya menyediakan: uangmu ditahan Jasa Rental sampai sewa selesai. Perbedaannya dijelaskan terbuka sebelum kamu membayar.</p></div>
-      <div class="step"><span class="no">3</span><h3>Ambil barang, sewa selesai</h3><p>Tunjukkan kode booking saat mengambil barang. Untuk transaksi Rekber, dana baru diteruskan ke toko sesudah barang kembali dan kamu mengonfirmasi sewa selesai.</p></div>
-    </div>
-  </div>
-</section>
-
-<section id="rekber" style="padding-top:6px">
-  <div class="wrap">
-    <div class="band">
-      <div class="eyebrow" style="color:#7FBF97">Pembeda Jasa Rental</div>
-      <h2>Rekber Aman — uangmu tidak langsung berpindah tangan</h2>
-      <p class="sub">Rekening bersama dari Jasa Rental. Penyewa tenang karena dana belum sampai ke toko sebelum barang diterima; toko tenang karena pembayaran penyewa sudah terkonfirmasi platform sebelum barang dilepas.</p>
-      <div class="flow">
-        <div class="fstep"><span class="no">Langkah 1</span><b>Penyewa membayar ke Jasa Rental</b><p>Dana masuk ke penampungan platform dan tercatat per booking.</p></div>
-        <div class="fstep"><span class="no">Langkah 2</span><b>Toko melepas barang</b><p>Toko berani dispatch karena pembayaran sudah dijamin platform.</p></div>
-        <div class="fstep"><span class="no">Langkah 3</span><b>Barang kembali &amp; selesai</b><p>Penyewa mengonfirmasi “Sewa Selesai”, atau otomatis 24 jam sesudah pengembalian tercatat tanpa sengketa.</p></div>
-        <div class="fstep"><span class="no">Langkah 4</span><b>Dana diteruskan ke toko</b><p>Dipotong biaya Rekber yang transparan. Ada sengketa? Dana tetap ditahan dan Jasa Rental memediasi dari bukti kedua pihak.</p></div>
+  <div class="max-w-[1240px] mx-auto px-4 md:px-6 py-12 md:py-16">
+    <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
+      <div>
+        <p class="micro" style="color:var(--ink-3)">01 / Kategori</p>
+        <h2 class="font-bold" style="font-size:clamp(24px,3vw,34px);letter-spacing:-.02em;margin-top:8px">Semua kebutuhan rental, satu platform</h2>
       </div>
-      <p class="note"><b>Jujur sejak awal:</b> Rekber adalah pilihan, bukan kewajiban. Transaksi pembayaran langsung ke toko tetap tersedia, dan selalu disertai peringatan bahwa dana itu berada di luar perlindungan Jasa Rental. Toko yang mengaktifkan Rekber mendapat badge <b>Rekber Aman</b> dan bisa ditemukan lewat filter khusus di marketplace.</p>
+      <a class="sw-btn-outline" href="marketplace/">Buka Marketplace →</a>
     </div>
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4" id="catgrid" style="border-top:1px solid var(--rule);border-left:1px solid var(--rule)"></div>
+  </div>
+</section>
 
-    <div class="twoways">
-      <div class="way rek">
-        <h3>Rekber Aman <span class="bdg rekber">Terlindungi</span></h3>
-        <ul>
-          <li>Dana ditahan platform sampai sewa selesai</li>
-          <li>Sengketa dimediasi Jasa Rental dari bukti serah-terima</li>
-          <li>Refund pembatalan mengikuti tangga yang tampil sebelum bayar</li>
-          <li>Cocok untuk toko yang baru pertama kali kamu pakai</li>
-        </ul>
+<!-- ================= PRODUK PILIHAN ================= -->
+<section id="pilihan" style="border-top:1px solid var(--rule)">
+  <div class="max-w-[1240px] mx-auto px-4 md:px-6 py-12 md:py-16">
+    <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
+      <div>
+        <p class="micro" style="color:var(--ink-3)">02 / Etalase Pilihan</p>
+        <h2 class="font-bold" style="font-size:clamp(24px,3vw,34px);letter-spacing:-.02em;margin-top:8px">Unit Siap Sewa &amp; Beli</h2>
+        <p class="mt-2" style="color:var(--ink-2)">Produk asli dari toko-toko yang terdaftar di platform — stok tampil apa adanya.</p>
       </div>
-      <div class="way">
-        <h3>Bayar Langsung ke Toko <span class="bdg warn">Tanpa Perlindungan Rekber</span></h3>
-        <ul>
-          <li>Dana langsung ke rekening toko, diverifikasi toko sendiri</li>
-          <li>Lebih cepat untuk toko langganan yang sudah kamu percaya</li>
-          <li>Selalu disertai peringatan penipuan sebelum tombol bayar aktif</li>
-          <li>Sengketa diselesaikan langsung antara kamu dan toko</li>
-        </ul>
+      <a class="sw-btn-outline" href="marketplace/">Lihat Semua Produk →</a>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4" id="dealGrid" style="border-top:1px solid var(--rule);border-left:1px solid var(--rule)"></div>
+  </div>
+</section>
+
+<!-- ================= CARA KERJA ================= -->
+<section id="cara-kerja" style="border-top:1px solid var(--rule);background:var(--paper)">
+  <div class="max-w-[1240px] mx-auto px-4 md:px-6 py-12 md:py-16">
+    <p class="micro" style="color:var(--ink-3)">03 / Cara Kerja</p>
+    <h2 class="font-bold" style="font-size:clamp(24px,3vw,34px);letter-spacing:-.02em;margin:8px 0 30px">Sewa dalam tiga langkah</h2>
+    <div class="grid md:grid-cols-3 gap-px" style="background:var(--rule);border:1px solid var(--rule)">
+      <div class="p-6" style="background:var(--white)">
+        <div class="mono font-bold" style="font-size:30px">01</div>
+        <h3 class="font-bold mt-3" style="font-size:16px">Cari &amp; bandingkan</h3>
+        <p class="mt-2" style="color:var(--ink-2)">Telusuri produk dari banyak toko rental, saring berdasarkan kota, kategori, dan tanggal sewa.</p>
+      </div>
+      <div class="p-6" style="background:var(--white)">
+        <div class="mono font-bold" style="font-size:30px">02</div>
+        <h3 class="font-bold mt-3" style="font-size:16px">Booking di halaman toko</h3>
+        <p class="mt-2" style="color:var(--ink-2)">Pesan langsung di halaman resmi toko, lalu pilih cara bayar: Rekber Aman atau langsung ke toko.</p>
+      </div>
+      <div class="p-6" style="background:var(--white)">
+        <div class="mono font-bold" style="font-size:30px">03</div>
+        <h3 class="font-bold mt-3" style="font-size:16px">Ambil barang &amp; sewa</h3>
+        <p class="mt-2" style="color:var(--ink-2)">Datang ke toko atau sepakati pengantaran. Bila memakai Rekber, dana baru diteruskan setelah barang kamu terima.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section id="pemilik" style="padding-top:6px">
-  <div class="wrap">
-    <div class="eyebrow">Untuk Pemilik Rental</div>
-    <h2>Tokomu tampil di marketplace — gratis</h2>
-    <p class="sub">Tidak ada biaya listing dan tidak ada komisi dari transaksi langsung. Kamu membayar hanya saat memakai Rekber, atau saat ingin tampil lebih dulu lewat PRO.</p>
-    <div class="feat">
-      <div class="featbox"><span class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 7l1.5 12h13L20 7M9 7a3 3 0 0 1 6 0"/></svg></span><h3>Toko &amp; panel admin lengkap</h3><p>Katalog sewa + jual, kontrak per penyewa, dispatch barang keluar–masuk, penanda telat, dan struk — semua dari satu panel.</p></div>
-      <div class="featbox"><span class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 19V5m0 14h16M8 15v-4m4 4V8m4 7v-6"/></svg></span><h3>Stok live yang jujur</h3><p>Stok di marketplace berkurang otomatis hanya sesudah booking terkonfirmasi dan pembayaran terverifikasi — penyewa tidak lagi dijanjikan barang yang sudah keluar.</p></div>
-      <div class="featbox"><span class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6z"/><path d="m9 12 2 2 4-4" stroke-linecap="round"/></svg></span><h3>Rekber Aman untuk tokomu</h3><p>Berani melepas barang ke penyewa baru: pembayarannya dijamin platform, bukan janji transfer. Bukti transfer palsu bukan lagi risikomu.</p></div>
-      <div class="featbox"><span class="ic"><svg width="19" height="19" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor" opacity=".18"/><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="m8.2 12.4 2.5 2.5 5-5.4" stroke="currentColor" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span><h3>Badge Terverifikasi</h3><p>Identitas, alamat, dan rekeningmu diperiksa platform. Badge ini yang membuat penyewa berani membayar — dan menjadi syarat mengaktifkan Rekber &amp; PRO.</p></div>
-      <div class="featbox"><span class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="#0E5B36"><path d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.4l-5.8 3.1 1.1-6.5L2.6 9.4l6.5-.9z"/></svg></span><h3>Ulasan dari transaksi nyata</h3><p>Rating tokomu dibangun hanya dari booking yang selesai — tidak bisa dibeli, tidak bisa dihapus, bisa kamu balas secara publik.</p></div>
-      <div class="featbox"><span class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 20V10m8 10V4m8 16v-8"/></svg></span><h3>PRO — tampil pertama</h3><p>Langganan PRO menaikkan produkmu ke kelompok teratas hasil pencarian yang relevan, seperti iklan. Penyewa tetap melihat label PRO secara terbuka.</p></div>
-    </div>
-  </div>
-</section>
-
-<section id="harga" style="padding-top:6px">
-  <div class="wrap">
-    <div class="eyebrow">Harga</div>
-    <h2>Sederhana: gratis untuk mulai, bayar saat dapat nilai</h2>
-    <div class="prices">
-      <div class="price">
-        <h3>Toko Dasar</h3>
-        <div class="amt">Rp0 <span>selamanya</span></div>
-        <ul>
-          <li>Tampil di marketplace &amp; direktori toko</li>
-          <li>Halaman toko + panel admin lengkap</li>
-          <li>Booking pembayaran langsung ke tokomu</li>
-          <li>Stok live &amp; ulasan penyewa</li>
-        </ul>
-        <a class="btn line" href="daftar/">Daftarkan Toko Gratis</a>
+<!-- ================= REKBER ================= -->
+<section id="rekber" style="background:var(--black);color:var(--white)">
+  <div class="max-w-[1240px] mx-auto px-4 md:px-6 py-12 md:py-16">
+    <div class="grid lg:grid-cols-12 gap-10">
+      <div class="lg:col-span-5">
+        <p class="micro" style="color:#BFBFBF">04 / Rekber Aman</p>
+        <h2 class="font-bold" style="font-size:clamp(24px,3vw,34px);letter-spacing:-.02em;margin:8px 0 14px">Uangmu ditahan dulu. Baru diteruskan setelah barang di tanganmu.</h2>
+        <p style="color:#D8D8D8">Rekber (rekening bersama) adalah cara bayar paling aman di Jasa Rental: pembayaranmu ditahan oleh platform, dan hanya diteruskan ke toko setelah kamu menerima barangnya. Toko mengaktifkan Rekber secara sukarela — cari label <b>Rekber Aman</b> di halaman toko.</p>
+        <p class="mono mt-5" style="font-size:13px;color:#BFBFBF">Biaya Rekber: 3% dari nilai transaksi, ditanggung penyewa, tampil sebelum kamu membayar.</p>
       </div>
-      <div class="price">
-        <h3>Rekber Aman</h3>
-        <div class="amt">3% <span>per transaksi berhasil</span></div>
-        <ul>
-          <li>Dipotong saat pencairan, bukan di depan</li>
-          <li>Pembayaran penyewa dijamin platform</li>
-          <li>Mediasi sengketa oleh Jasa Rental</li>
-          <li>Badge Rekber Aman + filter khusus</li>
-          <li>Syarat: toko Terverifikasi</li>
-        </ul>
-        <a class="btn line" href="#rekber">Pelajari Rekber</a>
-      </div>
-      <div class="price pro">
-        <span class="tag">TAMPIL PERTAMA</span>
-        <h3>PRO</h3>
-        <div class="amt">Rp99rb <span>/bulan*</span></div>
-        <ul>
-          <li>Produk diprioritaskan di hasil pencarian relevan</li>
-          <li>Label PRO di kartu produk &amp; halaman toko</li>
-          <li>Prioritas juga di daftar Toko</li>
-          <li>Analitik: dilihat, diklik, dipesan</li>
-          <li>Syarat: toko Terverifikasi</li>
-        </ul>
-        <a class="btn ink" href="dashboard/">Aktifkan PRO</a>
+      <div class="lg:col-span-7">
+        <div class="grid sm:grid-cols-2 gap-px" style="background:#2A2A2A;border:1px solid #2A2A2A">
+          <div class="p-5" style="background:var(--black)"><div class="mono font-bold" style="font-size:20px">01</div><h3 class="font-bold mt-2">Kamu membayar ke Rekber</h3><p class="mt-1.5" style="color:#BFBFBF;font-size:13px">Pembayaran masuk ke rekening bersama Jasa Rental, bukan langsung ke toko.</p></div>
+          <div class="p-5" style="background:var(--black)"><div class="mono font-bold" style="font-size:20px">02</div><h3 class="font-bold mt-2">Toko menyiapkan barang</h3><p class="mt-1.5" style="color:#BFBFBF;font-size:13px">Toko menerima notifikasi pesanan dan menyiapkan unit sesuai jadwal sewa.</p></div>
+          <div class="p-5" style="background:var(--black)"><div class="mono font-bold" style="font-size:20px">03</div><h3 class="font-bold mt-2">Kamu menerima barang</h3><p class="mt-1.5" style="color:#BFBFBF;font-size:13px">Ambil di toko atau terima pengantaran, lalu periksa kondisi barangnya.</p></div>
+          <div class="p-5" style="background:var(--black)"><div class="mono font-bold" style="font-size:20px">04</div><h3 class="font-bold mt-2">Dana diteruskan ke toko</h3><p class="mt-1.5" style="color:#BFBFBF;font-size:13px">Setelah masa sewa selesai dan barang kembali, dana diteruskan ke toko. Ada masalah? Tim kami memediasi.</p></div>
+        </div>
       </div>
     </div>
-    <p class="footnote">*Harga bertanda bintang adalah usulan yang sedang difinalisasi dan akan diumumkan resmi sebelum fitur berbayar dinyalakan. Selama masa peluncuran awal, semua toko tampil gratis tanpa batas waktu yang ditentukan sepihak.</p>
-  </div>
-</section>
-
-<section id="verifikasi" style="padding-top:6px">
-  <div class="wrap">
-    <div class="eyebrow">Kepercayaan</div>
-    <h2>Apa arti badge “Terverifikasi” di sini</h2>
-    <p class="sub">Bukan centang hiasan. Toko berhak memakai badge ini hanya sesudah kelima pemeriksaan berikut lolos — dan badge dicabut bila data berubah tanpa verifikasi ulang.</p>
-    <div class="vlist">
-      <div class="vitem"><span class="ck"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.5 5 5 10-11"/></svg></span><div><b>Identitas pemilik diperiksa</b><p>KTP pemilik usaha dicocokkan operator. Data tersimpan privat, tidak pernah tampil publik.</p></div></div>
-      <div class="vitem"><span class="ck"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.5 5 5 10-11"/></svg></span><div><b>Usaha &amp; stoknya nyata</b><p>Foto tempat usaha dan stok asli — bukan foto katalog dari internet.</p></div></div>
-      <div class="vitem"><span class="ck"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.5 5 5 10-11"/></svg></span><div><b>Alamat fisik &amp; titik maps cocok</b><p>Alamat depot konsisten dengan foto tempat usaha dan bisa ditemukan penyewa.</p></div></div>
-      <div class="vitem"><span class="ck"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.5 5 5 10-11"/></svg></span><div><b>Nomor WhatsApp aktif terverifikasi</b><p>Nomor toko dibuktikan aktif dan dipegang pemilik usaha.</p></div></div>
-      <div class="vitem"><span class="ck"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.5 5 5 10-11"/></svg></span><div><b>Rekening atas nama yang cocok</b><p>Nama pemilik rekening tujuan sama dengan pemilik/usaha — menutup pola penipuan rekening orang lain.</p></div></div>
-      <div class="vitem"><span class="ck"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.5 5 5 10-11"/></svg></span><div><b>Verifikasi ulang saat data berubah</b><p>Ganti pemilik, alamat, atau rekening = periksa ulang. Laporan penipuan terverifikasi = badge dicabut.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<section id="faq" style="padding-top:6px">
-  <div class="wrap">
-    <div class="eyebrow">Sering Ditanyakan</div>
-    <h2>FAQ</h2>
-    <div class="faq" id="faqList"></div>
-  </div>
-</section>
-
-<section style="padding-top:6px">
-  <div class="wrap">
-    <div class="final">
-      <h2>Mau menyewa, atau menyewakan?</h2>
-      <p>Dua-duanya mulai dari tempat yang sama. Penyewa mencari dengan aman, pemilik rental menjangkau penyewa yang lebih luas — gratis untuk memulai.</p>
-      <div class="hero-cta">
-        <a class="btn white" href="marketplace/">Buka Marketplace</a>
-        <a class="btn ghostw" href="daftar/">Daftarkan Tokomu</a>
+    <div class="grid md:grid-cols-2 gap-px mt-10" style="background:#2A2A2A;border:1px solid #2A2A2A">
+      <div class="p-6" style="background:var(--white);color:var(--black)">
+        <span class="badge-rekber">■ Rekber Aman</span>
+        <h3 class="font-bold mt-3" style="font-size:16px">Bayar lewat Rekber Jasa Rental</h3>
+        <p class="mt-2" style="color:var(--ink-2)">Dana ditahan platform sampai barang diterima. Bukti pembayaran terverifikasi, ada jalur mediasi bila terjadi sengketa, dan riwayat transaksi tercatat rapi.</p>
+      </div>
+      <div class="p-6" style="background:var(--white);color:var(--black)">
+        <span class="badge-direct">□ Bayar Langsung</span>
+        <h3 class="font-bold mt-3" style="font-size:16px">Bayar langsung ke toko</h3>
+        <p class="mt-2" style="color:var(--ink-2)">Transfer langsung ke rekening toko seperti transaksi rental biasa. Ditandai jelas sebagai <b>Transaksi Langsung — tanpa perlindungan Rekber</b> agar kamu tahu persis risikonya.</p>
       </div>
     </div>
   </div>
 </section>
 
-<footer>
-  <div class="wrap">
-    <div class="frow">
-      <div style="max-width:320px"><b style="color:var(--ink)">Jasa Rental</b> oleh FinOwi Id — marketplace rental untuk seluruh Indonesia. Transaksi &amp; barang adalah tanggung jawab toko dan penyewa; Jasa Rental menyediakan sistem, verifikasi, dan Rekber sebagai perlindungan pilihan.</div>
-      <nav style="margin-left:auto">
-        <a href="marketplace/">Marketplace</a><a href="#rekber">Rekber Aman</a><a href="#harga">Harga</a><a href="#">Ketentuan Platform</a><a href="#">Bantuan Penyewa</a><a href="#">Bantuan Pemilik Rental</a>
+<!-- ================= PEMILIK ================= -->
+<section id="pemilik">
+  <div class="max-w-[1240px] mx-auto px-4 md:px-6 py-12 md:py-16">
+    <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
+      <div>
+        <p class="micro" style="color:var(--ink-3)">05 / Untuk Pemilik Rental</p>
+        <h2 class="font-bold" style="font-size:clamp(24px,3vw,34px);letter-spacing:-.02em;margin-top:8px">Tokomu tampil di marketplace, tanpa bikin website sendiri</h2>
+        <p class="mt-2" style="color:var(--ink-2);max-width:640px">Daftar gratis, dapat halaman toko sendiri dengan katalog, stok, dan sistem booking. Mau tampilan yang benar-benar khas brand kamu? Ada jasa website custom dari tim kami.</p>
+      </div>
+      <a class="sw-btn-solid" href="daftar/">Daftarkan Toko Gratis →</a>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-px" style="background:var(--rule);border:1px solid var(--rule)" id="featGrid"></div>
+  </div>
+</section>
+
+<!-- ================= HARGA ================= -->
+<section id="harga" style="border-top:1px solid var(--rule);background:var(--paper)">
+  <div class="max-w-[1240px] mx-auto px-4 md:px-6 py-12 md:py-16">
+    <p class="micro" style="color:var(--ink-3)">06 / Harga</p>
+    <h2 class="font-bold" style="font-size:clamp(24px,3vw,34px);letter-spacing:-.02em;margin:8px 0 6px">Jualan dulu, biaya belakangan</h2>
+    <p style="color:var(--ink-2);max-width:640px">Listing dan halaman toko standar gratis selamanya. Platform hanya mengambil biaya dari fitur yang menghasilkan transaksi.</p>
+    <div class="grid md:grid-cols-3 gap-px mt-8" style="background:var(--rule);border:1px solid var(--rule)">
+      <div class="price-cell">
+        <p class="micro" style="color:var(--ink-3)">Toko Dasar</p>
+        <div class="mono font-bold mt-3" style="font-size:34px">Rp0</div>
+        <p class="pnote mt-2" style="color:var(--ink-2)">Halaman toko standar, katalog produk, stok real-time, dan booking online. Gratis selamanya, tanpa kartu kredit.</p>
+      </div>
+      <div class="price-cell">
+        <p class="micro" style="color:var(--ink-3)">Rekber Aman</p>
+        <div class="mono font-bold mt-3" style="font-size:34px">3%</div>
+        <p class="pnote mt-2" style="color:var(--ink-2)">Per transaksi Rekber yang berhasil, ditanggung penyewa. Hanya untuk toko Terverifikasi yang mengaktifkan Rekber.</p>
+      </div>
+      <div class="price-cell hot">
+        <div class="flex items-center justify-between gap-3"><p class="micro">Paket PRO</p><span class="badge-type">Tampil Pertama</span></div>
+        <div class="mono font-bold mt-3" style="font-size:34px">Rp99rb<span style="font-size:15px;font-weight:400">/bulan*</span></div>
+        <p class="pnote mt-2">Prioritas tampil di marketplace, label PRO, dan fitur lanjutan untuk toko yang sedang bertumbuh.</p>
+      </div>
+    </div>
+    <p class="mt-4" style="color:var(--ink-3);font-size:12.5px">*Harga bertanda bintang adalah usulan yang sedang difinalkan — belum berlaku dan belum bisa dibeli. Harga final akan diumumkan di halaman ini sebelum PRO diluncurkan.</p>
+  </div>
+</section>
+
+<!-- ================= VERIFIKASI ================= -->
+<section id="verifikasi" style="border-top:1px solid var(--rule)">
+  <div class="max-w-[1240px] mx-auto px-4 md:px-6 py-12 md:py-16 grid lg:grid-cols-12 gap-10">
+    <div class="lg:col-span-5">
+      <p class="micro" style="color:var(--ink-3)">07 / Verifikasi Toko</p>
+      <h2 class="font-bold" style="font-size:clamp(24px,3vw,34px);letter-spacing:-.02em;margin:8px 0 14px">Label “Terverifikasi” tidak bisa dibeli. Harus dibuktikan.</h2>
+      <p style="color:var(--ink-2)">Setiap toko yang ingin menyandang label Terverifikasi — syarat untuk mengaktifkan Rekber dan PRO — wajib melengkapi lima pemeriksaan berikut. Dokumen diperiksa tim kami, bukan sekadar diunggah.</p>
+    </div>
+    <div class="lg:col-span-7">
+      <div style="border:1px solid var(--rule)" id="verifList"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section id="faq" style="border-top:1px solid var(--rule);background:var(--paper)">
+  <div class="max-w-[1240px] mx-auto px-4 md:px-6 py-12 md:py-16">
+    <p class="micro" style="color:var(--ink-3)">08 / FAQ</p>
+    <h2 class="font-bold" style="font-size:clamp(24px,3vw,34px);letter-spacing:-.02em;margin:8px 0 26px">Sering ditanyakan</h2>
+    <div style="border-top:1px solid var(--rule)" id="faqList"></div>
+  </div>
+</section>
+
+<!-- ================= CTA AKHIR ================= -->
+<section style="background:var(--black);color:var(--white)">
+  <div class="max-w-[1240px] mx-auto px-4 md:px-6 py-14 md:py-20 text-center">
+    <h2 class="font-bold" style="font-size:clamp(26px,3.6vw,40px);letter-spacing:-.02em;line-height:1.1">Mulai sewa, atau mulai jualan sewa.</h2>
+    <p class="mt-4 mx-auto" style="color:#BFBFBF;max-width:520px">Penyewa menemukan barang dari toko yang jelas identitasnya. Pemilik rental mendapatkan etalase dan sistem booking tanpa ribet.</p>
+    <div class="flex flex-wrap justify-center gap-3 mt-8">
+      <a class="sw-btn-outline" href="marketplace/" style="background:var(--white)">Jelajahi Marketplace</a>
+      <a class="sw-btn-outline" href="daftar/" style="background:transparent;color:var(--white);border-color:var(--white)">Daftarkan Toko Gratis</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer style="border-top:1.5px solid var(--black)">
+  <div class="max-w-[1240px] mx-auto px-4 md:px-6 py-10">
+    <div class="flex flex-col md:flex-row md:items-start justify-between gap-8">
+      <div>
+        <div class="flex items-center gap-3">
+          <span class="flex items-center justify-center text-white font-bold" style="width:30px;height:30px;background:var(--black);font-size:11px">JR</span>
+          <span class="font-bold" style="font-size:15px">Jasa Rental</span>
+        </div>
+        <p class="mt-3" style="color:var(--ink-3);font-size:12.5px;max-width:340px">Marketplace rental Indonesia oleh FinOwi Id. Sewa dari toko terverifikasi, dengan opsi Rekber Aman.</p>
+      </div>
+      <nav class="flex flex-wrap gap-x-8 gap-y-3">
+        <a class="micro no-underline" href="marketplace/" style="color:var(--ink-2)">Marketplace</a>
+        <a class="micro no-underline" href="#rekber" style="color:var(--ink-2)">Rekber Aman</a>
+        <a class="micro no-underline" href="#harga" style="color:var(--ink-2)">Harga</a>
+        <a class="micro no-underline" href="ketentuan.html" style="color:var(--ink-2)">Ketentuan Platform</a>
+        <a class="micro no-underline" href="privasi.html" style="color:var(--ink-2)">Privasi</a>
       </nav>
     </div>
-    <div style="margin-top:18px">© 2026 FinOwi Id · Jasa Rental — marketplace rental Indonesia.</div>
+    <div class="flex flex-wrap justify-between gap-3 mt-8 pt-5" style="border-top:1px solid var(--rule)">
+      <span class="micro" style="color:var(--ink-3)">© 2026 Jasa Rental · FinOwi Id</span>
+      <span class="micro" style="color:var(--ink-3)">Swiss Monochrome · Rev 4</span>
+    </div>
   </div>
 </footer>
 
-<div id="loginModal" style="display:none;position:fixed;inset:0;background:rgba(16,32,22,.55);z-index:200;align-items:center;justify-content:center;padding:18px">
-  <div style="background:#fff;border-radius:18px;max-width:430px;width:100%;padding:26px 24px;box-shadow:0 24px 60px rgba(0,0,0,.3)">
-    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
-      <div><b style="font-size:19px">Masuk ke Jasa Rental</b><div style="color:var(--mut);font-weight:600;font-size:13.5px;margin-top:3px">Pilih sesuai kebutuhanmu — sama-sama memakai akun Google.</div></div>
-      <button id="loginModalClose" type="button" aria-label="Tutup" style="font-size:19px;font-weight:800;line-height:1;padding:4px 8px">✕</button>
-    </div>
-    <a href="dashboard/" style="display:block;border:1.5px solid var(--line);border-radius:14px;padding:16px 18px;margin-top:18px;text-decoration:none">
-      <b style="font-size:16px;color:var(--ink)">Masuk sebagai Tenant</b>
-      <div style="color:var(--mut);font-weight:600;font-size:13.5px;margin-top:3px">Untuk pemilik toko — kelola pesanan, katalog, pembayaran, dan profil tokomu.</div>
-      <div style="color:var(--green);font-weight:800;font-size:13.5px;margin-top:8px">Ke Dashboard Toko →</div>
-    </a>
-    <a href="marketplace/?masuk=1" style="display:block;border:1.5px solid var(--line);border-radius:14px;padding:16px 18px;margin-top:12px;text-decoration:none">
-      <b style="font-size:16px;color:var(--ink)">Masuk sebagai Pengguna</b>
-      <div style="color:var(--mut);font-weight:600;font-size:13.5px;margin-top:3px">Untuk penyewa — cari barang, simpan favorit, dan pantau bookingmu.</div>
-      <div style="color:var(--green);font-weight:800;font-size:13.5px;margin-top:8px">Ke Marketplace →</div>
-    </a>
+<!-- ================= MODAL LOGIN ================= -->
+<div id="loginModal" style="display:none" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+  <div class="login-card">
+    <button id="loginModalClose" type="button" aria-label="Tutup">✕</button>
+    <p class="micro" style="color:var(--ink-3)">Masuk</p>
+    <h3 id="loginTitle" class="font-bold" style="font-size:20px;margin-top:6px">Masuk ke Jasa Rental</h3>
+    <p style="color:var(--ink-2);font-size:13px;margin-top:4px">Pilih sesuai kebutuhanmu — sama-sama memakai akun Google.</p>
+    <button class="login-opt" type="button" onclick="location.href='dashboard/'">
+      <span class="lo-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5V21a1 1 0 0 1-1 1h-5v-7h-6v7H4a1 1 0 0 1-1-1z"/></svg></span>
+      <span style="flex:1"><b>Masuk sebagai Tenant</b><span>Kamu pemilik toko rental — kelola katalog, stok, pesanan, dan verifikasi tokomu.</span><span class="lo-go">Ke Dashboard Toko →</span></span>
+    </button>
+    <button class="login-opt" type="button" onclick="location.href='marketplace/?masuk=1'">
+      <span class="lo-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg></span>
+      <span style="flex:1"><b>Masuk sebagai Pengguna</b><span>Kamu mau menyewa barang — masuk untuk booking lebih cepat dan melihat riwayat sewa.</span><span class="lo-go">Ke Marketplace →</span></span>
+    </button>
   </div>
 </div>
-<script>
-(function(){
-  var m = document.getElementById('loginModal');
-  var open = function(){ m.style.display = 'flex'; };
-  var close = function(){ m.style.display = 'none'; };
-  document.getElementById('btnMasuk').addEventListener('click', open);
-  document.getElementById('loginModalClose').addEventListener('click', close);
-  m.addEventListener('click', function(e){ if(e.target === m) close(); });
-  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
-})();
-</script>
 
 <script>
-const CATS = [
-  ['Kendaraan','Mobil, motor, sepeda, bus & truk','car'],
-  ['Outdoor & Camping','Tenda, carrier, alat mendaki & pancing','tent'],
-  ['Fashion & Kostum','Kebaya, gaun, jas, kostum & baju adat','shirt'],
-  ['Elektronik','Proyektor, sound, genset, TV & laptop','speaker'],
-  ['Kamera & Fotografi','Mirrorless, lensa, drone & studio','camera'],
-  ['Mainan & Hiburan','PlayStation, mainan anak & alat musik','game'],
-  ['Event & Pesta','Tenda event, kursi, panggung & dekorasi','flag'],
-  ['Alat & Perkakas','Perkakas, alat konstruksi & kebersihan','tool'],
-  ['Bayi & Anak','Stroller, car seat & perlengkapan bayi','baby'],
-  ['Properti & Kos','Kos, villa, ruang meeting & gudang','home'],
-  ['Lainnya','Semua kebutuhan sewa lainnya','grid']
-];
-const IC = (inner) => '<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">' + inner + '</svg>';
-const ICONS = {
-  car: IC('<path d="M4 16v-4l2-6h12l2 6v4"/><path d="M4 16h16"/><circle cx="7.5" cy="17.5" r="1.6"/><circle cx="16.5" cy="17.5" r="1.6"/><path d="M9.1 17.5h5.8"/>'),
-  tent: IC('<path d="M12 4 2.5 20h19z"/><path d="M12 12 7.5 20h9z"/>'),
-  shirt: IC('<path d="M8.5 4 4 6.5 6 10l2-1v11h8V9l2 1 2-3.5L15.5 4a3.5 3.5 0 0 1-7 0z"/>'),
-  speaker: IC('<rect x="5" y="3" width="14" height="18" rx="2"/><circle cx="12" cy="14.5" r="3.2"/><circle cx="12" cy="7.5" r="1.2"/>'),
-  camera: IC('<path d="M4 8h3l2-2.5h6L17 8h3a1.5 1.5 0 0 1 1.5 1.5V19a1.5 1.5 0 0 1-1.5 1.5H4A1.5 1.5 0 0 1 2.5 19V9.5A1.5 1.5 0 0 1 4 8z"/><circle cx="12" cy="13.5" r="3.6"/>'),
-  game: IC('<rect x="2.5" y="7.5" width="19" height="10" rx="5"/><path d="M8 10.8v3.4M6.3 12.5h3.4"/><circle cx="15.8" cy="11.3" r=".4"/><circle cx="17.8" cy="13.7" r=".4"/>'),
-  flag: IC('<path d="M5 21V4"/><path d="M5 4.8c4-2.2 7 2 12 .3v9.4c-5 1.7-8-2.5-12-.3"/>'),
-  tool: IC('<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>'),
-  baby: IC('<path d="M4 4h2.5l2.2 9h9.6l2-7H8"/><circle cx="9.5" cy="19.5" r="1.5"/><circle cx="17.5" cy="19.5" r="1.5"/>'),
-  home: IC('<path d="m3.5 11 8.5-7.5L20.5 11"/><path d="M6 9.5V20h12V9.5"/><path d="M10 20v-5h4v5"/>'),
-  grid: IC('<rect x="4" y="4" width="7" height="7" rx="1.6"/><rect x="13" y="4" width="7" height="7" rx="1.6"/><rect x="4" y="13" width="7" height="7" rx="1.6"/><rect x="13" y="13" width="7" height="7" rx="1.6"/>')
+/* ================= IKON KATEGORI (garis, monokrom) ================= */
+var IC = {
+  car:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16 5.6 9.8A2 2 0 0 1 7.5 8.3h9a2 2 0 0 1 1.9 1.5L20 16"/><path d="M3 16.5h18V19a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-.5H6v.5a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><circle cx="7.5" cy="16.5" r=".4" fill="currentColor"/><circle cx="16.5" cy="16.5" r=".4" fill="currentColor"/></svg>',
+  tent:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 2.5 20h19z"/><path d="M12 12.5 8 20h8z"/></svg>',
+  shirt:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 4 3 7.5 5 12l2-1v9h10v-9l2 1 2-4.5L15.5 4a3.5 3.5 0 0 1-7 0z"/></svg>',
+  gadget:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="1.5"/><path d="M10.5 18.8h3"/></svg>',
+  camera:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5A1.5 1.5 0 0 1 4.5 7h2L8 4h8l1.5 3h2A1.5 1.5 0 0 1 21 8.5V19a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 19z"/><circle cx="12" cy="13.5" r="3.6"/></svg>',
+  game:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 8h10a5 5 0 0 1 5 5c0 2.8-2.2 5-5 5-1.2 0-2.3-.4-3.1-1.1L12.6 15h-1.2l-1.3 1.9C9.3 17.6 8.2 18 7 18c-2.8 0-5-2.2-5-5a5 5 0 0 1 5-5z"/><path d="M7.5 11v4M5.5 13h4"/><circle cx="16" cy="11.8" r=".5" fill="currentColor"/><circle cx="17.8" cy="14" r=".5" fill="currentColor"/></svg>',
+  party:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 6c-4 0-7 1.2-7 1.2C6.5 10 7 13 6.6 16.5L5 21M12 6c4 0 7 1.2 7 1.2C17.5 10 17 13 17.4 16.5L19 21M12 6v15"/></svg>',
+  tool:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 6.5a4.2 4.2 0 0 1 5.6-4L17.5 5l1.2 3 2.9-2.5a4.2 4.2 0 0 1-5.5 5.4L8 19a2.1 2.1 0 0 1-3-3z"/></svg>',
+  baby:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3.5c1.8 1.6 4.5 2 6.8 1M8.5 11h.01M15.5 11h.01" stroke-width="2"/><path d="M8.8 15.5c1 1.2 2.1 1.8 3.2 1.8s2.2-.6 3.2-1.8"/></svg>',
+  home:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9v11h13V9"/><path d="M9.5 20v-6h5v6"/></svg>',
+  box:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 3 7.5v9L12 21l9-4.5v-9z"/><path d="M3 7.5 12 12l9-4.5M12 12v9"/></svg>',
+  grid:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7"/><rect x="13.5" y="3.5" width="7" height="7"/><rect x="3.5" y="13.5" width="7" height="7"/><rect x="13.5" y="13.5" width="7" height="7"/></svg>',
+  chart:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V4"/><path d="M4 20h16"/><path d="M8 16v-5M12 16V8M16 16v-8"/></svg>',
+  tag:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 12.5v-9h9L21 12l-8.5 8.5z"/><circle cx="8" cy="8" r="1.3"/></svg>',
+  shield:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 5.8v5.4c0 4.6 3 7.8 7 9.8 4-2 7-5.2 7-9.8V5.8z"/><path d="m9 11.6 2.2 2.2L15.4 9.6"/></svg>',
+  star:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9z"/></svg>'
 };
-const box = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8.2v7.6a2 2 0 0 1-1 1.7l-7 4a2 2 0 0 1-2 0l-7-4A2 2 0 0 1 3 15.8V8.2a2 2 0 0 1 1-1.7l7-4a2 2 0 0 1 2 0l7 4a2 2 0 0 1 1 1.7z"/><path d="m3.3 8.3 8.7 5 8.7-5M12 22V13.3"/></svg>';
-document.getElementById('catgrid').innerHTML = CATS.map(c =>
-  '<a class="catbox" href="marketplace/"><span class="ic">' + (ICONS[c[2]] || box) + '</span><span><b>' + c[0] + '</b><span>' + c[1] + '</span></span></a>').join('');
-
-const FAQ = [
-  ['Apa itu Rekber Aman?', 'Rekber (rekening bersama) adalah cara bayar di mana uangmu ditahan dulu oleh Jasa Rental, dan baru diteruskan ke toko sesudah barang kembali dan sewa dinyatakan selesai. Bila ada sengketa, dana tetap ditahan dan Jasa Rental memediasi dari bukti kedua pihak. Rekber bersifat pilihan — hanya tersedia di toko Terverifikasi yang mengaktifkannya.'],
-  ['Kalau saya bayar langsung ke toko, apakah aman?', 'Pembayaran langsung berarti danamu berada di luar perlindungan Jasa Rental — karena itu setiap checkout langsung selalu menampilkan peringatan penipuan dan meminta persetujuanmu secara aktif sebelum tombol bayar menyala. Untuk toko yang baru pertama kali kamu pakai, kami sarankan memilih toko Terverifikasi dan memakai Rekber Aman bila tersedia.'],
-  ['Apakah deposit jaminan juga ditahan Jasa Rental?', 'Untuk saat ini belum. Deposit jaminan (misalnya uang tunai saat pengambilan barang) tetap diatur langsung antara kamu dan toko sesuai ketentuan toko yang tampil sebelum booking. Menahan deposit secara online masuk rencana pengembangan Rekber berikutnya.'],
-  ['Bagaimana cara mendaftarkan usaha rental saya?', 'Klik “Daftarkan Toko”, masuk dengan akun Google, lalu isi nama toko, kategori, kota, dan nomor WhatsApp — tokomu langsung tayang dan bisa menerima booking. Katalog dan metode pembayaran kamu atur sendiri dari dashboard. Untuk mendapat badge Terverifikasi — syarat mengaktifkan Rekber dan PRO — siapkan KTP pemilik, foto tempat usaha & stok, alamat + titik maps, nomor WhatsApp aktif, dan rekening atas nama pemilik/usaha.'],
-  ['Berapa biaya untuk pemilik rental?', 'Tampil di marketplace dan menerima booking pembayaran langsung: gratis, tanpa komisi. Kamu hanya membayar bila memakai Rekber Aman (potongan per transaksi berhasil yang diteruskan ke tokomu) atau berlangganan PRO agar produkmu diprioritaskan di hasil pencarian. Harga final fitur berbayar diumumkan resmi sebelum dinyalakan.'],
-  ['Ulasan di Jasa Rental bisa dipercaya?', 'Ulasan hanya bisa ditulis dari booking yang benar-benar selesai — barang sudah kembali dan kontrak ditutup. Toko tidak bisa menghapus ulasan, hanya membalasnya secara publik. Toko dengan ulasan kurang dari tiga ditandai jujur sebagai “Baru”, bukan diberi bintang karangan.']
+/* ================= KATEGORI ================= */
+var CATS = [
+  ['Kendaraan','Mobil, motor, dan sepeda untuk harian sampai perjalanan jauh.','car','kendaraan'],
+  ['Outdoor & Camping','Tenda, carrier, dan perlengkapan naik gunung & kemah.','tent','outdoor'],
+  ['Fashion & Kostum','Kebaya, jas, gaun, dan kostum untuk acara spesial.','shirt','fashion'],
+  ['Elektronik','Sound system, proyektor, TV, dan perangkat elektronik lain.','gadget','elektronik'],
+  ['Kamera & Fotografi','Kamera, lensa, dan lighting untuk konten & dokumentasi.','camera','kamera'],
+  ['Mainan & Hiburan','PlayStation, permainan anak, dan hiburan keluarga.','game','hiburan'],
+  ['Event & Pesta','Tenda acara, kursi, panggung, dan dekorasi pesta.','party','event'],
+  ['Alat & Perkakas','Bor, gerinda, genset, dan alat proyek lainnya.','tool','alat'],
+  ['Bayi & Anak','Stroller, box bayi, dan perlengkapan si kecil.','baby','bayi'],
+  ['Properti & Kos','Furnitur dan perlengkapan hunian sementara.','home','properti'],
+  ['Lainnya','Semua kebutuhan rental di luar kategori di atas.','grid','lainnya']
 ];
-document.getElementById('faqList').innerHTML = FAQ.map(f =>
-  '<div class="faqitem"><button>' + f[0] + '<svg class="chev" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg></button><div class="ans">' + f[1] + '</div></div>').join('');
-document.querySelectorAll('.faqitem button').forEach(b => b.onclick = () => b.parentElement.classList.toggle('open'));
-</script>
-<style>
-.dgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:26px}
-@media(min-width:760px){.dgrid{grid-template-columns:repeat(3,1fr)}}
-@media(min-width:1024px){.dgrid{grid-template-columns:repeat(4,1fr)}}
-.dload{grid-column:1/-1;text-align:center;color:var(--mut);font-weight:600;padding:26px 0}
-.dcard{background:var(--card);border:1px solid #E2EAE3;border-radius:18px;overflow:hidden;box-shadow:0 2px 10px rgba(23,40,30,.05);display:flex;flex-direction:column;transition:transform .25s ease,box-shadow .25s ease}
-.dcard:hover{transform:translateY(-4px);box-shadow:var(--sh-lg)}
-.dcard .dph{position:relative;aspect-ratio:4/3;background:#E2EAE3}
-.dcard .dph img{width:100%;height:100%;object-fit:cover}
-.dcard .phempty{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#EAF4ED,#DDEBDF);color:var(--green-d)}
-.dcard .phempty span{font-size:46px;font-weight:800;opacity:.92}
-.dcard .dbody{padding:12px 13px 14px;display:flex;flex-direction:column;gap:4px}
-.dcard .dname{font-weight:700;font-size:14px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:38px}
-.dcard .dstore{font-size:12px;color:var(--mut);font-weight:600}
-.dcard .dprice{font-size:17.5px;font-weight:800;color:var(--green-d)}
-.dcard .dprice span{font-size:11.5px;color:var(--mut);font-weight:600}
-</style>
-<script>
-(function(){
-  var grid = document.getElementById('dealGrid'); if(!grid) return;
-  var SB = 'https://nuowbpevzfwobedtgxzm.supabase.co', KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im51b3dicGV2emZ3b2JlZHRneHptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQwNjk5MjYsImV4cCI6MjEwOTY0NTkyNn0.-kSflWBRXeKtr2idO8bmEIcoipUO9pbNN-uOWapiS2M';
-  function rp(n){ return 'Rp' + Number(n || 0).toLocaleString('id-ID'); }
-  fetch(SB + '/rest/v1/rpc/marketplace_listings', {method:'POST', headers:{'apikey':KEY, 'Authorization':'Bearer ' + KEY, 'Content-Type':'application/json'}, body:'{}'})
-    .then(function(r){ return r.json(); })
-    .then(function(rows){
-      if(!Array.isArray(rows)) throw new Error('bad');
-      var sp = document.getElementById('statProduk'); if(sp) sp.textContent = rows.length;
-      var items = rows.filter(function(x){ return (x.stock_base || 0) - (x.committed || 0) > 0; });
-      items.sort(function(a, b){ return (b.image ? 1 : 0) - (a.image ? 1 : 0); });
-      items = items.slice(0, 8);
-      if(!items.length){ document.getElementById('pilihan').style.display = 'none'; return; }
-      grid.innerHTML = items.map(function(x){
-        var sale = x.type === 'sale';
-        var huruf = (x.name || 'J').trim().charAt(0).toUpperCase();
-        var ph = x.image ? '<img src="' + x.image + '" alt="" loading="lazy" onerror="this.parentNode.innerHTML=\'<div class=phempty><span>' + huruf + '</span></div>\'">' : '<div class="phempty"><span>' + huruf + '</span></div>';
-        return '<a class="dcard" href="marketplace/"><div class="dph">' + ph + '</div><div class="dbody"><div class="dname">' + x.name + '</div><div class="dstore">' + x.shop_name + '</div><div class="dprice">' + rp(sale ? x.price_sale : x.price_rental) + '<span>' + (sale ? ' · dijual' : ' /hari') + '</span></div></div></a>';
-      }).join('');
-    })
-    .catch(function(){ var p = document.getElementById('pilihan'); if(p) p.style.display = 'none'; });
-  fetch(SB + '/rest/v1/rpc/marketplace_stores', {method:'POST', headers:{'apikey':KEY, 'Authorization':'Bearer ' + KEY, 'Content-Type':'application/json'}, body:'{}'})
-    .then(function(r){ return r.json(); })
-    .then(function(st){ if(Array.isArray(st)){ var el = document.getElementById('statToko'); if(el) el.textContent = st.length; } })
-    .catch(function(){});
-})();
+document.getElementById('catgrid').innerHTML = CATS.map(function(c,i){
+  return '<a class="catcell" href="marketplace/?kat='+c[3]+'" style="border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)">'
+    + '<span class="flex items-start justify-between"><span class="cic">'+IC[c[2]]+'</span><span class="mono" style="font-size:11px;color:var(--ink-3)">'+String(i+1).padStart(2,'0')+'</span></span>'
+    + '<span><span class="block font-bold" style="font-size:15px">'+c[0]+'</span>'
+    + '<span class="block mt-1" style="color:var(--ink-2);font-size:13px">'+c[1]+'</span></span>'
+    + '<span class="micro mt-auto" style="color:var(--ink-3)">Lihat Unit →</span></a>';
+}).join('');
+
+/* ================= FITUR PEMILIK ================= */
+var FEATS = [
+  ['Halaman Toko Sendiri','Alamat jasa-rental.my.id/tokomu dengan katalog dan profil tokomu.','home'],
+  ['Katalog & Stok Real-Time','Tambah produk, atur stok per ukuran — stok berkurang otomatis saat booking terkonfirmasi.','box'],
+  ['Booking Online Terstruktur','Pesanan masuk rapi dengan data penyewa, tanggal, dan bukti pembayaran.','chart'],
+  ['Label Terverifikasi','Lengkapi 5 syarat verifikasi untuk membangun kepercayaan penyewa.','shield'],
+  ['Rekber Aman (Opsional)','Aktifkan Rekber setelah terverifikasi — dana ditahan platform sampai barang diterima.','shield'],
+  ['Rating & Ulasan Asli','Ulasan hanya dari transaksi yang benar-benar selesai di platform.','star']
+];
+document.getElementById('featGrid').innerHTML = FEATS.map(function(f,i){
+  return '<div class="p-6" style="background:var(--white)"><span class="cic" style="width:38px;height:38px;border:1.5px solid var(--black);display:inline-flex;align-items:center;justify-content:center"><span style="width:20px;height:20px;display:block">'+IC[f[2]]+'</span></span>'
+    + '<h3 class="font-bold mt-4" style="font-size:15px">'+f[0]+'</h3><p class="mt-1.5" style="color:var(--ink-2);font-size:13px">'+f[1]+'</p></div>';
+}).join('');
+
+/* ================= VERIFIKASI ================= */
+var VERIFS = [
+  ['Foto KTP pemilik','Identitas pemilik usaha sesuai data pendaftaran toko.'],
+  ['Foto tempat usaha / stok','Bukti fisik lokasi usaha atau gudang stok barang.'],
+  ['Alamat usaha + titik peta','Alamat lengkap yang bisa dikunjungi penyewa.'],
+  ['Nomor WhatsApp aktif','Nomor yang terverifikasi dan bisa dihubungi.'],
+  ['Rekening atas nama pemilik/usaha','Rekening tujuan pembayaran harus cocok dengan identitas.'],
+  ['Pemeriksaan manual oleh tim','Dokumen ditinjau satu per satu — label tidak otomatis terbit.']
+];
+document.getElementById('verifList').innerHTML = VERIFS.map(function(v,i){
+  return '<div class="flex gap-4 p-4" style="'+(i<VERIFS.length-1?'border-bottom:1px solid var(--rule);':'')+'background:var(--white)">'
+    + '<span class="mono flex-none" style="font-size:12px">[✓]</span>'
+    + '<span><span class="block font-bold" style="font-size:14px">'+v[0]+'</span><span class="block" style="color:var(--ink-2);font-size:13px">'+v[1]+'</span></span></div>';
+}).join('');
+
+/* ================= FAQ ================= */
+var FAQ = [
+  ['Apakah mendaftar toko dipungut biaya?','Tidak. Halaman toko standar dan listing produk gratis selamanya. Platform hanya mengambil biaya 3% dari transaksi Rekber yang berhasil (ditanggung penyewa), dan biaya langganan bila kamu memilih paket PRO saat sudah diluncurkan.'],
+  ['Apa itu Rekber Aman dan apakah wajib?','Rekber (rekening bersama) adalah opsi pembayaran di mana dana penyewa ditahan platform dan diteruskan ke toko setelah barang diterima. Sifatnya opsional dua arah: toko memilih mengaktifkan (setelah Terverifikasi), dan penyewa memilih memakai atau membayar langsung ke toko.'],
+  ['Kalau penyewa membayar langsung ke toko, apakah dilindungi?','Tidak — transaksi langsung ditandai jelas sebagai “Transaksi Langsung — tanpa perlindungan Rekber”. Kamu tetap bisa booking lewat platform, tetapi pembayaran dan risikonya langsung antara kamu dan toko.'],
+  ['Bagaimana cara toko mendapat label Terverifikasi?','Lengkapi 5 syarat: foto KTP pemilik, foto tempat usaha/stok, alamat usaha + titik peta, nomor WhatsApp aktif, dan rekening atas nama pemilik/usaha. Tim kami memeriksa dokumennya secara manual.'],
+  ['Apakah Jasa Rental hanya untuk rental outdoor?','Bukan. Marketplace ini terbuka untuk semua kategori rental: kendaraan, outdoor, fashion, elektronik, kamera, hiburan, event, alat, perlengkapan bayi, sampai properti. Layanan website custom kami memang berawal dari rental outdoor, tetapi platformnya untuk semua.'],
+  ['Saya sudah punya website sendiri, boleh tetap daftar?','Boleh. Banyak toko memakai halaman Jasa Rental sebagai etalase tambahan dan kanal booking, di samping website atau media sosial yang sudah mereka punya.']
+];
+document.getElementById('faqList').innerHTML = FAQ.map(function(f){
+  return '<div class="sw-faq"><button type="button">'+f[0]+'<span class="fi">+</span></button><div class="fa">'+f[1]+'</div></div>';
+}).join('');
+document.querySelectorAll('.sw-faq>button').forEach(function(b){
+  b.addEventListener('click', function(){ b.parentElement.classList.toggle('open'); });
+});
+
+/* ================= MODAL LOGIN ================= */
+var loginModal = document.getElementById('loginModal');
+function openLogin(){ loginModal.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+function closeLogin(){ loginModal.style.display = 'none'; document.body.style.overflow = ''; }
+document.getElementById('btnMasuk').addEventListener('click', openLogin);
+document.getElementById('loginModalClose').addEventListener('click', closeLogin);
+loginModal.addEventListener('click', function(e){ if (e.target === loginModal) closeLogin(); });
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeLogin(); });
+
+/* ================= DATA LIVE: statistik, hero, etalase ================= */
+var SB = 'https://nuowbpevzfwobedtgxzm.supabase.co';
+var KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im51b3dicGV2emZ3b2JlZHRneHptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMwMDEzMDIsImV4cCI6MjA3ODU3NzMwMn0.kOjEfUFYEb1eYnuCPyYxgt2yh6BfLc7RyAJDWApJ4eA';
+function rp(n){ return 'Rp' + Math.round(Number(n) || 0).toLocaleString('id-ID'); }
+function escL(s){ return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function rpcL(name){
+  return fetch(SB + '/rest/v1/rpc/' + name, { method:'POST', headers:{ apikey:KEY, Authorization:'Bearer ' + KEY, 'Content-Type':'application/json' }, body:'{}' })
+    .then(function(r){ return r.ok ? r.json() : null; }).catch(function(){ return null; });
+}
+function cityOf(row){
+  var parts = String((row && row.address) || '').split(',').map(function(x){ return x.trim(); }).filter(Boolean);
+  return parts.length > 1 ? parts[1] : (parts[0] || '');
+}
+
+var heroItems = [], heroCur = 0;
+function setHero(i){
+  if (!heroItems.length) return;
+  heroCur = ((i % heroItems.length) + heroItems.length) % heroItems.length;
+  var it = heroItems[heroCur];
+  var img = document.getElementById('heroImg');
+  img.src = it.image; img.style.display = 'block';
+  document.getElementById('heroEmpty').style.display = 'none';
+  var city = cityOf(it);
+  var hc = document.getElementById('heroCity');
+  if (city) { hc.textContent = city; hc.style.display = 'inline-flex'; } else { hc.style.display = 'none'; }
+  var idx = document.getElementById('heroIndex');
+  idx.textContent = String(heroCur + 1).padStart(2,'0') + ' / ' + String(heroItems.length).padStart(2,'0');
+  idx.style.display = 'block';
+  document.getElementById('heroStore').textContent = it.shop_name || 'Toko di Jasa Rental';
+  document.getElementById('heroName').textContent = it.name || '';
+  var sale = it.type === 'sale';
+  document.getElementById('heroPrice').textContent = rp(sale ? it.price_sale : it.price_rental);
+  document.getElementById('heroSuffix').textContent = sale ? ' · dijual' : ' / hari';
+  document.querySelectorAll('.hero-num-btn').forEach(function(b, bi){ b.classList.toggle('on', bi === heroCur); });
+}
+window.setHero = setHero;
+
+function dealCard(x){
+  var sale = x.type === 'sale';
+  var price = sale ? x.price_sale : x.price_rental;
+  var avail = (x.stock_base || 0) - (x.committed || 0);
+  var photo = x.image
+    ? '<img src="' + escL(x.image) + '" alt="' + escL(x.name) + '" loading="lazy" class="w-full h-full object-cover" onerror="this.parentNode.innerHTML=\'<div class=&quot;sw-photo-empty&quot;><span class=&quot;mono font-bold&quot; style=&quot;font-size:30px;color:var(--black)&quot;>' + escL((x.name || 'J').charAt(0).toUpperCase()) + '</span><span class=&quot;micro&quot;>Foto belum tersedia</span></div>\'">'
+    : '<div class="sw-photo-empty"><span class="mono font-bold" style="font-size:30px;color:var(--black)">' + escL((x.name || 'J').charAt(0).toUpperCase()) + '</span><span class="micro">Foto belum tersedia</span></div>';
+  return '<a class="sw-cell" href="marketplace/" style="border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)">'
+    + '<div class="sw-photo relative" style="aspect-ratio:4/3;background:var(--paper)">' + photo
+    + '<div class="absolute top-3 left-3 flex flex-wrap gap-1.5"><span class="badge-type">' + (sale ? 'Beli' : 'Sewa') + '</span></div>'
+    + '<div class="sw-cta-bar"><span class="micro" style="color:#fff">Lihat di Marketplace</span><span>→</span></div></div>'
+    + '<div class="p-5"><p class="micro" style="color:var(--ink-3)">' + escL(x.shop_name || 'Toko') + '</p>'
+    + '<h3 class="font-bold mt-1.5" style="font-size:15px;line-height:1.3;min-height:39px">' + escL(x.name) + '</h3>'
+    + '<div class="flex items-baseline justify-between gap-3 mt-3"><span class="mono font-bold" style="font-size:16px">' + rp(price) + '<span style="color:var(--ink-3);font-weight:400;font-size:11px">' + (sale ? ' · dijual' : ' /hari') + '</span></span>'
+    + '<span class="mono" style="font-size:11px;color:var(--ink-3)">' + avail + ' UNIT</span></div></div></a>';
+}
+
+rpcL('marketplace_listings').then(function(rows){
+  if (!Array.isArray(rows)) { var ps = document.getElementById('pilihan'); if (ps) ps.style.display = 'none'; document.getElementById('heroName').textContent = 'Katalog belum bisa dimuat'; return; }
+  document.getElementById('statProduk').textContent = rows.length;
+  var items = rows.filter(function(x){ return ((x.stock_base || 0) - (x.committed || 0)) > 0; });
+  items.sort(function(a, b){ return (b.image ? 1 : 0) - (a.image ? 1 : 0); });
+  /* hero: 3 produk berfoto pertama */
+  heroItems = items.filter(function(x){ return !!x.image; }).slice(0, 3);
+  if (heroItems.length) {
+    document.getElementById('heroBtns').innerHTML = heroItems.map(function(_, i){
+      return '<button type="button" class="hero-num-btn mono" onclick="setHero(' + i + ')">' + String(i + 1).padStart(2,'0') + '</button>';
+    }).join('');
+    setHero(0);
+  } else {
+    document.getElementById('heroName').textContent = 'Jelajahi katalog di marketplace';
+  }
+  /* etalase */
+  var grid = document.getElementById('dealGrid');
+  var show = items.slice(0, 8);
+  if (!show.length) { document.getElementById('pilihan').style.display = 'none'; return; }
+  grid.innerHTML = show.map(dealCard).join('');
+});
+rpcL('marketplace_stores').then(function(rows){
+  if (Array.isArray(rows)) document.getElementById('statToko').textContent = rows.length;
+});
 </script>
 </body>
 </html>
