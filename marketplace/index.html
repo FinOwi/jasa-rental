@@ -4,15 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Jasa Rental — Marketplace Rental</title>
-<meta name="description" content="Cari dan bandingkan produk rental dari toko-toko di Jasa Rental — tenda, carrier, jaket gunung, sepatu trail, dan perlengkapan outdoor lainnya dengan harga dan stok transparan. Booking langsung di halaman resmi toko.">
+<meta name="description" content="Cari & sewa produk dari toko rental terverifikasi di seluruh Indonesia: kendaraan, outdoor, kamera, event, dan lainnya. Stok real-time, opsi Rekber Aman.">
 <link rel="canonical" href="https://jasa-rental.my.id/marketplace/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Jasa Rental">
-<meta property="og:locale" content="id_ID">
 <meta property="og:title" content="Jasa Rental — Marketplace Rental">
-<meta property="og:description" content="Cari dan bandingkan produk rental dari toko-toko di Jasa Rental — tenda, carrier, jaket gunung, sepatu trail, dan perlengkapan outdoor lainnya dengan harga dan stok transparan. Booking langsung di halaman resmi toko.">
+<meta property="og:description" content="Sewa dari toko rental terverifikasi dengan stok real-time dan opsi Rekber Aman.">
 <meta property="og:url" content="https://jasa-rental.my.id/marketplace/">
 <meta name="twitter:card" content="summary">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -131,398 +131,428 @@
   ]
 }
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
 <style>
-:root{
-  --ink:#152219; --ink2:#43544a; --mut:#71806f;
-  --bg:#F7F9F7; --card:#ffffff; --line:#E2EAE3;
-  --green:#0E5B36; --green-d:#083D24; --green-soft:#e7f3ec;
-  --gold:#0E5B36; --gold-soft:#E7F2EA;
-  --blue:#0E5B36; --red:#152219; --red-soft:#EFF3F0;
-  --amber:#083D24; --amber-bg:#E7F2EA; --amber-line:#C9DFCF;
-  --r:20px; --sh:0 1px 2px rgba(23,40,30,.05),0 16px 40px -16px rgba(23,40,30,.16);
-  --sh-lg:0 2px 4px rgba(23,40,30,.06),0 28px 56px -20px rgba(23,40,30,.28);
-}
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{scroll-behavior:smooth}
-body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.5;padding-bottom:76px}
-button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
-input,select{font:inherit;color:inherit}
-img{display:block}
-svg{flex:none}
+  /* ============ SWISS MONOCHROME V4 (porting Tahap 1: marketplace) ============ */
+  :root{
+    --white:#FFFFFF; --paper:#F5F5F5; --hover:#ECECEC; --rule:#E2E2E2; --rule-mid:#BFBFBF;
+    --ink-3:#767676; --ink-2:#404040; --black:#0A0A0A;
+    /* alias nama variabel lama → monokrom, agar string gaya inline di JS tetap konsisten */
+    --ink:#0A0A0A; --mut:#767676; --line:#E2E2E2; --card:#FFFFFF; --bg:#FFFFFF;
+    --green:#0A0A0A; --green-d:#0A0A0A; --green-soft:#F5F5F5;
+    --gold:#404040; --gold-soft:#F5F5F5; --blue:#0A0A0A;
+    --red:#0A0A0A; --red-soft:#F5F5F5;
+    --amber:#404040; --amber-bg:#F5F5F5; --amber-line:#BFBFBF; --sh:none;
+  }
+  *{box-sizing:border-box}
+  html{overflow-x:clip;scroll-behavior:smooth}
+  body{margin:0;background:var(--white);color:var(--black);font-family:"Helvetica Neue",Helvetica,-apple-system,"Inter",Arial,sans-serif;font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:clip;padding-bottom:70px}
+  @media(min-width:860px){ body{padding-bottom:0} }
+  ::selection{background:var(--black);color:var(--white)}
+  .mono{font-family:ui-monospace,"SF Mono","JetBrains Mono",Menlo,monospace;font-variant-numeric:tabular-nums}
+  .micro{font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+  img{display:block}
+  a{color:inherit}
+  button{font-family:inherit;cursor:pointer}
+  input,select{font-family:inherit;font-size:14px}
+  @media (max-width:640px){ input,select{font-size:16px} }
+  .wrap{max-width:1240px;margin:0 auto;padding:0 16px}
+  @media(min-width:768px){ .wrap{padding:0 24px} }
 
-/* ---------- header ---------- */
-header{position:sticky;top:0;z-index:40;background:#fff;color:var(--ink);box-shadow:0 1px 0 var(--line),0 10px 30px -24px rgba(20,40,28,.35)}
-.hwrap{max-width:1180px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:14px}
-.logo{display:flex;align-items:center;gap:9px;font-weight:800;font-size:18px;letter-spacing:-.02em;white-space:nowrap}
-.logo .mark{width:30px;height:30px;border-radius:9px;background:var(--green);display:grid;place-items:center;color:#fff}
-.logo small{display:block;font-size:10px;font-weight:600;color:var(--mut);letter-spacing:.08em;text-transform:uppercase}
-.hnav{display:none;gap:4px;margin-left:10px}
-.hnav button{padding:8px 12px;border-radius:99px;font-weight:600;font-size:14px;color:var(--ink2)}
-.hnav button.on{background:var(--green-soft);color:var(--green-d)}
-.hright{margin-left:auto;display:flex;align-items:center;gap:10px}
-.member{display:flex;align-items:center;gap:8px;background:var(--green-soft);border:1px solid #D8E6DA;padding:6px 12px 6px 6px;border-radius:99px;font-weight:700;font-size:13px;color:var(--ink)}
-.member .av{width:26px;height:26px;border-radius:50%;background:var(--gold-soft);color:var(--gold);display:grid;place-items:center;font-size:12px;font-weight:800}
-@media(min-width:860px){.hnav{display:flex}}
+  .sw-btn-solid{display:inline-flex;align-items:center;gap:8px;background:var(--black);color:var(--white);border:1.5px solid var(--black);padding:10px 18px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:background .15s,color .15s;white-space:nowrap}
+  .sw-btn-solid:hover{background:var(--white);color:var(--black)}
+  .sw-btn-outline{display:inline-flex;align-items:center;gap:8px;background:var(--white);color:var(--black);border:1.5px solid var(--black);padding:10px 18px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:background .15s,color .15s;white-space:nowrap}
+  .sw-btn-outline:hover{background:var(--black);color:var(--white)}
+  .badge-rekber{display:inline-flex;align-items:center;background:var(--black);color:var(--white);font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 8px}
+  .badge-direct{display:inline-flex;align-items:center;background:var(--white);color:var(--ink-2);border:1px dashed var(--ink-3);font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 8px}
+  .badge-type{display:inline-flex;align-items:center;background:var(--white);color:var(--black);border:1px solid var(--black);font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 8px}
+  .badge-out{display:inline-flex;align-items:center;background:var(--paper);color:var(--ink-3);font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 8px}
+  .nav-tab{position:relative;background:none;border:none;padding:8px 2px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);transition:color .15s}
+  .nav-tab:hover{color:var(--black)}
+  .nav-tab.on{color:var(--black)}
+  .nav-tab.on::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--black)}
+  .sw-input{width:100%;background:var(--white);border:1px solid var(--rule);color:var(--black);padding:11px 12px;outline:none;transition:border-color .15s;border-radius:0;appearance:none;-webkit-appearance:none}
+  .sw-input:focus{border-color:var(--black)}
+  .sw-input::placeholder{color:var(--ink-3)}
+  select.sw-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%230A0A0A' stroke-width='1.5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
+  input[type="checkbox"].sw-check{appearance:none;-webkit-appearance:none;width:16px;height:16px;border:1.5px solid var(--black);background:var(--white);flex:none;cursor:pointer;position:relative;margin:0}
+  input[type="checkbox"].sw-check:checked{background:var(--black)}
+  input[type="checkbox"].sw-check:checked::after{content:"";position:absolute;left:4.5px;top:1.5px;width:4px;height:8px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg)}
 
-/* ---------- hero & search ---------- */
-.hero{padding:16px 16px 0}
-.hero-in{background:linear-gradient(125deg,#F5F9F4,#EAF4ED 60%,#E2F0E5);border-radius:26px;padding:28px 26px 22px;color:var(--ink);box-shadow:var(--sh)}
-@media(min-width:900px){.hero-in{padding:36px 38px 26px}}
-@media(min-width:900px){.hero-in{display:grid;grid-template-columns:1.02fr .98fr;gap:38px;align-items:center}}
-.kick{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:.09em;background:#fff;border:1px solid #CFE5D6;color:var(--green-d);padding:6px 12px;border-radius:99px;margin-bottom:14px;box-shadow:var(--sh)}
-.hero-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
-.btn-hero{background:var(--green);color:#fff;font-weight:800;padding:13px 22px;border-radius:99px;font-size:14px;box-shadow:0 12px 24px -10px rgba(23,114,69,.55)}
-.btn-hero2{background:#fff;border:1px solid var(--line);color:var(--ink);font-weight:700;padding:13px 22px;border-radius:99px;font-size:14px}
-.hero-slide{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/3;background:#DCE9DE;box-shadow:0 24px 44px -22px rgba(16,42,26,.35);margin-top:20px}
-@media(min-width:900px){.hero-slide{margin-top:0}}
-.hero-slide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .8s ease}
-.hero-slide img.on{opacity:1}
-.hchip{position:absolute;left:12px;bottom:12px;background:#fff;color:var(--ink);border-radius:13px;padding:10px 13px;box-shadow:var(--sh-lg);max-width:78%}
-.hchip .hn{font-size:13px;font-weight:800;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:250px}
-.hchip .hp{font-size:16.5px;font-weight:800;color:var(--green-d)}
-.hchip .hs{font-size:11px;color:var(--mut);font-weight:600}
-.hdots{position:absolute;right:12px;bottom:16px;display:flex;gap:5px}
-.hdots span{width:7px;height:7px;border-radius:50%;background:#ffffff80}
-.hdots span.on{background:#fff;width:18px;border-radius:99px}
-.hero-trust{grid-column:1/-1;display:flex;gap:14px;flex-wrap:wrap;margin-top:24px;padding-top:18px;border-top:1px solid #D8E6DA}
-.ht{display:flex;gap:10px;align-items:center;flex:1;min-width:180px}
-.htic{width:38px;height:38px;border-radius:12px;background:#fff;color:var(--green-d);display:grid;place-items:center;flex:none;box-shadow:var(--sh)}
-.ht b{display:block;font-size:13px}
-.ht small{display:block;font-size:11.5px;color:var(--mut);font-weight:600}
-.hero-in{max-width:1180px;margin:0 auto}
-.hero h1{font-size:clamp(28px,4.4vw,42px);font-weight:800;letter-spacing:-.02em;line-height:1.14;max-width:620px;color:var(--ink)}
-.hero h1 em{font-style:normal;color:var(--green)}
-.hero p{color:var(--ink2);margin-top:10px;max-width:560px;font-size:15px}
-.search{max-width:1180px;margin:16px auto 0;padding:0 16px;position:relative;z-index:5}
-.search-card{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--sh);padding:18px;display:grid;gap:12px}
-.sf{display:flex;flex-direction:column;gap:4px}
-.sf label{font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--mut);display:flex;align-items:center;gap:5px}
-.sf select,.sf input{border:1px solid var(--line);border-radius:12px;padding:11px 12px;background:#FFFFFF;font-weight:600;width:100%}
-.sf select:focus,.sf input:focus{outline:2px solid var(--green);outline-offset:0;border-color:transparent}
-.btn-cari{background:var(--green);color:#fff;font-weight:800;border-radius:12px;padding:13px 20px;display:flex;align-items:center;justify-content:center;gap:8px}
-.btn-cari:active{background:var(--green-d)}
-@media(min-width:860px){.search-card{grid-template-columns:1.1fr 1fr 1fr 1.6fr auto;align-items:end}}
+  /* header member */
+  .member{display:flex;align-items:center;gap:8px;background:var(--white);border:1.5px solid var(--rule-mid);padding:5px 12px 5px 5px;font-weight:700;font-size:12px;color:var(--black);transition:border-color .15s}
+  .member:hover{border-color:var(--black)}
+  .member .av{width:26px;height:26px;background:var(--black);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;border-radius:0 !important;object-fit:cover}
 
-/* ---------- main ---------- */
-main{max-width:1180px;margin:0 auto;padding:18px 16px 8px}
-.cats{display:flex;gap:13px;overflow-x:auto;padding:8px 2px 12px;scrollbar-width:none}
-.cats::-webkit-scrollbar{display:none}
-.cat{flex:none;display:flex;flex-direction:column;align-items:center;gap:6px;padding:2px;background:none;border:none;font-weight:700;color:var(--ink2)}
-.cat .cic{width:56px;height:56px;border-radius:50%;background:#EFF5F0;border:1px solid #E3EDE4;display:grid;place-items:center;color:var(--green-d);transition:transform .2s}
-.cat:hover .cic{transform:translateY(-2px)}
-.cat .clab{font-size:11px;font-weight:700;max-width:76px;text-align:center;line-height:1.25}
-.cat.on .cic{background:var(--green);color:#fff;border-color:var(--green)}
-.cat.on .clab{color:var(--ink)}
-.cat svg{opacity:.75}
-.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:6px 0 14px}
-.pills{display:flex;gap:8px;flex-wrap:wrap}
-.pill{padding:8px 13px;border-radius:99px;border:1px solid var(--line);background:var(--card);font-weight:700;font-size:13px;color:var(--ink2);display:flex;align-items:center;gap:6px}
-.pill.on{background:var(--green-soft);border-color:var(--green);color:var(--green-d)}
-.toggle{margin-left:auto;display:flex;background:#E2EAE3;border-radius:99px;padding:3px}
-.toggle button{padding:7px 16px;border-radius:99px;font-weight:800;font-size:13px;color:var(--ink2)}
-.toggle button.on{background:var(--card);color:var(--ink);box-shadow:var(--sh)}
-.secthead{display:block;margin:22px 0 4px}
-.secthead .sbar{display:none}
-.secthead h2{font-size:23px;font-weight:800;letter-spacing:-.02em}
-.secthead h2::before{content:'— ETALASE TOKO';display:block;font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--green);margin-bottom:5px}
-.secthead .snote{display:block;margin-top:3px;font-size:12.5px;color:var(--mut);font-weight:600}
-.sortrow{display:flex;align-items:center;gap:10px;margin-bottom:14px}
-.sortrow .count{font-size:13.5px;color:var(--mut);font-weight:600}
-.sortrow select{margin-left:auto;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:8px 10px;font-weight:700;font-size:13px}
+  .view{display:none}
+  .view.on{display:block}
+  .vhead{padding:26px 0 4px}
+  .vhead h2{font-size:clamp(22px,3vw,30px);font-weight:700;letter-spacing:-.02em;margin:6px 0 0}
+  .vhead p{color:var(--ink-2);margin-top:4px}
 
-/* ---------- cards ---------- */
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-@media(min-width:700px){.grid{grid-template-columns:repeat(3,1fr);gap:20px}}
-@media(min-width:1024px){.grid{grid-template-columns:repeat(4,1fr)}}
-.pcard{background:var(--card);border:1px solid #E2EAE3;border-radius:18px;overflow:hidden;text-align:left;width:100%;box-shadow:0 2px 10px rgba(23,40,30,.05);display:flex;flex-direction:column;transition:transform .25s ease,box-shadow .25s ease}
-.pcard:hover{transform:translateY(-4px);box-shadow:var(--sh-lg)}
-.pcard .ph{position:relative;aspect-ratio:4/3;background:#E2EAE3}
-.phempty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:linear-gradient(135deg,#EAF4ED,#DDEBDF);color:var(--green-d)}
-.phempty span{font-size:52px;font-weight:800;line-height:1;opacity:.92}
-.phempty small{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.72}
-.pcard .ph img{width:100%;height:100%;object-fit:cover}
-.fav{position:absolute;top:8px;right:8px;width:32px;height:32px;border-radius:50%;background:#fffffff2;display:grid;place-items:center;box-shadow:var(--sh)}
-.fav.on{color:#152219}
-.tagpro{position:absolute;top:8px;left:8px;background:var(--gold);color:#fff;font-size:10.5px;font-weight:800;letter-spacing:.06em;padding:4px 8px;border-radius:7px}
-.tagcat{position:absolute;bottom:8px;left:8px;background:#152219cc;color:#fff;font-size:11px;font-weight:700;padding:4px 9px;border-radius:99px;backdrop-filter:blur(2px)}
-.taglow{position:absolute;bottom:8px;right:8px;background:#0E5B36;color:#fff;font-size:10px;font-weight:800;letter-spacing:.05em;padding:4px 8px;border-radius:7px}
-.habistag{position:absolute;inset:0;background:rgba(250,248,243,.74);color:var(--ink);display:grid;place-items:center;font-weight:800;letter-spacing:.06em;backdrop-filter:blur(3px)}
-.pbody{padding:12px 13px 14px;display:flex;flex-direction:column;gap:5px;flex:1}
-.pname{font-weight:700;font-size:15px;letter-spacing:-.01em;line-height:1.35}
-.srow{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--ink2);font-weight:600;min-width:0}
-.srow .sav{width:22px;height:22px;border-radius:50%;background:var(--green-soft);color:var(--green-d);display:grid;place-items:center;font-size:10px;font-weight:800;flex:none}
-.srow img.sav{object-fit:cover;background:#fff;border:1px solid var(--line)}
-.srow .sname{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.rate{display:flex;align-items:center;gap:5px;font-size:12.5px;font-weight:700}
-.rate .star{color:#0E5B36}
-.rate .rc{color:var(--mut);font-weight:600}
-.baru{font-size:11px;font-weight:800;color:var(--blue);background:#E7F2EA;padding:2px 7px;border-radius:99px}
-.stok{font-size:12.5px;font-weight:700;color:var(--green-d);display:flex;align-items:center;gap:5px}
-.stok.habis{color:var(--red)}
-.stok .dot{width:7px;height:7px;border-radius:50%;background:var(--green)}
-.stok.habis .dot{background:var(--red)}
-.badges{display:flex;gap:5px;flex-wrap:wrap;margin-top:2px}
-.bdg{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:800;padding:3px 7px;border-radius:99px;letter-spacing:.01em}
-.bdg.rekber{background:var(--green-soft);color:var(--green-d)}
-.bdg.verif{background:#E7F2EA;color:#083D24}
-.price{margin-top:auto;padding-top:6px;display:flex;align-items:baseline;gap:3px}
-.price b{font-size:18.5px;font-weight:800;letter-spacing:-.01em;color:var(--ink)}
-.cta-bar{margin-top:9px;background:var(--green-soft);color:var(--green-d);font-weight:800;font-size:13px;text-align:center;padding:10px;border-radius:11px}
-.price span{font-size:12px;color:var(--mut);font-weight:600}
-.city{font-size:12px;color:var(--mut);font-weight:600;display:flex;gap:4px;align-items:center}
+  /* hero slider */
+  #heroSlide{position:relative;border:1.5px solid var(--black);background:var(--paper);aspect-ratio:4/3;overflow:hidden}
+  #heroSlide img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .55s}
+  #heroSlide img.on{opacity:1}
+  .hero-num-btn{flex:1;background:var(--white);border:1px solid var(--rule);padding:9px 0;font-size:11px;color:var(--ink-3);transition:all .15s}
+  .hero-num-btn:hover{border-color:var(--black);color:var(--black)}
+  .hero-num-btn.on{background:var(--black);color:var(--white);border-color:var(--black)}
 
-/* store cards */
-.scard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px;box-shadow:var(--sh);display:flex;flex-direction:column;gap:10px;text-align:left;width:100%;transition:transform .25s ease,box-shadow .25s ease}
-.scard:hover{transform:translateY(-4px);box-shadow:var(--sh-lg)}
-.scard .shead{display:flex;gap:12px;align-items:center}
-.scard .slogo{width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,#083D24,#0E5B36);color:#fff;display:grid;place-items:center;font-weight:800;font-size:20px;flex:none}
-.scard img.slogo{object-fit:cover;background:#fff;border:1px solid var(--line)}
-.scard .sname2{font-weight:800;font-size:16.5px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.btn-toko{margin-top:auto;background:var(--ink);color:#fff;font-weight:700;border-radius:12px;padding:13px;text-align:center}
-.empty{grid-column:1/-1;text-align:center;padding:56px 16px;color:var(--mut);font-weight:600}
-.empty b{display:block;font-size:20px;font-weight:600;color:var(--ink);margin-bottom:6px}
+  /* mode toggle */
+  .seg{display:inline-flex;border:1.5px solid var(--black)}
+  .seg button{background:var(--white);border:none;padding:9px 18px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+  .seg button.on{background:var(--black);color:var(--white)}
 
-/* merchant strip */
-.rekber-strip{margin:26px 0 0;background:linear-gradient(120deg,#083D24,#0E5B36);border-radius:20px;padding:20px 22px;color:#EAF2EC;display:flex;gap:15px;align-items:center;flex-wrap:wrap;box-shadow:var(--sh)}
-.merchant{margin:16px 0 8px;background:linear-gradient(120deg,#083D24,#0E5B36);color:#EAF2EC;border-radius:24px;padding:28px;display:flex;flex-wrap:wrap;gap:16px;align-items:center}
-.merchant h3{font-size:20px;font-weight:800;letter-spacing:-.01em}
-.merchant p{color:#c3cec2;font-size:13.5px;margin-top:3px;max-width:520px}
-.merchant .cta{margin-left:auto;background:#fff;color:var(--ink);font-weight:800;padding:12px 18px;border-radius:12px}
-.foot{max-width:1180px;margin:0 auto;padding:14px 16px 20px;color:var(--mut);font-size:12px;text-align:center}
+  /* grid & kartu */
+  #grid,#gridFav{display:grid;grid-template-columns:1fr;border-top:1px solid var(--rule);border-left:1px solid var(--rule)}
+  @media(min-width:640px){ #grid,#gridFav{grid-template-columns:repeat(2,1fr)} }
+  @media(min-width:1024px){ #grid{grid-template-columns:repeat(3,1fr)} #gridFav{grid-template-columns:repeat(3,1fr)} }
+  .sw-cell{position:relative;background:var(--white);transition:background .15s;color:inherit;display:block;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);cursor:pointer}
+  .sw-cell:hover{background:#FAFAFA}
+  .sw-cell .sw-photo{position:relative;overflow:hidden;aspect-ratio:4/3;background:var(--paper)}
+  .sw-cell .sw-photo>img{width:100%;height:100%;object-fit:cover;transition:transform .5s cubic-bezier(.22,.61,.36,1)}
+  .sw-cell:hover .sw-photo>img{transform:scale(1.03)}
+  .sw-photo-empty{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:var(--paper);color:var(--ink-3)}
+  .sw-cta-bar{position:absolute;left:0;right:0;bottom:0;background:var(--black);color:var(--white);padding:9px 14px;display:flex;justify-content:space-between;align-items:center;opacity:0;transform:translateY(4px);transition:opacity .2s,transform .2s;pointer-events:none;z-index:2}
+  .sw-cell:hover .sw-cta-bar{opacity:1;transform:translateY(0)}
+  @media (hover:none){ .sw-cta-bar{opacity:1;transform:none} }
+  .sw-cell.habis .sw-photo>img{filter:grayscale(1);opacity:.5}
+  .sw-cell.habis .price b{text-decoration:line-through}
+  .habistag{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--white);border:1.5px solid var(--black);color:var(--black);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:6px 12px;z-index:2}
+  .fav{position:absolute;top:10px;right:10px;width:34px;height:34px;background:var(--white);border:1px solid var(--rule-mid);display:flex;align-items:center;justify-content:center;z-index:3;padding:0}
+  .fav:hover{border-color:var(--black)}
+  .pbody{padding:18px 20px 20px}
+  .srow{display:flex;align-items:center;gap:8px}
+  .sav{width:24px;height:24px;flex:none;background:var(--black);color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;object-fit:cover}
+  img.sav{background:var(--paper)}
+  .sname{font-size:12px;font-weight:600;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .pname{font-weight:700;font-size:15.5px;line-height:1.3;margin-top:8px;min-height:40px}
+  .rate{display:flex;align-items:center;gap:5px;font-size:12.5px;font-weight:700;margin-top:6px}
+  .rate .rc{color:var(--ink-3);font-weight:500}
+  .rate .baru{display:inline-flex;background:var(--paper);color:var(--ink-2);border:1px solid var(--rule-mid);font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:3px 7px}
+  .badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;min-height:21px}
+  .bdg{display:inline-flex;align-items:center;gap:4px;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px}
+  .bdg.rekber{background:var(--black);color:#fff}
+  .bdg.verif{background:var(--white);color:var(--black);border:1px solid var(--black)}
+  .price{display:flex;align-items:baseline;gap:5px;margin-top:12px}
+  .price b{font-size:17px}
+  .price span{color:var(--ink-3);font-size:12px}
+  .price .stk{margin-left:auto;font-size:11px;color:var(--ink-3)}
+  .city{display:flex;align-items:center;gap:5px;color:var(--ink-3);font-size:12px;margin-top:8px}
 
-/* ---------- bottom nav ---------- */
-.bnav{position:fixed;left:0;right:0;bottom:0;z-index:40;background:#fffffff5;backdrop-filter:blur(8px);border-top:1px solid var(--line);display:flex;padding:8px 6px calc(8px + env(safe-area-inset-bottom))}
-.bnav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;font-weight:700;color:var(--mut);padding:4px 0;border-radius:10px}
-.bnav button.on{color:var(--green-d)}
-@media(min-width:860px){.bnav{display:none}body{padding-bottom:0}}
+  /* kartu toko */
+  .scard{background:var(--white);border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:22px;display:flex;flex-direction:column}
+  .shead{display:flex;gap:13px;align-items:flex-start}
+  .slogo{width:52px;height:52px;flex:none;background:var(--black);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;object-fit:cover}
+  img.slogo{background:var(--paper)}
+  .sname2{font-weight:700;font-size:16px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  .scard .city{margin-top:3px}
+  .scard .rate{margin-top:12px}
+  .btn-toko{margin-top:auto;padding-top:0;width:100%;background:var(--black);color:#fff;border:1.5px solid var(--black);padding:11px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;transition:background .15s,color .15s}
+  .btn-toko:hover{background:var(--white);color:var(--black)}
+  .scard .btn-toko{margin-top:16px}
 
-/* ---------- views ---------- */
-.view{display:none}.view.on{display:block}
-.bk-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;box-shadow:var(--sh);margin-bottom:12px}
-.bk-head{display:flex;gap:12px;align-items:center}
-.bk-head img{width:56px;height:56px;border-radius:12px;object-fit:cover}
-.bk-code{font-size:12px;color:var(--mut);font-weight:700}
-.bk-status{margin-left:auto;font-size:11.5px;font-weight:800;padding:5px 10px;border-radius:99px;background:var(--green-soft);color:var(--green-d);white-space:nowrap}
-.bk-status.langsung{background:var(--gold-soft);color:var(--gold)}
-.steps{display:flex;gap:0;margin-top:14px}
-.step{flex:1;text-align:center;position:relative;font-size:10.5px;font-weight:700;color:var(--mut);padding-top:16px}
-.step:before{content:"";position:absolute;top:4px;left:50%;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:#D5DFD6;z-index:1}
-.step:after{content:"";position:absolute;top:8px;left:-50%;width:100%;height:2px;background:#D5DFD6}
-.step:first-child:after{display:none}
-.step.done{color:var(--green-d)}.step.done:before{background:var(--green)}.step.done:after{background:var(--green)}
-.label-langsung{margin-top:12px;font-size:12px;font-weight:800;color:var(--gold);background:var(--gold-soft);border:1px dashed var(--gold);border-radius:10px;padding:8px 11px}
+  .empty{grid-column:1/-1;border:1px dashed var(--rule-mid);background:var(--paper);padding:34px 22px;text-align:center;color:var(--ink-2)}
+  .empty b{display:block;font-size:16px;color:var(--black);margin-bottom:5px}
+  .note{display:none;border:1px dashed var(--rule-mid);background:var(--paper);padding:10px 14px;font-size:12px;color:var(--ink-2);margin-bottom:14px}
+  .skl{height:300px;background:linear-gradient(100deg,#F5F5F5 40%,#ECECEC 50%,#F5F5F5 60%);background-size:200% 100%;animation:sk 1.2s infinite}
+  @keyframes sk{to{background-position:-200% 0}}
 
-/* ---------- sheet ---------- */
-.scrim{position:fixed;inset:0;background:#152219b3;z-index:60;display:none}
-.scrim.on{display:block}
-.sheet{position:fixed;left:0;right:0;bottom:0;z-index:61;background:#fff;border-radius:22px 22px 0 0;max-height:92dvh;overflow-y:auto;transform:translateY(105%);transition:transform .28s ease;max-width:640px;margin:0 auto}
-.sheet.on{transform:translateY(0)}
-@media(min-width:700px){.sheet{border-radius:22px;bottom:24px}}
-.sheet .grab{width:40px;height:4px;border-radius:99px;background:#D5DFD6;margin:10px auto 2px}
-.sheet-in{padding:8px 18px 22px}
-.sheet .hero-img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:14px}
-.sheet h2{font-size:20px;font-weight:800;letter-spacing:-.01em;margin-top:12px}
-.verifnote{font-size:12px;color:#083D24;background:#E7F2EA;border-radius:10px;padding:8px 11px;font-weight:600;margin-top:10px}
-.rev{border-top:1px solid var(--line);padding:11px 0}
-.rev .rhead{display:flex;gap:7px;align-items:center;font-weight:800;font-size:13px}
-.rev p{font-size:13.5px;color:var(--ink2);margin-top:3px}
-.rev .reply{background:var(--bg);border-radius:10px;padding:8px 11px;margin-top:7px;font-size:12.5px}
-.rev .reply b{color:var(--green-d)}
-.sec-t{font-weight:800;font-size:14px;margin:18px 0 9px}
-.dates{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.dates .sf input{padding:10px}
-.qtyrow{display:flex;align-items:center;gap:12px;margin-top:12px;font-weight:700}
-.qty{display:flex;align-items:center;gap:0;border:1px solid var(--line);border-radius:11px;overflow:hidden;margin-left:auto}
-.qty button{width:36px;height:36px;font-size:18px;font-weight:800;background:#FFFFFF}
-.qty span{width:36px;text-align:center;font-weight:800}
-.payopt{display:flex;gap:11px;border:1.5px solid var(--line);border-radius:14px;padding:13px;margin-bottom:10px;cursor:pointer;align-items:flex-start;text-align:left;width:100%;background:#fff}
-.payopt.on{border-color:var(--green);background:var(--green-soft)}
-.payopt .radio{width:19px;height:19px;border-radius:50%;border:2px solid #C4D2C6;margin-top:2px;flex:none;display:grid;place-items:center}
-.payopt.on .radio{border-color:var(--green)}
-.payopt.on .radio:after{content:"";width:10px;height:10px;border-radius:50%;background:var(--green)}
-.payopt b{font-size:14.5px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
-.payopt p{font-size:12.5px;color:var(--ink2);margin-top:2px}
-.warnbox{display:none;background:var(--amber-bg);border:1.5px solid var(--amber-line);border-radius:14px;padding:13px;margin:2px 0 12px}
-.warnbox.on{display:block}
-.warnbox h4{color:var(--amber);font-size:13px;letter-spacing:.02em;display:flex;gap:7px;align-items:center}
-.warnbox p{font-size:12.8px;color:#083D24;margin-top:6px}
-.warnbox label{display:flex;gap:9px;align-items:flex-start;margin-top:11px;font-weight:700;font-size:13px;color:#083D24;cursor:pointer}
-.warnbox input{width:18px;height:18px;margin-top:1px;accent-color:var(--amber)}
-.totalrow{display:flex;justify-content:space-between;align-items:baseline;border-top:1px dashed var(--line);padding-top:12px;margin-top:6px}
-.totalrow b{font-size:19px;font-weight:800}
-.btn-pay{width:100%;background:var(--green);color:#fff;font-weight:800;font-size:15.5px;border-radius:13px;padding:15px;margin-top:13px}
-.btn-pay:disabled{background:#C4D2C6;cursor:not-allowed}
-.btn-ghost{width:100%;border:1px solid var(--line);font-weight:800;border-radius:13px;padding:13px;margin-top:9px;background:#fff}
-.success{text-align:center;padding:12px 0 4px}
-.success .okc{width:62px;height:62px;border-radius:50%;background:var(--green-soft);color:var(--green);display:grid;place-items:center;margin:6px auto 12px}
+  /* strip rekber & merchant */
+  .rekber-strip{margin:26px 0 0;background:var(--black);color:#fff;padding:26px}
+  .rekber-strip h3{font-size:19px;font-weight:700;letter-spacing:-.01em}
+  .rekber-strip p{color:#CFCFCF;font-size:13.5px;margin-top:5px;max-width:640px}
+  .rekber-strip .rsteps{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+  .rekber-strip .rsteps span{border:1px solid #3A3A3A;padding:7px 12px;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+  .merchant{margin:16px 0 8px;border:1.5px solid var(--black);background:var(--paper);padding:26px;display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+  .merchant h3{font-size:19px;font-weight:700;letter-spacing:-.01em}
+  .merchant p{color:var(--ink-2);font-size:13.5px;margin-top:3px;max-width:560px}
+  .merchant .cta{margin-left:auto}
 
-/* ===== SISTEM RESPONSIF TERPADU — otomatis menyesuaikan HP (<=640px), tablet (641-1024px), desktop (>1024px). Ditulis bow 18 Nov atas permintaan zgg. ===== */
-html,body{overflow-x:clip}
-@media(max-width:640px){
- .grid{gap:12px}
- .search-card{padding:14px}
- .hero-slide{aspect-ratio:16/10}
- .hero-in{padding:22px 18px 18px}
- .pname{font-size:14px}
- #memberBtn{max-width:46vw}
- #memberBtn span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
- .rekber-strip{padding:16px 18px}
- .sortrow select{font-size:16px}
- .search-card input,.search-card select,.sheet input,.sheet select{font-size:16px}
- .bk-card{padding:14px}
-}
+  /* booking */
+  .bk-card{border:1px solid var(--rule);background:#fff;padding:18px;margin-bottom:12px}
+  .bk-head{display:flex;gap:13px;align-items:center}
+  .bk-head img{width:56px;height:56px;object-fit:cover;background:var(--paper);flex:none}
+  .bk-head b{font-size:15.5px}
+  .bk-code{font-size:12px;color:var(--ink-3);margin-top:2px}
+  .bk-status{margin-left:auto;flex:none;background:var(--black);color:#fff;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 9px;text-align:center}
+  .bk-status.langsung{background:var(--white);color:var(--ink-2);border:1px dashed var(--ink-3)}
+  .steps{display:flex;gap:5px;margin-top:14px}
+  .step{flex:1;text-align:center;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);padding-top:9px;position:relative}
+  .step::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--rule)}
+  .step.done{color:var(--black)}
+  .step.done::before{background:var(--black)}
+  .label-langsung{margin-top:13px;border:1px dashed var(--ink-3);background:var(--paper);color:var(--ink-2);font-size:12.5px;font-weight:600;padding:10px 13px}
 
-/* tambahan: audit semua section (18 Nov) */
-@media(max-width:640px){
- .ht{flex:1 1 140px;min-width:140px}
- .bk-head>div{min-width:0}
- .merchant{padding:20px 18px}
- .merchant h3{font-size:18px}
- .merchant .cta{margin-left:0;width:100%;text-align:center}
- .step{font-size:10px}
- .fav{width:36px;height:36px}
-}
+  /* footer */
+  .foot{margin-top:44px;border-top:1.5px solid var(--black);padding:26px 0 34px;color:var(--ink-3);font-size:12.5px}
+  .foot a{font-weight:600}
+
+  /* bottom nav */
+  .bnav{position:fixed;left:0;right:0;bottom:0;z-index:60;background:#fff;border-top:1.5px solid var(--black);display:flex}
+  .bnav button{flex:1;background:none;border:none;padding:9px 0 10px;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);position:relative}
+  .bnav button.on{color:var(--black)}
+  .bnav button.on::before{content:"";position:absolute;top:-1.5px;left:22%;right:22%;height:3px;background:var(--black)}
+  @media(min-width:860px){ .bnav{display:none} }
+
+  /* sheet checkout */
+  .scrim{position:fixed;inset:0;background:rgba(10,10,10,.45);opacity:0;pointer-events:none;transition:opacity .25s;z-index:70}
+  .scrim.on{opacity:1;pointer-events:auto}
+  .sheet{position:fixed;left:0;right:0;bottom:0;z-index:71;background:#fff;border-top:2px solid var(--black);max-height:92dvh;overflow-y:auto;transform:translateY(105%);transition:transform .32s cubic-bezier(.32,.72,.24,1);padding:20px 18px calc(20px + env(safe-area-inset-bottom))}
+  @media(min-width:760px){ .sheet{left:50%;right:auto;width:560px;transform:translate(-50%,105%)} .sheet.on{transform:translate(-50%,0)} }
+  .sheet.on{transform:translateY(0)}
+  @media(min-width:760px){ .sheet.on{transform:translate(-50%,0)} }
+  .sheet h2{font-size:20px;font-weight:700;letter-spacing:-.01em;margin-top:10px;line-height:1.25}
+  .sheet .hero-img{width:100%;height:230px;object-fit:cover;background:var(--paper)}
+  .tagpro{display:inline-flex;background:var(--black);color:#fff;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 8px}
+  .tagcat{display:inline-flex;background:var(--white);color:var(--black);border:1px solid var(--black);font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 8px}
+  .verifnote{margin-top:11px;background:var(--paper);border:1px solid var(--rule);color:var(--ink-2);font-size:12.5px;padding:10px 13px}
+  .sec-t{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin:20px 0 9px}
+  .rev{border:1px solid var(--rule);padding:12px 14px;margin-bottom:8px}
+  .rev .rhead{font-weight:700;font-size:13px;display:flex;justify-content:space-between;gap:8px}
+  .rev p{font-size:13px;color:var(--ink-2);margin-top:4px}
+  .rev .reply{margin-top:8px;background:var(--paper);padding:8px 11px;font-size:12.5px;color:var(--ink-2)}
+  .dates{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .sf label{display:block;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:5px}
+  .sf input{width:100%;border:1px solid var(--rule);padding:10px;font:inherit;background:#fff;border-radius:0}
+  .sf input:focus{border-color:var(--black);outline:none}
+  .qtyrow{display:flex;align-items:center;justify-content:space-between;margin-top:14px;font-weight:600;font-size:13.5px}
+  .qty{display:flex;align-items:center;gap:2px}
+  .qty button{width:34px;height:34px;border:1.5px solid var(--black);background:#fff;font-size:16px;font-weight:700;line-height:1}
+  .qty span{min-width:36px;text-align:center;font-weight:700}
+  .payopt{display:flex;gap:11px;width:100%;text-align:left;background:#fff;border:1.5px solid var(--rule);padding:13px 14px;margin-bottom:8px;align-items:flex-start}
+  .payopt.on{border-color:var(--black);background:var(--paper)}
+  .payopt .radio{width:16px;height:16px;flex:none;border:1.5px solid var(--black);margin-top:2px;position:relative}
+  .payopt.on .radio::after{content:"";position:absolute;inset:3px;background:var(--black)}
+  .payopt b{font-size:14px;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+  .payopt p{font-size:12.5px;color:var(--ink-2);margin-top:3px;line-height:1.5}
+  .warnbox{display:none;border:1.5px dashed var(--ink-2);background:var(--paper);padding:14px 15px;margin-top:4px}
+  .warnbox.on{display:block}
+  .warnbox h4{display:flex;gap:7px;align-items:center;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--black);margin:0 0 8px}
+  .warnbox p{font-size:12.8px;color:var(--ink-2);line-height:1.55;margin:0 0 8px}
+  .warnbox label{display:flex;gap:9px;align-items:flex-start;font-size:13px;font-weight:600;cursor:pointer;margin-top:10px}
+  .warnbox input{width:17px;height:17px;flex:none;accent-color:var(--black);margin-top:1px}
+  .totalrow{display:flex;justify-content:space-between;align-items:center;margin-top:18px;padding-top:15px;border-top:1.5px solid var(--black)}
+  .totalrow b{font-size:19px}
+  .btn-pay{width:100%;background:var(--black);color:#fff;border:1.5px solid var(--black);padding:14px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-top:14px;transition:background .15s,color .15s}
+  .btn-pay:hover:not(:disabled){background:#fff;color:var(--black)}
+  .btn-pay:disabled{background:var(--hover);border-color:var(--hover);color:var(--ink-3);cursor:not-allowed}
+  .btn-ghost{width:100%;background:#fff;color:var(--black);border:1.5px solid var(--black);padding:12px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-top:9px}
+  .success{text-align:center;padding:16px 0 4px}
+  .success .okc{width:58px;height:58px;background:var(--black);color:#fff;display:inline-flex;align-items:center;justify-content:center}
+  .success .label-langsung{text-align:left}
 </style>
 </head>
 <body>
 
-<header>
-  <div class="hwrap">
-    <div class="logo">
-      <span class="mark"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span>
-      <span>Jasa Rental<small>Marketplace Rental Indonesia</small></span>
-    </div>
-    <nav class="hnav">
-      <button class="on" data-nav="jelajahi">Jelajahi</button>
-      <button data-nav="favorit">Favorit</button>
-      <button data-nav="booking">Booking Saya</button>
-    </nav>
-    <div class="hright">
-      <button class="member" id="memberBtn" data-nav="akun"><span class="av">?</span><span>Masuk</span></button>
+<!-- ================= HEADER ================= -->
+<header class="sticky top-0 z-40 bg-white" style="border-bottom:1.5px solid var(--black)">
+  <div class="max-w-[1240px] mx-auto px-4 md:px-6">
+    <div class="flex items-center gap-5 md:gap-8 h-[60px]">
+      <a href="../" class="flex items-center gap-3 no-underline flex-none">
+        <span class="flex items-center justify-center text-white font-bold" style="width:34px;height:34px;background:var(--black);font-size:12px;letter-spacing:.04em">JR</span>
+        <span class="leading-none">
+          <span class="block font-bold" style="font-size:16px;letter-spacing:-.01em">Jasa Rental</span>
+          <span class="micro block mt-1" style="color:var(--ink-3)">Marketplace Rental</span>
+        </span>
+      </a>
+      <nav class="hidden md:flex items-center gap-6 flex-1">
+        <button class="nav-tab on" data-nav="jelajahi" type="button">Jelajahi</button>
+        <button class="nav-tab" data-nav="favorit" type="button">Favorit</button>
+        <button class="nav-tab" data-nav="booking" type="button">Booking Saya</button>
+        <a class="nav-tab" href="../#rekber">Rekber Aman</a>
+      </nav>
+      <div class="flex items-center gap-2 ml-auto md:ml-0 flex-none">
+        <button class="member" id="memberBtn" data-nav="akun" type="button"><span class="av">M</span><span>Masuk</span></button>
+      </div>
     </div>
   </div>
 </header>
 
-<!-- ============ VIEW: JELAJAHI ============ -->
+<main>
+<!-- ================= VIEW: JELAJAHI ================= -->
 <section class="view on" id="view-jelajahi">
-  <div class="hero">
-    <div class="hero-in">
-      <div class="hero-txt">
-        <span class="kick">MARKETPLACE RENTAL · TOKO TERPERIKSA</span>
-        <h1>Sewa apa saja, dari toko rental <em>terverifikasi</em>.</h1>
-        <p>Tenda, mobil, kamera, sound system, sampai stroller — cari lintas toko, bandingkan rating &amp; stok aslinya, dan lindungi pembayaranmu dengan Rekber Aman.</p>
-        <div class="hero-cta"><a class="btn-hero" href="#grid" onclick="document.getElementById('grid').scrollIntoView({behavior:'smooth'});return false;">Mulai Cari Barang</a><a class="btn-hero2" href="https://jasa-rental.my.id/#rekber">Cara Kerja Rekber</a></div>
+  <!-- band hero -->
+  <div style="background:var(--paper);border-bottom:1px solid var(--rule)">
+    <div class="wrap py-10 md:py-14 grid lg:grid-cols-12 gap-10 items-start">
+      <div class="lg:col-span-7">
+        <p class="micro flex items-center gap-2" style="color:var(--ink-3)"><span style="width:7px;height:7px;background:var(--black);display:inline-block"></span> 02 / Marketplace Rental</p>
+        <h1 class="font-bold" style="font-size:clamp(30px,4.2vw,46px);line-height:1.05;letter-spacing:-.02em;margin:16px 0 0">Mau sewa apa hari ini?</h1>
+        <p class="mt-4" style="color:var(--ink-2);font-size:15.5px;max-width:540px">Semua produk di bawah ini asli dari toko-toko yang terdaftar di Jasa Rental, dengan stok yang tampil apa adanya. Booking diselesaikan di halaman resmi tokonya.</p>
+        <div class="flex flex-wrap gap-3 mt-7">
+          <a class="sw-btn-solid" href="#grid">Mulai Cari Barang →</a>
+          <a class="sw-btn-outline" href="https://jasa-rental.my.id/#rekber">Cara Kerja Rekber</a>
+        </div>
+        <div class="grid grid-cols-3 mt-9" style="border:1px solid var(--rule);background:var(--white)">
+          <div class="p-3.5 flex items-center gap-2.5" style="border-right:1px solid var(--rule)"><span style="width:8px;height:8px;background:var(--black);flex:none"></span><span class="micro" style="letter-spacing:.08em">Rekber Aman</span></div>
+          <div class="p-3.5 flex items-center gap-2.5" style="border-right:1px solid var(--rule)"><span style="width:8px;height:8px;background:var(--black);flex:none"></span><span class="micro" style="letter-spacing:.08em">Stok Asli</span></div>
+          <div class="p-3.5 flex items-center gap-2.5"><span style="width:8px;height:8px;background:var(--black);flex:none"></span><span class="micro" style="letter-spacing:.08em">Harga Jelas</span></div>
+        </div>
       </div>
-      <div class="hero-slide" id="heroSlide"></div>
-      <div class="hero-trust">
-        <div class="ht"><span class="htic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6z"/><path d="m9 12 2 2 4-4" stroke-linecap="round"/></svg></span><div><b>Rekber Aman</b><small>Uang ditahan sampai sewa selesai</small></div></div>
-        <div class="ht"><span class="htic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="M3 8l9 5 9-5"/><path d="M12 13v8"/></svg></span><div><b>Stok Asli</b><small>Langsung dari data toko</small></div></div>
-        <div class="ht"><span class="htic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.6 2.9 21 11.3a2 2 0 0 1 0 2.8l-6.9 6.9a2 2 0 0 1-2.8 0L2.9 12.6A2 2 0 0 1 2.3 11.2V4.5a2 2 0 0 1 2-2h6.7a2 2 0 0 1 1.6.4z"/><circle cx="7.5" cy="7.5" r="1.3"/></svg></span><div><b>Harga Jelas</b><small>Per hari, tanpa biaya siluman</small></div></div>
+      <div class="lg:col-span-5" id="heroPanel">
+        <div id="heroSlide"></div>
+        <div class="flex items-end justify-between gap-4 mt-4">
+          <div class="min-w-0">
+            <p class="micro" id="heroStore" style="color:var(--ink-3)">Produk Pilihan</p>
+            <h3 class="font-bold truncate" id="heroName" style="font-size:17px;margin-top:3px">Memuat katalog…</h3>
+            <p class="mono font-bold mt-1" style="font-size:16px" id="heroPrice"></p>
+          </div>
+        </div>
+        <div class="flex gap-2 mt-4" id="heroDots"></div>
       </div>
     </div>
   </div>
-  <div class="search">
-    <form class="search-card" id="searchForm">
-      <div class="sf">
-        <label><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Kota / Lokasi</label>
-        <select id="fCity">
-          <option value="">Semua kota</option><option>Medan</option><option>Jakarta</option><option>Bandung</option><option>Surabaya</option>
-        </select>
-      </div>
-      <div class="sf"><label>Tanggal Sewa</label><input type="date" id="fFrom" value="2026-11-21"></div>
-      <div class="sf"><label>Tanggal Kembali</label><input type="date" id="fTo" value="2026-11-22"></div>
-      <div class="sf"><label>Cari Produk / Toko</label><input type="text" id="fQuery" placeholder="cth: tenda, avanza, kamera…"></div>
-      <button class="btn-cari" type="submit"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>Cari</button>
-    </form>
-  </div>
 
-  <main>
-    <div class="cats" id="cats"></div>
-    <div class="secthead"><span class="sbar"></span><h2>Pilihan Hari Ini</h2><span class="snote">Harga &amp; stok langsung dari toko</span></div>
-    <div class="toolbar">
-      <div class="pills" id="pills">
-        <button class="pill on" data-pill="semua">Semua</button>
-        <button class="pill" data-pill="rekber"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6z"/><path d="m9 12 2 2 4-4" stroke-linecap="round"/></svg>Rekber Aman</button>
-        <button class="pill" data-pill="verif"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 2.1 3.1-.5 1.1 3 3 1.1-.5 3.1L23 13.2l-1.9 2.4.5 3.1-3 1.1-1.1 3-3.1-.5L12 24.4l-2.4-2.1-3.1.5-1.1-3-3-1.1.5-3.1L1 13.2l1.9-2.4L2.4 7.7l3-1.1 1.1-3 3.1.5z" transform="scale(.92) translate(1,0)"/><path d="m9 12.2 2.2 2.2L15.4 10" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg>Toko Terverifikasi</button>
-        <button class="pill" data-pill="rating"><svg width="13" height="13" viewBox="0 0 24 24" fill="#0E5B36"><path d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.4l-5.8 3.1 1.1-6.5L2.6 9.4l6.5-.9z"/></svg>Rating 4+</button>
-      </div>
-      <div class="toggle">
-        <button class="on" data-mode="produk">Produk</button>
-        <button data-mode="toko">Toko</button>
-      </div>
-    </div>
-    <div class="sortrow">
-      <span class="count" id="count"></span>
-      <select id="fSort">
-        <option value="rekomendasi">Urutkan: Rekomendasi</option>
-        <option value="murah">Harga Terendah</option>
-        <option value="mahal">Harga Tertinggi</option>
-        <option value="rating">Rating Tertinggi</option>
-        <option value="nama">Nama A–Z</option>
-      </select>
-    </div>
-    <div id="liveNote" style="display:none;background:var(--green-soft);color:var(--green-d);font-weight:700;font-size:12.8px;border-radius:12px;padding:10px 13px;margin-bottom:11px">Menampilkan produk ASLI dari toko yang sudah bergabung di Jasa Rental — stok mengikuti data server toko saat ini.</div>
-    <div class="grid" id="grid"></div>
-
-    <div class="rekber-strip">
-      <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#7FBF97" stroke-width="2" stroke-linejoin="round" style="flex:none"><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6z"/><path d="m9 12 2 2 4-4" stroke-linecap="round"/></svg>
-      <div><h3 style="font-size:17.5px;font-weight:800">Belanja lebih tenang dengan Rekber Aman</h3><p style="color:#C9D4C9;font-size:13px;margin-top:2px">Uangmu ditahan Jasa Rental dan baru diteruskan ke toko sesudah barang kembali — tersedia di toko Terverifikasi yang mengaktifkannya.</p></div>
-      <a href="https://jasa-rental.my.id/#rekber" style="margin-left:auto;background:#fff;color:var(--ink);font-weight:800;padding:11px 17px;border-radius:11px;font-size:13.5px;white-space:nowrap">Pelajari Rekber</a>
-    </div>
-    <div class="merchant">
+  <!-- katalog -->
+  <div class="wrap py-10 md:py-12">
+    <div class="flex flex-wrap items-end justify-between gap-4 mb-7">
       <div>
-        <h3>Punya usaha rental?</h3>
-        <p>Tampilkan tokomu di marketplace ini — gratis. Aktifkan Rekber Aman dan langganan PRO agar produkmu tampil pertama saat penyewa mencari.</p>
+        <p class="micro" style="color:var(--ink-3)">Katalog Unit &amp; Toko Aktif</p>
+        <h2 class="font-bold" style="font-size:clamp(22px,3vw,30px);letter-spacing:-.02em;margin-top:6px">Jelajahi Produk &amp; Toko</h2>
       </div>
-      <button class="cta">Daftarkan Tokomu</button>
+      <div class="seg" role="group" aria-label="Mode tampilan">
+        <button type="button" class="on" data-mode="produk">Produk</button>
+        <button type="button" data-mode="toko">Toko</button>
+      </div>
     </div>
-  </main>
+
+    <div class="grid lg:grid-cols-12 gap-8 items-start">
+      <aside class="lg:col-span-3">
+        <form id="searchForm">
+          <p class="micro mb-2.5" style="color:var(--ink-3)">Pencarian</p>
+          <input class="sw-input" type="text" id="fQuery" placeholder="Cari produk atau toko…" autocomplete="off">
+          <p class="micro mb-2.5 mt-6" style="color:var(--ink-3)">Kota</p>
+          <select class="sw-input" id="fCity">
+            <option value="">Semua kota</option>
+            <option>Medan</option>
+            <option>Jakarta</option>
+            <option>Bandung</option>
+            <option>Surabaya</option>
+          </select>
+          <div class="grid grid-cols-2 gap-2.5 mt-6">
+            <div>
+              <p class="micro mb-2.5" style="color:var(--ink-3)">Tanggal Ambil</p>
+              <input class="sw-input" type="date" id="fFrom" value="2026-11-21">
+            </div>
+            <div>
+              <p class="micro mb-2.5" style="color:var(--ink-3)">Tanggal Kembali</p>
+              <input class="sw-input" type="date" id="fTo" value="2026-11-22">
+            </div>
+          </div>
+          <button class="sw-btn-solid w-full justify-center mt-6" type="submit" style="width:100%;justify-content:center">Cari</button>
+        </form>
+
+        <p class="micro mb-2.5 mt-8" style="color:var(--ink-3)">Kategori</p>
+        <select class="sw-input" id="fCat" aria-label="Filter kategori"></select>
+
+        <p class="micro mb-3 mt-8" style="color:var(--ink-3)">Filter Cepat</p>
+        <div class="flex flex-col gap-3">
+          <label class="flex items-center gap-2.5 cursor-pointer" style="font-size:13px"><input type="checkbox" class="sw-check" id="fRekber"> Rekber Aman saja</label>
+          <label class="flex items-center gap-2.5 cursor-pointer" style="font-size:13px"><input type="checkbox" class="sw-check" id="fVerif"> Toko Terverifikasi</label>
+          <label class="flex items-center gap-2.5 cursor-pointer" style="font-size:13px"><input type="checkbox" class="sw-check" id="fRating"> Rating 4+ (dari ulasan asli)</label>
+        </div>
+
+        <button class="micro w-full mt-8 py-3" id="btnReset" type="button" style="background:var(--white);border:1px solid var(--rule-mid);color:var(--ink-2)">Reset Filter</button>
+      </aside>
+
+      <div class="lg:col-span-9">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+          <span class="mono" id="count" style="font-size:12px;letter-spacing:.08em">Memuat produk…</span>
+          <div class="flex items-center gap-2.5">
+            <label class="micro" for="fSort" style="color:var(--ink-3)">Urutkan</label>
+            <select class="sw-input" id="fSort" style="width:auto;padding-top:8px;padding-bottom:8px">
+              <option value="rekomendasi">Rekomendasi</option>
+              <option value="murah">Harga Terendah</option>
+              <option value="mahal">Harga Tertinggi</option>
+              <option value="rating">Rating Tertinggi</option>
+              <option value="nama">Nama A–Z</option>
+            </select>
+          </div>
+        </div>
+        <div class="note" id="liveNote">Menampilkan produk <b>ASLI</b> dari toko-toko terdaftar, lengkap dengan stok terkininya. Ketuk produk untuk detail, lalu selesaikan booking di halaman resmi tokonya.</div>
+        <div id="grid"></div>
+
+        <div class="rekber-strip">
+          <p class="micro" style="color:#BFBFBF">Rekber Aman</p>
+          <h3 class="mt-2">Bayar lewat Rekber, dana ditahan sampai barang diterima</h3>
+          <p>Toko dengan label Rekber Aman menerima pembayaran yang ditahan dulu oleh Jasa Rental. Dana baru diteruskan ke toko setelah sewa selesai dan barang kembali tanpa sengketa.</p>
+          <div class="rsteps"><span>01 Bayar ke Rekber</span><span>02 Toko Menyiapkan</span><span>03 Kamu Menerima</span><span>04 Dana Diteruskan</span></div>
+        </div>
+
+        <div class="merchant">
+          <div>
+            <h3>Punya usaha rental?</h3>
+            <p>Daftarkan tokomu dan tampilkan produkmu di marketplace ini — gratis, dengan halaman toko dan sistem booking sendiri.</p>
+          </div>
+          <a class="sw-btn-solid cta" href="../daftar/">Daftarkan Tokomu →</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- ============ VIEW: FAVORIT ============ -->
+<!-- ================= VIEW: FAVORIT ================= -->
 <section class="view" id="view-favorit">
-  <main>
-    <h2 style="font-size:20px;font-weight:800;margin:6px 0 14px">Favorit Saya</h2>
-    <div class="grid" id="gridFav"></div>
-  </main>
+  <div class="wrap">
+    <div class="vhead">
+      <p class="micro" style="color:var(--ink-3)">Favorit</p>
+      <h2>Produk favoritmu</h2>
+      <p>Produk yang kamu tandai dengan hati tersimpan di sini (di perangkat ini).</p>
+    </div>
+    <div id="gridFav" style="margin-top:20px"></div>
+  </div>
 </section>
 
-<!-- ============ VIEW: BOOKING ============ -->
+<!-- ================= VIEW: BOOKING ================= -->
 <section class="view" id="view-booking">
-  <main>
-    <h2 style="font-size:20px;font-weight:800;margin:6px 0 14px">Booking Saya</h2>
-    <div id="bkList"></div>
-  </main>
+  <div class="wrap">
+    <div class="vhead">
+      <p class="micro" style="color:var(--ink-3)">Booking Saya</p>
+      <h2>Booking terakhir</h2>
+      <p>Booking yang kamu buat dari marketplace ini. Booking di halaman toko mengikuti riwayat di toko masing-masing.</p>
+    </div>
+    <div id="bkList" style="margin-top:20px;max-width:720px"></div>
+  </div>
 </section>
 
-<!-- ============ VIEW: AKUN ============ -->
+<!-- ================= VIEW: AKUN ================= -->
 <section class="view" id="view-akun">
-  <main>
-    <div id="akunBox"></div>
-  </main>
+  <div class="wrap">
+    <div class="vhead">
+      <p class="micro" style="color:var(--ink-3)">Akun</p>
+      <h2>Akun saya</h2>
+    </div>
+    <div id="akunBox" style="margin-top:20px;max-width:560px"></div>
+  </div>
 </section>
+</main>
 
-<div class="foot">Jasa Rental oleh FinOwi Id · Marketplace rental Indonesia — produk, harga &amp; stok langsung dari toko-toko rental.</div>
+<footer class="foot">
+  <div class="wrap flex flex-wrap justify-between gap-3">
+    <span>© 2026 Jasa Rental · FinOwi Id — Marketplace rental Indonesia.</span>
+    <span class="micro" style="color:var(--ink-3)">Swiss Monochrome · Rev 4</span>
+  </div>
+</footer>
 
+<!-- bottom nav (mobile) -->
 <nav class="bnav">
-  <button class="on" data-nav="jelajahi"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>Jelajahi</button>
-  <button data-nav="favorit"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M19.8 5.1a5 5 0 0 0-7.1 0l-.7.7-.7-.7a5 5 0 1 0-7.1 7.1l7.8 7.8 7.8-7.8a5 5 0 0 0 0-7.1z"/></svg>Favorit</button>
-  <button data-nav="booking"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M4 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4z"/><path d="M13 6v2m0 3v2m0 3v2" stroke-linecap="round"/></svg>Booking Saya</button>
-  <button data-nav="akun"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 5-5.5 8-5.5s6.5 1.5 8 5.5"/></svg>Akun</button>
+  <button class="on" data-nav="jelajahi" type="button"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4.6-4.6"/></svg>Jelajahi</button>
+  <button data-nav="favorit" type="button"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5C7 16.5 3.5 13.3 3.5 9.6A4.6 4.6 0 0 1 8.1 5c1.6 0 3 .8 3.9 2A4.4 4.4 0 0 1 15.9 5a4.6 4.6 0 0 1 4.6 4.6c0 3.7-3.5 6.9-8.5 10.9z"/></svg>Favorit</button>
+  <button data-nav="booking" type="button"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="16"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Booking</button>
+  <button data-nav="akun" type="button"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5"/></svg>Akun</button>
 </nav>
 
+<!-- sheet checkout -->
 <div class="scrim" id="scrim"></div>
-<div class="sheet" id="sheet"><div class="grab"></div><div class="sheet-in" id="sheetIn"></div></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true"><div id="sheetIn"></div></div>
 
 <script>
 const ICON = {
-  star:'<svg class="star" width="13" height="13" viewBox="0 0 24 24" fill="#0E5B36"><path d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.4l-5.8 3.1 1.1-6.5L2.6 9.4l6.5-.9z"/></svg>',
+  star:'<svg class="star" width="13" height="13" viewBox="0 0 24 24" fill="#0A0A0A"><path d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.4l-5.8 3.1 1.1-6.5L2.6 9.4l6.5-.9z"/></svg>',
   pin:'<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
   shield:'<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6z"/><path d="m9 12 2 2 4-4" stroke-linecap="round"/></svg>',
-  verif:'<svg width="14" height="14" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#0E5B36"/><path d="m8.2 12.4 2.5 2.5 5-5.4" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
-  heart:f=>'<svg width="16" height="16" viewBox="0 0 24 24" fill="'+(f?'#152219':'none')+'" stroke="'+(f?'#152219':'#43544a')+'" stroke-width="2.2" stroke-linejoin="round"><path d="M19.8 5.1a5 5 0 0 0-7.1 0l-.7.7-.7-.7a5 5 0 1 0-7.1 7.1l7.8 7.8 7.8-7.8a5 5 0 0 0 0-7.1z"/></svg>'
+  verif:'<svg width="14" height="14" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#0A0A0A"/><path d="m8.2 12.4 2.5 2.5 5-5.4" stroke="#fff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  heart:f=>'<svg width="16" height="16" viewBox="0 0 24 24" fill="'+(f?'#0A0A0A':'none')+'" stroke="'+(f?'#0A0A0A':'#404040')+'" stroke-width="2.2" stroke-linejoin="round"><path d="M19.8 5.1a5 5 0 0 0-7.1 0l-.7.7-.7-.7a5 5 0 1 0-7.1 7.1l7.8 7.8 7.8-7.8a5 5 0 0 0 0-7.1z"/></svg>'
 };
 const CATS = [
   ['semua','Semua'],['kendaraan','Kendaraan'],['outdoor','Outdoor & Camping'],['fashion','Fashion & Kostum'],
@@ -549,35 +579,39 @@ function badgesHTML(s){
 }
 function cardHTML(p){
   const s = STORES[p.store];
-  return '<article class="pcard" data-open="' + p.id + '">' +
-    '<div class="ph">' + (p.img ? '<img src="' + p.img + '" alt="" loading="lazy" onerror="this.remove()">' : '<div class="phempty"><span>' + (p.name || 'J').trim().charAt(0).toUpperCase() + '</span><small>' + p.catLabel + '</small></div>') +
-    (s.pro ? '<span class="tagpro">PRO</span>' : '') +
-    '<button class="fav' + (state.favs.has(p.id)?' on':'') + '" data-fav="' + p.id + '">' + ICON.heart(state.favs.has(p.id)) + '</button>' +
-    '<span class="tagcat">' + p.catLabel + '</span>' + (p.stock>0 && p.stock<=2 ? '<span class="taglow">STOK TERBATAS</span>' : '') +
-    (p.stock===0 ? '<span class="habistag">STOK HABIS</span>' : '') + '</div>' +
-    '<div class="pbody"><div class="pname">' + p.name + '</div>' +
+  const habis = p.stock===0;
+  return '<article class="sw-cell' + (habis?' habis':'') + '" data-open="' + p.id + '" data-catlabel="' + p.catLabel + '">' +
+    '<div class="sw-photo">' + (p.img ? '<img src="' + p.img + '" alt="" loading="lazy" onerror="this.remove()">' : '<div class="sw-photo-empty"><span class="mono" style="font-size:30px;color:var(--black);font-weight:700">' + (p.name || 'J').trim().charAt(0).toUpperCase() + '</span><small class="micro">' + p.catLabel + '</small></div>') +
+    '<div style="position:absolute;top:12px;left:12px;display:flex;gap:6px;flex-wrap:wrap;z-index:2"><span class="badge-type">' + (p.period==='jual' ? 'Beli' : 'Sewa') + '</span>' + (s.pro ? '<span class="badge-rekber">PRO</span>' : '') + '</div>' +
+    '<button class="fav' + (state.favs.has(p.id)?' on':'') + '" data-fav="' + p.id + '" aria-label="Simpan ke favorit">' + ICON.heart(state.favs.has(p.id)) + '</button>' +
+    (habis ? '<span class="habistag">Stok Habis</span>' : '') +
+    '<div class="sw-cta-bar"><span class="micro" style="color:#fff">Lihat &amp; Booking</span><span>→</span></div></div>' +
+    '<div class="pbody">' +
     '<div class="srow">' + (s.logo ? '<img class="sav" src="' + s.logo + '" alt="" loading="lazy" onerror="this.remove()">' : '<span class="sav">' + s.name[0] + '</span>') + '<span class="sname">' + s.name + '</span>' + (s.verified?ICON.verif:'') + '</div>' +
+    '<div class="pname">' + p.name + '</div>' +
     '<div class="rate">' + rateHTML(p) + '</div>' +
-    '<div class="stok' + (p.stock===0?' habis':'') + '"><span class="dot"></span>' + (p.stock===0?'Stok habis':'Stok siap: ' + p.stock + ' unit') + '</div>' +
-    '<div class="badges">' + badgesHTML(s) + '</div>' +
-    '<div class="price"><b>' + rupiah(p.price) + '</b><span>/' + p.period + '</span></div><div class="cta-bar">Lihat &amp; Booking</div>' +
+    '<div class="badges">' + badgesHTML(s) + (p.stock>0 && p.stock<=2 ? '<span class="badge-out">Stok Terbatas</span>' : '') + '</div>' +
+    '<div class="price"><b class="mono">' + rupiah(p.price) + '</b><span>' + (p.period==='jual' ? '· dijual' : '/hari') + '</span><span class="stk mono">' + (habis ? 'HABIS' : p.stock + ' UNIT') + '</span></div>' +
     '<div class="city">' + ICON.pin + s.city + '</div></div></article>';
 }
-document.addEventListener('error', function(e){ var t = e.target; if(t && t.tagName === 'IMG' && t.closest && t.closest('.pcard .ph')){ var card = t.closest('.pcard'); var nm = (card.querySelector('.pname') || {}).textContent || 'J'; var ct = (card.querySelector('.tagcat') || {}).textContent || ''; var d = document.createElement('div'); d.className = 'phempty'; d.innerHTML = '<span>' + nm.trim().charAt(0).toUpperCase() + '</span><small>' + ct + '</small>'; t.replaceWith(d); } }, true);
+document.addEventListener('error', function(e){ var t = e.target; if(t && t.tagName === 'IMG' && t.closest && t.closest('.sw-cell .sw-photo')){ var card = t.closest('.sw-cell'); var nm = (card.querySelector('.pname') || {}).textContent || 'J'; var ct = card.dataset.catlabel || ''; var d = document.createElement('div'); d.className = 'sw-photo-empty'; d.innerHTML = '<span class="mono" style="font-size:30px;color:var(--black);font-weight:700">' + nm.trim().charAt(0).toUpperCase() + '</span><small class="micro">' + ct + '</small>'; t.replaceWith(d); } }, true);
 let heroTimer = null;
 function initHero(){
   const box = document.getElementById('heroSlide'); if(!box) return;
+  const panel = document.getElementById('heroPanel');
   const items = PRODUCTS.filter(p => p.img && p.stock > 0).slice(0, 4);
-  if(!items.length){ box.style.display = 'none'; return; }
+  if(!items.length){ if(panel) panel.style.display = 'none'; return; }
   box.innerHTML = items.map((p, i) => '<img data-i="' + i + '" src="' + p.img + '" alt="" loading="lazy" onerror="this.remove()">').join('') +
-    '<div class="hchip"><div class="hn" id="heroName"></div><div class="hp" id="heroPrice"></div><div class="hs" id="heroStore"></div></div>' +
-    '<div class="hdots">' + items.map((_, i) => '<span data-i="' + i + '"></span>').join('') + '</div>';
+    '<span class="mono" id="heroIndex" style="position:absolute;bottom:12px;right:12px;background:var(--black);color:#fff;font-size:11px;padding:5px 9px;z-index:3"></span>';
+  const dots = document.getElementById('heroDots');
+  if(dots) dots.innerHTML = items.map((_, i) => '<button type="button" class="hero-num-btn mono" data-i="' + i + '">' + String(i + 1).padStart(2,'0') + '</button>').join('');
   let idx = 0;
-  const upd = () => { const p = items[idx]; if(!p) return; const st = STORES[p.store] || {}; document.getElementById('heroName').textContent = p.name; document.getElementById('heroPrice').textContent = rupiah(p.price) + ' /' + p.period; document.getElementById('heroStore').textContent = (st.name || '') + (st.city ? ' · ' + st.city : ''); };
-  const show = (el) => { idx = Number(el.dataset.i); box.querySelectorAll('img').forEach(im => im.classList.toggle('on', im === el)); box.querySelectorAll('.hdots span').forEach(d => d.classList.toggle('on', Number(d.dataset.i) === idx)); upd(); };
+  const upd = () => { const p = items[idx]; if(!p) return; const st = STORES[p.store] || {}; document.getElementById('heroName').textContent = p.name; document.getElementById('heroPrice').textContent = rupiah(p.price) + (p.period==='jual' ? ' · dijual' : ' /hari'); document.getElementById('heroStore').textContent = (st.name || '') + (st.city ? ' · ' + st.city : ''); const hi = document.getElementById('heroIndex'); if(hi) hi.textContent = String(idx + 1).padStart(2,'0') + ' / ' + String(items.length).padStart(2,'0'); };
+  const show = (el) => { idx = Number(el.dataset.i); box.querySelectorAll('img').forEach(im => im.classList.toggle('on', im === el)); if(dots) dots.querySelectorAll('.hero-num-btn').forEach(d => d.classList.toggle('on', Number(d.dataset.i) === idx)); upd(); };
   const first = box.querySelector('img');
-  if(!first){ box.style.display = 'none'; return; }
+  if(!first){ if(panel) panel.style.display = 'none'; return; }
   show(first);
+  if(dots) dots.querySelectorAll('.hero-num-btn').forEach(b => b.onclick = () => { const t = [...box.querySelectorAll('img')].find(im => Number(im.dataset.i) === Number(b.dataset.i)); if(t) show(t); });
   box.addEventListener('error', () => { setTimeout(() => { const list = [...box.querySelectorAll('img')]; if(list.length) show(list[0]); }, 0); }, true);
   if(heroTimer) clearInterval(heroTimer);
   heroTimer = setInterval(() => { const list = [...box.querySelectorAll('img')]; if(!list.length) return; const cur = list.findIndex(im => im.classList.contains('on')); if(cur === -1){ show(list[0]); return; } if(list.length > 1) show(list[(cur + 1) % list.length]); }, 4500);
@@ -587,8 +621,9 @@ function storeCardHTML(key){
   const s = STORES[key];
   const rating = s.reviews < 3 ? '<span class="baru">Baru</span>' : ICON.star + '<span>' + s.rating.toFixed(1).replace('.',',') + '</span><span class="rc">(' + s.reviews + ' ulasan)</span>';
   return '<article class="scard"><div class="shead">' + (s.logo ? '<img class="slogo" src="' + s.logo + '" alt="" loading="lazy" onerror="this.remove()">' : '<span class="slogo">' + s.name[0] + '</span>') + '<div>' +
-    '<div class="sname2">' + s.name + (s.verified?ICON.verif:'') + (s.pro?'<span class="tagpro" style="position:static">PRO</span>':'') + '</div>' +
-    '<div class="city">' + ICON.pin + s.city + ' · ' + s.products + ' produk</div></div></div>' +
+    '<div class="sname2">' + s.name + (s.verified?ICON.verif:'') + (s.pro?'<span class="badge-rekber">PRO</span>':'') + '</div>' +
+    '<div class="city">' + ICON.pin + s.city + ' · ' + s.products + ' produk</div></div>' +
+    '<span style="margin-left:auto;flex:none">' + (s.rekber ? '<span class="badge-rekber">■ Rekber</span>' : '<span class="badge-direct">□ Langsung</span>') + '</span></div>' +
     '<div class="rate">' + rating + '</div><div class="badges">' + badgesHTML(s) + '</div>' +
     '<button class="btn-toko" data-openstore="' + key + '">Kunjungi Toko</button></article>';
 }
@@ -670,7 +705,7 @@ function openSheet(id){
     '<img class="hero-img" src="' + p.img + '" onerror="this.remove()">' +
     '<div style="display:flex;gap:6px;margin-top:12px;flex-wrap:wrap">' + (s.pro?'<span class="tagpro" style="position:static">PRO</span>':'') + '<span class="tagcat" style="position:static">' + p.catLabel + '</span></div>' +
     '<h2>' + p.name + '</h2>' +
-    '<a class="srow" href="' + storeUrl(p.slug) + '" style="margin-top:7px;text-decoration:none;color:inherit;cursor:pointer"><span class="sav">' + s.name[0] + '</span><span class="sname" style="font-size:13.5px">' + s.name + '</span>' + (s.verified?ICON.verif:'') + '<span style="color:var(--mut)">' + ICON.pin.replace('currentColor','#71806f') + ' ' + s.city + '</span><span style="margin-left:auto;font-weight:800;color:var(--green);font-size:12.5px;white-space:nowrap">Kunjungi Toko ›</span></a>' +
+    '<a class="srow" href="' + storeUrl(p.slug) + '" style="margin-top:7px;text-decoration:none;color:inherit;cursor:pointer"><span class="sav">' + s.name[0] + '</span><span class="sname" style="font-size:13.5px">' + s.name + '</span>' + (s.verified?ICON.verif:'') + '<span style="color:var(--mut)">' + ICON.pin.replace('currentColor','#767676') + ' ' + s.city + '</span><span style="margin-left:auto;font-weight:800;color:var(--green);font-size:12.5px;white-space:nowrap">Kunjungi Toko ›</span></a>' +
     (p.live ? (s.verified ? '<div class="verifnote">Identitas pemilik, alamat &amp; rekening toko ini sudah diperiksa Jasa Rental. ' + s.since + '.</div>' : '<div class="verifnote">Toko ini terdaftar di platform Jasa Rental dan belum menyelesaikan verifikasi toko. Booking dilakukan di halaman resmi toko ini.</div>') : (s.verified ? '<div class="verifnote">Identitas pemilik, alamat &amp; rekening toko ini sudah diperiksa Jasa Rental. ' + s.since + '.</div>' : '<div class="verifnote" style="background:var(--amber-bg);color:var(--amber)">Toko ini <b>belum terverifikasi</b> oleh Jasa Rental. Berhati-hatilah sebelum membayar.</div>')) +
     '<div class="rate" style="margin-top:10px">' + rateHTML(p) + '</div>' +
     '<p style="margin-top:10px;color:var(--ink2);font-size:14px">' + p.desc + '</p>' +
@@ -762,15 +797,15 @@ function go(v){
 }
 document.querySelectorAll('[data-nav]').forEach(b=>b.onclick=()=>go(b.dataset.nav));
 if (new URLSearchParams(location.search).get('masuk') === '1') go('akun');
-const CATICON = { semua:'<rect x="4" y="4" width="7" height="7" rx="1.6"/><rect x="13" y="4" width="7" height="7" rx="1.6"/><rect x="4" y="13" width="7" height="7" rx="1.6"/><rect x="13" y="13" width="7" height="7" rx="1.6"/>', kendaraan:'<path d="M4 16v-4l2-6h12l2 6v4"/><path d="M4 16h16"/><circle cx="7.5" cy="17.5" r="1.6"/><circle cx="16.5" cy="17.5" r="1.6"/><path d="M9.1 17.5h5.8"/>', outdoor:'<path d="M12 4 2.5 20h19z"/><path d="M12 12 7.5 20h9z"/>', fashion:'<path d="M8.5 4 4 6.5 6 10l2-1v11h8V9l2 1 2-3.5L15.5 4a3.5 3.5 0 0 1-7 0z"/>', elektronik:'<rect x="5" y="3" width="14" height="18" rx="2"/><circle cx="12" cy="14.5" r="3.2"/><circle cx="12" cy="7.5" r="1.2"/>', kamera:'<path d="M4 8h3l2-2.5h6L17 8h3a1.5 1.5 0 0 1 1.5 1.5V19a1.5 1.5 0 0 1-1.5 1.5H4A1.5 1.5 0 0 1 2.5 19V9.5A1.5 1.5 0 0 1 4 8z"/><circle cx="12" cy="13.5" r="3.6"/>', hiburan:'<rect x="2.5" y="7.5" width="19" height="10" rx="5"/><path d="M8 10.8v3.4M6.3 12.5h3.4"/><circle cx="15.8" cy="11.3" r=".4"/><circle cx="17.8" cy="13.7" r=".4"/>', event:'<path d="M5 21V4"/><path d="M5 4.8c4-2.2 7 2 12 .3v9.4c-5 1.7-8-2.5-12-.3"/>', alat:'<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>', bayi:'<path d="M4 4h2.5l2.2 9h9.6l2-7H8"/><circle cx="9.5" cy="19.5" r="1.5"/><circle cx="17.5" cy="19.5" r="1.5"/>', properti:'<path d="m3.5 11 8.5-7.5L20.5 11"/><path d="M6 9.5V20h12V9.5"/><path d="M10 20v-5h4v5"/>', lainnya:'<circle cx="5" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="19" cy="12" r="1.4"/>' };
-document.getElementById('cats').innerHTML = CATS.map(c=>'<button class="cat' + (c[0]==='semua'?' on':'') + '" data-cat="' + c[0] + '"><span class="cic"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">' + (CATICON[c[0]] || CATICON.lainnya) + '</svg></span><span class="clab">' + c[1] + '</span></button>').join('');
-document.querySelectorAll('[data-cat]').forEach(b=>b.onclick=()=>{
-  state.cat=b.dataset.cat;
-  document.querySelectorAll('[data-cat]').forEach(x=>x.classList.toggle('on',x===b)); render();
-});
-document.querySelectorAll('[data-pill]').forEach(b=>b.onclick=()=>{
-  state.pill=b.dataset.pill;
-  document.querySelectorAll('[data-pill]').forEach(x=>x.classList.toggle('on',x===b)); render();
+document.getElementById('fCat').innerHTML = CATS.map(c=>'<option value="' + c[0] + '">' + c[1] + '</option>').join('');
+document.getElementById('fCat').onchange = e => { state.cat = e.target.value; render(); };
+[['fRekber','rekber'],['fVerif','verif'],['fRating','rating']].forEach(function(pair){
+  const el = document.getElementById(pair[0]); if(!el) return;
+  el.onchange = () => {
+    if(el.checked){ state.pill = pair[1]; ['fRekber','fVerif','fRating'].forEach(function(id){ if(id !== pair[0]) document.getElementById(id).checked = false; }); }
+    else if(state.pill === pair[1]) state.pill = 'semua';
+    render();
+  };
 });
 document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>{
   state.mode=b.dataset.mode;
@@ -778,6 +813,15 @@ document.querySelectorAll('[data-mode]').forEach(b=>b.onclick=()=>{
 });
 document.getElementById('fCity').onchange=e=>{state.city=e.target.value; render();};
 document.getElementById('fSort').onchange=e=>{state.sort=e.target.value; render();};
+document.getElementById('btnReset').onclick = () => {
+  state.cat = 'semua'; state.pill = 'semua'; state.query = ''; state.city = ''; state.sort = 'rekomendasi';
+  document.getElementById('fCat').value = 'semua';
+  document.getElementById('fQuery').value = '';
+  document.getElementById('fCity').value = '';
+  document.getElementById('fSort').value = 'rekomendasi';
+  ['fRekber','fVerif','fRating'].forEach(function(id){ document.getElementById(id).checked = false; });
+  render();
+};
 document.getElementById('searchForm').onsubmit=e=>{e.preventDefault(); state.query=document.getElementById('fQuery').value.trim(); state.city=document.getElementById('fCity').value; render(); document.getElementById('grid').scrollIntoView({behavior:'smooth',block:'start'});};
 render(); renderBookings();
 
@@ -810,7 +854,7 @@ async function loadSheetReviews(p){
   box.innerHTML = data.map(r =>
     '<div class="rev"><div class="rhead">' + escT(r.display_name || 'Penyewa') + ' <span>' + ICON.star.repeat(Math.max(0, Math.min(5, r.rating || 0))) + '</span></div>' +
     (r.body ? '<p>' + escT(r.body) + '</p>' : '') +
-    (r.photo_url ? '<img src="' + escT(r.photo_url) + '" alt="" loading="lazy" style="width:100%;max-height:180px;object-fit:cover;border-radius:10px;margin-top:7px">' : '') +
+    (r.photo_url ? '<img src="' + escT(r.photo_url) + '" alt="" loading="lazy" style="width:100%;max-height:180px;object-fit:cover;border-radius:0;margin-top:7px">' : '') +
     (r.store_reply ? '<div class="reply"><b>Balasan toko:</b> ' + escT(r.store_reply) + '</div>' : '') + '</div>'
   ).join('');
 }
@@ -922,13 +966,13 @@ function memberLogout(){
 let mpToastTimer = null;
 function mpToast(msg){
   let t = document.getElementById('mpToast');
-  if(!t){ t = document.createElement('div'); t.id = 'mpToast'; t.style.cssText = 'position:fixed;left:50%;bottom:86px;transform:translateX(-50%);background:#14231a;color:#fff;padding:11px 16px;border-radius:12px;font-weight:700;font-size:13.5px;z-index:99;box-shadow:0 10px 30px rgba(0,0,0,.25);max-width:88vw;text-align:center'; document.body.appendChild(t); }
+  if(!t){ t = document.createElement('div'); t.id = 'mpToast'; t.style.cssText = 'position:fixed;left:50%;bottom:86px;transform:translateX(-50%);background:#0A0A0A;color:#fff;padding:11px 16px;border-radius:0;font-weight:700;font-size:13.5px;z-index:99;box-shadow:0 10px 30px rgba(0,0,0,.25);max-width:88vw;text-align:center'; document.body.appendChild(t); }
   t.textContent = msg; t.style.display = 'block';
   clearTimeout(mpToastTimer); mpToastTimer = setTimeout(()=>{ t.style.display = 'none'; }, 3400);
 }
 const GLOGO = '<svg width="18" height="18" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 8 3l5.7-5.7C34.3 6.1 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 8 3l5.7-5.7C34.3 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C36.9 39.2 44 34 44 24c0-1.3-.1-2.6-.4-3.9z"/></svg>';
 function avHTML(sz){
-  if(memberProfile && memberProfile.avatar) return '<img class="av" src="' + escT(memberProfile.avatar) + '" alt="" style="width:' + sz + 'px;height:' + sz + 'px;border-radius:50%;object-fit:cover">';
+  if(memberProfile && memberProfile.avatar) return '<img class="av" src="' + escT(memberProfile.avatar) + '" alt="" style="width:' + sz + 'px;height:' + sz + 'px;border-radius:0;object-fit:cover">';
   const ini = memberProfile ? (memberProfile.name || '?').trim().charAt(0).toUpperCase() : '?';
   return '<span class="av" style="width:' + sz + 'px;height:' + sz + 'px;font-size:' + Math.round(sz*0.42) + 'px">' + escT(ini) + '</span>';
 }
@@ -944,7 +988,7 @@ function renderMemberUI(){
     box.innerHTML = '<div class="bk-card" style="text-align:center;padding:26px 18px">' +
       '<b style="font-size:17px">Masuk sebagai member</b>' +
       '<p style="color:var(--mut);font-weight:600;font-size:13.5px;margin:8px 0 16px">Satu tombol untuk daftar &amp; masuk — tanpa kata sandi, tanpa form panjang.</p>' +
-      '<button onclick="startGoogleLogin()" style="display:inline-flex;align-items:center;gap:10px;background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:11px 20px;font-weight:800;font-size:14.5px;cursor:pointer;color:var(--ink)">' + GLOGO + 'Masuk dengan Google</button>' +
+      '<button onclick="startGoogleLogin()" style="display:inline-flex;align-items:center;gap:10px;background:#fff;border:1.5px solid var(--line);border-radius:0;padding:11px 20px;font-weight:800;font-size:14.5px;cursor:pointer;color:var(--ink)">' + GLOGO + 'Masuk dengan Google</button>' +
       '<p style="color:var(--mut);font-weight:600;font-size:12px;margin:14px 0 0">Booking tetap dilakukan di halaman toko masing-masing.</p>' +
       '<p style="font-size:13px;font-weight:700;margin:16px 0 0;border-top:1px solid var(--line);padding-top:14px">Pemilik toko? <a href="/dashboard/" style="color:var(--green);font-weight:800">Masuk sebagai Tenant →</a></p></div>';
     return;
@@ -967,7 +1011,7 @@ function renderMemberUI(){
 
 (function(){ try{ var u = new URLSearchParams(location.search); var q = u.get('q'); var kat = u.get('kat');
   if(q){ state.query = q; var fq = document.getElementById('fQuery'); if(fq) fq.value = q; }
-  if(kat && CATS.some(function(c){ return c[0] === kat; })){ state.cat = kat; document.querySelectorAll('[data-cat]').forEach(function(x){ x.classList.toggle('on', x.dataset.cat === kat); }); }
+  if(kat && CATS.some(function(c){ return c[0] === kat; })){ state.cat = kat; var fc2 = document.getElementById('fCat'); if(fc2) fc2.value = kat; }
 }catch(e){} })();
 loadLive();
 </script>
